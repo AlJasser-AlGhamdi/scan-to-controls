@@ -1,0 +1,548 @@
+{
+  "note": "ATLAS ECC-mapping baseline, portable (synthetic only, no real data). Score = micro-F1 of predicted control id vs gold, pooled over checks weighted by observed frequency in the n=100 seed=1337 corpus.",
+  "valid_ids": [
+    "1-10-3-1",
+    "1-10-3-2",
+    "1-10-3-3",
+    "1-10-3-4",
+    "1-10-4-1",
+    "1-10-4-2",
+    "1-10-4-3",
+    "1-5-3-1",
+    "1-5-3-2",
+    "1-5-3-3",
+    "1-5-3-4",
+    "1-6-2-1",
+    "1-6-2-2",
+    "1-6-3-1",
+    "1-6-3-2",
+    "1-6-3-3",
+    "1-6-3-4",
+    "1-6-3-5",
+    "1-9-3-1",
+    "1-9-3-2",
+    "1-9-4-1",
+    "1-9-4-2",
+    "2-10-3-1",
+    "2-10-3-2",
+    "2-10-3-3",
+    "2-10-3-4",
+    "2-10-3-5",
+    "2-11-3-1",
+    "2-11-3-2",
+    "2-12-1-2",
+    "2-12-3-1",
+    "2-12-3-2",
+    "2-12-3-3",
+    "2-12-3-4",
+    "2-12-3-5",
+    "2-13-3-1",
+    "2-13-3-2",
+    "2-13-3-3",
+    "2-13-3-4",
+    "2-13-3-5",
+    "2-14-3-1",
+    "2-14-3-2",
+    "2-14-3-3",
+    "2-14-3-4",
+    "2-14-3-5",
+    "2-15-3-1",
+    "2-15-3-2",
+    "2-15-3-3",
+    "2-15-3-4",
+    "2-15-3-5",
+    "2-2-3-1",
+    "2-2-3-2",
+    "2-2-3-3",
+    "2-2-3-4",
+    "2-2-3-5",
+    "2-3-3-1",
+    "2-3-3-2",
+    "2-3-3-3",
+    "2-3-3-4",
+    "2-4-3-1",
+    "2-4-3-2",
+    "2-4-3-3",
+    "2-4-3-4",
+    "2-4-3-5",
+    "2-5-3-1",
+    "2-5-3-2",
+    "2-5-3-3",
+    "2-5-3-4",
+    "2-5-3-5",
+    "2-5-3-6",
+    "2-5-3-7",
+    "2-5-3-8",
+    "2-5-3-9",
+    "2-6-3-1",
+    "2-6-3-2",
+    "2-6-3-3",
+    "2-6-3-4",
+    "2-7-1-2",
+    "2-7-1-3",
+    "2-8-3-1",
+    "2-8-3-2",
+    "2-8-3-3",
+    "2-9-3-1",
+    "2-9-3-2",
+    "2-9-3-3",
+    "3-1-3-1",
+    "3-1-3-2",
+    "3-1-3-3",
+    "4-1-2-1",
+    "4-1-2-2",
+    "4-1-2-3",
+    "4-1-3-1",
+    "4-1-3-2",
+    "4-2-3-1",
+    "4-2-3-2"
+  ],
+  "catalog_title": {
+    "1-10-3-1": "Secure handling of email services, especially phishing emails.",
+    "1-10-3-2": "Secure handling of mobile devices and storage media.",
+    "1-10-3-3": "Secure Internet browsing.",
+    "1-10-3-4": "Secure usage of social media.",
+    "1-10-4-1": "Cybersecurity department personnel.",
+    "1-10-4-2": "Personnel working on software/application development and those working on information and technology assets of the entity.",
+    "1-10-4-3": "Executive and supervisory positions.",
+    "1-5-3-1": "At early stage of technology projects.",
+    "1-5-3-2": "Before making major changes to technology infrastructure.",
+    "1-5-3-3": "During planning to obtain third party services.",
+    "1-5-3-4": "During planning and before the release of new technology services and products.",
+    "1-6-2-1": "Vulnerability assessment and remediation.",
+    "1-6-2-2": "Reviewing secure configuration and hardening and updates packages before launching projects and changes.",
+    "1-6-3-1": "Using the secure coding standards.",
+    "1-6-3-2": "Using trusted and licensed sources for software development tools and libraries.",
+    "1-6-3-3": "Conducting compliance test for software against the cybersecurity requirements within the entity.",
+    "1-6-3-4": "Secure integration between applications.",
+    "1-6-3-5": "Reviewing secure configuration and hardening and updates packages before launching software products",
+    "1-9-3-1": "Incorporating the personnel’s cybersecurity responsibilities clauses and non-disclosure clauses in their employment contracts with the entity (including duri…",
+    "1-9-3-2": "Conducting screening or vetting for personnel in cybersecurity positions and technical positions with critical and privileged powers.",
+    "1-9-4-1": "Cybersecurity awareness (during on-boarding and during employment).",
+    "1-9-4-2": "Implementation and compliance with cybersecurity requirements, as per the entity’s cybersecurity policies, procedures, and operations.",
+    "2-10-3-1": "Periodic vulnerabilities assessment and detection.",
+    "2-10-3-2": "Vulnerabilities classification based on their severities.",
+    "2-10-3-3": "Vulnerabilities remediation based on their classification and the associated cyber risks.",
+    "2-10-3-4": "Patch management to remediate vulnerabilities, and ensuring the integrity and effectiveness of these updates and fixes are verified using a non-production en…",
+    "2-10-3-5": "Communication and subscription with trusted resources for new and up-to-date vulnerabilities.",
+    "2-11-3-1": "Scope of penetration testing to include all externally provided services (via the Internet) and their technical components, including infrastructure, website…",
+    "2-11-3-2": "Conducting penetration tests periodically.",
+    "2-12-1-2": "Subscribe to an NCA-licensed managed security service center for cybersecurity m",
+    "2-12-3-1": "Activation of cybersecurity event logs for critical information assets within the entity.",
+    "2-12-3-2": "Activation of cybersecurity event logs for critical and privileged accounts accessing information assets as well as for remote access events within the entit…",
+    "2-12-3-3": "Identification of Security Information and Event Management (SIEM) techniques required for cybersecurity event logs collection.",
+    "2-12-3-4": "Continuous monitoring of cybersecurity event logs.",
+    "2-12-3-5": "Retention period of cybersecurity event logs (shall be at least 12 months).",
+    "2-13-3-1": "Cybersecurity incident response plans and escalation procedures.",
+    "2-13-3-2": "Cybersecurity incident classification.",
+    "2-13-3-3": "Reporting cybersecurity incidents to the NCA.",
+    "2-13-3-4": "Sharing cybersecurity incident notifications, threat intelligence, penetration indicators, and incident reports with the NCA.",
+    "2-13-3-5": "Collecting and handling threat intelligence feeds.",
+    "2-14-3-1": "Authorized access to critical areas within the entity (e.g",
+    "2-14-3-2": "Access and monitoring logs (CCTV).",
+    "2-14-3-3": "Protection of access and monitoring log information.",
+    "2-14-3-4": "Security of the destruction and re-use of physical assets that hold classified information (including paper documents and storage media).",
+    "2-14-3-5": "Security of devices and equipment inside and outside the entity’s facilities.",
+    "2-15-3-1": "Use of web application firewall.",
+    "2-15-3-2": "Adoption of the multi-tier architecture principle.",
+    "2-15-3-3": "Use of secure protocols (e.g",
+    "2-15-3-4": "Clarification of the secure usage policy for users.",
+    "2-15-3-5": "User authentication, and the suitable authentication factors and their numbers as well as the authentication techniques shall be defined based on the result …",
+    "2-2-3-1": "Single-factor authentication based on username and password.",
+    "2-2-3-2": "Multi-factor authentication, and defining the suitable authentication factors and their numbers as well as the suitable authentication techniques based on th…",
+    "2-2-3-3": "User authorization based on identity and access control principles (Need-to-Know and Need-to-Use principle, Least Privilege principle, and Segregation of Dut…",
+    "2-2-3-4": "Privileged access management.",
+    "2-2-3-5": "Periodic review of identities and access rights.",
+    "2-3-3-1": "Protection from viruses, suspicious programs and activities, and malware on workstations and servers, using modern and advanced protection technologies and m…",
+    "2-3-3-2": "Strict restriction on the use of external storage media and their security.",
+    "2-3-3-3": "Patch management for systems, applications, and devices.",
+    "2-3-3-4": "Centralized clock synchronization with an accurate and trusted source, such as sources provided by the Saudi Standards, Metrology and Quality Organization (S…",
+    "2-4-3-1": "Analyzing and filtering email messages (specifically phishing emails and spam emails) using modern and advanced email protection techniques and mechanisms.",
+    "2-4-3-2": "Multi-factor authentication, and defining the suitable authentication factors and their numbers as well as the suitable authentication techniques based on th…",
+    "2-4-3-3": "Email archiving and backup.",
+    "2-4-3-4": "Secure management and protection against Advanced Persistent Threats (APT), which normally utilize zero-day malware and viruses.",
+    "2-4-3-5": "Validation of the entity’s email service domains by using Sender Policy Framework (SPF), Domain Keys Identified Mail (DKIM), and Domain Message Authenticatio…",
+    "2-5-3-1": "Logical or physical isolation and segmentation of network segments in a secure manner which is required to control relevant cybersecurity risks, using firewa…",
+    "2-5-3-2": "Isolation of production network from testing and development environment networks.",
+    "2-5-3-3": "Secure browsing and internet connectivity, including strict restrictions on suspicious websites, file storage/sharing websites, and remote access websites.",
+    "2-5-3-4": "Wireless network security and protection using secure authentication and encryption techniques and avoiding the connection of wireless networks to the entity…",
+    "2-5-3-5": "Restricting and managing network services, protocols, and ports.",
+    "2-5-3-6": "Intrusion Prevention Systems (IPS).",
+    "2-5-3-7": "Security of Domain Name Service (DNS).",
+    "2-5-3-8": "Secure management and protection of Internet browsing channel against Advanced Persistent Threats (APT), which normally utilize zero-day malware and viruses.",
+    "2-5-3-9": "Protecting against Distributed Denial of Service (DDoS) attacks to limit risks arising from these attacks.",
+    "2-6-3-1": "Separation and encryption of the entity’s data and information stored on mobile devices and BYODs.",
+    "2-6-3-2": "Controlled and restricted use based on the requirements of the interest of the entity's business.",
+    "2-6-3-3": "Deletion of the entity’s data and information stored on mobile devices and BYOD in cases of device loss or after the ending/termination of employment with th…",
+    "2-6-3-4": "Security awareness for users.",
+    "2-7-1-2": "Subscribe to a brand protection service that protects the entity's identity from",
+    "2-7-1-3": "Security of the use of printers, scanners, and imaging devices used to process e",
+    "2-8-3-1": "Approved cryptographic systems and solutions standards and their technical and regulatory restrictions.",
+    "2-8-3-2": "Secure management of cryptographic keys during their lifecycles.",
+    "2-8-3-3": "Encryption of data in-transit and at-rest, as per their classification and the relevant legislative and regulatory requirements.",
+    "2-9-3-1": "Scope of backups to cover critical technology and information assets.",
+    "2-9-3-2": "Ability to perform quick recovery of data and systems after cybersecurity incidents.",
+    "2-9-3-3": "Periodic testing for the effectiveness of backup recovery.",
+    "3-1-3-1": "Ensuring the continuity of cybersecurity systems and procedures.",
+    "3-1-3-2": "Developing plans for response to cybersecurity incidents that may affect the entity’s business continuity.",
+    "3-1-3-3": "Developing disaster recovery plans.",
+    "4-1-2-1": "Clauses of non-disclosure and the secure removal of the entity’s data by the third party upon the end of service.",
+    "4-1-2-2": "Communication procedures in case of the occurrence of a cybersecurity incident.",
+    "4-1-2-3": "Obligating the third party to apply the entity’s cybersecurity requirements and policies and the relevant legislative and regulatory requirements.",
+    "4-1-3-1": "Conducting a cybersecurity risk assessment and ensuring the availability of risk mitigation controls before signing contracts and agreements or upon making c…",
+    "4-1-3-2": "Cybersecurity managed service centers for monitoring and operations which use remote access shall be fully located in the Kingdom of Saudi Arabia.",
+    "4-2-3-1": "Protection of entity’s data by cloud and hosting service providers in accordance with its classification level and returning data (in a usable format) upon s…",
+    "4-2-3-2": "Separation of the entity’s environment (especially virtual servers) from environments of other entities within the cloud computing service provider."
+  },
+  "catalog_full": {
+    "1-10-3-1": "Secure handling of email services, especially phishing emails.. Secure handling of email services, especially phishing emails.",
+    "1-10-3-2": "Secure handling of mobile devices and storage media.. Secure handling of mobile devices and storage media.",
+    "1-10-3-3": "Secure Internet browsing.. Secure Internet browsing.",
+    "1-10-3-4": "Secure usage of social media.. Secure usage of social media.",
+    "1-10-4-1": "Cybersecurity department personnel.. Cybersecurity department personnel.",
+    "1-10-4-2": "Personnel working on software/application development and those working on information and technology assets of the entity.. Personnel working on software/application development and those working on information and technology assets of the entity.",
+    "1-10-4-3": "Executive and supervisory positions.. Executive and supervisory positions.",
+    "1-5-3-1": "At early stage of technology projects.. At early stage of technology projects.",
+    "1-5-3-2": "Before making major changes to technology infrastructure.. Before making major changes to technology infrastructure.",
+    "1-5-3-3": "During planning to obtain third party services.. During planning to obtain third party services.",
+    "1-5-3-4": "During planning and before the release of new technology services and products.. During planning and before the release of new technology services and products.",
+    "1-6-2-1": "Vulnerability assessment and remediation.. Vulnerability assessment and remediation.",
+    "1-6-2-2": "Reviewing secure configuration and hardening and updates packages before launching projects and changes.. Reviewing secure configuration and hardening and updates packages before launching projects and changes.",
+    "1-6-3-1": "Using the secure coding standards.. Using the secure coding standards.",
+    "1-6-3-2": "Using trusted and licensed sources for software development tools and libraries.. Using trusted and licensed sources for software development tools and libraries.",
+    "1-6-3-3": "Conducting compliance test for software against the cybersecurity requirements within the entity.. Conducting compliance test for software against the cybersecurity requirements within the entity.",
+    "1-6-3-4": "Secure integration between applications.. Secure integration between applications.",
+    "1-6-3-5": "Reviewing secure configuration and hardening and updates packages before launching software products. Reviewing secure configuration and hardening and updates packages before launching software products",
+    "1-9-3-1": "Incorporating the personnel’s cybersecurity responsibilities clauses and non-disclosure clauses in their employment contracts with the entity (including duri…. Incorporating the personnel’s cybersecurity responsibilities clauses and non-disclosure clauses in their employment contracts with the entity (including during and after employment end/termination with the entity).",
+    "1-9-3-2": "Conducting screening or vetting for personnel in cybersecurity positions and technical positions with critical and privileged powers.. Conducting screening or vetting for personnel in cybersecurity positions and technical positions with critical and privileged powers.",
+    "1-9-4-1": "Cybersecurity awareness (during on-boarding and during employment).. Cybersecurity awareness (during on-boarding and during employment).",
+    "1-9-4-2": "Implementation and compliance with cybersecurity requirements, as per the entity’s cybersecurity policies, procedures, and operations.. Implementation and compliance with cybersecurity requirements, as per the entity’s cybersecurity policies, procedures, and operations.",
+    "2-10-3-1": "Periodic vulnerabilities assessment and detection.. Periodic vulnerabilities assessment and detection.",
+    "2-10-3-2": "Vulnerabilities classification based on their severities.. Vulnerabilities classification based on their severities.",
+    "2-10-3-3": "Vulnerabilities remediation based on their classification and the associated cyber risks.. Vulnerabilities remediation based on their classification and the associated cyber risks.",
+    "2-10-3-4": "Patch management to remediate vulnerabilities, and ensuring the integrity and effectiveness of these updates and fixes are verified using a non-production en…. Patch management to remediate vulnerabilities, and ensuring the integrity and effectiveness of these updates and fixes are verified using a non-production environment before being applied.",
+    "2-10-3-5": "Communication and subscription with trusted resources for new and up-to-date vulnerabilities.. Communication and subscription with trusted resources for new and up-to-date vulnerabilities.",
+    "2-11-3-1": "Scope of penetration testing to include all externally provided services (via the Internet) and their technical components, including infrastructure, website…. Scope of penetration testing to include all externally provided services (via the Internet) and their technical components, including infrastructure, websites, web applications, smartphone and tablet applications, email, and remote access.",
+    "2-11-3-2": "Conducting penetration tests periodically.. Conducting penetration tests periodically.",
+    "2-12-1-2": "Subscribe to an NCA-licensed managed security service center for cybersecurity m. Subscribe to an NCA-licensed managed security service center for cybersecurity monitoring and operations.",
+    "2-12-3-1": "Activation of cybersecurity event logs for critical information assets within the entity.. Activation of cybersecurity event logs for critical information assets within the entity.",
+    "2-12-3-2": "Activation of cybersecurity event logs for critical and privileged accounts accessing information assets as well as for remote access events within the entit…. Activation of cybersecurity event logs for critical and privileged accounts accessing information assets as well as for remote access events within the entity.",
+    "2-12-3-3": "Identification of Security Information and Event Management (SIEM) techniques required for cybersecurity event logs collection.. Identification of Security Information and Event Management (SIEM) techniques required for cybersecurity event logs collection.",
+    "2-12-3-4": "Continuous monitoring of cybersecurity event logs.. Continuous monitoring of cybersecurity event logs.",
+    "2-12-3-5": "Retention period of cybersecurity event logs (shall be at least 12 months).. Retention period of cybersecurity event logs (shall be at least 12 months).",
+    "2-13-3-1": "Cybersecurity incident response plans and escalation procedures.. Cybersecurity incident response plans and escalation procedures.",
+    "2-13-3-2": "Cybersecurity incident classification.. Cybersecurity incident classification.",
+    "2-13-3-3": "Reporting cybersecurity incidents to the NCA.. Reporting cybersecurity incidents to the NCA.",
+    "2-13-3-4": "Sharing cybersecurity incident notifications, threat intelligence, penetration indicators, and incident reports with the NCA.. Sharing cybersecurity incident notifications, threat intelligence, penetration indicators, and incident reports with the NCA.",
+    "2-13-3-5": "Collecting and handling threat intelligence feeds.. Collecting and handling threat intelligence feeds.",
+    "2-14-3-1": "Authorized access to critical areas within the entity (e.g. Authorized access to critical areas within the entity (e.g. the entity’s data center, disaster recovery center, critical information processing facilities, security surveillance center, network connection rooms, technical device and equipment supply areas, etc.).",
+    "2-14-3-2": "Access and monitoring logs (CCTV).. Access and monitoring logs (CCTV).",
+    "2-14-3-3": "Protection of access and monitoring log information.. Protection of access and monitoring log information.",
+    "2-14-3-4": "Security of the destruction and re-use of physical assets that hold classified information (including paper documents and storage media).. Security of the destruction and re-use of physical assets that hold classified information (including paper documents and storage media).",
+    "2-14-3-5": "Security of devices and equipment inside and outside the entity’s facilities.. Security of devices and equipment inside and outside the entity’s facilities.",
+    "2-15-3-1": "Use of web application firewall.. Use of web application firewall.",
+    "2-15-3-2": "Adoption of the multi-tier architecture principle.. Adoption of the multi-tier architecture principle.",
+    "2-15-3-3": "Use of secure protocols (e.g. Use of secure protocols (e.g. HTTPS).",
+    "2-15-3-4": "Clarification of the secure usage policy for users.. Clarification of the secure usage policy for users.",
+    "2-15-3-5": "User authentication, and the suitable authentication factors and their numbers as well as the authentication techniques shall be defined based on the result …. User authentication, and the suitable authentication factors and their numbers as well as the authentication techniques shall be defined based on the result of impact assessment of authentication failure and bypass for users’ access.",
+    "2-2-3-1": "Single-factor authentication based on username and password.. Single-factor authentication based on username and password.",
+    "2-2-3-2": "Multi-factor authentication, and defining the suitable authentication factors and their numbers as well as the suitable authentication techniques based on th…. Multi-factor authentication, and defining the suitable authentication factors and their numbers as well as the suitable authentication techniques based on the result of impact assessment of authentication failure and bypass for remote access and for privileged accounts.",
+    "2-2-3-3": "User authorization based on identity and access control principles (Need-to-Know and Need-to-Use principle, Least Privilege principle, and Segregation of Dut…. User authorization based on identity and access control principles (Need-to-Know and Need-to-Use principle, Least Privilege principle, and Segregation of Duties principle).",
+    "2-2-3-4": "Privileged access management.. Privileged access management.",
+    "2-2-3-5": "Periodic review of identities and access rights.. Periodic review of identities and access rights.",
+    "2-3-3-1": "Protection from viruses, suspicious programs and activities, and malware on workstations and servers, using modern and advanced protection technologies and m…. Protection from viruses, suspicious programs and activities, and malware on workstations and servers, using modern and advanced protection technologies and mechanisms, and securely managing them.",
+    "2-3-3-2": "Strict restriction on the use of external storage media and their security.. Strict restriction on the use of external storage media and their security.",
+    "2-3-3-3": "Patch management for systems, applications, and devices.. Patch management for systems, applications, and devices.",
+    "2-3-3-4": "Centralized clock synchronization with an accurate and trusted source, such as sources provided by the Saudi Standards, Metrology and Quality Organization (S…. Centralized clock synchronization with an accurate and trusted source, such as sources provided by the Saudi Standards, Metrology and Quality Organization (SASO).",
+    "2-4-3-1": "Analyzing and filtering email messages (specifically phishing emails and spam emails) using modern and advanced email protection techniques and mechanisms.. Analyzing and filtering email messages (specifically phishing emails and spam emails) using modern and advanced email protection techniques and mechanisms.",
+    "2-4-3-2": "Multi-factor authentication, and defining the suitable authentication factors and their numbers as well as the suitable authentication techniques based on th…. Multi-factor authentication, and defining the suitable authentication factors and their numbers as well as the suitable authentication techniques based on the result of impact assessment of authentication failure and bypass for remote and webmail access.",
+    "2-4-3-3": "Email archiving and backup.. Email archiving and backup.",
+    "2-4-3-4": "Secure management and protection against Advanced Persistent Threats (APT), which normally utilize zero-day malware and viruses.. Secure management and protection against Advanced Persistent Threats (APT), which normally utilize zero-day malware and viruses.",
+    "2-4-3-5": "Validation of the entity’s email service domains by using Sender Policy Framework (SPF), Domain Keys Identified Mail (DKIM), and Domain Message Authenticatio…. Validation of the entity’s email service domains by using Sender Policy Framework (SPF), Domain Keys Identified Mail (DKIM), and Domain Message Authentication Reporting and Conformance (DMARC).",
+    "2-5-3-1": "Logical or physical isolation and segmentation of network segments in a secure manner which is required to control relevant cybersecurity risks, using firewa…. Logical or physical isolation and segmentation of network segments in a secure manner which is required to control relevant cybersecurity risks, using firewall and defense-in-depth principle.",
+    "2-5-3-2": "Isolation of production network from testing and development environment networks.. Isolation of production network from testing and development environment networks.",
+    "2-5-3-3": "Secure browsing and internet connectivity, including strict restrictions on suspicious websites, file storage/sharing websites, and remote access websites.. Secure browsing and internet connectivity, including strict restrictions on suspicious websites, file storage/sharing websites, and remote access websites.",
+    "2-5-3-4": "Wireless network security and protection using secure authentication and encryption techniques and avoiding the connection of wireless networks to the entity…. Wireless network security and protection using secure authentication and encryption techniques and avoiding the connection of wireless networks to the entity’s internal network, except after a comprehensive assessment of subsequent risks, with handling them in a way that protects the technology assets of the entity.",
+    "2-5-3-5": "Restricting and managing network services, protocols, and ports.. Restricting and managing network services, protocols, and ports.",
+    "2-5-3-6": "Intrusion Prevention Systems (IPS).. Intrusion Prevention Systems (IPS).",
+    "2-5-3-7": "Security of Domain Name Service (DNS).. Security of Domain Name Service (DNS).",
+    "2-5-3-8": "Secure management and protection of Internet browsing channel against Advanced Persistent Threats (APT), which normally utilize zero-day malware and viruses.. Secure management and protection of Internet browsing channel against Advanced Persistent Threats (APT), which normally utilize zero-day malware and viruses.",
+    "2-5-3-9": "Protecting against Distributed Denial of Service (DDoS) attacks to limit risks arising from these attacks.. Protecting against Distributed Denial of Service (DDoS) attacks to limit risks arising from these attacks.",
+    "2-6-3-1": "Separation and encryption of the entity’s data and information stored on mobile devices and BYODs.. Separation and encryption of the entity’s data and information stored on mobile devices and BYODs.",
+    "2-6-3-2": "Controlled and restricted use based on the requirements of the interest of the entity's business.. Controlled and restricted use based on the requirements of the interest of the entity's business.",
+    "2-6-3-3": "Deletion of the entity’s data and information stored on mobile devices and BYOD in cases of device loss or after the ending/termination of employment with th…. Deletion of the entity’s data and information stored on mobile devices and BYOD in cases of device loss or after the ending/termination of employment with the entity.",
+    "2-6-3-4": "Security awareness for users.. Security awareness for users.",
+    "2-7-1-2": "Subscribe to a brand protection service that protects the entity's identity from. Subscribe to a brand protection service that protects the entity's identity from impersonation (e.g., monitoring for brand and domain spoofing and fraudulent lookalike-domain registration).",
+    "2-7-1-3": "Security of the use of printers, scanners, and imaging devices used to process e. Security of the use of printers, scanners, and imaging devices used to process entity information (interpretive: device management, access control, and secure-print and data-purge configuration to prevent unauthorised copying, printing, scanning, or transmission of classified information).",
+    "2-8-3-1": "Approved cryptographic systems and solutions standards and their technical and regulatory restrictions.. Approved cryptographic systems and solutions standards and their technical and regulatory restrictions.",
+    "2-8-3-2": "Secure management of cryptographic keys during their lifecycles.. Secure management of cryptographic keys during their lifecycles.",
+    "2-8-3-3": "Encryption of data in-transit and at-rest, as per their classification and the relevant legislative and regulatory requirements.. Encryption of data in-transit and at-rest, as per their classification and the relevant legislative and regulatory requirements.",
+    "2-9-3-1": "Scope of backups to cover critical technology and information assets.. Scope of backups to cover critical technology and information assets.",
+    "2-9-3-2": "Ability to perform quick recovery of data and systems after cybersecurity incidents.. Ability to perform quick recovery of data and systems after cybersecurity incidents.",
+    "2-9-3-3": "Periodic testing for the effectiveness of backup recovery.. Periodic testing for the effectiveness of backup recovery.",
+    "3-1-3-1": "Ensuring the continuity of cybersecurity systems and procedures.. Ensuring the continuity of cybersecurity systems and procedures.",
+    "3-1-3-2": "Developing plans for response to cybersecurity incidents that may affect the entity’s business continuity.. Developing plans for response to cybersecurity incidents that may affect the entity’s business continuity.",
+    "3-1-3-3": "Developing disaster recovery plans.. Developing disaster recovery plans.",
+    "4-1-2-1": "Clauses of non-disclosure and the secure removal of the entity’s data by the third party upon the end of service.. Clauses of non-disclosure and the secure removal of the entity’s data by the third party upon the end of service.",
+    "4-1-2-2": "Communication procedures in case of the occurrence of a cybersecurity incident.. Communication procedures in case of the occurrence of a cybersecurity incident.",
+    "4-1-2-3": "Obligating the third party to apply the entity’s cybersecurity requirements and policies and the relevant legislative and regulatory requirements.. Obligating the third party to apply the entity’s cybersecurity requirements and policies and the relevant legislative and regulatory requirements.",
+    "4-1-3-1": "Conducting a cybersecurity risk assessment and ensuring the availability of risk mitigation controls before signing contracts and agreements or upon making c…. Conducting a cybersecurity risk assessment and ensuring the availability of risk mitigation controls before signing contracts and agreements or upon making changes to the relevant legislative and regulatory requirements.",
+    "4-1-3-2": "Cybersecurity managed service centers for monitoring and operations which use remote access shall be fully located in the Kingdom of Saudi Arabia.. Cybersecurity managed service centers for monitoring and operations which use remote access shall be fully located in the Kingdom of Saudi Arabia.",
+    "4-2-3-1": "Protection of entity’s data by cloud and hosting service providers in accordance with its classification level and returning data (in a usable format) upon s…. Protection of entity’s data by cloud and hosting service providers in accordance with its classification level and returning data (in a usable format) upon service completion.",
+    "4-2-3-2": "Separation of the entity’s environment (especially virtual servers) from environments of other entities within the cloud computing service provider.. Separation of the entity’s environment (especially virtual servers) from environments of other entities within the cloud computing service provider."
+  },
+  "checks": [
+    {
+      "check": "directory_listing_enabled",
+      "query_text": "Directory listing enabled on web server",
+      "gold_ids": [
+        "2-15-3-3"
+      ],
+      "frequency": 29
+    },
+    {
+      "check": "dkim_missing",
+      "query_text": "DKIM not found for probed selectors (selector-limited)",
+      "gold_ids": [
+        "2-4-3-5"
+      ],
+      "frequency": 35
+    },
+    {
+      "check": "dmarc_missing_or_none",
+      "query_text": "DMARC absent or policy=none",
+      "gold_ids": [
+        "2-4-3-5"
+      ],
+      "frequency": 32
+    },
+    {
+      "check": "dns_zone_transfer_open",
+      "query_text": "DNS zone transfer (AXFR) allowed to arbitrary clients",
+      "gold_ids": [
+        "2-5-3-7"
+      ],
+      "frequency": 7
+    },
+    {
+      "check": "dnssec_missing",
+      "query_text": "DNSSEC not enabled for the domain",
+      "gold_ids": [
+        "2-5-3-7"
+      ],
+      "frequency": 54
+    },
+    {
+      "check": "eol_software_exposed",
+      "query_text": "End-of-life, unsupported software version exposed",
+      "gold_ids": [
+        "2-3-3-3"
+      ],
+      "frequency": 109
+    },
+    {
+      "check": "expired_certificate",
+      "query_text": "Expired or not-yet-valid certificate",
+      "gold_ids": [
+        "2-8-3-3"
+      ],
+      "frequency": 28
+    },
+    {
+      "check": "exposed_database_port",
+      "query_text": "Database service port reachable from the internet",
+      "gold_ids": [
+        "2-5-3-1"
+      ],
+      "frequency": 50
+    },
+    {
+      "check": "exposed_dev_environment",
+      "query_text": "Development or staging environment publicly reachable",
+      "gold_ids": [
+        "2-5-3-2"
+      ],
+      "frequency": 11
+    },
+    {
+      "check": "exposed_internal_port",
+      "query_text": "Internal service port exposed to internet",
+      "gold_ids": [
+        "2-5-3-1"
+      ],
+      "frequency": 53
+    },
+    {
+      "check": "exposed_login_panel",
+      "query_text": "Administrative login interface exposed without access control",
+      "gold_ids": [
+        "2-15-3-5"
+      ],
+      "frequency": 77
+    },
+    {
+      "check": "exposed_management_port",
+      "query_text": "Management service (SSH/RDP) directly exposed",
+      "gold_ids": [
+        "2-2-3-1",
+        "2-2-3-2"
+      ],
+      "frequency": 86
+    },
+    {
+      "check": "exposed_sensitive_file",
+      "query_text": "Sensitive file exposed (.git, .env, or backup archive)",
+      "gold_ids": [
+        "2-15-3-3"
+      ],
+      "frequency": 36
+    },
+    {
+      "check": "high_risk_port_open",
+      "query_text": "Unnecessary/high-risk port open",
+      "gold_ids": [
+        "2-5-3-5"
+      ],
+      "frequency": 77
+    },
+    {
+      "check": "insecure_cookie",
+      "query_text": "Session cookie without Secure/HttpOnly/SameSite",
+      "gold_ids": [
+        "2-15-3-3"
+      ],
+      "frequency": 78
+    },
+    {
+      "check": "legacy_tls_version",
+      "query_text": "Legacy TLS version (1.0/1.1) enabled",
+      "gold_ids": [
+        "2-8-3-3"
+      ],
+      "frequency": 84
+    },
+    {
+      "check": "missing_csp",
+      "query_text": "Content-Security-Policy absent",
+      "gold_ids": [
+        "2-15-3-3"
+      ],
+      "frequency": 95
+    },
+    {
+      "check": "missing_hsts",
+      "query_text": "HSTS header absent",
+      "gold_ids": [
+        "2-15-3-3",
+        "2-8-3-3"
+      ],
+      "frequency": 90
+    },
+    {
+      "check": "missing_permissions_policy",
+      "query_text": "Permissions-Policy header absent",
+      "gold_ids": [
+        "2-15-3-3"
+      ],
+      "frequency": 70
+    },
+    {
+      "check": "missing_referrer_policy",
+      "query_text": "Referrer-Policy absent",
+      "gold_ids": [
+        "2-15-3-3"
+      ],
+      "frequency": 60
+    },
+    {
+      "check": "missing_x_content_type_options",
+      "query_text": "X-Content-Type-Options absent",
+      "gold_ids": [
+        "2-15-3-3"
+      ],
+      "frequency": 66
+    },
+    {
+      "check": "missing_x_frame_options",
+      "query_text": "X-Frame-Options absent (clickjacking)",
+      "gold_ids": [
+        "2-15-3-3"
+      ],
+      "frequency": 82
+    },
+    {
+      "check": "mta_sts_missing",
+      "query_text": "MTA-STS policy absent (no enforced inbound TLS)",
+      "gold_ids": [
+        "2-4-3-5"
+      ],
+      "frequency": 28
+    },
+    {
+      "check": "no_ddos_protection",
+      "query_text": "No DDoS mitigation fingerprint; origin appears directly exposed",
+      "gold_ids": [
+        "2-15-3-2",
+        "2-5-3-9"
+      ],
+      "frequency": 41
+    },
+    {
+      "check": "no_https_redirect",
+      "query_text": "HTTP served without HTTPS redirect",
+      "gold_ids": [
+        "2-15-3-3"
+      ],
+      "frequency": 41
+    },
+    {
+      "check": "outdated_exposed_software",
+      "query_text": "Outdated exposed software version",
+      "gold_ids": [
+        "2-10-3-1",
+        "2-10-3-4"
+      ],
+      "frequency": 124
+    },
+    {
+      "check": "self_signed_certificate",
+      "query_text": "Self-signed or untrusted certificate chain",
+      "gold_ids": [
+        "2-8-3-3"
+      ],
+      "frequency": 24
+    },
+    {
+      "check": "spf_missing",
+      "query_text": "SPF record missing/misconfigured",
+      "gold_ids": [
+        "2-4-3-5"
+      ],
+      "frequency": 17
+    },
+    {
+      "check": "waf_absent",
+      "query_text": "No WAF fingerprint on external web app",
+      "gold_ids": [
+        "2-15-3-1"
+      ],
+      "frequency": 185
+    },
+    {
+      "check": "weak_certificate_key",
+      "query_text": "Weak certificate key or signature (RSA<2048 or SHA-1)",
+      "gold_ids": [
+        "2-8-3-3"
+      ],
+      "frequency": 33
+    },
+    {
+      "check": "weak_tls_cipher",
+      "query_text": "Weak TLS cipher negotiated",
+      "gold_ids": [
+        "2-8-3-3"
+      ],
+      "frequency": 55
+    }
+  ]
+}

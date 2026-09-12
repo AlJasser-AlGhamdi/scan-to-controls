@@ -1,0 +1,202 @@
+{
+  "catalog": {
+    "uuid": "0a1db85b-8db0-5cf8-a266-e5899d1e0176",
+    "metadata": {
+      "title": "ATLAS OSCAL Catalog — NCNICC-1:2025 (exclusive controls)",
+      "last-modified": "2026-01-01T00:00:00+00:00",
+      "version": "2024.1",
+      "oscal-version": "1.1.2",
+      "props": [
+        {
+          "name": "exclusive-controls",
+          "ns": "https://atlas.sa/ns/oscal",
+          "value": "3"
+        },
+        {
+          "name": "source",
+          "ns": "https://atlas.sa/ns/oscal",
+          "value": "spec/atlas_taxonomy_v4.tex"
+        }
+      ]
+    },
+    "groups": [
+      {
+        "id": "ncnicc-exclusive",
+        "title": "NCNICC-1:2025 controls with no ECC-2:2024 equivalent",
+        "controls": [
+          {
+            "id": "ncnicc-2-7-1-2",
+            "title": "Subscribe to a brand protection service that protects the entity's identity from",
+            "props": [
+              {
+                "name": "label",
+                "value": "2-7-1-2"
+              },
+              {
+                "name": "tier",
+                "ns": "https://atlas.sa/ns/oscal",
+                "value": "2"
+              },
+              {
+                "name": "ncnicc-class-a-status",
+                "ns": "https://atlas.sa/ns/oscal",
+                "value": "M"
+              },
+              {
+                "name": "ncnicc-class-b-status",
+                "ns": "https://atlas.sa/ns/oscal",
+                "value": "R"
+              },
+              {
+                "name": "kind",
+                "ns": "https://atlas.sa/ns/oscal",
+                "value": "ncnicc_exclusive"
+              },
+              {
+                "name": "text-source",
+                "ns": "https://atlas.sa/ns/oscal",
+                "value": "atlas-taxonomy-summary"
+              }
+            ],
+            "parts": [
+              {
+                "name": "statement",
+                "class": "en",
+                "prose": "Subscribe to a brand protection service that protects the entity's identity from impersonation (e.g., monitoring for brand and domain spoofing and fraudulent lookalike-domain registration)."
+              },
+              {
+                "name": "guidance",
+                "class": "en",
+                "prose": "Entity has active brand/domain protection subscription; evidence of monitoring alerts reviewed."
+              },
+              {
+                "name": "assessment-method",
+                "ns": "https://atlas.sa/ns/oscal",
+                "prose": "Upload proof of active subscription to a brand/domain protection monitoring service; service must cover domain spoofing detection and lookalike domain registration alerts."
+              },
+              {
+                "name": "remediation",
+                "ns": "https://atlas.sa/ns/oscal",
+                "prose": "Subscribe to an NCA-recognized brand monitoring service; configure alerts for lookalike domains and impersonation indicators; establish a takedown process for identified fraudulent domains."
+              }
+            ]
+          },
+          {
+            "id": "ncnicc-2-7-1-3",
+            "title": "Security of the use of printers, scanners, and imaging devices used to process e",
+            "props": [
+              {
+                "name": "label",
+                "value": "2-7-1-3"
+              },
+              {
+                "name": "tier",
+                "ns": "https://atlas.sa/ns/oscal",
+                "value": "2"
+              },
+              {
+                "name": "ncnicc-class-a-status",
+                "ns": "https://atlas.sa/ns/oscal",
+                "value": "M"
+              },
+              {
+                "name": "ncnicc-class-b-status",
+                "ns": "https://atlas.sa/ns/oscal",
+                "value": "M"
+              },
+              {
+                "name": "kind",
+                "ns": "https://atlas.sa/ns/oscal",
+                "value": "ncnicc_exclusive"
+              },
+              {
+                "name": "text-source",
+                "ns": "https://atlas.sa/ns/oscal",
+                "value": "atlas-taxonomy-summary"
+              }
+            ],
+            "parts": [
+              {
+                "name": "statement",
+                "class": "en",
+                "prose": "Security of the use of printers, scanners, and imaging devices used to process entity information (interpretive: device management, access control, and secure-print and data-purge configuration to prevent unauthorised copying, printing, scanning, or transmission of classified information)."
+              },
+              {
+                "name": "guidance",
+                "class": "en",
+                "prose": "All printers, scanners, and imaging devices are inventoried, access-controlled, configured with secure-print and data-purge functions, and audit-logged."
+              },
+              {
+                "name": "assessment-method",
+                "ns": "https://atlas.sa/ns/oscal",
+                "prose": "Questionnaire review of device inventory, access-control configuration, secure-print settings, data-purge functions, and audit logging; evidence upload of device management policy and configuration records."
+              },
+              {
+                "name": "remediation",
+                "ns": "https://atlas.sa/ns/oscal",
+                "prose": "Inventory all printers, scanners, and imaging devices; implement access controls and audit logging; configure secure-print and automatic data-purge; integrate into the asset management (2-1) process; attest compliance."
+              }
+            ]
+          },
+          {
+            "id": "ncnicc-2-12-1-2",
+            "title": "Subscribe to an NCA-licensed managed security service center for cybersecurity m",
+            "props": [
+              {
+                "name": "label",
+                "value": "2-12-1-2"
+              },
+              {
+                "name": "tier",
+                "ns": "https://atlas.sa/ns/oscal",
+                "value": "2"
+              },
+              {
+                "name": "ncnicc-class-a-status",
+                "ns": "https://atlas.sa/ns/oscal",
+                "value": "M"
+              },
+              {
+                "name": "ncnicc-class-b-status",
+                "ns": "https://atlas.sa/ns/oscal",
+                "value": "R"
+              },
+              {
+                "name": "kind",
+                "ns": "https://atlas.sa/ns/oscal",
+                "value": "ncnicc_exclusive"
+              },
+              {
+                "name": "text-source",
+                "ns": "https://atlas.sa/ns/oscal",
+                "value": "atlas-taxonomy-summary"
+              }
+            ],
+            "parts": [
+              {
+                "name": "statement",
+                "class": "en",
+                "prose": "Subscribe to an NCA-licensed managed security service center for cybersecurity monitoring and operations."
+              },
+              {
+                "name": "guidance",
+                "class": "en",
+                "prose": "Entity has active subscription to an NCA-licensed SOC; subscription covers the minimum monitoring scope required by NCNICC 2-12."
+              },
+              {
+                "name": "assessment-method",
+                "ns": "https://atlas.sa/ns/oscal",
+                "prose": "Upload proof of active subscription to an NCA-licensed Security Operations Center (SOC) managed service provider; license number verified against NCA licensed provider list."
+              },
+              {
+                "name": "remediation",
+                "ns": "https://atlas.sa/ns/oscal",
+                "prose": "Contract with an NCA-licensed managed SOC provider; verify NCA licensing status before contracting; ensure SLA covers 24/7 monitoring, alert escalation, and incident notification within NCA-defined timeframes."
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

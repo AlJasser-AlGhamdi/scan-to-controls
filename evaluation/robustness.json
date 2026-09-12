@@ -1,0 +1,202 @@
+{
+  "attestation_sensitivity": {
+    "0.30": {
+      "f1": 0.840077071290944,
+      "precision": 0.7569444444444444,
+      "recall": 0.9437229437229437
+    },
+    "0.50": {
+      "f1": 0.8977556109725686,
+      "precision": 0.8530805687203792,
+      "recall": 0.9473684210526315
+    },
+    "0.70": {
+      "f1": 0.9032846715328468,
+      "precision": 0.8902877697841727,
+      "recall": 0.9166666666666666
+    }
+  },
+  "corpus_priors": {
+    "baseline_f1": 0.9085106382978723,
+    "max": 0.9296758104738154,
+    "min": 0.8806333739342266,
+    "note": "end-to-end F1 under a common +-20% scaling of the sector weights and conditional propensities (incident-informed declared priors, SOURCES.md section 4); shows the result is not knife-edge on them",
+    "scaled_f1": {
+      "0.80": 0.8806333739342266,
+      "0.90": 0.9055523755008587,
+      "1.10": 0.9296758104738154,
+      "1.20": 0.9217798594847776
+    }
+  },
+  "detection_sensitivity": {
+    "baseline_f1": 0.9085106382978723,
+    "max": 0.966230936819172,
+    "min": 0.8443083205717202,
+    "shifted_f1": {
+      "+0.05": 0.945533769063181,
+      "+0.10": 0.966230936819172,
+      "-0.05": 0.8729743857814951,
+      "-0.10": 0.8443083205717202
+    }
+  },
+  "detection_uncertainty_ensemble": {
+    "draws": 2000,
+    "f1_median": 0.911,
+    "f1_predictive_interval": [
+      0.896,
+      0.927
+    ],
+    "note": "Monte-Carlo ensemble with per-check Beta priors (wide for low-confidence checks, tight for deterministic reads); the predictive interval is the honest uncertainty from the modelled detection rates, distinct from the per-run bootstrap CI which is corpus-sampling variability.",
+    "precision_median": 0.897,
+    "precision_predictive_interval": [
+      0.873,
+      0.921
+    ],
+    "top_variance_drivers": [
+      [
+        "no_ddos_protection",
+        -0.482
+      ],
+      [
+        "dkim_missing",
+        -0.338
+      ],
+      [
+        "exposed_login_panel",
+        -0.267
+      ],
+      [
+        "exposed_management_port",
+        -0.237
+      ],
+      [
+        "eol_software_exposed",
+        -0.111
+      ]
+    ]
+  },
+  "precision_stress": {
+    "fa_scaled": {
+      "1.5x": {
+        "f1": 0.8958660387231816,
+        "precision": 0.8663967611336032,
+        "recall": 0.9274106175514626,
+        "strong_precision": 0.6179775280898876
+      },
+      "2.0x": {
+        "f1": 0.871820956256358,
+        "precision": 0.8216682646212847,
+        "recall": 0.9284940411700975,
+        "strong_precision": 0.5339805825242718
+      }
+    },
+    "note": "false-alarm rates scaled up with sensitivity held; reports precision and strong-posture precision, answering whether the false-alarm assumptions are too low."
+  },
+  "scan_conditions": {
+    "baseline_f1": 0.9085106382978723,
+    "max": 0.9085106382978723,
+    "min": 0.9071504802561366,
+    "note": "end-to-end F1 as the obstructed-host share is scaled 0.5x to 2x; the freed or taken mass moves to or from reachable. Shows the result is not knife-edge on the obstruction rate.",
+    "scaled_f1": {
+      "0.5x": 0.9081253319171535,
+      "1.5x": 0.9079297498669505,
+      "2.0x": 0.9071504802561366
+    }
+  },
+  "stability_across_seeds": {
+    "end_to_end_f1": [
+      0.9085106382978723,
+      0.9073514602215508,
+      0.9029227557411275,
+      0.8976793248945147,
+      0.9054122407688415,
+      0.9051987767584098,
+      0.9075546719681908,
+      0.909272183449651,
+      0.9085427135678392,
+      0.9099190283400809,
+      0.907520325203252,
+      0.9049820236260914,
+      0.9064895247828308,
+      0.9019812304483837,
+      0.908266129032258,
+      0.8844884488448845,
+      0.8983845752996352,
+      0.9122994652406418,
+      0.898989898989899,
+      0.8911449520586576,
+      0.8953744493392071,
+      0.9080919080919082,
+      0.9247417609444171,
+      0.8994018488308864,
+      0.9075114971895759,
+      0.9100844510680576,
+      0.89798087141339,
+      0.8747913188647746,
+      0.8943270300333703,
+      0.8966942148760331
+    ],
+    "max": 0.9247417609444171,
+    "mean": 0.9028636572728744,
+    "min": 0.8747913188647746,
+    "seeds": [
+      1337,
+      7,
+      42,
+      2025,
+      99,
+      3,
+      11,
+      13,
+      17,
+      19,
+      23,
+      29,
+      31,
+      37,
+      101,
+      202,
+      303,
+      404,
+      505,
+      606,
+      707,
+      808,
+      909,
+      1234,
+      4242,
+      5150,
+      8675,
+      314159,
+      271828,
+      161803
+    ],
+    "stdev": 0.009082877978223101
+  },
+  "weighting": {
+    "ahp_consistency_ratio": 0.008910646373075174,
+    "ahp_consistent": true,
+    "assessed_max_abs_delta": 0.17092382266252987,
+    "assessed_mean_abs_delta": 0.07460298135296876,
+    "assessed_rank_spearman": 0.8949333444463694,
+    "note": "uniform vs illustrative AHP subdomain weighting (consistency-gated). Reweighting has a bounded effect on the assessed score (mean and max |delta|, rank correlation reported), which is why the paper reports uniform-weighted scores and treats the assessed score as a lower bound pending the expert AHP elicitation. The end-to-end recovery is an unweighted set measure and is unaffected by weighting.",
+    "subdomain_weights": {
+      "2-10": 0.06957444708906119,
+      "2-15": 0.18766552576886567,
+      "2-2": 0.13392874319573175,
+      "2-3": 0.03541996462126392,
+      "2-4": 0.23630622288454958,
+      "2-5": 0.22145673023116066,
+      "2-8": 0.1156483662093673
+    }
+  },
+  "worst_case_corner": {
+    "corner": {
+      "f1": 0.8719832109129065,
+      "precision": 0.8453713123092573,
+      "recall": 0.9003250270855905,
+      "strong_precision": 0.5789473684210527
+    },
+    "note": "all low-confidence checks at their pessimistic end at once (false alarm x2, sensitivity x0.8): a defended simultaneous worst case for the scanner-dependent numbers."
+  }
+}

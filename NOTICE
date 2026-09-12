@@ -1,0 +1,16 @@
+From Ports to Controls
+Copyright the authors.
+
+Code and generated artifacts in this repository are licensed under the terms in
+LICENSE. Two exclusions:
+
+1. NCA control text. The Essential Cybersecurity Controls (ECC-2:2024) and the
+   Non-CNI Private Sector Controls (NCNICC-1:2025) are copyright of the National
+   Cybersecurity Authority of Saudi Arabia and are NOT redistributed here. The
+   full-text catalogs live in a gitignored private/ directory. The tracked
+   taxonomy/release/sort_overlay.json carries only control identifiers and this
+   project's own classification. Resolve identifiers against the official NCA
+   publications at nca.gov.sa.
+
+2. The manuscript in paper/ is a submission to Computers & Security (Elsevier)
+   and is subject to that venue's copyright terms on acceptance.

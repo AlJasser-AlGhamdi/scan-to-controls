@@ -1,0 +1,989 @@
+{
+  "metadata": {
+    "title": "ATLAS ECC-2:2024 ↔ NCNICC-1:2025 crosswalk",
+    "mapped_ecc_controls": 137,
+    "ncnicc_exclusive": 3
+  },
+  "entries": [
+    {
+      "ecc_control_id": "1-10-1",
+      "ncnicc_subcomponent": "5-1",
+      "class_a_status": "M",
+      "class_b_status": "R",
+      "ncnicc_exclusive": false
+    },
+    {
+      "ecc_control_id": "1-10-2",
+      "ncnicc_subcomponent": "5-1",
+      "class_a_status": "M",
+      "class_b_status": "R",
+      "ncnicc_exclusive": false
+    },
+    {
+      "ecc_control_id": "1-10-3",
+      "ncnicc_subcomponent": "5-1",
+      "class_a_status": "M",
+      "class_b_status": "R",
+      "ncnicc_exclusive": false
+    },
+    {
+      "ecc_control_id": "1-10-4",
+      "ncnicc_subcomponent": "5-1",
+      "class_a_status": "M",
+      "class_b_status": "R",
+      "ncnicc_exclusive": false
+    },
+    {
+      "ecc_control_id": "1-10-5",
+      "ncnicc_subcomponent": "5-1",
+      "class_a_status": "M",
+      "class_b_status": "R",
+      "ncnicc_exclusive": false
+    },
+    {
+      "ecc_control_id": "1-2-1",
+      "ncnicc_subcomponent": "1-1",
+      "class_a_status": "M",
+      "class_b_status": "R",
+      "ncnicc_exclusive": false
+    },
+    {
+      "ecc_control_id": "1-2-2",
+      "ncnicc_subcomponent": "1-1",
+      "class_a_status": "M",
+      "class_b_status": "R",
+      "ncnicc_exclusive": false
+    },
+    {
+      "ecc_control_id": "1-2-3",
+      "ncnicc_subcomponent": "1-1",
+      "class_a_status": "M",
+      "class_b_status": "R",
+      "ncnicc_exclusive": false
+    },
+    {
+      "ecc_control_id": "1-3-1",
+      "ncnicc_subcomponent": "2-1",
+      "class_a_status": "M",
+      "class_b_status": "R",
+      "ncnicc_exclusive": false
+    },
+    {
+      "ecc_control_id": "1-3-2",
+      "ncnicc_subcomponent": "2-1",
+      "class_a_status": "M",
+      "class_b_status": "R",
+      "ncnicc_exclusive": false
+    },
+    {
+      "ecc_control_id": "1-3-3",
+      "ncnicc_subcomponent": "2-1",
+      "class_a_status": "M",
+      "class_b_status": "R",
+      "ncnicc_exclusive": false
+    },
+    {
+      "ecc_control_id": "1-3-4",
+      "ncnicc_subcomponent": "2-1",
+      "class_a_status": "M",
+      "class_b_status": "R",
+      "ncnicc_exclusive": false
+    },
+    {
+      "ecc_control_id": "1-4-1",
+      "ncnicc_subcomponent": "1-1",
+      "class_a_status": "M",
+      "class_b_status": "R",
+      "ncnicc_exclusive": false
+    },
+    {
+      "ecc_control_id": "1-4-2",
+      "ncnicc_subcomponent": "1-1",
+      "class_a_status": "M",
+      "class_b_status": "R",
+      "ncnicc_exclusive": false
+    },
+    {
+      "ecc_control_id": "1-5-1",
+      "ncnicc_subcomponent": "3-1",
+      "class_a_status": "M",
+      "class_b_status": "R",
+      "ncnicc_exclusive": false
+    },
+    {
+      "ecc_control_id": "1-5-2",
+      "ncnicc_subcomponent": "3-1",
+      "class_a_status": "M",
+      "class_b_status": "R",
+      "ncnicc_exclusive": false
+    },
+    {
+      "ecc_control_id": "1-5-3",
+      "ncnicc_subcomponent": "3-1",
+      "class_a_status": "M",
+      "class_b_status": "R",
+      "ncnicc_exclusive": false
+    },
+    {
+      "ecc_control_id": "1-5-4",
+      "ncnicc_subcomponent": "3-1",
+      "class_a_status": "M",
+      "class_b_status": "R",
+      "ncnicc_exclusive": false
+    },
+    {
+      "ecc_control_id": "1-8-1",
+      "ncnicc_subcomponent": "4-1",
+      "class_a_status": "M",
+      "class_b_status": "R",
+      "ncnicc_exclusive": false
+    },
+    {
+      "ecc_control_id": "1-8-2",
+      "ncnicc_subcomponent": "4-1",
+      "class_a_status": "M",
+      "class_b_status": "R",
+      "ncnicc_exclusive": false
+    },
+    {
+      "ecc_control_id": "1-8-3",
+      "ncnicc_subcomponent": "4-1",
+      "class_a_status": "M",
+      "class_b_status": "R",
+      "ncnicc_exclusive": false
+    },
+    {
+      "ecc_control_id": "2-1-1",
+      "ncnicc_subcomponent": "1-2",
+      "class_a_status": "M",
+      "class_b_status": "M",
+      "ncnicc_exclusive": false
+    },
+    {
+      "ecc_control_id": "2-1-2",
+      "ncnicc_subcomponent": "1-2",
+      "class_a_status": "M",
+      "class_b_status": "M",
+      "ncnicc_exclusive": false
+    },
+    {
+      "ecc_control_id": "2-1-3",
+      "ncnicc_subcomponent": "1-2",
+      "class_a_status": "M",
+      "class_b_status": "M",
+      "ncnicc_exclusive": false
+    },
+    {
+      "ecc_control_id": "2-1-4",
+      "ncnicc_subcomponent": "1-2",
+      "class_a_status": "M",
+      "class_b_status": "M",
+      "ncnicc_exclusive": false
+    },
+    {
+      "ecc_control_id": "2-1-5",
+      "ncnicc_subcomponent": "1-2",
+      "class_a_status": "M",
+      "class_b_status": "M",
+      "ncnicc_exclusive": false
+    },
+    {
+      "ecc_control_id": "2-1-6",
+      "ncnicc_subcomponent": "1-2",
+      "class_a_status": "M",
+      "class_b_status": "R",
+      "ncnicc_exclusive": false
+    },
+    {
+      "ecc_control_id": "2-10-1",
+      "ncnicc_subcomponent": "10-2",
+      "class_a_status": "M",
+      "class_b_status": "M",
+      "ncnicc_exclusive": false
+    },
+    {
+      "ecc_control_id": "2-10-2",
+      "ncnicc_subcomponent": "10-2",
+      "class_a_status": "M",
+      "class_b_status": "M",
+      "ncnicc_exclusive": false
+    },
+    {
+      "ecc_control_id": "2-10-3-1",
+      "ncnicc_subcomponent": "10-2",
+      "class_a_status": "M",
+      "class_b_status": "M",
+      "ncnicc_exclusive": false
+    },
+    {
+      "ecc_control_id": "2-10-3-2",
+      "ncnicc_subcomponent": "10-2",
+      "class_a_status": "M",
+      "class_b_status": "M",
+      "ncnicc_exclusive": false
+    },
+    {
+      "ecc_control_id": "2-10-3-3",
+      "ncnicc_subcomponent": "10-2",
+      "class_a_status": "M",
+      "class_b_status": "M",
+      "ncnicc_exclusive": false
+    },
+    {
+      "ecc_control_id": "2-10-3-4",
+      "ncnicc_subcomponent": "10-2",
+      "class_a_status": "M",
+      "class_b_status": "M",
+      "ncnicc_exclusive": false
+    },
+    {
+      "ecc_control_id": "2-10-3-5",
+      "ncnicc_subcomponent": "10-2",
+      "class_a_status": "M",
+      "class_b_status": "M",
+      "ncnicc_exclusive": false
+    },
+    {
+      "ecc_control_id": "2-10-4",
+      "ncnicc_subcomponent": "10-2",
+      "class_a_status": "M",
+      "class_b_status": "R",
+      "ncnicc_exclusive": false
+    },
+    {
+      "ecc_control_id": "2-11-1",
+      "ncnicc_subcomponent": "11-2",
+      "class_a_status": "M",
+      "class_b_status": "R",
+      "ncnicc_exclusive": false
+    },
+    {
+      "ecc_control_id": "2-11-2",
+      "ncnicc_subcomponent": "11-2",
+      "class_a_status": "M",
+      "class_b_status": "R",
+      "ncnicc_exclusive": false
+    },
+    {
+      "ecc_control_id": "2-11-3-1",
+      "ncnicc_subcomponent": "11-2",
+      "class_a_status": "M",
+      "class_b_status": "R",
+      "ncnicc_exclusive": false
+    },
+    {
+      "ecc_control_id": "2-11-3-2",
+      "ncnicc_subcomponent": "11-2",
+      "class_a_status": "M",
+      "class_b_status": "R",
+      "ncnicc_exclusive": false
+    },
+    {
+      "ecc_control_id": "2-11-4",
+      "ncnicc_subcomponent": "11-2",
+      "class_a_status": "M",
+      "class_b_status": "R",
+      "ncnicc_exclusive": false
+    },
+    {
+      "ecc_control_id": "2-12-1",
+      "ncnicc_subcomponent": "12-2",
+      "class_a_status": "M",
+      "class_b_status": "M",
+      "ncnicc_exclusive": false
+    },
+    {
+      "ecc_control_id": "2-12-2",
+      "ncnicc_subcomponent": "12-2",
+      "class_a_status": "M",
+      "class_b_status": "M",
+      "ncnicc_exclusive": false
+    },
+    {
+      "ecc_control_id": "2-12-3-1",
+      "ncnicc_subcomponent": "12-2",
+      "class_a_status": "M",
+      "class_b_status": "M",
+      "ncnicc_exclusive": false
+    },
+    {
+      "ecc_control_id": "2-12-3-2",
+      "ncnicc_subcomponent": "12-2",
+      "class_a_status": "M",
+      "class_b_status": "M",
+      "ncnicc_exclusive": false
+    },
+    {
+      "ecc_control_id": "2-12-3-3",
+      "ncnicc_subcomponent": "12-2",
+      "class_a_status": "M",
+      "class_b_status": "M",
+      "ncnicc_exclusive": false
+    },
+    {
+      "ecc_control_id": "2-12-3-4",
+      "ncnicc_subcomponent": "12-2",
+      "class_a_status": "M",
+      "class_b_status": "M",
+      "ncnicc_exclusive": false
+    },
+    {
+      "ecc_control_id": "2-12-3-5",
+      "ncnicc_subcomponent": "12-2",
+      "class_a_status": "M",
+      "class_b_status": "M",
+      "ncnicc_exclusive": false
+    },
+    {
+      "ecc_control_id": "2-12-4",
+      "ncnicc_subcomponent": "12-2",
+      "class_a_status": "M",
+      "class_b_status": "R",
+      "ncnicc_exclusive": false
+    },
+    {
+      "ecc_control_id": "2-13-1",
+      "ncnicc_subcomponent": "13-2",
+      "class_a_status": "M",
+      "class_b_status": "M",
+      "ncnicc_exclusive": false
+    },
+    {
+      "ecc_control_id": "2-13-2",
+      "ncnicc_subcomponent": "13-2",
+      "class_a_status": "M",
+      "class_b_status": "M",
+      "ncnicc_exclusive": false
+    },
+    {
+      "ecc_control_id": "2-13-3-1",
+      "ncnicc_subcomponent": "13-2",
+      "class_a_status": "M",
+      "class_b_status": "R",
+      "ncnicc_exclusive": false
+    },
+    {
+      "ecc_control_id": "2-13-3-2",
+      "ncnicc_subcomponent": "13-2",
+      "class_a_status": "M",
+      "class_b_status": "M",
+      "ncnicc_exclusive": false
+    },
+    {
+      "ecc_control_id": "2-13-3-3",
+      "ncnicc_subcomponent": "13-2",
+      "class_a_status": "M",
+      "class_b_status": "M",
+      "ncnicc_exclusive": false
+    },
+    {
+      "ecc_control_id": "2-13-3-4",
+      "ncnicc_subcomponent": "13-2",
+      "class_a_status": "M",
+      "class_b_status": "M",
+      "ncnicc_exclusive": false
+    },
+    {
+      "ecc_control_id": "2-13-3-5",
+      "ncnicc_subcomponent": "13-2",
+      "class_a_status": "M",
+      "class_b_status": "M",
+      "ncnicc_exclusive": false
+    },
+    {
+      "ecc_control_id": "2-13-4",
+      "ncnicc_subcomponent": "13-2",
+      "class_a_status": "M",
+      "class_b_status": "R",
+      "ncnicc_exclusive": false
+    },
+    {
+      "ecc_control_id": "2-14-1",
+      "ncnicc_subcomponent": "14-2",
+      "class_a_status": "M",
+      "class_b_status": "M",
+      "ncnicc_exclusive": false
+    },
+    {
+      "ecc_control_id": "2-14-2",
+      "ncnicc_subcomponent": "14-2",
+      "class_a_status": "M",
+      "class_b_status": "M",
+      "ncnicc_exclusive": false
+    },
+    {
+      "ecc_control_id": "2-14-3-1",
+      "ncnicc_subcomponent": "14-2",
+      "class_a_status": "M",
+      "class_b_status": "M",
+      "ncnicc_exclusive": false
+    },
+    {
+      "ecc_control_id": "2-14-3-2",
+      "ncnicc_subcomponent": "14-2",
+      "class_a_status": "M",
+      "class_b_status": "M",
+      "ncnicc_exclusive": false
+    },
+    {
+      "ecc_control_id": "2-14-3-3",
+      "ncnicc_subcomponent": "14-2",
+      "class_a_status": "M",
+      "class_b_status": "M",
+      "ncnicc_exclusive": false
+    },
+    {
+      "ecc_control_id": "2-14-3-4",
+      "ncnicc_subcomponent": "14-2",
+      "class_a_status": "M",
+      "class_b_status": "M",
+      "ncnicc_exclusive": false
+    },
+    {
+      "ecc_control_id": "2-14-3-5",
+      "ncnicc_subcomponent": "14-2",
+      "class_a_status": "M",
+      "class_b_status": "R",
+      "ncnicc_exclusive": false
+    },
+    {
+      "ecc_control_id": "2-14-4",
+      "ncnicc_subcomponent": "14-2",
+      "class_a_status": "M",
+      "class_b_status": "R",
+      "ncnicc_exclusive": false
+    },
+    {
+      "ecc_control_id": "2-15-1",
+      "ncnicc_subcomponent": "15-2",
+      "class_a_status": "M",
+      "class_b_status": "R",
+      "ncnicc_exclusive": false
+    },
+    {
+      "ecc_control_id": "2-15-2",
+      "ncnicc_subcomponent": "15-2",
+      "class_a_status": "M",
+      "class_b_status": "R",
+      "ncnicc_exclusive": false
+    },
+    {
+      "ecc_control_id": "2-15-3-1",
+      "ncnicc_subcomponent": "15-2",
+      "class_a_status": "M",
+      "class_b_status": "R",
+      "ncnicc_exclusive": false
+    },
+    {
+      "ecc_control_id": "2-15-3-2",
+      "ncnicc_subcomponent": "15-2",
+      "class_a_status": "M",
+      "class_b_status": "R",
+      "ncnicc_exclusive": false
+    },
+    {
+      "ecc_control_id": "2-15-3-3",
+      "ncnicc_subcomponent": "15-2",
+      "class_a_status": "M",
+      "class_b_status": "R",
+      "ncnicc_exclusive": false
+    },
+    {
+      "ecc_control_id": "2-15-3-4",
+      "ncnicc_subcomponent": "15-2",
+      "class_a_status": "M",
+      "class_b_status": "R",
+      "ncnicc_exclusive": false
+    },
+    {
+      "ecc_control_id": "2-15-3-5",
+      "ncnicc_subcomponent": "15-2",
+      "class_a_status": "M",
+      "class_b_status": "R",
+      "ncnicc_exclusive": false
+    },
+    {
+      "ecc_control_id": "2-15-4",
+      "ncnicc_subcomponent": "15-2",
+      "class_a_status": "M",
+      "class_b_status": "R",
+      "ncnicc_exclusive": false
+    },
+    {
+      "ecc_control_id": "2-2-1",
+      "ncnicc_subcomponent": "2-2",
+      "class_a_status": "M",
+      "class_b_status": "M",
+      "ncnicc_exclusive": false
+    },
+    {
+      "ecc_control_id": "2-2-2",
+      "ncnicc_subcomponent": "2-2",
+      "class_a_status": "M",
+      "class_b_status": "M",
+      "ncnicc_exclusive": false
+    },
+    {
+      "ecc_control_id": "2-2-3-1",
+      "ncnicc_subcomponent": "2-2",
+      "class_a_status": "M",
+      "class_b_status": "M",
+      "ncnicc_exclusive": false
+    },
+    {
+      "ecc_control_id": "2-2-3-2",
+      "ncnicc_subcomponent": "2-2",
+      "class_a_status": "M",
+      "class_b_status": "M",
+      "ncnicc_exclusive": false
+    },
+    {
+      "ecc_control_id": "2-2-3-3",
+      "ncnicc_subcomponent": "2-2",
+      "class_a_status": "M",
+      "class_b_status": "M",
+      "ncnicc_exclusive": false
+    },
+    {
+      "ecc_control_id": "2-2-3-4",
+      "ncnicc_subcomponent": "2-2",
+      "class_a_status": "M",
+      "class_b_status": "R",
+      "ncnicc_exclusive": false
+    },
+    {
+      "ecc_control_id": "2-2-3-5",
+      "ncnicc_subcomponent": "2-2",
+      "class_a_status": "M",
+      "class_b_status": "M",
+      "ncnicc_exclusive": false
+    },
+    {
+      "ecc_control_id": "2-2-4",
+      "ncnicc_subcomponent": "2-2",
+      "class_a_status": "M",
+      "class_b_status": "R",
+      "ncnicc_exclusive": false
+    },
+    {
+      "ecc_control_id": "2-3-1",
+      "ncnicc_subcomponent": "3-2",
+      "class_a_status": "M",
+      "class_b_status": "M",
+      "ncnicc_exclusive": false
+    },
+    {
+      "ecc_control_id": "2-3-2",
+      "ncnicc_subcomponent": "3-2",
+      "class_a_status": "M",
+      "class_b_status": "M",
+      "ncnicc_exclusive": false
+    },
+    {
+      "ecc_control_id": "2-3-3-1",
+      "ncnicc_subcomponent": "3-2",
+      "class_a_status": "M",
+      "class_b_status": "M",
+      "ncnicc_exclusive": false
+    },
+    {
+      "ecc_control_id": "2-3-3-2",
+      "ncnicc_subcomponent": "3-2",
+      "class_a_status": "M",
+      "class_b_status": "M",
+      "ncnicc_exclusive": false
+    },
+    {
+      "ecc_control_id": "2-3-3-3",
+      "ncnicc_subcomponent": "10-2",
+      "class_a_status": "M",
+      "class_b_status": "M",
+      "ncnicc_exclusive": false
+    },
+    {
+      "ecc_control_id": "2-3-3-4",
+      "ncnicc_subcomponent": "3-2",
+      "class_a_status": "M",
+      "class_b_status": "M",
+      "ncnicc_exclusive": false
+    },
+    {
+      "ecc_control_id": "2-3-4",
+      "ncnicc_subcomponent": "3-2",
+      "class_a_status": "M",
+      "class_b_status": "R",
+      "ncnicc_exclusive": false
+    },
+    {
+      "ecc_control_id": "2-4-1",
+      "ncnicc_subcomponent": "4-2",
+      "class_a_status": "M",
+      "class_b_status": "M",
+      "ncnicc_exclusive": false
+    },
+    {
+      "ecc_control_id": "2-4-2",
+      "ncnicc_subcomponent": "4-2",
+      "class_a_status": "M",
+      "class_b_status": "M",
+      "ncnicc_exclusive": false
+    },
+    {
+      "ecc_control_id": "2-4-3-1",
+      "ncnicc_subcomponent": "4-2",
+      "class_a_status": "M",
+      "class_b_status": "M",
+      "ncnicc_exclusive": false
+    },
+    {
+      "ecc_control_id": "2-4-3-2",
+      "ncnicc_subcomponent": "2-2",
+      "class_a_status": "M",
+      "class_b_status": "M",
+      "ncnicc_exclusive": false
+    },
+    {
+      "ecc_control_id": "2-4-3-3",
+      "ncnicc_subcomponent": "9-2",
+      "class_a_status": "M",
+      "class_b_status": "M",
+      "ncnicc_exclusive": false
+    },
+    {
+      "ecc_control_id": "2-4-3-4",
+      "ncnicc_subcomponent": "4-2",
+      "class_a_status": "M",
+      "class_b_status": "R",
+      "ncnicc_exclusive": false
+    },
+    {
+      "ecc_control_id": "2-4-3-5",
+      "ncnicc_subcomponent": "4-2",
+      "class_a_status": "M",
+      "class_b_status": "M",
+      "ncnicc_exclusive": false
+    },
+    {
+      "ecc_control_id": "2-4-4",
+      "ncnicc_subcomponent": "4-2",
+      "class_a_status": "M",
+      "class_b_status": "R",
+      "ncnicc_exclusive": false
+    },
+    {
+      "ecc_control_id": "2-5-1",
+      "ncnicc_subcomponent": "5-2",
+      "class_a_status": "M",
+      "class_b_status": "M",
+      "ncnicc_exclusive": false
+    },
+    {
+      "ecc_control_id": "2-5-2",
+      "ncnicc_subcomponent": "5-2",
+      "class_a_status": "M",
+      "class_b_status": "M",
+      "ncnicc_exclusive": false
+    },
+    {
+      "ecc_control_id": "2-5-3-1",
+      "ncnicc_subcomponent": "5-2",
+      "class_a_status": "M",
+      "class_b_status": "M",
+      "ncnicc_exclusive": false
+    },
+    {
+      "ecc_control_id": "2-5-3-2",
+      "ncnicc_subcomponent": "5-2",
+      "class_a_status": "M",
+      "class_b_status": "R",
+      "ncnicc_exclusive": false
+    },
+    {
+      "ecc_control_id": "2-5-3-3",
+      "ncnicc_subcomponent": "5-2",
+      "class_a_status": "M",
+      "class_b_status": "R",
+      "ncnicc_exclusive": false
+    },
+    {
+      "ecc_control_id": "2-5-3-4",
+      "ncnicc_subcomponent": "5-2",
+      "class_a_status": "M",
+      "class_b_status": "M",
+      "ncnicc_exclusive": false
+    },
+    {
+      "ecc_control_id": "2-5-3-5",
+      "ncnicc_subcomponent": "5-2",
+      "class_a_status": "M",
+      "class_b_status": "R",
+      "ncnicc_exclusive": false
+    },
+    {
+      "ecc_control_id": "2-5-3-6",
+      "ncnicc_subcomponent": "5-2",
+      "class_a_status": "M",
+      "class_b_status": "R",
+      "ncnicc_exclusive": false
+    },
+    {
+      "ecc_control_id": "2-5-3-8",
+      "ncnicc_subcomponent": "5-2",
+      "class_a_status": "M",
+      "class_b_status": "R",
+      "ncnicc_exclusive": false
+    },
+    {
+      "ecc_control_id": "2-5-3-9",
+      "ncnicc_subcomponent": "5-2",
+      "class_a_status": "M",
+      "class_b_status": "R",
+      "ncnicc_exclusive": false
+    },
+    {
+      "ecc_control_id": "2-5-4",
+      "ncnicc_subcomponent": "5-2",
+      "class_a_status": "M",
+      "class_b_status": "R",
+      "ncnicc_exclusive": false
+    },
+    {
+      "ecc_control_id": "2-6-1",
+      "ncnicc_subcomponent": "6-2",
+      "class_a_status": "M",
+      "class_b_status": "M",
+      "ncnicc_exclusive": false
+    },
+    {
+      "ecc_control_id": "2-6-2",
+      "ncnicc_subcomponent": "6-2",
+      "class_a_status": "M",
+      "class_b_status": "M",
+      "ncnicc_exclusive": false
+    },
+    {
+      "ecc_control_id": "2-6-3-1",
+      "ncnicc_subcomponent": "6-2",
+      "class_a_status": "M",
+      "class_b_status": "M",
+      "ncnicc_exclusive": false
+    },
+    {
+      "ecc_control_id": "2-6-3-2",
+      "ncnicc_subcomponent": "6-2",
+      "class_a_status": "M",
+      "class_b_status": "M",
+      "ncnicc_exclusive": false
+    },
+    {
+      "ecc_control_id": "2-6-3-3",
+      "ncnicc_subcomponent": "6-2",
+      "class_a_status": "M",
+      "class_b_status": "M",
+      "ncnicc_exclusive": false
+    },
+    {
+      "ecc_control_id": "2-6-3-4",
+      "ncnicc_subcomponent": "6-2",
+      "class_a_status": "M",
+      "class_b_status": "M",
+      "ncnicc_exclusive": false
+    },
+    {
+      "ecc_control_id": "2-6-4",
+      "ncnicc_subcomponent": "6-2",
+      "class_a_status": "M",
+      "class_b_status": "R",
+      "ncnicc_exclusive": false
+    },
+    {
+      "ecc_control_id": "2-7-1",
+      "ncnicc_subcomponent": "7-2",
+      "class_a_status": "M",
+      "class_b_status": "M",
+      "ncnicc_exclusive": false
+    },
+    {
+      "ecc_control_id": "2-7-2",
+      "ncnicc_subcomponent": "7-2",
+      "class_a_status": "M",
+      "class_b_status": "M",
+      "ncnicc_exclusive": false
+    },
+    {
+      "ecc_control_id": "2-7-3",
+      "ncnicc_subcomponent": "7-2",
+      "class_a_status": "M",
+      "class_b_status": "R",
+      "ncnicc_exclusive": false
+    },
+    {
+      "ecc_control_id": "2-8-1",
+      "ncnicc_subcomponent": "8-2",
+      "class_a_status": "M",
+      "class_b_status": "M",
+      "ncnicc_exclusive": false
+    },
+    {
+      "ecc_control_id": "2-8-2",
+      "ncnicc_subcomponent": "8-2",
+      "class_a_status": "M",
+      "class_b_status": "M",
+      "ncnicc_exclusive": false
+    },
+    {
+      "ecc_control_id": "2-8-3-1",
+      "ncnicc_subcomponent": "8-2",
+      "class_a_status": "M",
+      "class_b_status": "R",
+      "ncnicc_exclusive": false
+    },
+    {
+      "ecc_control_id": "2-8-3-2",
+      "ncnicc_subcomponent": "8-2",
+      "class_a_status": "M",
+      "class_b_status": "M",
+      "ncnicc_exclusive": false
+    },
+    {
+      "ecc_control_id": "2-8-3-3",
+      "ncnicc_subcomponent": "8-2",
+      "class_a_status": "M",
+      "class_b_status": "M",
+      "ncnicc_exclusive": false
+    },
+    {
+      "ecc_control_id": "2-8-4",
+      "ncnicc_subcomponent": "8-2",
+      "class_a_status": "M",
+      "class_b_status": "R",
+      "ncnicc_exclusive": false
+    },
+    {
+      "ecc_control_id": "2-9-1",
+      "ncnicc_subcomponent": "9-2",
+      "class_a_status": "M",
+      "class_b_status": "M",
+      "ncnicc_exclusive": false
+    },
+    {
+      "ecc_control_id": "2-9-2",
+      "ncnicc_subcomponent": "9-2",
+      "class_a_status": "M",
+      "class_b_status": "M",
+      "ncnicc_exclusive": false
+    },
+    {
+      "ecc_control_id": "2-9-3-1",
+      "ncnicc_subcomponent": "9-2",
+      "class_a_status": "M",
+      "class_b_status": "M",
+      "ncnicc_exclusive": false
+    },
+    {
+      "ecc_control_id": "2-9-3-2",
+      "ncnicc_subcomponent": "9-2",
+      "class_a_status": "M",
+      "class_b_status": "M",
+      "ncnicc_exclusive": false
+    },
+    {
+      "ecc_control_id": "2-9-3-3",
+      "ncnicc_subcomponent": "9-2",
+      "class_a_status": "M",
+      "class_b_status": "M",
+      "ncnicc_exclusive": false
+    },
+    {
+      "ecc_control_id": "2-9-4",
+      "ncnicc_subcomponent": "9-2",
+      "class_a_status": "M",
+      "class_b_status": "R",
+      "ncnicc_exclusive": false
+    },
+    {
+      "ecc_control_id": "4-1-1",
+      "ncnicc_subcomponent": "1-3",
+      "class_a_status": "M",
+      "class_b_status": "R",
+      "ncnicc_exclusive": false
+    },
+    {
+      "ecc_control_id": "4-1-2",
+      "ncnicc_subcomponent": "1-3",
+      "class_a_status": "M",
+      "class_b_status": "R",
+      "ncnicc_exclusive": false
+    },
+    {
+      "ecc_control_id": "4-1-3",
+      "ncnicc_subcomponent": "1-3",
+      "class_a_status": "M",
+      "class_b_status": "R",
+      "ncnicc_exclusive": false
+    },
+    {
+      "ecc_control_id": "4-1-4",
+      "ncnicc_subcomponent": "1-3",
+      "class_a_status": "M",
+      "class_b_status": "R",
+      "ncnicc_exclusive": false
+    },
+    {
+      "ecc_control_id": "4-2-1",
+      "ncnicc_subcomponent": "2-3",
+      "class_a_status": "M",
+      "class_b_status": "R",
+      "ncnicc_exclusive": false
+    },
+    {
+      "ecc_control_id": "4-2-2",
+      "ncnicc_subcomponent": "2-3",
+      "class_a_status": "M",
+      "class_b_status": "R",
+      "ncnicc_exclusive": false
+    },
+    {
+      "ecc_control_id": "4-2-3-1",
+      "ncnicc_subcomponent": "2-3",
+      "class_a_status": "M",
+      "class_b_status": "R",
+      "ncnicc_exclusive": false
+    },
+    {
+      "ecc_control_id": "4-2-3-2",
+      "ncnicc_subcomponent": "2-3",
+      "class_a_status": "M",
+      "class_b_status": "R",
+      "ncnicc_exclusive": false
+    },
+    {
+      "ecc_control_id": "4-2-4",
+      "ncnicc_subcomponent": "2-3",
+      "class_a_status": "M",
+      "class_b_status": "R",
+      "ncnicc_exclusive": false
+    },
+    {
+      "ecc_control_id": null,
+      "ncnicc_subcomponent": "2-12-1-2",
+      "class_a_status": "M",
+      "class_b_status": "R",
+      "ncnicc_exclusive": true
+    },
+    {
+      "ecc_control_id": null,
+      "ncnicc_subcomponent": "2-7-1-2",
+      "class_a_status": "M",
+      "class_b_status": "R",
+      "ncnicc_exclusive": true
+    },
+    {
+      "ecc_control_id": null,
+      "ncnicc_subcomponent": "2-7-1-3",
+      "class_a_status": "M",
+      "class_b_status": "M",
+      "ncnicc_exclusive": true
+    }
+  ]
+}

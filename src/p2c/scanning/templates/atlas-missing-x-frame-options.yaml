@@ -1,0 +1,24 @@
+id: atlas-missing-x-frame-options
+info:
+  name: Missing X-Frame-Options header (clickjacking)
+  author: atlas
+  severity: medium
+  description: The endpoint responds 200 without X-Frame-Options / CSP frame-ancestors, allowing framing.
+  tags: atlas,headers,misconfig,ecc
+  metadata:
+    atlas-check-id: missing_x_frame_options
+    control-id: "2-15-3-3"
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}"
+    matchers-condition: and
+    matchers:
+      - type: status
+        status:
+          - 200
+      - type: word
+        part: header
+        words:
+          - "X-Frame-Options"
+        negative: true

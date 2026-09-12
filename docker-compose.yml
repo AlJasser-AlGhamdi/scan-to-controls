@@ -1,0 +1,15 @@
+services:
+  test-matrix:
+    build: ./test-target
+    image: p2c-test-matrix:latest
+    container_name: p2c-matrix
+    ports:
+      - "127.0.0.1:9080:80"     # header, cookie and development-server cases
+      - "127.0.0.1:9443:443"    # self-signed RSA-2048
+      - "127.0.0.1:9444:8444"   # private-CA leaf: untrusted, not self-signed
+      - "127.0.0.1:9445:8445"   # self-signed RSA-1024
+      - "127.0.0.1:9446:8446"   # self-signed RSA-4096
+      - "127.0.0.1:9447:8447"   # self-signed EC P-256
+      - "127.0.0.1:9448:8448"   # self-signed EC secp192r1
+      - "127.0.0.1:9449:8449"   # expired self-signed RSA-2048
+    restart: unless-stopped

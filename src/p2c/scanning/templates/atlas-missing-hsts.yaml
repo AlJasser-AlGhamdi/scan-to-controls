@@ -1,0 +1,24 @@
+id: atlas-missing-hsts
+info:
+  name: Missing Strict-Transport-Security (HSTS) header
+  author: atlas
+  severity: medium
+  description: The endpoint responds 200 without an HSTS header, enabling SSL-strip / downgrade.
+  tags: atlas,headers,misconfig,ecc
+  metadata:
+    atlas-check-id: missing_hsts
+    control-id: "2-15-3-3"
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}"
+    matchers-condition: and
+    matchers:
+      - type: status
+        status:
+          - 200
+      - type: word
+        part: header
+        words:
+          - "Strict-Transport-Security"
+        negative: true

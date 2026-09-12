@@ -1,0 +1,313 @@
+{
+  "k": 60,
+  "cases": {
+    "http /": {
+      "case": "no security headers",
+      "trials": 60,
+      "unreadable": 0,
+      "expected": [
+        "missing_csp",
+        "missing_hsts",
+        "missing_permissions_policy",
+        "missing_referrer_policy",
+        "missing_x_content_type_options",
+        "missing_x_frame_options"
+      ],
+      "fired": {
+        "missing_referrer_policy": 60,
+        "missing_permissions_policy": 60,
+        "missing_x_frame_options": 60,
+        "missing_x_content_type_options": 60,
+        "missing_hsts": 60,
+        "missing_csp": 60
+      }
+    },
+    "http /clean": {
+      "case": "every header present",
+      "trials": 60,
+      "unreadable": 0,
+      "expected": [],
+      "fired": {}
+    },
+    "http /no-permissions-policy": {
+      "case": "only Permissions-Policy absent",
+      "trials": 60,
+      "unreadable": 0,
+      "expected": [
+        "missing_permissions_policy"
+      ],
+      "fired": {
+        "missing_permissions_policy": 60
+      }
+    },
+    "http /cookie-insecure": {
+      "case": "a cookie without Secure",
+      "trials": 60,
+      "unreadable": 0,
+      "expected": [
+        "insecure_cookie"
+      ],
+      "fired": {
+        "insecure_cookie": 60
+      }
+    },
+    "http /cookie-secure": {
+      "case": "every cookie has Secure",
+      "trials": 60,
+      "unreadable": 0,
+      "expected": [],
+      "fired": {}
+    },
+    "http /dev-server": {
+      "case": "development server signature",
+      "trials": 60,
+      "unreadable": 0,
+      "expected": [
+        "exposed_dev_environment"
+      ],
+      "fired": {
+        "exposed_dev_environment": 60
+      }
+    },
+    "http /dev-name-only": {
+      "case": "development hostname, production server",
+      "trials": 60,
+      "unreadable": 0,
+      "expected": [],
+      "fired": {}
+    },
+    "tls :9443": {
+      "case": "self-signed RSA-2048",
+      "trials": 60,
+      "unreadable": 0,
+      "expected": [
+        "self_signed_certificate"
+      ],
+      "fired": {
+        "self_signed_certificate": 60
+      }
+    },
+    "tls :9444": {
+      "case": "private-CA leaf, untrusted but not self-signed",
+      "trials": 60,
+      "unreadable": 0,
+      "expected": [],
+      "fired": {}
+    },
+    "tls :9445": {
+      "case": "self-signed RSA-1024",
+      "trials": 60,
+      "unreadable": 0,
+      "expected": [
+        "self_signed_certificate",
+        "weak_certificate_key"
+      ],
+      "fired": {
+        "weak_certificate_key": 60,
+        "self_signed_certificate": 60
+      }
+    },
+    "tls :9446": {
+      "case": "self-signed RSA-4096",
+      "trials": 60,
+      "unreadable": 0,
+      "expected": [
+        "self_signed_certificate"
+      ],
+      "fired": {
+        "self_signed_certificate": 60
+      }
+    },
+    "tls :9447": {
+      "case": "self-signed EC P-256",
+      "trials": 60,
+      "unreadable": 0,
+      "expected": [
+        "self_signed_certificate"
+      ],
+      "fired": {
+        "self_signed_certificate": 60
+      }
+    },
+    "tls :9448": {
+      "case": "self-signed EC secp192r1",
+      "trials": 60,
+      "unreadable": 60,
+      "expected": [
+        "self_signed_certificate",
+        "weak_certificate_key"
+      ],
+      "fired": {}
+    },
+    "tls :9449": {
+      "case": "expired self-signed RSA-2048",
+      "trials": 60,
+      "unreadable": 0,
+      "expected": [
+        "expired_certificate",
+        "self_signed_certificate"
+      ],
+      "fired": {
+        "self_signed_certificate": 60,
+        "expired_certificate": 60
+      }
+    }
+  },
+  "detectors": {
+    "expired_certificate": {
+      "positive_trials": 60,
+      "negative_trials": 300,
+      "sensitivity": 1.0,
+      "sensitivity_ci": [
+        0.9398,
+        1.0
+      ],
+      "false_alarm": 0.0,
+      "false_alarm_ci": [
+        0.0,
+        0.0126
+      ]
+    },
+    "exposed_dev_environment": {
+      "positive_trials": 60,
+      "negative_trials": 360,
+      "sensitivity": 1.0,
+      "sensitivity_ci": [
+        0.9398,
+        1.0
+      ],
+      "false_alarm": 0.0,
+      "false_alarm_ci": [
+        0.0,
+        0.0106
+      ]
+    },
+    "insecure_cookie": {
+      "positive_trials": 60,
+      "negative_trials": 360,
+      "sensitivity": 1.0,
+      "sensitivity_ci": [
+        0.9398,
+        1.0
+      ],
+      "false_alarm": 0.0,
+      "false_alarm_ci": [
+        0.0,
+        0.0106
+      ]
+    },
+    "missing_csp": {
+      "positive_trials": 60,
+      "negative_trials": 360,
+      "sensitivity": 1.0,
+      "sensitivity_ci": [
+        0.9398,
+        1.0
+      ],
+      "false_alarm": 0.0,
+      "false_alarm_ci": [
+        0.0,
+        0.0106
+      ]
+    },
+    "missing_hsts": {
+      "positive_trials": 60,
+      "negative_trials": 360,
+      "sensitivity": 1.0,
+      "sensitivity_ci": [
+        0.9398,
+        1.0
+      ],
+      "false_alarm": 0.0,
+      "false_alarm_ci": [
+        0.0,
+        0.0106
+      ]
+    },
+    "missing_permissions_policy": {
+      "positive_trials": 120,
+      "negative_trials": 300,
+      "sensitivity": 1.0,
+      "sensitivity_ci": [
+        0.969,
+        1.0
+      ],
+      "false_alarm": 0.0,
+      "false_alarm_ci": [
+        0.0,
+        0.0126
+      ]
+    },
+    "missing_referrer_policy": {
+      "positive_trials": 60,
+      "negative_trials": 360,
+      "sensitivity": 1.0,
+      "sensitivity_ci": [
+        0.9398,
+        1.0
+      ],
+      "false_alarm": 0.0,
+      "false_alarm_ci": [
+        0.0,
+        0.0106
+      ]
+    },
+    "missing_x_content_type_options": {
+      "positive_trials": 60,
+      "negative_trials": 360,
+      "sensitivity": 1.0,
+      "sensitivity_ci": [
+        0.9398,
+        1.0
+      ],
+      "false_alarm": 0.0,
+      "false_alarm_ci": [
+        0.0,
+        0.0106
+      ]
+    },
+    "missing_x_frame_options": {
+      "positive_trials": 60,
+      "negative_trials": 360,
+      "sensitivity": 1.0,
+      "sensitivity_ci": [
+        0.9398,
+        1.0
+      ],
+      "false_alarm": 0.0,
+      "false_alarm_ci": [
+        0.0,
+        0.0106
+      ]
+    },
+    "self_signed_certificate": {
+      "positive_trials": 300,
+      "negative_trials": 60,
+      "sensitivity": 1.0,
+      "sensitivity_ci": [
+        0.9874,
+        1.0
+      ],
+      "false_alarm": 0.0,
+      "false_alarm_ci": [
+        0.0,
+        0.0602
+      ]
+    },
+    "weak_certificate_key": {
+      "positive_trials": 60,
+      "negative_trials": 300,
+      "sensitivity": 1.0,
+      "sensitivity_ci": [
+        0.9398,
+        1.0
+      ],
+      "false_alarm": 0.0,
+      "false_alarm_ci": [
+        0.0,
+        0.0126
+      ]
+    }
+  },
+  "note": "parsing correctness of the released inspectors against a one-axis-per-endpoint matrix. The Wilson intervals below are reported for completeness only: 60 identical requests to a static loopback endpoint are deterministic replicates, not Bernoulli trials, so they carry no sampling error and the paper reports agreement across configurations instead. Not a field measurement: the sensing model's acquisition factors cannot be reproduced on loopback and are not calibrated here."
+}

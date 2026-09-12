@@ -1,0 +1,67 @@
+{
+  "k": 200,
+  "target": "http://127.0.0.1:8081/",
+  "checks": {
+    "missing_hsts": {
+      "sensitivity": 1.0,
+      "sensitivity_ci": [
+        0.9812,
+        1.0
+      ],
+      "false_alarm": 0.0,
+      "false_alarm_ci": [
+        0.0,
+        0.0188
+      ]
+    },
+    "missing_csp": {
+      "sensitivity": 1.0,
+      "sensitivity_ci": [
+        0.9812,
+        1.0
+      ],
+      "false_alarm": 0.0,
+      "false_alarm_ci": [
+        0.0,
+        0.0188
+      ]
+    },
+    "missing_x_frame_options": {
+      "sensitivity": 1.0,
+      "sensitivity_ci": [
+        0.9812,
+        1.0
+      ],
+      "false_alarm": 0.0,
+      "false_alarm_ci": [
+        0.0,
+        0.0188
+      ]
+    },
+    "missing_x_content_type_options": {
+      "sensitivity": 1.0,
+      "sensitivity_ci": [
+        0.9812,
+        1.0
+      ],
+      "false_alarm": 0.0,
+      "false_alarm_ci": [
+        0.0,
+        0.0188
+      ]
+    },
+    "missing_referrer_policy": {
+      "sensitivity": 1.0,
+      "sensitivity_ci": [
+        0.9812,
+        1.0
+      ],
+      "false_alarm": 0.0,
+      "false_alarm_ci": [
+        0.0,
+        0.0188
+      ]
+    }
+  },
+  "note": "measured on the reference implementation's own header inspector against the test-target (planted, all five security headers absent) and an in-process clean control (all present); sensitivity near 1.0 and false alarm near 0.0 confirm the deterministic-read model assumptions."
+}

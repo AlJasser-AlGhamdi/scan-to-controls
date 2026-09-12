@@ -1,0 +1,28 @@
+cff-version: 1.2.0
+title: "Tiered-evidence toolkit, control classification and evaluation artefacts for Saudi SME cybersecurity compliance"
+message: If you use these artefacts, please cite the article.
+type: software
+authors:
+  - given-names: AlJasser
+    family-names: AlGhamdi
+    orcid: https://orcid.org/0009-0006-4342-7452
+    affiliation: King Abdulaziz University
+  - given-names: Miada
+    family-names: Almasre
+    orcid: https://orcid.org/0000-0002-4071-277X
+    affiliation: King Abdulaziz University
+  - given-names: Norah
+    family-names: Al-Malki
+    orcid: https://orcid.org/0000-0002-1497-1356
+    affiliation: King Abdulaziz University
+keywords:
+  - compliance evidence
+  - external attack surface
+  - automated security assessment
+  - evidence-tier classification
+  - SME cybersecurity
+  - ECC-2:2024
+  - NCNICC-1:2025
+  - Saudi Arabia
+license: Apache-2.0
+repository-code: https://github.com/AlJasser-AlGhamdi/scan-to-controls

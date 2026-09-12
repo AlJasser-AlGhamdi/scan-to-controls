@@ -1,0 +1,202 @@
+{
+  "seeds": [
+    1337,
+    7,
+    42,
+    2025,
+    99,
+    3,
+    11,
+    13,
+    17,
+    19,
+    23,
+    29,
+    31,
+    37,
+    101,
+    202,
+    303,
+    404,
+    505,
+    606,
+    707,
+    808,
+    909,
+    1234,
+    4242,
+    5150,
+    8675,
+    314159,
+    271828,
+    161803
+  ],
+  "pairs": [
+    {
+      "seed": 1337,
+      "measured_f1": 0.9085106382978723,
+      "expected_f1": 0.9097
+    },
+    {
+      "seed": 7,
+      "measured_f1": 0.9073514602215508,
+      "expected_f1": 0.9113
+    },
+    {
+      "seed": 42,
+      "measured_f1": 0.9029227557411275,
+      "expected_f1": 0.9037
+    },
+    {
+      "seed": 2025,
+      "measured_f1": 0.8976793248945147,
+      "expected_f1": 0.9055
+    },
+    {
+      "seed": 99,
+      "measured_f1": 0.9054122407688415,
+      "expected_f1": 0.9084
+    },
+    {
+      "seed": 3,
+      "measured_f1": 0.9051987767584098,
+      "expected_f1": 0.9093
+    },
+    {
+      "seed": 11,
+      "measured_f1": 0.9075546719681908,
+      "expected_f1": 0.9148
+    },
+    {
+      "seed": 13,
+      "measured_f1": 0.909272183449651,
+      "expected_f1": 0.9144
+    },
+    {
+      "seed": 17,
+      "measured_f1": 0.9085427135678392,
+      "expected_f1": 0.9118
+    },
+    {
+      "seed": 19,
+      "measured_f1": 0.9099190283400809,
+      "expected_f1": 0.911
+    },
+    {
+      "seed": 23,
+      "measured_f1": 0.907520325203252,
+      "expected_f1": 0.9105
+    },
+    {
+      "seed": 29,
+      "measured_f1": 0.9049820236260914,
+      "expected_f1": 0.9074
+    },
+    {
+      "seed": 31,
+      "measured_f1": 0.9064895247828308,
+      "expected_f1": 0.9071
+    },
+    {
+      "seed": 37,
+      "measured_f1": 0.9019812304483837,
+      "expected_f1": 0.904
+    },
+    {
+      "seed": 101,
+      "measured_f1": 0.908266129032258,
+      "expected_f1": 0.9089
+    },
+    {
+      "seed": 202,
+      "measured_f1": 0.8844884488448845,
+      "expected_f1": 0.8972
+    },
+    {
+      "seed": 303,
+      "measured_f1": 0.8983845752996352,
+      "expected_f1": 0.9023
+    },
+    {
+      "seed": 404,
+      "measured_f1": 0.9122994652406418,
+      "expected_f1": 0.9004
+    },
+    {
+      "seed": 505,
+      "measured_f1": 0.898989898989899,
+      "expected_f1": 0.9069
+    },
+    {
+      "seed": 606,
+      "measured_f1": 0.8911449520586576,
+      "expected_f1": 0.8958
+    },
+    {
+      "seed": 707,
+      "measured_f1": 0.8953744493392071,
+      "expected_f1": 0.894
+    },
+    {
+      "seed": 808,
+      "measured_f1": 0.9080919080919082,
+      "expected_f1": 0.9084
+    },
+    {
+      "seed": 909,
+      "measured_f1": 0.9247417609444171,
+      "expected_f1": 0.9128
+    },
+    {
+      "seed": 1234,
+      "measured_f1": 0.8994018488308864,
+      "expected_f1": 0.8948
+    },
+    {
+      "seed": 4242,
+      "measured_f1": 0.9075114971895759,
+      "expected_f1": 0.9062
+    },
+    {
+      "seed": 5150,
+      "measured_f1": 0.9100844510680576,
+      "expected_f1": 0.9108
+    },
+    {
+      "seed": 8675,
+      "measured_f1": 0.89798087141339,
+      "expected_f1": 0.8988
+    },
+    {
+      "seed": 314159,
+      "measured_f1": 0.8747913188647746,
+      "expected_f1": 0.8911
+    },
+    {
+      "seed": 271828,
+      "measured_f1": 0.8943270300333703,
+      "expected_f1": 0.8943
+    },
+    {
+      "seed": 161803,
+      "measured_f1": 0.8966942148760331,
+      "expected_f1": 0.9044
+    }
+  ],
+  "measured_mean": 0.9028636572728744,
+  "measured_pstdev": 0.009082877978223101,
+  "measured_stdev": 0.009238152097311388,
+  "expected_mean": 0.9052,
+  "expected_pstdev": 0.00651255198315785,
+  "paired_diff_mean": -0.002336342727125577,
+  "paired_diff_stdev": 0.005716522541746495,
+  "paired_diff_se": 0.0010436894488671075,
+  "n_seeds_measured_above_expected": 6,
+  "note": "Per seed: the end-to-end micro F1 on that seed's cohort against the analytic perfect-mapper expectation computed from the same cohort's expected detection counts. The paired difference is the loss (negative) or gain from the mapping and scoring stages plus the seeded draw around the expectation.",
+  "eval_000_scan_conditions": {
+    "sme000-co.sa": "reachable",
+    "cdn.sme000-co.sa": "reachable",
+    "mail.sme000-co.sa": "throttled",
+    "api.sme000-co.sa": "reachable"
+  }
+}

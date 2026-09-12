@@ -1,0 +1,319 @@
+{
+  "notebook_url": "https://www.kaggle.com/code/aljasseralghmadi/p2c-baseline-ladder",
+  "kernel_slug": "aljasseralghmadi/p2c-baseline-ladder",
+  "run": {
+    "run_date_utc": "2026-08-10T18:18:34Z",
+    "seed": 1337,
+    "temperature": 0.0,
+    "num_predict": 2048,
+    "conditions": {
+      "title": 5120,
+      "full_text": 8192
+    },
+    "ollama_version": "ollama version is 0.32.7",
+    "python_version": "3.12.13",
+    "packages": {
+      "ollama": null,
+      "torch": "2.10.0+cu128",
+      "numpy": "2.0.2",
+      "requests": "2.32.4",
+      "urllib3": "2.5.0"
+    },
+    "gpu": "Tesla P100-PCIE-16GB, 16384 MiB, 580.159.04",
+    "disk_free_gb_start": {
+      "kaggle_temp": 1100.2,
+      "working": 20.9
+    },
+    "data_sha256": "ab8de9ac7679c23ebbf8d4fc45b6ebe752b0416f4a407883dd53e170b4661b49",
+    "n_checks": 31,
+    "n_candidate_controls": 95,
+    "weighted_findings": 1856,
+    "models_requested": [
+      "gemma3:12b",
+      "qwen2.5:7b",
+      "iKhalid/ALLaM:7b",
+      "hf.co/mradermacher/jais-adapted-7b-chat-GGUF:Q4_K_M",
+      "hf.co/mradermacher/SILMA-9B-Instruct-v1.0-GGUF:Q4_K_M",
+      "command-r7b-arabic:7b",
+      "phi4:14b",
+      "qwen3:14b",
+      "deepseek-r1:14b",
+      "gpt-oss:20b",
+      "mistral-small:24b",
+      "qwen3:32b"
+    ],
+    "models": {
+      "gemma3:12b": {
+        "status": "ok",
+        "secs": 776,
+        "digest": "f4031aab637d1ffa37b42570452ae0e4fad0314754d17ded67322e4b95836f8a",
+        "size": 8149190253,
+        "details": {
+          "parent_model": "",
+          "format": "gguf",
+          "family": "gemma3",
+          "families": [
+            "gemma3"
+          ],
+          "parameter_size": "12.2B",
+          "quantization_level": "Q4_K_M"
+        },
+        "modified_at": "2026-08-10T18:19:27.962726912Z"
+      },
+      "qwen2.5:7b": {
+        "status": "ok",
+        "secs": 374,
+        "digest": "845dbda0ea48ed749caafd9e6037047aa19acfcfd82e704d7ca97d631a0b697e",
+        "size": 4683087332,
+        "details": {
+          "parent_model": "",
+          "format": "gguf",
+          "family": "qwen2",
+          "families": [
+            "qwen2"
+          ],
+          "parameter_size": "7.6B",
+          "quantization_level": "Q4_K_M",
+          "context_length": 32768,
+          "embedding_length": 3584
+        },
+        "modified_at": "2026-08-10T18:33:01.015852839Z"
+      },
+      "iKhalid/ALLaM:7b": {
+        "status": "ok",
+        "secs": 179,
+        "digest": "10c46c23c2076edba0c0ea39fb7bd1d1b0d2726e974ac158bad1174038d3f944",
+        "size": 4007997234,
+        "details": {
+          "parent_model": "",
+          "format": "gguf",
+          "family": "llama",
+          "families": [
+            "llama"
+          ],
+          "parameter_size": "7.0B",
+          "quantization_level": "Q4_0",
+          "context_length": 4096,
+          "embedding_length": 4096
+        },
+        "modified_at": "2026-08-10T18:39:53.634823825Z"
+      },
+      "hf.co/mradermacher/jais-adapted-7b-chat-GGUF:Q4_K_M": {
+        "status": "ok",
+        "secs": 196,
+        "digest": "814bbda1e62d2aa362ebaa36dba16b3b42c37cff84f502104620b903251c6f9e",
+        "size": 4263158074,
+        "details": {
+          "parent_model": "",
+          "format": "gguf",
+          "family": "llama",
+          "families": [
+            "llama"
+          ],
+          "parameter_size": "7B",
+          "quantization_level": "unknown",
+          "context_length": 4096,
+          "embedding_length": 4096
+        },
+        "modified_at": "2026-08-10T18:43:45.464975491Z"
+      },
+      "hf.co/mradermacher/SILMA-9B-Instruct-v1.0-GGUF:Q4_K_M": {
+        "status": "ok",
+        "secs": 611,
+        "digest": "856aa053fbe70367fac3925fd32db8d5f33aadb72b9653a97ea781ab4ac6e5be",
+        "size": 5761058925,
+        "details": {
+          "parent_model": "",
+          "format": "gguf",
+          "family": "gemma2",
+          "families": [
+            "gemma2"
+          ],
+          "parameter_size": "9.24B",
+          "quantization_level": "Q4_K_M",
+          "context_length": 8192,
+          "embedding_length": 3584
+        },
+        "modified_at": "2026-08-10T18:48:04.456906631Z"
+      },
+      "command-r7b-arabic:7b": {
+        "status": "ok",
+        "secs": 693,
+        "digest": "4bbe3353e56a7bad7512de135cf875f8cd31b10cd2310c257ce5d4f98a43fe9e",
+        "size": 5057031326,
+        "details": {
+          "parent_model": "",
+          "format": "gguf",
+          "family": "cohere2",
+          "families": [
+            "cohere2"
+          ],
+          "parameter_size": "8.0B",
+          "quantization_level": "Q4_K_M",
+          "context_length": 16384,
+          "embedding_length": 4096
+        },
+        "modified_at": "2026-08-10T18:58:59.610739671Z"
+      },
+      "phi4:14b": {
+        "status": "ok",
+        "secs": 1203,
+        "digest": "ac896e5b8b34a1f4efa7b14d7520725140d5512484457fab45d2a4ea14c69dba",
+        "size": 9053116391,
+        "details": {
+          "parent_model": "",
+          "format": "gguf",
+          "family": "phi3",
+          "families": [
+            "phi3"
+          ],
+          "parameter_size": "14.7B",
+          "quantization_level": "Q4_K_M",
+          "context_length": 16384,
+          "embedding_length": 5120
+        },
+        "modified_at": "2026-08-10T19:11:30.246812862Z"
+      },
+      "qwen3:14b": {
+        "status": "ok",
+        "secs": 2277,
+        "digest": "bdbd181c33f2ed1b31c972991882db3cf4d192569092138a7d29e973cd9debe8",
+        "size": 9276198565,
+        "details": {
+          "parent_model": "",
+          "format": "gguf",
+          "family": "qwen3",
+          "families": [
+            "qwen3"
+          ],
+          "parameter_size": "14.8B",
+          "quantization_level": "Q4_K_M",
+          "context_length": 40960,
+          "embedding_length": 5120
+        },
+        "modified_at": "2026-08-10T19:32:31.45218563Z"
+      },
+      "deepseek-r1:14b": {
+        "status": "ok",
+        "secs": 2637,
+        "digest": "c333b7232bdb521236694ffbb5f5a6b11cc45d98e9142c73123b670fca400b09",
+        "size": 8988112209,
+        "details": {
+          "parent_model": "",
+          "format": "gguf",
+          "family": "qwen2",
+          "families": [
+            "qwen2"
+          ],
+          "parameter_size": "14.8B",
+          "quantization_level": "Q4_K_M",
+          "context_length": 131072,
+          "embedding_length": 5120
+        },
+        "modified_at": "2026-08-10T20:11:36.530414301Z"
+      },
+      "gpt-oss:20b": {
+        "status": "ok",
+        "secs": 800,
+        "digest": "17052f91a42e97930aa6e28a6c6c06a983e6a58dbb00434885a0cf5313e376f7",
+        "size": 13793441244,
+        "details": {
+          "parent_model": "",
+          "format": "gguf",
+          "family": "gptoss",
+          "families": [
+            "gptoss"
+          ],
+          "parameter_size": "20.9B",
+          "quantization_level": "MXFP4",
+          "context_length": 131072,
+          "embedding_length": 2880
+        },
+        "modified_at": "2026-08-10T20:57:05.258671471Z"
+      },
+      "mistral-small:24b": {
+        "status": "ok",
+        "secs": 1516,
+        "digest": "8039dd90c1138d772437a0779a33b7349efd5d9cca71edcd26e4dd463f90439d",
+        "size": 14333921662,
+        "details": {
+          "parent_model": "",
+          "format": "gguf",
+          "family": "llama",
+          "families": [
+            "llama"
+          ],
+          "parameter_size": "23.6B",
+          "quantization_level": "Q4_K_M",
+          "context_length": 32768,
+          "embedding_length": 5120
+        },
+        "modified_at": "2026-08-10T21:12:02.137261094Z"
+      },
+      "qwen3:32b": {
+        "status": "ok",
+        "secs": 17304,
+        "digest": "030ee887880fc378860c2dd35101da424377520441ae4bfe7be6deff8ade7840",
+        "size": 20201253829,
+        "details": {
+          "parent_model": "",
+          "format": "gguf",
+          "family": "qwen3",
+          "families": [
+            "qwen3"
+          ],
+          "parameter_size": "32.8B",
+          "quantization_level": "Q4_K_M",
+          "context_length": 40960,
+          "embedding_length": 5120
+        },
+        "modified_at": "2026-08-10T21:39:58.604781847Z"
+      }
+    },
+    "total_secs": 29416
+  },
+  "model_status": {
+    "gemma3:12b": "fresh",
+    "qwen2.5:7b": "fresh",
+    "iKhalid/ALLaM:7b": "fresh",
+    "hf.co/mradermacher/jais-adapted-7b-chat-GGUF:Q4_K_M": "fresh",
+    "hf.co/mradermacher/SILMA-9B-Instruct-v1.0-GGUF:Q4_K_M": "fresh",
+    "command-r7b-arabic:7b": "fresh",
+    "phi4:14b": "fresh",
+    "qwen3:14b": "fresh",
+    "deepseek-r1:14b": "fresh",
+    "gpt-oss:20b": "fresh",
+    "mistral-small:24b": "fresh",
+    "qwen3:32b": "fresh"
+  },
+  "models_fresh": [
+    "command-r7b-arabic:7b",
+    "deepseek-r1:14b",
+    "gemma3:12b",
+    "gpt-oss:20b",
+    "hf.co/mradermacher/SILMA-9B-Instruct-v1.0-GGUF:Q4_K_M",
+    "hf.co/mradermacher/jais-adapted-7b-chat-GGUF:Q4_K_M",
+    "iKhalid/ALLaM:7b",
+    "mistral-small:24b",
+    "phi4:14b",
+    "qwen2.5:7b",
+    "qwen3:14b",
+    "qwen3:32b"
+  ],
+  "models_stale_prior": [],
+  "best_full_text_f1_fresh": 0.597,
+  "best_full_text_f1_overall": 0.597,
+  "single_pick_ceiling_note": "computed locally from baselines.json (single_pick_ceiling), not on Kaggle",
+  "local_vs_kernel_mismatches": [],
+  "data_sha256_expected": "ab8de9ac7679c23ebbf8d4fc45b6ebe752b0416f4a407883dd53e170b4661b49",
+  "multi_label": {
+    "condition": "multi_full_text: a check may name several controls; scored by multi-label micro-F1 so the single-pick ceiling no longer binds",
+    "models_completed": 11,
+    "model_missing": "qwen3:32b, cut off when the run was cancelled (CANCEL_ACKNOWLEDGED)",
+    "best_multi_label": {
+      "model": "qwen3:14b",
+      "micro_f1": 0.3222
+    },
+    "integration": "add-only: single-pick title/full_text aggregates and predictions left byte-identical from the prior committed run; multi_full_text recomputed locally from the fetched predictions and cross-checked against the kernel (scripts/integrate_multilabel_ladder.py)"
+  }
+}

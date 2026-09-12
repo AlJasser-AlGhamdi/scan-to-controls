@@ -1,0 +1,147 @@
+{
+  "curated_f1": 1.0,
+  "definitional_agreement": {
+    "agreement_rate": 1.0,
+    "ambiguous_artifacts": [],
+    "artifact_names_one_control": true,
+    "confirmed": 4,
+    "links": 4,
+    "note": "finding-to-control links for artifacts named in both the control statement and the check (SPF, DKIM, DMARC, DDoS). Each artifact name is searched across all 95 candidate subcontrols; agreement counts only where the search returns exactly the curated control, so the definitional subset is grounded independently of the mapping rules."
+  },
+  "embedding_bge_m3": {
+    "curated_f1": 1.0,
+    "method": "BGE-M3 semantic cosine over the full catalog",
+    "micro_f1": 0.21356350184956843,
+    "micro_precision": 0.23317178244480344,
+    "micro_recall": 0.1969972702456779,
+    "n_findings": 1857,
+    "note": "a modern multilingual dense retriever mapping by meaning; still far below the curated cross-walk, so semantic similarity does not recover the finding-to-control link"
+  },
+  "embedding_bge_m3_fulltext": {
+    "curated_f1": 1.0,
+    "method": "BGE-M3 semantic cosine over full public control text",
+    "micro_f1": 0.2120838471023428,
+    "micro_precision": 0.2315562735595046,
+    "micro_recall": 0.19563239308462238,
+    "n_findings": 1857,
+    "note": "a modern multilingual dense retriever mapping by meaning; still far below the curated cross-walk, so semantic similarity does not recover the finding-to-control link"
+  },
+  "embedding_hashing": {
+    "curated_f1": 1.0,
+    "method": "embedding cosine (hashing embedder) over the full catalog",
+    "micro_f1": 0.022688039457459924,
+    "micro_precision": 0.024771136241249325,
+    "micro_recall": 0.020928116469517744,
+    "n_findings": 1857,
+    "note": "cosine over a deterministic lexical embedding of check and control text; still far below the curated cross-walk because the two vocabularies barely overlap"
+  },
+  "embedding_hashing_fulltext": {
+    "curated_f1": 1.0,
+    "method": "embedding cosine (hashing) over the full public control text",
+    "micro_f1": 0.022688039457459924,
+    "micro_precision": 0.024771136241249325,
+    "micro_recall": 0.020928116469517744,
+    "n_findings": 1857,
+    "note": "deterministic lexical embedding over the complete public control statement; still far below the curated cross-walk, so the correspondence is not recoverable even from full text"
+  },
+  "embedding_hashing_observable": {
+    "curated_f1": 1.0,
+    "method": "embedding cosine (hashing) over the observable candidate set",
+    "micro_f1": 0.09469790382244143,
+    "micro_precision": 0.10339256865912763,
+    "micro_recall": 0.08735213830755233,
+    "n_findings": 1857,
+    "note": "deterministic lexical embedding restricted to the taxonomy's externally observable controls, the fair candidate set; still far below the curated cross-walk"
+  },
+  "keyword_fulltext": {
+    "curated_f1": 1.0,
+    "method": "naive keyword title overlap over the full public control text",
+    "micro_f1": 0.0907521578298397,
+    "micro_precision": 0.0990845449649973,
+    "micro_recall": 0.08371246587807098,
+    "n_findings": 1857,
+    "note": "candidate is the complete public control statement, untruncated; still far below the curated cross-walk, so the mapping is not lexically recoverable even from full regulatory text"
+  },
+  "llm_zeroshot": {
+    "curated_f1": 1.0,
+    "method": "zero-shot LLM (qwen2.5:7b) over titles alone, constrained to catalog ids",
+    "micro_f1": 0.2764146219328994,
+    "micro_precision": 0.30734966592427615,
+    "micro_recall": 0.25113739763421294,
+    "n_findings": 1857,
+    "note": "an instruction-tuned model choosing the control from titles alone; still far below the curated cross-walk, so the mapping is not recoverable zero-shot",
+    "unanswered_checks": 2
+  },
+  "llm_zeroshot_fulltext": {
+    "curated_f1": 1.0,
+    "method": "zero-shot LLM (qwen2.5:7b) over full public control text, constrained to catalog ids",
+    "micro_f1": 0.2569667077681874,
+    "micro_precision": 0.28056004308023696,
+    "micro_recall": 0.2370336669699727,
+    "n_findings": 1857,
+    "note": "an instruction-tuned model choosing the control from full public control text; still far below the curated cross-walk, so the mapping is not recoverable zero-shot",
+    "unanswered_checks": 0
+  },
+  "majority_class_mapper": {
+    "curated_f1": 1.0,
+    "method": "constant: answer 2-15-3-3 to every check, ignoring the finding",
+    "micro_f1": 0.3191122071516646,
+    "micro_precision": 0.34841141626278943,
+    "micro_recall": 0.2943585077343039,
+    "modal_control": "2-15-3-3",
+    "modal_share": 0.348,
+    "n_findings": 1857,
+    "note": "the degenerate floor every non-curated baseline must clear; it exploits the corpus's concentration on one control rather than reading the finding at all"
+  },
+  "naive_keyword": {
+    "curated_f1": 1.0,
+    "method": "naive keyword title overlap over the full catalog",
+    "micro_f1": 0.1662145499383477,
+    "micro_precision": 0.18147549811523964,
+    "micro_recall": 0.15332120109190173,
+    "n_findings": 1857,
+    "note": "scanner findings and regulatory control text share little vocabulary, so the finding-to-control mapping is not lexically recoverable and needs the curated cross-walk"
+  },
+  "naive_keyword_multilabel": {
+    "curated_f1": 1.0,
+    "method": "naive keyword multi-label (top 2) over the full public control text",
+    "micro_f1": 0.18748700893785075,
+    "micro_precision": 0.1725985457328741,
+    "micro_recall": 0.2051865332120109,
+    "n_findings": 1857,
+    "note": "allowed to predict the top controls per check, removing the single-pick cap; still far below the curated cross-walk, so the cap does not explain the gap"
+  },
+  "naive_keyword_observable": {
+    "curated_f1": 1.0,
+    "method": "naive keyword over the title, observable candidate set",
+    "micro_f1": 0.29543773119605427,
+    "micro_precision": 0.32256327409800756,
+    "micro_recall": 0.27252047315741584,
+    "n_findings": 1857,
+    "note": "candidates restricted to the taxonomy's externally observable controls, the fair set a real external mapper would search; still far below the curated cross-walk"
+  },
+  "naive_keyword_observable_fulltext": {
+    "curated_f1": 1.0,
+    "method": "naive keyword over the full public control text, observable candidate set",
+    "micro_f1": 0.3334155363748459,
+    "micro_precision": 0.3640280021540118,
+    "micro_recall": 0.3075523202911738,
+    "n_findings": 1857,
+    "note": "candidates restricted to the taxonomy's externally observable controls, the fair set a real external mapper would search; still far below the curated cross-walk"
+  },
+  "note": "non-curated mappers scored against the curated answer key; the curated cross-walk scores 1.000 by construction. Lexical mappers are run over the full catalog and over the observable Tier-1 candidate set (the fair set a real external mapper searches), single-pick and multi-label. single_pick_ceiling is the analytical micro-F1 cap for any one-control-per-check mapper. Model-backed baselines (BGE-M3, zero-shot LLM) are opt-in.",
+  "parent_reading_sensitivity": {
+    "as_shipped": {
+      "constant_mapper_f1": 0.3191,
+      "modal_control": "2-15-3-3",
+      "modal_share": 0.348
+    },
+    "note": "sensitivity only. The shipped key is unchanged; the panel of Section 9.7 rules on the reading.",
+    "parent_reading": {
+      "constant_mapper_f1": 0.216,
+      "modal_control": "2-15-3",
+      "modal_share": 0.236
+    }
+  },
+  "single_pick_ceiling": 0.916
+}

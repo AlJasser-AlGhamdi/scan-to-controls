@@ -1,0 +1,2762 @@
+{
+  "gemma3:12b": {
+    "title": {
+      "directory_listing_enabled": "2-10-3-1",
+      "dkim_missing": "2-4-3-5",
+      "dmarc_missing_or_none": "2-4-3-5",
+      "dns_zone_transfer_open": "2-5-3-7",
+      "dnssec_missing": "2-5-3-7",
+      "eol_software_exposed": "2-3-3-3",
+      "expired_certificate": "2-10-3-3",
+      "exposed_database_port": "2-5-3-5",
+      "exposed_dev_environment": "2-5-3-2",
+      "exposed_internal_port": "2-5-3-5",
+      "exposed_login_panel": "2-2-3-2",
+      "exposed_management_port": "2-5-3-5",
+      "exposed_sensitive_file": "2-10-3-1",
+      "high_risk_port_open": "2-5-3-5",
+      "insecure_cookie": "2-15-3-2",
+      "legacy_tls_version": "2-15-3-3",
+      "missing_csp": "2-15-3-5",
+      "missing_hsts": "2-15-3-3",
+      "missing_permissions_policy": "2-15-3-5",
+      "missing_referrer_policy": "2-15-3-5",
+      "missing_x_content_type_options": "2-15-3-3",
+      "missing_x_frame_options": "2-15-3-5",
+      "mta_sts_missing": "2-4-3-5",
+      "no_ddos_protection": "2-5-3-9",
+      "no_https_redirect": "2-15-3-3",
+      "outdated_exposed_software": "2-3-3-3",
+      "self_signed_certificate": "2-10-3-1",
+      "spf_missing": "2-4-3-5",
+      "waf_absent": "2-15-3-1",
+      "weak_certificate_key": "2-8-3-2",
+      "weak_tls_cipher": "2-15-3-3"
+    },
+    "full_text": {
+      "directory_listing_enabled": "2-15-3-3",
+      "dkim_missing": "2-4-3-5",
+      "dmarc_missing_or_none": "2-4-3-5",
+      "dns_zone_transfer_open": "2-5-3-7",
+      "dnssec_missing": "2-5-3-7",
+      "eol_software_exposed": "2-3-3-3",
+      "expired_certificate": "2-3-3-3",
+      "exposed_database_port": "2-5-3-5",
+      "exposed_dev_environment": "2-11-3-1",
+      "exposed_internal_port": "2-5-3-5",
+      "exposed_login_panel": "2-2-3-2",
+      "exposed_management_port": "2-11-3-2",
+      "exposed_sensitive_file": "2-10-3-1",
+      "high_risk_port_open": "2-5-3-5",
+      "insecure_cookie": "2-15-3-3",
+      "legacy_tls_version": "2-15-3-3",
+      "missing_csp": "2-15-3-3",
+      "missing_hsts": "2-15-3-3",
+      "missing_permissions_policy": "2-15-3-3",
+      "missing_referrer_policy": "2-15-3-3",
+      "missing_x_content_type_options": "2-15-3-3",
+      "missing_x_frame_options": "2-15-3-3",
+      "mta_sts_missing": "2-15-3-3",
+      "no_ddos_protection": "2-5-3-9",
+      "no_https_redirect": "2-15-3-3",
+      "outdated_exposed_software": "2-3-3-3",
+      "self_signed_certificate": "2-15-3-3",
+      "spf_missing": "2-4-3-5",
+      "waf_absent": "2-15-3-1",
+      "weak_certificate_key": "2-15-3-3",
+      "weak_tls_cipher": "2-15-3-3"
+    },
+    "multi_full_text": {
+      "directory_listing_enabled": [
+        "1-6-2-1",
+        "1-9-4-1",
+        "1-9-4-2",
+        "2-10-3-1",
+        "2-10-3-3",
+        "2-11-3-1",
+        "2-11-3-2",
+        "2-15-3-3",
+        "2-2-3-2",
+        "2-2-3-3",
+        "2-3-3-3",
+        "2-5-3-5",
+        "2-5-3-6"
+      ],
+      "dkim_missing": [
+        "1-6-2-1",
+        "1-9-4-1",
+        "1-9-4-2",
+        "2-10-3-4",
+        "2-11-3-2",
+        "2-4-3-5",
+        "2-15-3-3",
+        "2-2-3-2",
+        "2-2-3-5",
+        "2-3-3-3",
+        "2-4-3-2",
+        "2-4-3-4",
+        "2-5-3-5",
+        "2-5-3-8",
+        "2-6-3-1",
+        "2-6-3-3"
+      ],
+      "dmarc_missing_or_none": [
+        "1-6-2-1",
+        "1-9-4-1",
+        "2-10-3-4",
+        "2-11-3-2",
+        "2-15-3-3",
+        "2-4-3-5"
+      ],
+      "dns_zone_transfer_open": [
+        "1-6-2-1",
+        "1-6-3-5",
+        "2-10-3-1",
+        "2-10-3-3",
+        "2-11-3-1",
+        "2-11-3-2",
+        "2-5-3-7"
+      ],
+      "dnssec_missing": [
+        "1-6-2-1",
+        "1-9-4-1",
+        "1-9-4-2",
+        "2-5-3-7",
+        "2-10-3-1",
+        "2-10-3-3",
+        "2-11-3-2",
+        "2-15-3-3"
+      ],
+      "eol_software_exposed": [
+        "1-6-2-1",
+        "1-6-3-3",
+        "2-10-3-3",
+        "2-10-3-4",
+        "2-3-3-3",
+        "2-5-3-3",
+        "2-5-3-7",
+        "2-9-3-3"
+      ],
+      "expired_certificate": [
+        "1-6-2-1",
+        "1-9-4-1",
+        "1-9-4-2",
+        "2-10-3-1",
+        "2-10-3-2",
+        "2-10-3-3",
+        "2-10-3-4",
+        "2-11-3-2",
+        "2-15-3-3",
+        "2-2-3-2",
+        "2-3-3-3",
+        "2-4-3-4",
+        "2-5-3-3",
+        "2-8-3-3"
+      ],
+      "exposed_database_port": [
+        "1-6-2-1",
+        "1-9-3-1",
+        "1-9-4-2",
+        "2-10-3-1",
+        "2-10-3-2",
+        "2-10-3-3",
+        "2-10-3-5",
+        "2-11-3-1",
+        "2-11-3-2",
+        "2-12-1-2",
+        "2-12-3-4",
+        "2-13-3-1",
+        "2-13-3-2",
+        "2-15-3-3",
+        "2-5-3-5",
+        "2-5-3-6"
+      ],
+      "exposed_dev_environment": [
+        "1-6-2-1",
+        "1-6-3-5",
+        "2-10-3-1",
+        "2-10-3-2",
+        "2-10-3-3",
+        "2-10-3-4",
+        "2-11-3-1",
+        "2-11-3-2",
+        "2-15-3-1",
+        "2-15-3-3",
+        "2-2-3-2",
+        "2-2-3-3",
+        "2-2-3-4",
+        "2-2-3-5",
+        "2-3-3-3",
+        "2-5-3-2",
+        "2-5-3-5",
+        "2-6-3-1"
+      ],
+      "exposed_internal_port": [
+        "1-6-2-1",
+        "1-9-3-1",
+        "1-9-4-1",
+        "1-9-4-2",
+        "2-10-3-1",
+        "2-10-3-2",
+        "2-10-3-3",
+        "2-10-3-5",
+        "2-11-3-1",
+        "2-11-3-2",
+        "2-12-3-1",
+        "2-12-3-2",
+        "2-12-3-4",
+        "2-12-3-5",
+        "2-13-3-1",
+        "2-13-3-2",
+        "2-15-3-5",
+        "2-5-3-5"
+      ],
+      "exposed_login_panel": [
+        "1-6-2-1",
+        "1-9-3-1",
+        "1-9-4-1",
+        "1-9-4-2",
+        "2-10-3-1",
+        "2-10-3-2",
+        "2-10-3-3",
+        "2-11-3-2",
+        "2-12-3-1",
+        "2-12-3-2",
+        "2-12-3-4",
+        "2-13-3-1",
+        "2-13-3-2",
+        "2-15-3-3",
+        "2-2-3-2",
+        "2-2-3-3",
+        "2-2-3-4",
+        "2-3-3-3"
+      ],
+      "exposed_management_port": [
+        "1-6-2-1",
+        "1-9-4-1",
+        "1-9-4-2",
+        "2-10-3-1",
+        "2-10-3-2",
+        "2-10-3-3",
+        "2-10-3-5",
+        "2-11-3-2",
+        "2-12-3-2",
+        "2-12-3-4",
+        "2-13-3-1",
+        "2-13-3-2",
+        "2-15-3-3",
+        "2-2-3-2",
+        "2-2-3-4",
+        "2-3-3-3",
+        "2-5-3-1",
+        "2-5-3-5"
+      ],
+      "exposed_sensitive_file": [
+        "1-6-2-1",
+        "1-6-3-5",
+        "2-10-3-3",
+        "2-10-3-4",
+        "2-11-3-2",
+        "2-13-3-1",
+        "2-13-3-2",
+        "2-13-3-5",
+        "2-14-3-4",
+        "2-15-3-5",
+        "2-3-3-2",
+        "2-3-3-3"
+      ],
+      "high_risk_port_open": [
+        "1-6-2-1",
+        "1-9-3-1",
+        "1-9-4-1",
+        "1-9-4-2",
+        "2-10-3-1",
+        "2-10-3-2",
+        "2-10-3-3",
+        "2-10-3-5",
+        "2-11-3-1",
+        "2-11-3-2",
+        "2-12-3-1",
+        "2-12-3-2",
+        "2-12-3-4",
+        "2-12-3-5",
+        "2-13-3-1",
+        "2-13-3-2",
+        "2-15-3-5",
+        "2-5-3-5"
+      ],
+      "insecure_cookie": [
+        "1-6-2-1",
+        "1-6-3-1",
+        "1-6-3-5",
+        "2-10-3-1",
+        "2-10-3-3",
+        "2-10-3-4",
+        "2-11-3-1",
+        "2-11-3-2",
+        "2-15-3-3",
+        "2-2-3-2",
+        "2-2-3-5",
+        "2-3-3-3",
+        "2-5-3-5",
+        "2-5-3-6",
+        "2-8-3-3"
+      ],
+      "legacy_tls_version": [
+        "1-6-2-1",
+        "1-6-3-3",
+        "2-10-3-1",
+        "2-10-3-3",
+        "2-10-3-4",
+        "2-11-3-2",
+        "2-15-3-3",
+        "2-2-3-2",
+        "2-3-3-3",
+        "2-5-3-5",
+        "2-5-3-6",
+        "2-8-3-3"
+      ],
+      "missing_csp": [
+        "1-6-2-1",
+        "1-6-3-5",
+        "2-10-3-3",
+        "2-11-3-1",
+        "2-11-3-2",
+        "2-13-3-1",
+        "2-13-3-3",
+        "2-15-3-3",
+        "2-15-3-5",
+        "2-2-3-5",
+        "2-3-3-3",
+        "2-5-3-5",
+        "2-5-3-6",
+        "2-8-3-3"
+      ],
+      "missing_hsts": [
+        "1-6-2-1",
+        "1-9-4-1",
+        "2-3-3-3",
+        "2-5-3-5",
+        "2-15-3-3"
+      ],
+      "missing_permissions_policy": [
+        "1-6-2-1",
+        "1-9-4-1",
+        "1-9-4-2",
+        "2-10-3-3",
+        "2-15-3-3",
+        "2-15-3-5"
+      ],
+      "missing_referrer_policy": [
+        "1-6-2-1",
+        "1-6-3-3",
+        "2-10-3-1",
+        "2-10-3-3",
+        "2-15-3-3",
+        "2-15-3-5",
+        "2-2-3-5",
+        "2-3-3-3",
+        "2-5-3-5"
+      ],
+      "missing_x_content_type_options": [
+        "1-6-2-1",
+        "1-9-4-1",
+        "1-9-4-2",
+        "2-10-3-1",
+        "2-10-3-3",
+        "2-15-3-3",
+        "2-15-3-5",
+        "2-2-3-5",
+        "2-3-3-3",
+        "2-5-3-5",
+        "2-5-3-6"
+      ],
+      "missing_x_frame_options": [
+        "1-6-2-1",
+        "1-6-3-5",
+        "2-10-3-1",
+        "2-10-3-3",
+        "2-10-3-5",
+        "2-11-3-2",
+        "2-15-3-3",
+        "2-2-3-3",
+        "2-2-3-5",
+        "2-3-3-3",
+        "2-5-3-5",
+        "2-5-3-6",
+        "2-7-1-3"
+      ],
+      "mta_sts_missing": [
+        "1-6-2-1",
+        "1-9-4-2",
+        "2-10-3-3",
+        "2-11-3-2",
+        "2-15-3-3",
+        "2-15-3-5",
+        "2-2-3-2",
+        "2-2-3-5",
+        "2-3-3-3",
+        "2-4-3-4",
+        "2-4-3-5",
+        "2-5-3-5",
+        "2-5-3-9",
+        "2-8-3-3"
+      ],
+      "no_ddos_protection": [
+        "1-6-2-1",
+        "1-9-4-1",
+        "1-9-4-2",
+        "2-5-3-9",
+        "2-11-3-1",
+        "2-11-3-2",
+        "2-13-3-1",
+        "2-13-3-2",
+        "2-15-3-5"
+      ],
+      "no_https_redirect": [
+        "1-6-2-1",
+        "1-9-4-1",
+        "1-9-4-2",
+        "2-3-3-3",
+        "2-5-3-5",
+        "2-15-3-3",
+        "2-15-3-5",
+        "2-2-3-3",
+        "2-2-3-5",
+        "2-3-3-1",
+        "2-3-3-4",
+        "2-5-3-6",
+        "2-9-3-3"
+      ],
+      "outdated_exposed_software": [
+        "1-6-2-1",
+        "1-6-3-3",
+        "2-10-3-1",
+        "2-10-3-2",
+        "2-10-3-3",
+        "2-10-3-4",
+        "2-3-3-3",
+        "2-5-3-3",
+        "2-5-3-7",
+        "2-9-3-3"
+      ],
+      "self_signed_certificate": [
+        "1-6-2-1",
+        "1-6-3-5",
+        "2-10-3-1",
+        "2-10-3-3",
+        "2-10-3-4",
+        "2-11-3-1",
+        "2-11-3-2",
+        "2-13-3-1",
+        "2-13-3-3",
+        "2-15-3-3",
+        "2-2-3-3",
+        "2-3-3-3",
+        "2-5-3-5",
+        "2-5-3-6",
+        "2-8-3-3"
+      ],
+      "spf_missing": [
+        "1-6-2-1",
+        "1-9-4-1",
+        "1-9-4-2",
+        "2-10-3-4",
+        "2-10-3-5",
+        "2-4-3-5",
+        "2-5-3-7",
+        "2-5-3-8",
+        "2-15-3-3"
+      ],
+      "waf_absent": [
+        "1-6-2-1",
+        "1-6-3-5",
+        "2-10-3-1",
+        "2-10-3-2",
+        "2-10-3-3",
+        "2-10-3-4",
+        "2-11-3-1",
+        "2-11-3-2",
+        "2-15-3-1",
+        "2-15-3-3"
+      ],
+      "weak_certificate_key": [
+        "1-6-2-1",
+        "1-6-3-5",
+        "2-10-3-1",
+        "2-10-3-2",
+        "2-10-3-3",
+        "2-10-3-4",
+        "2-11-3-2",
+        "2-15-3-3",
+        "2-2-3-2",
+        "2-3-3-3",
+        "2-8-3-3"
+      ],
+      "weak_tls_cipher": [
+        "1-6-2-1",
+        "1-6-3-5",
+        "2-10-3-3",
+        "2-10-3-4",
+        "2-11-3-2",
+        "2-15-3-3",
+        "2-2-3-2",
+        "2-3-3-3",
+        "2-5-3-5",
+        "2-8-3-3"
+      ]
+    }
+  },
+  "qwen2.5:7b": {
+    "title": {
+      "directory_listing_enabled": "2-15-3-1",
+      "dkim_missing": "2-4-3-5",
+      "dmarc_missing_or_none": "1-6-2-1",
+      "dns_zone_transfer_open": null,
+      "dnssec_missing": null,
+      "eol_software_exposed": "2-10-3-4",
+      "expired_certificate": "2-6-3-1",
+      "exposed_database_port": "2-5-3-5",
+      "exposed_dev_environment": "2-5-3-1",
+      "exposed_internal_port": "2-10-3-1",
+      "exposed_login_panel": "2-2-3-5",
+      "exposed_management_port": "2-10-3-4",
+      "exposed_sensitive_file": "2-10-3-4",
+      "high_risk_port_open": "2-5-3-5",
+      "insecure_cookie": "1-6-2-1",
+      "legacy_tls_version": "2-15-3-3",
+      "missing_csp": "2-15-3-1",
+      "missing_hsts": "2-15-3-3",
+      "missing_permissions_policy": "2-15-3-1",
+      "missing_referrer_policy": "2-15-3-3",
+      "missing_x_content_type_options": "2-10-3-4",
+      "missing_x_frame_options": "2-15-3-1",
+      "mta_sts_missing": "2-15-3-3",
+      "no_ddos_protection": "2-9-3-1",
+      "no_https_redirect": "2-15-3-3",
+      "outdated_exposed_software": "2-10-3-4",
+      "self_signed_certificate": "2-15-3-3",
+      "spf_missing": "2-4-3-5",
+      "waf_absent": "2-15-3-1",
+      "weak_certificate_key": "1-6-2-1",
+      "weak_tls_cipher": "2-15-3-3"
+    },
+    "full_text": {
+      "directory_listing_enabled": "2-15-3-1",
+      "dkim_missing": "1-6-3-4",
+      "dmarc_missing_or_none": "1-6-3-5",
+      "dns_zone_transfer_open": "2-5-3-7",
+      "dnssec_missing": "2-5-3-7",
+      "eol_software_exposed": "1-6-2-1",
+      "expired_certificate": "1-6-2-1",
+      "exposed_database_port": "2-11-3-1",
+      "exposed_dev_environment": "2-5-3-5",
+      "exposed_internal_port": "2-5-3-5",
+      "exposed_login_panel": "2-2-3-4",
+      "exposed_management_port": "2-5-3-1",
+      "exposed_sensitive_file": "1-6-2-1",
+      "high_risk_port_open": "2-5-3-5",
+      "insecure_cookie": "1-6-3-5",
+      "legacy_tls_version": "1-6-2-1",
+      "missing_csp": "2-15-3-3",
+      "missing_hsts": "1-6-3-3",
+      "missing_permissions_policy": "2-15-3-3",
+      "missing_referrer_policy": "1-6-2-1",
+      "missing_x_content_type_options": "1-6-2-1",
+      "missing_x_frame_options": "1-6-2-1",
+      "mta_sts_missing": "2-15-3-3",
+      "no_ddos_protection": "2-9-3-1",
+      "no_https_redirect": "2-15-3-3",
+      "outdated_exposed_software": "1-6-2-1",
+      "self_signed_certificate": "1-6-2-1",
+      "spf_missing": "1-6-3-5",
+      "waf_absent": "2-15-3-1",
+      "weak_certificate_key": "1-6-2-1",
+      "weak_tls_cipher": "1-6-2-1"
+    },
+    "multi_full_text": {
+      "directory_listing_enabled": [
+        "2-15-3-1",
+        "2-15-3-3",
+        "2-15-3-4"
+      ],
+      "dkim_missing": [
+        "1-6-3-4",
+        "2-4-3-5"
+      ],
+      "dmarc_missing_or_none": [
+        "1-6-3-4",
+        "2-4-3-5"
+      ],
+      "dns_zone_transfer_open": [
+        "2-5-3-7",
+        "2-5-3-9",
+        "1-6-2-1"
+      ],
+      "dnssec_missing": [
+        "2-5-3-7",
+        "2-15-3-3"
+      ],
+      "eol_software_exposed": [
+        "1-6-2-1",
+        "1-6-3-4",
+        "2-10-3-4",
+        "2-15-3-3",
+        "2-3-3-3"
+      ],
+      "expired_certificate": [
+        "1-6-2-1",
+        "1-6-3-4",
+        "2-15-3-3",
+        "2-5-3-8"
+      ],
+      "exposed_database_port": [
+        "2-15-3-3",
+        "2-15-3-4",
+        "2-15-3-5",
+        "2-2-3-2",
+        "2-6-3-1",
+        "2-6-3-2",
+        "2-6-3-3",
+        "2-10-3-1",
+        "2-10-3-2",
+        "2-10-3-3",
+        "2-10-3-4",
+        "2-10-3-5",
+        "2-11-3-1",
+        "2-11-3-2",
+        "2-12-3-1",
+        "2-12-3-2",
+        "2-12-3-3",
+        "2-12-3-4",
+        "2-12-3-5",
+        "2-13-3-1",
+        "2-13-3-2",
+        "2-13-3-3",
+        "2-13-3-4",
+        "2-13-3-5",
+        "2-14-3-1",
+        "2-14-3-2",
+        "2-14-3-3",
+        "2-14-3-4",
+        "2-14-3-5",
+        "2-15-3-1"
+      ],
+      "exposed_dev_environment": [
+        "1-6-2-1",
+        "1-6-3-4",
+        "2-5-3-5",
+        "2-5-3-9"
+      ],
+      "exposed_internal_port": [
+        "2-5-3-1",
+        "2-5-3-5",
+        "2-11-3-1"
+      ],
+      "exposed_login_panel": [
+        "2-15-3-4",
+        "2-2-3-3",
+        "2-2-3-5",
+        "2-6-3-3",
+        "2-10-3-1",
+        "2-10-3-2",
+        "2-10-3-3",
+        "2-10-3-4",
+        "2-11-3-1",
+        "2-11-3-2"
+      ],
+      "exposed_management_port": [
+        "2-11-3-1",
+        "2-11-3-2",
+        "2-12-3-1",
+        "2-12-3-2",
+        "2-12-3-4",
+        "2-12-3-5",
+        "2-13-3-1",
+        "2-13-3-2",
+        "2-13-3-3",
+        "2-13-3-4",
+        "2-14-3-1",
+        "2-14-3-2",
+        "2-14-3-3",
+        "2-15-3-1",
+        "2-15-3-2",
+        "2-15-3-3",
+        "2-15-3-4",
+        "2-15-3-5",
+        "2-2-3-2",
+        "2-3-3-1",
+        "2-3-3-3",
+        "2-5-3-1",
+        "2-5-3-2",
+        "2-5-3-3",
+        "2-5-3-4",
+        "2-5-3-5",
+        "2-6-3-1",
+        "2-6-3-2",
+        "2-6-3-3"
+      ],
+      "exposed_sensitive_file": [
+        "1-6-2-1",
+        "1-6-3-4",
+        "2-10-3-1",
+        "2-10-3-2",
+        "2-10-3-3",
+        "2-10-3-4",
+        "2-11-3-1",
+        "2-11-3-2",
+        "2-12-3-1",
+        "2-12-3-2",
+        "2-12-3-3",
+        "2-12-3-4",
+        "2-12-3-5",
+        "2-13-3-1",
+        "2-13-3-2",
+        "2-13-3-3",
+        "2-13-3-4",
+        "2-13-3-5",
+        "2-14-3-1",
+        "2-14-3-2",
+        "2-14-3-3",
+        "2-14-3-4",
+        "2-14-3-5",
+        "2-15-3-1",
+        "2-15-3-2",
+        "2-15-3-3",
+        "2-15-3-4",
+        "2-15-3-5",
+        "2-2-3-2",
+        "2-2-3-3",
+        "2-2-3-4",
+        "2-2-3-5",
+        "2-3-3-1",
+        "2-3-3-2",
+        "2-3-3-3",
+        "2-3-3-4",
+        "2-4-3-1",
+        "2-4-3-2",
+        "2-4-3-3",
+        "2-4-3-4",
+        "2-4-3-5",
+        "2-5-3-1",
+        "2-5-3-2",
+        "2-5-3-3",
+        "2-5-3-4",
+        "2-5-3-5",
+        "2-6-3-1",
+        "2-6-3-2",
+        "2-6-3-3",
+        "2-7-1-2",
+        "2-8-3-1",
+        "2-8-3-2",
+        "2-8-3-3",
+        "2-9-3-1",
+        "2-9-3-2",
+        "2-9-3-3"
+      ],
+      "high_risk_port_open": [
+        "2-5-3-5",
+        "2-10-3-1",
+        "2-10-3-2",
+        "2-10-3-3",
+        "2-10-3-4",
+        "2-11-3-1",
+        "2-11-3-2"
+      ],
+      "insecure_cookie": [
+        "1-6-2-1",
+        "1-6-3-4",
+        "2-15-3-3"
+      ],
+      "legacy_tls_version": [
+        "1-6-2-1",
+        "1-6-2-2",
+        "2-15-3-3",
+        "2-5-3-8"
+      ],
+      "missing_csp": [
+        "2-15-3-3",
+        "2-15-3-4"
+      ],
+      "missing_hsts": [
+        "2-15-3-3",
+        "2-2-3-4",
+        "2-6-3-1",
+        "2-6-3-2",
+        "2-6-3-3",
+        "2-10-3-1",
+        "2-10-3-2",
+        "2-10-3-3",
+        "2-10-3-4",
+        "2-10-3-5",
+        "2-11-3-1",
+        "2-11-3-2",
+        "2-12-3-1",
+        "2-12-3-2",
+        "2-12-3-3",
+        "2-12-3-4",
+        "2-12-3-5",
+        "2-13-3-1",
+        "2-13-3-2",
+        "2-13-3-3",
+        "2-13-3-4",
+        "2-13-3-5",
+        "2-14-3-1",
+        "2-14-3-2",
+        "2-14-3-3",
+        "2-14-3-4",
+        "2-14-3-5",
+        "2-15-3-1",
+        "2-15-3-2"
+      ],
+      "missing_permissions_policy": [
+        "2-15-3-3",
+        "2-15-3-4"
+      ],
+      "missing_referrer_policy": [
+        "2-15-3-3",
+        "2-15-3-4"
+      ],
+      "missing_x_content_type_options": [
+        "1-6-2-1",
+        "1-6-3-4",
+        "2-15-3-3",
+        "2-5-3-5"
+      ],
+      "missing_x_frame_options": [
+        "1-6-2-1",
+        "1-6-3-4",
+        "2-15-3-3",
+        "2-5-3-5"
+      ],
+      "mta_sts_missing": [
+        "1-6-2-1",
+        "1-6-3-4",
+        "2-15-3-3",
+        "2-4-3-5"
+      ],
+      "no_ddos_protection": [
+        "2-10-3-4"
+      ],
+      "no_https_redirect": [
+        "2-15-3-3",
+        "2-2-3-4",
+        "2-15-3-5"
+      ],
+      "outdated_exposed_software": [
+        "1-6-2-1",
+        "1-6-3-4",
+        "2-10-3-4",
+        "2-3-3-3"
+      ],
+      "self_signed_certificate": [
+        "1-6-2-1",
+        "1-6-3-5",
+        "2-15-3-3",
+        "2-5-3-8"
+      ],
+      "spf_missing": [
+        "1-6-3-4",
+        "2-4-3-5"
+      ],
+      "waf_absent": [
+        "2-15-3-1",
+        "2-15-3-2",
+        "2-15-3-3"
+      ],
+      "weak_certificate_key": [
+        "1-6-2-1",
+        "1-6-3-4",
+        "2-10-3-1",
+        "2-10-3-2",
+        "2-10-3-3",
+        "2-10-3-4",
+        "2-15-3-3"
+      ],
+      "weak_tls_cipher": [
+        "1-6-2-1",
+        "1-6-3-4",
+        "2-15-3-3",
+        "2-5-3-8"
+      ]
+    }
+  },
+  "iKhalid/ALLaM:7b": {
+    "title": {
+      "directory_listing_enabled": "2-10-3-1",
+      "dkim_missing": "2-15-3-1",
+      "dmarc_missing_or_none": "1-5-3-1",
+      "dns_zone_transfer_open": "2-10-3-1",
+      "dnssec_missing": "2-10-3-1",
+      "eol_software_exposed": "2-10-3-1",
+      "expired_certificate": "2-10-3-1",
+      "exposed_database_port": "1-6-3-4",
+      "exposed_dev_environment": "1-5-3-4",
+      "exposed_internal_port": "2-5-3-5",
+      "exposed_login_panel": "1-5-3-4",
+      "exposed_management_port": "1-5-3-4",
+      "exposed_sensitive_file": "2-10-3-1",
+      "high_risk_port_open": "2-5-3-5",
+      "insecure_cookie": "1-5-3-2",
+      "legacy_tls_version": "1-5-3-4",
+      "missing_csp": "1-6-3-4",
+      "missing_hsts": "1-5-3-1",
+      "missing_permissions_policy": "1-5-3-2",
+      "missing_referrer_policy": "1-5-3-2",
+      "missing_x_content_type_options": "2-10-3-1",
+      "missing_x_frame_options": "1-5-3-2",
+      "mta_sts_missing": "2-10-3-1",
+      "no_ddos_protection": "2-5-3-9",
+      "no_https_redirect": "2-10-3-1",
+      "outdated_exposed_software": "1-6-3-5",
+      "self_signed_certificate": "2-10-3-1",
+      "spf_missing": "1-5-3-4",
+      "waf_absent": "2-15-3-1",
+      "weak_certificate_key": "2-10-3-1",
+      "weak_tls_cipher": "2-10-3-4"
+    },
+    "full_text": {
+      "directory_listing_enabled": "2-3-3-1",
+      "dkim_missing": "2-3-3-1",
+      "dmarc_missing_or_none": "2-3-3-1",
+      "dns_zone_transfer_open": "2-3-3-1",
+      "dnssec_missing": "2-3-3-1",
+      "eol_software_exposed": "2-3-3-1",
+      "expired_certificate": "2-3-3-1",
+      "exposed_database_port": "2-3-3-1",
+      "exposed_dev_environment": "2-3-3-1",
+      "exposed_internal_port": "2-3-3-1",
+      "exposed_login_panel": "2-3-3-1",
+      "exposed_management_port": "2-3-3-1",
+      "exposed_sensitive_file": "2-3-3-1",
+      "high_risk_port_open": "2-3-3-1",
+      "insecure_cookie": "2-3-3-1",
+      "legacy_tls_version": "2-3-3-1",
+      "missing_csp": "2-3-3-1",
+      "missing_hsts": "2-3-3-1",
+      "missing_permissions_policy": "2-3-3-1",
+      "missing_referrer_policy": "2-3-3-1",
+      "missing_x_content_type_options": "2-3-3-1",
+      "missing_x_frame_options": "2-3-3-1",
+      "mta_sts_missing": "2-3-3-1",
+      "no_ddos_protection": "2-3-3-1",
+      "no_https_redirect": "2-3-3-1",
+      "outdated_exposed_software": "2-3-3-1",
+      "self_signed_certificate": "2-3-3-1",
+      "spf_missing": "2-3-3-1",
+      "waf_absent": "2-3-3-1",
+      "weak_certificate_key": "2-3-3-1",
+      "weak_tls_cipher": "2-3-3-1"
+    },
+    "multi_full_text": {
+      "directory_listing_enabled": [],
+      "dkim_missing": [],
+      "dmarc_missing_or_none": [],
+      "dns_zone_transfer_open": [],
+      "dnssec_missing": [],
+      "eol_software_exposed": [],
+      "expired_certificate": [],
+      "exposed_database_port": [],
+      "exposed_dev_environment": [],
+      "exposed_internal_port": [],
+      "exposed_login_panel": [],
+      "exposed_management_port": [],
+      "exposed_sensitive_file": [],
+      "high_risk_port_open": [],
+      "insecure_cookie": [],
+      "legacy_tls_version": [],
+      "missing_csp": [],
+      "missing_hsts": [],
+      "missing_permissions_policy": [],
+      "missing_referrer_policy": [],
+      "missing_x_content_type_options": [],
+      "missing_x_frame_options": [],
+      "mta_sts_missing": [],
+      "no_ddos_protection": [],
+      "no_https_redirect": [],
+      "outdated_exposed_software": [],
+      "self_signed_certificate": [],
+      "spf_missing": [],
+      "waf_absent": [],
+      "weak_certificate_key": [],
+      "weak_tls_cipher": []
+    }
+  },
+  "hf.co/mradermacher/jais-adapted-7b-chat-GGUF:Q4_K_M": {
+    "title": {
+      "directory_listing_enabled": "1-5-3-1",
+      "dkim_missing": "1-5-3-1",
+      "dmarc_missing_or_none": "1-6-3-5",
+      "dns_zone_transfer_open": "1-5-3-1",
+      "dnssec_missing": "1-5-3-1",
+      "eol_software_exposed": "1-5-3-1",
+      "expired_certificate": "1-5-3-1",
+      "exposed_database_port": "1-5-3-1",
+      "exposed_dev_environment": "1-6-3-5",
+      "exposed_internal_port": "1-5-3-1",
+      "exposed_login_panel": "1-5-3-1",
+      "exposed_management_port": "1-5-3-1",
+      "exposed_sensitive_file": "1-6-3-5",
+      "high_risk_port_open": "1-5-3-1",
+      "insecure_cookie": "1-5-3-1",
+      "legacy_tls_version": "1-5-3-1",
+      "missing_csp": "1-6-3-5",
+      "missing_hsts": "1-6-3-5",
+      "missing_permissions_policy": "1-5-3-1",
+      "missing_referrer_policy": "1-5-3-1",
+      "missing_x_content_type_options": "1-6-3-5",
+      "missing_x_frame_options": "1-5-3-1",
+      "mta_sts_missing": "1-6-3-5",
+      "no_ddos_protection": "1-6-3-5",
+      "no_https_redirect": "1-5-3-1",
+      "outdated_exposed_software": "1-5-3-1",
+      "self_signed_certificate": "1-5-3-1",
+      "spf_missing": "1-5-3-1",
+      "waf_absent": "1-5-3-1",
+      "weak_certificate_key": "1-6-3-5",
+      "weak_tls_cipher": "1-5-3-1"
+    },
+    "full_text": {
+      "directory_listing_enabled": "2-4-3-5",
+      "dkim_missing": "2-4-3-5",
+      "dmarc_missing_or_none": "2-4-3-5",
+      "dns_zone_transfer_open": "2-4-3-5",
+      "dnssec_missing": "2-4-3-5",
+      "eol_software_exposed": "2-4-3-5",
+      "expired_certificate": "2-4-3-5",
+      "exposed_database_port": "2-4-3-5",
+      "exposed_dev_environment": "2-4-3-5",
+      "exposed_internal_port": "2-4-3-5",
+      "exposed_login_panel": "2-4-3-5",
+      "exposed_management_port": "2-4-3-5",
+      "exposed_sensitive_file": "2-4-3-5",
+      "high_risk_port_open": "2-4-3-5",
+      "insecure_cookie": "2-4-3-5",
+      "legacy_tls_version": "2-4-3-5",
+      "missing_csp": "2-4-3-5",
+      "missing_hsts": "2-4-3-5",
+      "missing_permissions_policy": "2-4-3-5",
+      "missing_referrer_policy": "2-4-3-5",
+      "missing_x_content_type_options": "2-4-3-5",
+      "missing_x_frame_options": "2-4-3-5",
+      "mta_sts_missing": "2-4-3-5",
+      "no_ddos_protection": "2-4-3-5",
+      "no_https_redirect": "2-4-3-5",
+      "outdated_exposed_software": "2-4-3-5",
+      "self_signed_certificate": "2-4-3-5",
+      "spf_missing": "2-4-3-5",
+      "waf_absent": "2-4-3-5",
+      "weak_certificate_key": "2-4-3-5",
+      "weak_tls_cipher": "2-4-3-5"
+    },
+    "multi_full_text": {
+      "directory_listing_enabled": [],
+      "dkim_missing": [],
+      "dmarc_missing_or_none": [],
+      "dns_zone_transfer_open": [],
+      "dnssec_missing": [],
+      "eol_software_exposed": [],
+      "expired_certificate": [],
+      "exposed_database_port": [],
+      "exposed_dev_environment": [],
+      "exposed_internal_port": [],
+      "exposed_login_panel": [],
+      "exposed_management_port": [],
+      "exposed_sensitive_file": [],
+      "high_risk_port_open": [],
+      "insecure_cookie": [],
+      "legacy_tls_version": [],
+      "missing_csp": [],
+      "missing_hsts": [],
+      "missing_permissions_policy": [],
+      "missing_referrer_policy": [],
+      "missing_x_content_type_options": [],
+      "missing_x_frame_options": [],
+      "mta_sts_missing": [],
+      "no_ddos_protection": [],
+      "no_https_redirect": [],
+      "outdated_exposed_software": [],
+      "self_signed_certificate": [],
+      "spf_missing": [],
+      "waf_absent": [],
+      "weak_certificate_key": [],
+      "weak_tls_cipher": []
+    }
+  },
+  "hf.co/mradermacher/SILMA-9B-Instruct-v1.0-GGUF:Q4_K_M": {
+    "title": {
+      "directory_listing_enabled": "1-6-2-2",
+      "dkim_missing": "2-15-3-5",
+      "dmarc_missing_or_none": "1-6-2-2",
+      "dns_zone_transfer_open": "2-11-3-1",
+      "dnssec_missing": null,
+      "eol_software_exposed": "1-6-2-2",
+      "expired_certificate": "1-6-2-2",
+      "exposed_database_port": "2-11-3-1",
+      "exposed_dev_environment": "1-6-3-5",
+      "exposed_internal_port": "2-11-3-1",
+      "exposed_login_panel": "1-6-2-1",
+      "exposed_management_port": "1-6-2-1",
+      "exposed_sensitive_file": "1-6-2-2",
+      "high_risk_port_open": "1-6-2-1",
+      "insecure_cookie": "1-6-3-5",
+      "legacy_tls_version": "1-6-2-2",
+      "missing_csp": "1-6-2-2",
+      "missing_hsts": "1-6-2-2",
+      "missing_permissions_policy": "1-6-2-2",
+      "missing_referrer_policy": "1-6-2-2",
+      "missing_x_content_type_options": "1-6-2-2",
+      "missing_x_frame_options": "1-6-2-2",
+      "mta_sts_missing": "1-5-3-4",
+      "no_ddos_protection": "2-11-3-1",
+      "no_https_redirect": "1-6-2-2",
+      "outdated_exposed_software": "1-6-2-2",
+      "self_signed_certificate": "1-6-2-2",
+      "spf_missing": "2-15-3-5",
+      "waf_absent": "2-15-3-1",
+      "weak_certificate_key": "2-10-3-1",
+      "weak_tls_cipher": "1-6-2-2"
+    },
+    "full_text": {
+      "directory_listing_enabled": "2-15-3-4",
+      "dkim_missing": "2-10-3-5",
+      "dmarc_missing_or_none": "2-10-3-4",
+      "dns_zone_transfer_open": "2-10-3-4",
+      "dnssec_missing": "2-15-3-4",
+      "eol_software_exposed": "2-10-3-4",
+      "expired_certificate": "2-10-3-4",
+      "exposed_database_port": "2-10-3-4",
+      "exposed_dev_environment": "2-10-3-4",
+      "exposed_internal_port": "2-10-3-4",
+      "exposed_login_panel": "2-10-3-4",
+      "exposed_management_port": "2-10-3-4",
+      "exposed_sensitive_file": "2-10-3-4",
+      "high_risk_port_open": "2-10-3-4",
+      "insecure_cookie": "2-15-3-4",
+      "legacy_tls_version": "2-15-3-5",
+      "missing_csp": "2-15-3-4",
+      "missing_hsts": "1-6-3-5",
+      "missing_permissions_policy": "2-15-3-4",
+      "missing_referrer_policy": "2-10-3-4",
+      "missing_x_content_type_options": "2-10-3-4",
+      "missing_x_frame_options": "1-6-3-5",
+      "mta_sts_missing": "2-15-3-4",
+      "no_ddos_protection": "2-10-3-4",
+      "no_https_redirect": "2-15-3-5",
+      "outdated_exposed_software": "2-10-3-4",
+      "self_signed_certificate": "2-15-3-4",
+      "spf_missing": "2-10-3-4",
+      "waf_absent": "2-15-3-1",
+      "weak_certificate_key": "2-10-3-4",
+      "weak_tls_cipher": "2-15-3-4"
+    },
+    "multi_full_text": {
+      "directory_listing_enabled": [
+        "2-10-3-4"
+      ],
+      "dkim_missing": [
+        "2-10-3-4"
+      ],
+      "dmarc_missing_or_none": [
+        "1-6-3-5"
+      ],
+      "dns_zone_transfer_open": [
+        "2-10-3-4"
+      ],
+      "dnssec_missing": [
+        "2-10-3-4"
+      ],
+      "eol_software_exposed": [
+        "1-6-3-5"
+      ],
+      "expired_certificate": [
+        "2-10-3-4"
+      ],
+      "exposed_database_port": [
+        "2-10-3-4"
+      ],
+      "exposed_dev_environment": [
+        "1-6-3-4"
+      ],
+      "exposed_internal_port": [
+        "2-10-3-4"
+      ],
+      "exposed_login_panel": [
+        "2-10-3-4"
+      ],
+      "exposed_management_port": [
+        "2-10-3-4"
+      ],
+      "exposed_sensitive_file": [
+        "2-10-3-4"
+      ],
+      "high_risk_port_open": [
+        "2-10-3-4"
+      ],
+      "insecure_cookie": [
+        "1-6-3-5"
+      ],
+      "legacy_tls_version": [
+        "2-15-3-5"
+      ],
+      "missing_csp": [
+        "1-6-3-5"
+      ],
+      "missing_hsts": [
+        "1-6-3-5"
+      ],
+      "missing_permissions_policy": [
+        "1-6-3-5"
+      ],
+      "missing_referrer_policy": [
+        "1-6-3-5"
+      ],
+      "missing_x_content_type_options": [
+        "1-6-3-5"
+      ],
+      "missing_x_frame_options": [
+        "1-6-3-5"
+      ],
+      "mta_sts_missing": [
+        "1-6-2-1"
+      ],
+      "no_ddos_protection": [
+        "2-10-3-4"
+      ],
+      "no_https_redirect": [
+        "2-15-3-3"
+      ],
+      "outdated_exposed_software": [
+        "1-6-3-5"
+      ],
+      "self_signed_certificate": [
+        "2-10-3-4"
+      ],
+      "spf_missing": [
+        "1-6-2-1"
+      ],
+      "waf_absent": [
+        "2-15-3-1"
+      ],
+      "weak_certificate_key": [
+        "2-10-3-4"
+      ],
+      "weak_tls_cipher": [
+        "2-15-3-5"
+      ]
+    }
+  },
+  "command-r7b-arabic:7b": {
+    "title": {
+      "directory_listing_enabled": "1-6-3-5",
+      "dkim_missing": null,
+      "dmarc_missing_or_none": "1-10-3-1",
+      "dns_zone_transfer_open": "2-5-3-7",
+      "dnssec_missing": null,
+      "eol_software_exposed": "1-6-2-1",
+      "expired_certificate": "1-6-3-5",
+      "exposed_database_port": "2-5-3-5",
+      "exposed_dev_environment": "1-5-3-2",
+      "exposed_internal_port": "2-5-3-5",
+      "exposed_login_panel": "2-2-3-3",
+      "exposed_management_port": "2-5-3-3",
+      "exposed_sensitive_file": "1-6-3-5",
+      "high_risk_port_open": "2-5-3-5",
+      "insecure_cookie": "1-6-3-4",
+      "legacy_tls_version": "1-6-3-5",
+      "missing_csp": "1-6-3-4",
+      "missing_hsts": "1-10-3-3",
+      "missing_permissions_policy": "1-10-3-3",
+      "missing_referrer_policy": "1-6-3-4",
+      "missing_x_content_type_options": "1-6-3-5",
+      "missing_x_frame_options": "1-6-3-4",
+      "mta_sts_missing": "1-10-3-1",
+      "no_ddos_protection": "2-5-3-9",
+      "no_https_redirect": "1-5-3-3",
+      "outdated_exposed_software": "1-6-2-2",
+      "self_signed_certificate": "1-6-3-2",
+      "spf_missing": "2-4-3-5",
+      "waf_absent": "2-15-3-1",
+      "weak_certificate_key": "1-6-3-5",
+      "weak_tls_cipher": "1-6-3-5"
+    },
+    "full_text": {
+      "directory_listing_enabled": "1-6-3-5",
+      "dkim_missing": "1-6-3-5",
+      "dmarc_missing_or_none": "1-9-4-2",
+      "dns_zone_transfer_open": "1-6-3-5",
+      "dnssec_missing": "1-6-3-5",
+      "eol_software_exposed": "1-6-3-5",
+      "expired_certificate": "1-6-3-5",
+      "exposed_database_port": "2-15-3-4",
+      "exposed_dev_environment": "1-6-3-5",
+      "exposed_internal_port": "2-5-3-1",
+      "exposed_login_panel": "1-6-3-5",
+      "exposed_management_port": "1-6-2-1",
+      "exposed_sensitive_file": "1-6-3-5",
+      "high_risk_port_open": "2-5-3-5",
+      "insecure_cookie": "1-9-3-2",
+      "legacy_tls_version": "1-6-3-5",
+      "missing_csp": "1-6-3-5",
+      "missing_hsts": "1-6-3-5",
+      "missing_permissions_policy": "1-6-3-5",
+      "missing_referrer_policy": "1-6-3-5",
+      "missing_x_content_type_options": "1-6-3-5",
+      "missing_x_frame_options": "1-6-3-5",
+      "mta_sts_missing": "1-6-3-5",
+      "no_ddos_protection": "2-5-3-9",
+      "no_https_redirect": null,
+      "outdated_exposed_software": "1-6-3-5",
+      "self_signed_certificate": "1-6-3-5",
+      "spf_missing": "1-5-3-4",
+      "waf_absent": "2-15-3-1",
+      "weak_certificate_key": "1-6-3-5",
+      "weak_tls_cipher": "1-6-3-5"
+    },
+    "multi_full_text": {
+      "directory_listing_enabled": [
+        "1-6-3-5",
+        "2-14-3-1",
+        "2-15-3-5"
+      ],
+      "dkim_missing": [
+        "2-4-3-5"
+      ],
+      "dmarc_missing_or_none": [
+        "1-10-3-1",
+        "1-10-3-4",
+        "1-6-2-1",
+        "1-9-3-2",
+        "2-12-3-5",
+        "2-13-3-1",
+        "2-13-3-2",
+        "2-13-3-3",
+        "2-13-3-4",
+        "2-13-3-5",
+        "2-14-3-1",
+        "2-14-3-3",
+        "2-14-3-4",
+        "2-15-3-5"
+      ],
+      "dns_zone_transfer_open": [
+        "1-6-3-5",
+        "2-5-3-7"
+      ],
+      "dnssec_missing": [
+        "1-6-3-5",
+        "2-5-3-7",
+        "2-8-3-3"
+      ],
+      "eol_software_exposed": [
+        "1-6-3-5",
+        "2-10-3-4",
+        "2-12-3-5"
+      ],
+      "expired_certificate": [
+        "1-6-3-5",
+        "2-10-3-4",
+        "2-12-3-5"
+      ],
+      "exposed_database_port": [
+        "1-6-2-1",
+        "1-6-3-5",
+        "2-10-3-4",
+        "2-11-3-2",
+        "2-12-3-4",
+        "2-14-3-3",
+        "2-15-3-5"
+      ],
+      "exposed_dev_environment": [
+        "1-5-3-2",
+        "1-6-3-4",
+        "1-9-3-2",
+        "2-10-3-4",
+        "2-12-3-5"
+      ],
+      "exposed_internal_port": [
+        "1-6-3-5",
+        "2-14-3-1",
+        "2-15-3-5",
+        "2-2-3-2",
+        "2-5-3-5"
+      ],
+      "exposed_login_panel": [
+        "1-6-3-5",
+        "2-14-3-1",
+        "2-14-3-3",
+        "2-14-3-4",
+        "2-15-3-5"
+      ],
+      "exposed_management_port": [
+        "1-6-2-1",
+        "1-6-3-5",
+        "2-12-3-4",
+        "2-14-3-3",
+        "2-15-3-5"
+      ],
+      "exposed_sensitive_file": [
+        "1-6-3-5",
+        "2-14-3-1",
+        "2-14-3-3",
+        "2-14-3-4",
+        "2-15-3-5"
+      ],
+      "high_risk_port_open": [
+        "1-6-3-5",
+        "2-5-3-5"
+      ],
+      "insecure_cookie": [
+        "1-10-3-3",
+        "1-6-3-5",
+        "2-14-3-3"
+      ],
+      "legacy_tls_version": [
+        "1-6-3-5",
+        "2-10-3-4"
+      ],
+      "missing_csp": [
+        "1-10-3-3",
+        "1-6-3-5",
+        "2-12-3-4",
+        "2-14-3-3",
+        "2-15-3-5",
+        "2-2-3-3",
+        "2-2-3-4",
+        "2-4-3-2",
+        "2-5-3-8"
+      ],
+      "missing_hsts": [
+        "1-6-3-5",
+        "2-10-3-4",
+        "2-12-3-5"
+      ],
+      "missing_permissions_policy": [
+        "1-6-3-5",
+        "2-14-3-3"
+      ],
+      "missing_referrer_policy": [
+        "1-10-3-3",
+        "1-6-3-5",
+        "1-9-3-2",
+        "2-12-3-4",
+        "2-14-3-3",
+        "2-15-3-5",
+        "2-2-3-3",
+        "2-2-3-4",
+        "2-4-3-2",
+        "2-5-3-8",
+        "2-6-3-1",
+        "2-7-1-2",
+        "2-8-3-3"
+      ],
+      "missing_x_content_type_options": [
+        "1-6-3-5",
+        "2-4-3-5"
+      ],
+      "missing_x_frame_options": [
+        "1-6-3-5",
+        "2-14-3-3"
+      ],
+      "mta_sts_missing": [
+        "1-10-3-3",
+        "2-14-3-5"
+      ],
+      "no_ddos_protection": [
+        "2-5-3-9"
+      ],
+      "no_https_redirect": [
+        "1-6-3-5",
+        "2-15-3-3"
+      ],
+      "outdated_exposed_software": [
+        "1-6-3-5",
+        "2-10-3-4",
+        "2-12-3-5"
+      ],
+      "self_signed_certificate": [
+        "1-6-3-5",
+        "2-4-3-5",
+        "2-7-1-2"
+      ],
+      "spf_missing": [
+        "2-4-3-5",
+        "2-7-1-2"
+      ],
+      "waf_absent": [
+        "2-15-3-4",
+        "2-15-3-5"
+      ],
+      "weak_certificate_key": [
+        "1-6-3-5",
+        "2-8-3-3"
+      ],
+      "weak_tls_cipher": [
+        "1-6-3-5",
+        "2-10-3-4",
+        "2-12-3-5"
+      ]
+    }
+  },
+  "phi4:14b": {
+    "title": {
+      "directory_listing_enabled": "1-6-2-2",
+      "dkim_missing": "2-4-3-5",
+      "dmarc_missing_or_none": "2-4-3-5",
+      "dns_zone_transfer_open": "2-5-3-7",
+      "dnssec_missing": "2-5-3-7",
+      "eol_software_exposed": "1-6-2-1",
+      "expired_certificate": "2-15-3-3",
+      "exposed_database_port": "2-5-3-5",
+      "exposed_dev_environment": "2-5-3-2",
+      "exposed_internal_port": "1-6-2-2",
+      "exposed_login_panel": "2-2-3-3",
+      "exposed_management_port": "1-6-2-2",
+      "exposed_sensitive_file": "1-6-3-5",
+      "high_risk_port_open": "2-5-3-5",
+      "insecure_cookie": "2-5-3-3",
+      "legacy_tls_version": "2-5-3-3",
+      "missing_csp": "2-5-3-3",
+      "missing_hsts": "2-5-3-3",
+      "missing_permissions_policy": "2-5-3-3",
+      "missing_referrer_policy": "2-5-3-3",
+      "missing_x_content_type_options": "2-5-3-3",
+      "missing_x_frame_options": "2-5-3-3",
+      "mta_sts_missing": "2-4-3-1",
+      "no_ddos_protection": "2-5-3-9",
+      "no_https_redirect": "1-10-3-3",
+      "outdated_exposed_software": "1-6-2-2",
+      "self_signed_certificate": "2-5-3-3",
+      "spf_missing": "2-4-3-5",
+      "waf_absent": "2-15-3-1",
+      "weak_certificate_key": "2-8-3-1",
+      "weak_tls_cipher": "2-5-3-3"
+    },
+    "full_text": {
+      "directory_listing_enabled": "1-6-2-2",
+      "dkim_missing": "1-10-3-1",
+      "dmarc_missing_or_none": "2-4-3-5",
+      "dns_zone_transfer_open": "2-5-3-7",
+      "dnssec_missing": "2-5-3-7",
+      "eol_software_exposed": "2-10-3-4",
+      "expired_certificate": "1-6-2-1",
+      "exposed_database_port": "2-5-3-5",
+      "exposed_dev_environment": "1-5-3-2",
+      "exposed_internal_port": "2-5-3-5",
+      "exposed_login_panel": "2-2-3-2",
+      "exposed_management_port": "1-6-2-2",
+      "exposed_sensitive_file": "1-6-3-5",
+      "high_risk_port_open": "2-5-3-5",
+      "insecure_cookie": "1-6-2-2",
+      "legacy_tls_version": "1-6-2-2",
+      "missing_csp": "2-15-3-4",
+      "missing_hsts": "2-15-3-3",
+      "missing_permissions_policy": "2-15-3-4",
+      "missing_referrer_policy": "2-15-3-3",
+      "missing_x_content_type_options": "2-15-3-3",
+      "missing_x_frame_options": "2-15-3-1",
+      "mta_sts_missing": "2-4-3-5",
+      "no_ddos_protection": "2-5-3-9",
+      "no_https_redirect": "2-5-3-3",
+      "outdated_exposed_software": "2-10-3-4",
+      "self_signed_certificate": "2-15-3-3",
+      "spf_missing": "2-4-3-5",
+      "waf_absent": "2-15-3-1",
+      "weak_certificate_key": "2-8-3-1",
+      "weak_tls_cipher": "2-15-3-3"
+    },
+    "multi_full_text": {
+      "directory_listing_enabled": [
+        "1-6-2-1",
+        "2-10-3-1",
+        "2-10-3-2",
+        "2-10-3-3",
+        "2-11-3-1",
+        "2-15-3-1",
+        "2-5-3-9"
+      ],
+      "dkim_missing": [
+        "2-4-3-5"
+      ],
+      "dmarc_missing_or_none": [
+        "2-4-3-5"
+      ],
+      "dns_zone_transfer_open": [
+        "1-6-2-1",
+        "2-10-3-1",
+        "2-10-3-2",
+        "2-10-3-3",
+        "2-11-3-1"
+      ],
+      "dnssec_missing": [
+        "1-6-2-1",
+        "1-10-3-3",
+        "2-10-3-1",
+        "2-10-3-2",
+        "2-10-3-3",
+        "2-5-3-7"
+      ],
+      "eol_software_exposed": [
+        "1-6-2-1",
+        "2-10-3-4",
+        "2-10-3-5",
+        "2-12-1-2",
+        "2-14-3-5",
+        "2-15-3-3",
+        "2-3-3-3"
+      ],
+      "expired_certificate": [
+        "1-6-2-2",
+        "2-10-3-4"
+      ],
+      "exposed_database_port": [
+        "2-5-3-5",
+        "2-10-3-1",
+        "2-10-3-2",
+        "2-11-3-1"
+      ],
+      "exposed_dev_environment": [
+        "1-6-2-2",
+        "1-5-3-4",
+        "2-10-3-1",
+        "2-10-3-3",
+        "2-11-3-1",
+        "2-5-3-2"
+      ],
+      "exposed_internal_port": [
+        "1-6-2-1",
+        "2-10-3-1",
+        "2-10-3-2",
+        "2-10-3-3",
+        "2-11-3-1",
+        "2-5-3-5"
+      ],
+      "exposed_login_panel": [
+        "1-6-2-1",
+        "2-10-3-1",
+        "2-10-3-2",
+        "2-10-3-3",
+        "2-11-3-1",
+        "2-12-3-1",
+        "2-14-3-5",
+        "2-15-3-1",
+        "2-15-3-2",
+        "2-15-3-3",
+        "2-2-3-4",
+        "2-5-3-1"
+      ],
+      "exposed_management_port": [
+        "1-6-2-1",
+        "2-10-3-1",
+        "2-10-3-2",
+        "2-10-3-3",
+        "2-11-3-1",
+        "2-12-3-4",
+        "2-15-3-5",
+        "2-2-3-2",
+        "2-5-3-1",
+        "2-5-3-5"
+      ],
+      "exposed_sensitive_file": [
+        "1-6-2-1",
+        "2-10-3-1",
+        "2-10-3-2",
+        "2-10-3-3",
+        "2-12-3-4",
+        "2-15-3-1",
+        "2-5-3-1",
+        "2-8-3-3"
+      ],
+      "high_risk_port_open": [
+        "1-6-2-1",
+        "2-10-3-1",
+        "2-10-3-2",
+        "2-10-3-3",
+        "2-10-3-4",
+        "2-5-3-5"
+      ],
+      "insecure_cookie": [
+        "1-6-2-2",
+        "2-10-3-1",
+        "2-10-3-2",
+        "2-10-3-3",
+        "2-15-3-3"
+      ],
+      "legacy_tls_version": [
+        "1-6-2-1",
+        "2-10-3-1",
+        "2-10-3-2",
+        "2-10-3-3",
+        "2-10-3-4",
+        "2-15-3-3"
+      ],
+      "missing_csp": [
+        "1-6-2-2",
+        "2-15-3-1",
+        "2-15-3-3",
+        "2-5-3-8"
+      ],
+      "missing_hsts": [
+        "2-15-3-3"
+      ],
+      "missing_permissions_policy": [
+        "1-6-2-2",
+        "2-10-3-1",
+        "2-15-3-5"
+      ],
+      "missing_referrer_policy": [
+        "2-15-3-3",
+        "2-5-3-8",
+        "2-5-3-9",
+        "2-15-3-1"
+      ],
+      "missing_x_content_type_options": [
+        "1-6-2-2",
+        "2-15-3-3",
+        "2-5-3-8"
+      ],
+      "missing_x_frame_options": [
+        "2-15-3-3",
+        "1-6-2-2",
+        "2-10-3-1",
+        "2-10-3-3",
+        "1-6-2-1"
+      ],
+      "mta_sts_missing": [
+        "2-4-3-1",
+        "2-4-3-5",
+        "2-5-3-8"
+      ],
+      "no_ddos_protection": [
+        "2-5-3-9",
+        "1-6-2-2",
+        "2-10-3-4"
+      ],
+      "no_https_redirect": [
+        "1-6-3-5",
+        "2-15-3-3"
+      ],
+      "outdated_exposed_software": [
+        "1-6-2-1",
+        "2-10-3-4",
+        "2-10-3-5"
+      ],
+      "self_signed_certificate": [
+        "1-6-2-1",
+        "1-6-2-2",
+        "1-6-3-2",
+        "2-10-3-1",
+        "2-10-3-2",
+        "2-10-3-3",
+        "2-15-3-3"
+      ],
+      "spf_missing": [
+        "2-4-3-5"
+      ],
+      "waf_absent": [
+        "2-15-3-1",
+        "2-10-3-1",
+        "2-11-3-1"
+      ],
+      "weak_certificate_key": [
+        "1-6-2-1",
+        "2-10-3-1",
+        "2-10-3-2",
+        "2-10-3-3",
+        "2-10-3-4",
+        "2-11-3-1",
+        "2-11-3-2",
+        "2-8-3-1",
+        "2-8-3-2",
+        "2-8-3-3"
+      ],
+      "weak_tls_cipher": [
+        "1-6-2-2",
+        "2-10-3-4",
+        "2-10-3-5"
+      ]
+    }
+  },
+  "qwen3:14b": {
+    "title": {
+      "directory_listing_enabled": "1-6-2-2",
+      "dkim_missing": "2-4-3-5",
+      "dmarc_missing_or_none": "2-4-3-5",
+      "dns_zone_transfer_open": "2-5-3-7",
+      "dnssec_missing": "2-5-3-7",
+      "eol_software_exposed": "1-6-2-1",
+      "expired_certificate": "2-15-3-3",
+      "exposed_database_port": "2-5-3-5",
+      "exposed_dev_environment": "2-5-3-2",
+      "exposed_internal_port": "2-5-3-5",
+      "exposed_login_panel": "2-2-3-3",
+      "exposed_management_port": "2-5-3-1",
+      "exposed_sensitive_file": "1-6-2-2",
+      "high_risk_port_open": "2-5-3-5",
+      "insecure_cookie": "1-6-3-1",
+      "legacy_tls_version": "2-15-3-3",
+      "missing_csp": "1-6-2-2",
+      "missing_hsts": "2-15-3-3",
+      "missing_permissions_policy": "1-6-2-2",
+      "missing_referrer_policy": "1-6-2-2",
+      "missing_x_content_type_options": "1-6-3-5",
+      "missing_x_frame_options": "1-6-2-2",
+      "mta_sts_missing": "2-15-3-3",
+      "no_ddos_protection": "2-5-3-9",
+      "no_https_redirect": "2-15-3-3",
+      "outdated_exposed_software": "2-3-3-3",
+      "self_signed_certificate": "2-15-3-3",
+      "spf_missing": "2-4-3-5",
+      "waf_absent": "2-15-3-1",
+      "weak_certificate_key": "2-8-3-1",
+      "weak_tls_cipher": "2-15-3-3"
+    },
+    "full_text": {
+      "directory_listing_enabled": "1-6-2-2",
+      "dkim_missing": "2-4-3-5",
+      "dmarc_missing_or_none": "2-4-3-5",
+      "dns_zone_transfer_open": "2-5-3-7",
+      "dnssec_missing": "2-5-3-7",
+      "eol_software_exposed": "2-3-3-3",
+      "expired_certificate": "2-15-3-3",
+      "exposed_database_port": "2-5-3-5",
+      "exposed_dev_environment": "2-5-3-2",
+      "exposed_internal_port": "2-5-3-5",
+      "exposed_login_panel": "2-2-3-3",
+      "exposed_management_port": "2-5-3-1",
+      "exposed_sensitive_file": "1-6-2-2",
+      "high_risk_port_open": "2-5-3-5",
+      "insecure_cookie": "1-6-3-1",
+      "legacy_tls_version": "2-15-3-3",
+      "missing_csp": "1-6-2-2",
+      "missing_hsts": "2-15-3-3",
+      "missing_permissions_policy": "1-6-2-2",
+      "missing_referrer_policy": "1-6-2-2",
+      "missing_x_content_type_options": "1-6-2-2",
+      "missing_x_frame_options": "1-6-2-2",
+      "mta_sts_missing": "1-6-2-2",
+      "no_ddos_protection": "2-5-3-9",
+      "no_https_redirect": "2-15-3-3",
+      "outdated_exposed_software": "1-6-2-1",
+      "self_signed_certificate": "2-15-3-3",
+      "spf_missing": "2-4-3-5",
+      "waf_absent": "2-15-3-1",
+      "weak_certificate_key": "2-8-3-1",
+      "weak_tls_cipher": "2-15-3-3"
+    },
+    "multi_full_text": {
+      "directory_listing_enabled": [
+        "1-6-2-2",
+        "1-6-3-5",
+        "2-15-3-1"
+      ],
+      "dkim_missing": [
+        "1-10-3-1",
+        "2-4-3-5"
+      ],
+      "dmarc_missing_or_none": [
+        "1-10-3-1",
+        "2-4-3-5"
+      ],
+      "dns_zone_transfer_open": [
+        "2-5-3-7"
+      ],
+      "dnssec_missing": [
+        "2-5-3-7"
+      ],
+      "eol_software_exposed": [
+        "1-6-2-1",
+        "2-3-3-3",
+        "2-10-3-1",
+        "2-10-3-2",
+        "2-10-3-3",
+        "2-10-3-4"
+      ],
+      "expired_certificate": [
+        "1-6-2-1",
+        "2-3-3-3",
+        "2-15-3-3"
+      ],
+      "exposed_database_port": [
+        "2-5-3-5",
+        "2-11-3-1",
+        "1-6-2-2",
+        "2-10-3-1"
+      ],
+      "exposed_dev_environment": [
+        "2-5-3-2"
+      ],
+      "exposed_internal_port": [
+        "2-5-3-1",
+        "2-5-3-5",
+        "2-10-3-1"
+      ],
+      "exposed_login_panel": [
+        "2-2-3-3",
+        "2-2-3-2",
+        "2-2-3-5",
+        "1-6-2-2"
+      ],
+      "exposed_management_port": [
+        "2-5-3-1",
+        "2-5-3-5",
+        "2-2-3-2",
+        "2-10-3-1",
+        "2-10-3-3",
+        "2-11-3-1",
+        "2-12-3-2"
+      ],
+      "exposed_sensitive_file": [
+        "1-6-2-2",
+        "1-6-3-5",
+        "2-3-3-2"
+      ],
+      "high_risk_port_open": [
+        "1-6-2-1",
+        "1-6-2-2",
+        "2-5-3-5",
+        "2-10-3-3"
+      ],
+      "insecure_cookie": [
+        "1-6-2-2",
+        "1-6-3-1",
+        "1-6-3-5"
+      ],
+      "legacy_tls_version": [
+        "2-15-3-3",
+        "2-3-3-3"
+      ],
+      "missing_csp": [
+        "1-6-2-2",
+        "1-6-3-5",
+        "2-15-3-1"
+      ],
+      "missing_hsts": [
+        "1-10-3-3",
+        "2-15-3-3"
+      ],
+      "missing_permissions_policy": [
+        "1-6-2-2",
+        "2-15-3-3"
+      ],
+      "missing_referrer_policy": [
+        "1-6-2-2",
+        "1-6-3-5"
+      ],
+      "missing_x_content_type_options": [
+        "1-6-2-1",
+        "1-6-2-2",
+        "1-6-3-5",
+        "2-10-3-3"
+      ],
+      "missing_x_frame_options": [
+        "1-6-2-2",
+        "1-6-3-5",
+        "2-15-3-1"
+      ],
+      "mta_sts_missing": [
+        "2-15-3-3"
+      ],
+      "no_ddos_protection": [
+        "2-5-3-9"
+      ],
+      "no_https_redirect": [
+        "2-15-3-3"
+      ],
+      "outdated_exposed_software": [
+        "1-6-2-1",
+        "2-3-3-3",
+        "2-10-3-1",
+        "2-10-3-3",
+        "2-10-3-4"
+      ],
+      "self_signed_certificate": [
+        "2-15-3-3",
+        "2-8-3-3"
+      ],
+      "spf_missing": [
+        "2-4-3-5"
+      ],
+      "waf_absent": [
+        "2-15-3-1"
+      ],
+      "weak_certificate_key": [
+        "1-6-2-1",
+        "2-8-3-1",
+        "2-8-3-2",
+        "2-10-3-1",
+        "2-10-3-3"
+      ],
+      "weak_tls_cipher": [
+        "2-15-3-3",
+        "2-8-3-3"
+      ]
+    }
+  },
+  "deepseek-r1:14b": {
+    "title": {
+      "directory_listing_enabled": "2-10-3-1",
+      "dkim_missing": "2-4-3-5",
+      "dmarc_missing_or_none": "2-4-3-5",
+      "dns_zone_transfer_open": "2-5-3-7",
+      "dnssec_missing": "2-5-3-7",
+      "eol_software_exposed": "2-10-3-4",
+      "expired_certificate": "2-10-3-4",
+      "exposed_database_port": "2-5-3-5",
+      "exposed_dev_environment": "2-5-3-2",
+      "exposed_internal_port": "2-5-3-5",
+      "exposed_login_panel": "2-2-3-3",
+      "exposed_management_port": "2-10-3-1",
+      "exposed_sensitive_file": "1-6-2-2",
+      "high_risk_port_open": "2-5-3-5",
+      "insecure_cookie": "2-5-3-3",
+      "legacy_tls_version": "2-10-3-3",
+      "missing_csp": "2-15-3-4",
+      "missing_hsts": "2-15-3-3",
+      "missing_permissions_policy": "1-6-2-2",
+      "missing_referrer_policy": "1-6-2-2",
+      "missing_x_content_type_options": "1-6-2-2",
+      "missing_x_frame_options": "1-6-2-2",
+      "mta_sts_missing": "1-10-3-1",
+      "no_ddos_protection": "2-5-3-9",
+      "no_https_redirect": "2-5-3-3",
+      "outdated_exposed_software": "2-10-3-4",
+      "self_signed_certificate": "1-10-3-3",
+      "spf_missing": "2-4-3-5",
+      "waf_absent": "2-15-3-1",
+      "weak_certificate_key": "2-8-3-2",
+      "weak_tls_cipher": "2-15-3-3"
+    },
+    "full_text": {
+      "directory_listing_enabled": "1-6-2-2",
+      "dkim_missing": "2-4-3-5",
+      "dmarc_missing_or_none": "2-4-3-5",
+      "dns_zone_transfer_open": "2-5-3-7",
+      "dnssec_missing": "2-5-3-7",
+      "eol_software_exposed": "2-10-3-4",
+      "expired_certificate": "2-10-3-4",
+      "exposed_database_port": "2-5-3-5",
+      "exposed_dev_environment": "2-5-3-2",
+      "exposed_internal_port": "2-5-3-5",
+      "exposed_login_panel": "2-2-3-5",
+      "exposed_management_port": "1-6-2-2",
+      "exposed_sensitive_file": "1-6-3-1",
+      "high_risk_port_open": "2-5-3-5",
+      "insecure_cookie": "1-10-3-3",
+      "legacy_tls_version": "2-15-3-3",
+      "missing_csp": "2-15-3-4",
+      "missing_hsts": "1-10-3-3",
+      "missing_permissions_policy": "1-10-3-3",
+      "missing_referrer_policy": "1-10-3-3",
+      "missing_x_content_type_options": "1-10-3-3",
+      "missing_x_frame_options": "1-10-3-3",
+      "mta_sts_missing": "1-10-3-1",
+      "no_ddos_protection": "2-5-3-9",
+      "no_https_redirect": "2-15-3-3",
+      "outdated_exposed_software": "1-6-2-1",
+      "self_signed_certificate": "2-15-3-3",
+      "spf_missing": "2-4-3-5",
+      "waf_absent": "2-15-3-1",
+      "weak_certificate_key": "2-8-3-2",
+      "weak_tls_cipher": "2-15-3-3"
+    },
+    "multi_full_text": {
+      "directory_listing_enabled": [
+        "1-6-2-1",
+        "1-6-2-2",
+        "1-6-3-5"
+      ],
+      "dkim_missing": [
+        "2-4-3-5"
+      ],
+      "dmarc_missing_or_none": [
+        "2-4-3-5"
+      ],
+      "dns_zone_transfer_open": [
+        "1-6-2-1",
+        "2-5-3-7"
+      ],
+      "dnssec_missing": [
+        "2-5-3-7"
+      ],
+      "eol_software_exposed": [
+        "1-6-2-1",
+        "1-6-2-2",
+        "2-10-3-4",
+        "2-10-3-5"
+      ],
+      "expired_certificate": [
+        "1-6-2-2",
+        "1-6-3-5",
+        "2-10-3-4"
+      ],
+      "exposed_database_port": [
+        "1-6-2-1",
+        "2-5-3-5",
+        "1-6-2-2",
+        "2-5-3-6"
+      ],
+      "exposed_dev_environment": [
+        "1-6-2-1",
+        "1-6-2-2",
+        "2-5-3-2"
+      ],
+      "exposed_internal_port": [
+        "2-5-3-5",
+        "2-5-3-6"
+      ],
+      "exposed_login_panel": [
+        "2-2-3-5",
+        "2-2-3-4",
+        "2-5-3-1",
+        "2-5-3-5"
+      ],
+      "exposed_management_port": [
+        "1-6-2-1",
+        "1-6-2-2"
+      ],
+      "exposed_sensitive_file": [
+        "1-6-2-1",
+        "1-6-3-1",
+        "1-6-3-5"
+      ],
+      "high_risk_port_open": [
+        "1-6-2-1",
+        "1-6-2-2",
+        "2-5-3-5"
+      ],
+      "insecure_cookie": [
+        "1-6-3-1",
+        "1-6-2-2",
+        "2-5-3-3",
+        "2-15-3-3"
+      ],
+      "legacy_tls_version": [
+        "1-6-2-2",
+        "2-5-3-3",
+        "2-5-3-8"
+      ],
+      "missing_csp": [
+        "1-10-3-3",
+        "2-5-3-3",
+        "1-6-2-2",
+        "1-6-3-5",
+        "2-5-3-8"
+      ],
+      "missing_hsts": [
+        "1-6-3-3",
+        "2-5-3-8"
+      ],
+      "missing_permissions_policy": [
+        "1-6-2-2",
+        "1-6-3-5",
+        "2-5-3-3"
+      ],
+      "missing_referrer_policy": [
+        "1-6-2-2"
+      ],
+      "missing_x_content_type_options": [
+        "1-6-2-2",
+        "2-5-3-3"
+      ],
+      "missing_x_frame_options": [
+        "1-6-2-1",
+        "1-6-3-1",
+        "2-5-3-1",
+        "2-5-3-8"
+      ],
+      "mta_sts_missing": [
+        "1-10-3-1",
+        "2-4-3-5",
+        "2-5-3-8",
+        "2-8-3-3"
+      ],
+      "no_ddos_protection": [
+        "2-5-3-9"
+      ],
+      "no_https_redirect": [
+        "1-10-3-3",
+        "2-5-3-3",
+        "2-15-3-3"
+      ],
+      "outdated_exposed_software": [
+        "1-6-2-1",
+        "1-6-2-2",
+        "1-6-3-5"
+      ],
+      "self_signed_certificate": [
+        "1-6-2-2",
+        "1-6-3-5",
+        "2-5-3-8",
+        "2-8-3-1",
+        "2-8-3-3"
+      ],
+      "spf_missing": [
+        "2-4-3-5",
+        "2-4-3-1"
+      ],
+      "waf_absent": [
+        "2-5-3-1",
+        "2-5-3-6",
+        "2-15-3-1"
+      ],
+      "weak_certificate_key": [
+        "2-8-3-1",
+        "2-8-3-2",
+        "2-10-3-3"
+      ],
+      "weak_tls_cipher": [
+        "1-6-2-2",
+        "1-6-3-4",
+        "2-5-3-8",
+        "2-8-3-3"
+      ]
+    }
+  },
+  "gpt-oss:20b": {
+    "title": {
+      "directory_listing_enabled": "1-6-2-2",
+      "dkim_missing": "2-4-3-5",
+      "dmarc_missing_or_none": "2-4-3-5",
+      "dns_zone_transfer_open": "2-5-3-7",
+      "dnssec_missing": "2-5-3-7",
+      "eol_software_exposed": "2-10-3-4",
+      "expired_certificate": "1-6-2-2",
+      "exposed_database_port": "2-5-3-5",
+      "exposed_dev_environment": "2-5-3-2",
+      "exposed_internal_port": "2-5-3-5",
+      "exposed_login_panel": "2-2-3-4",
+      "exposed_management_port": "2-5-3-5",
+      "exposed_sensitive_file": "1-6-2-1",
+      "high_risk_port_open": "2-5-3-5",
+      "insecure_cookie": "1-6-3-1",
+      "legacy_tls_version": "2-15-3-3",
+      "missing_csp": "1-6-3-5",
+      "missing_hsts": "1-6-3-5",
+      "missing_permissions_policy": "1-6-3-5",
+      "missing_referrer_policy": "1-6-3-1",
+      "missing_x_content_type_options": "1-6-2-2",
+      "missing_x_frame_options": "1-6-3-5",
+      "mta_sts_missing": "1-10-3-1",
+      "no_ddos_protection": "2-5-3-9",
+      "no_https_redirect": "2-15-3-3",
+      "outdated_exposed_software": "2-10-3-4",
+      "self_signed_certificate": "1-6-3-5",
+      "spf_missing": "2-4-3-5",
+      "waf_absent": "2-15-3-1",
+      "weak_certificate_key": "2-8-3-1",
+      "weak_tls_cipher": "2-15-3-3"
+    },
+    "full_text": {
+      "directory_listing_enabled": "1-6-2-2",
+      "dkim_missing": "2-4-3-5",
+      "dmarc_missing_or_none": "2-4-3-5",
+      "dns_zone_transfer_open": "2-5-3-7",
+      "dnssec_missing": "2-5-3-7",
+      "eol_software_exposed": "2-10-3-4",
+      "expired_certificate": "2-8-3-1",
+      "exposed_database_port": "2-5-3-5",
+      "exposed_dev_environment": "2-5-3-2",
+      "exposed_internal_port": "2-5-3-5",
+      "exposed_login_panel": "2-2-3-4",
+      "exposed_management_port": "2-2-3-2",
+      "exposed_sensitive_file": "1-6-2-2",
+      "high_risk_port_open": "2-5-3-5",
+      "insecure_cookie": "1-6-3-1",
+      "legacy_tls_version": "2-15-3-3",
+      "missing_csp": "1-6-3-5",
+      "missing_hsts": "2-15-3-3",
+      "missing_permissions_policy": "1-6-2-2",
+      "missing_referrer_policy": "1-6-3-5",
+      "missing_x_content_type_options": "1-6-3-5",
+      "missing_x_frame_options": "1-6-3-5",
+      "mta_sts_missing": "1-10-3-1",
+      "no_ddos_protection": "2-5-3-9",
+      "no_https_redirect": "2-15-3-3",
+      "outdated_exposed_software": "2-10-3-4",
+      "self_signed_certificate": "2-15-3-3",
+      "spf_missing": "2-4-3-5",
+      "waf_absent": "2-15-3-1",
+      "weak_certificate_key": "2-8-3-1",
+      "weak_tls_cipher": "2-15-3-3"
+    },
+    "multi_full_text": {
+      "directory_listing_enabled": [
+        "1-6-2-1",
+        "1-6-2-2",
+        "2-10-3-1",
+        "2-11-3-1"
+      ],
+      "dkim_missing": [
+        "2-4-3-5"
+      ],
+      "dmarc_missing_or_none": [
+        "2-4-3-5"
+      ],
+      "dns_zone_transfer_open": [
+        "1-6-2-1",
+        "1-6-2-2",
+        "2-5-3-5",
+        "2-5-3-7",
+        "2-10-3-1"
+      ],
+      "dnssec_missing": [
+        "2-5-3-7"
+      ],
+      "eol_software_exposed": [
+        "1-6-2-1",
+        "1-6-2-2",
+        "2-10-3-1",
+        "2-10-3-2",
+        "2-10-3-3",
+        "2-10-3-4",
+        "2-10-3-5",
+        "2-3-3-3"
+      ],
+      "expired_certificate": [
+        "2-8-3-1",
+        "2-8-3-2",
+        "2-8-3-3",
+        "2-15-3-3"
+      ],
+      "exposed_database_port": [
+        "2-5-3-5",
+        "2-5-3-1",
+        "1-6-2-1",
+        "1-6-2-2",
+        "1-6-3-5",
+        "2-10-3-1",
+        "2-11-3-1"
+      ],
+      "exposed_dev_environment": [
+        "2-5-3-1",
+        "2-5-3-2"
+      ],
+      "exposed_internal_port": [
+        "2-5-3-5",
+        "2-10-3-1",
+        "2-10-3-4",
+        "2-11-3-1"
+      ],
+      "exposed_login_panel": [
+        "1-6-2-1",
+        "1-6-2-2",
+        "2-10-3-1",
+        "2-15-3-1",
+        "2-15-3-5",
+        "2-2-3-4",
+        "2-2-3-2",
+        "2-5-3-1",
+        "2-5-3-2"
+      ],
+      "exposed_management_port": [
+        "2-5-3-1",
+        "2-5-3-5",
+        "2-2-3-2",
+        "2-2-3-4",
+        "1-6-2-1",
+        "1-6-2-2",
+        "2-10-3-1",
+        "2-11-3-1",
+        "2-12-3-2",
+        "2-12-3-4",
+        "2-15-3-5",
+        "1-5-3-2",
+        "2-15-3-4"
+      ],
+      "exposed_sensitive_file": [
+        "1-6-2-1",
+        "1-6-2-2",
+        "1-6-3-1",
+        "1-6-3-5",
+        "2-10-3-1"
+      ],
+      "high_risk_port_open": [
+        "2-5-3-5",
+        "1-6-2-1",
+        "1-6-2-2",
+        "2-10-3-1",
+        "2-10-3-4",
+        "2-5-3-1",
+        "2-11-3-2"
+      ],
+      "insecure_cookie": [
+        "1-6-3-1",
+        "1-6-3-5"
+      ],
+      "legacy_tls_version": [
+        "1-6-2-1",
+        "1-6-2-2",
+        "1-6-3-5",
+        "2-10-3-1",
+        "2-10-3-4",
+        "2-15-3-3",
+        "2-5-3-5"
+      ],
+      "missing_csp": [
+        "1-6-2-2",
+        "1-6-3-1",
+        "1-6-3-5"
+      ],
+      "missing_hsts": [
+        "1-6-2-2",
+        "1-6-3-5",
+        "2-15-3-3"
+      ],
+      "missing_permissions_policy": [
+        "1-6-2-2",
+        "1-6-3-5",
+        "2-10-3-1",
+        "2-11-3-1"
+      ],
+      "missing_referrer_policy": [
+        "1-6-3-1",
+        "1-6-3-5"
+      ],
+      "missing_x_content_type_options": [
+        "1-6-2-2",
+        "1-6-3-5"
+      ],
+      "missing_x_frame_options": [
+        "1-6-2-1",
+        "1-6-2-2",
+        "1-6-3-5",
+        "2-10-3-1",
+        "2-11-3-1"
+      ],
+      "mta_sts_missing": [
+        "1-10-3-1",
+        "2-4-3-5"
+      ],
+      "no_ddos_protection": [
+        "2-5-3-9"
+      ],
+      "no_https_redirect": [
+        "2-15-3-3"
+      ],
+      "outdated_exposed_software": [
+        "1-6-2-1",
+        "1-6-2-2",
+        "1-6-3-5",
+        "2-10-3-1",
+        "2-10-3-4",
+        "2-10-3-3",
+        "2-3-3-3"
+      ],
+      "self_signed_certificate": [
+        "2-8-3-1",
+        "2-8-3-2",
+        "2-8-3-3",
+        "2-15-3-3"
+      ],
+      "spf_missing": [
+        "2-4-3-5"
+      ],
+      "waf_absent": [
+        "2-15-3-1"
+      ],
+      "weak_certificate_key": [
+        "1-6-2-1",
+        "2-10-3-1",
+        "2-8-3-1",
+        "2-8-3-2"
+      ],
+      "weak_tls_cipher": [
+        "1-6-2-1",
+        "1-6-2-2",
+        "1-6-3-5",
+        "2-8-3-1",
+        "2-8-3-3",
+        "2-15-3-3",
+        "2-10-3-1",
+        "2-10-3-4",
+        "2-11-3-1",
+        "2-11-3-2"
+      ]
+    }
+  },
+  "mistral-small:24b": {
+    "title": {
+      "directory_listing_enabled": "2-10-3-1",
+      "dkim_missing": "2-4-3-5",
+      "dmarc_missing_or_none": "2-4-3-5",
+      "dns_zone_transfer_open": "2-5-3-7",
+      "dnssec_missing": "2-5-3-7",
+      "eol_software_exposed": "2-10-3-4",
+      "expired_certificate": "2-10-3-4",
+      "exposed_database_port": "2-10-3-3",
+      "exposed_dev_environment": "2-5-3-2",
+      "exposed_internal_port": "2-5-3-5",
+      "exposed_login_panel": "2-2-3-5",
+      "exposed_management_port": "2-5-3-5",
+      "exposed_sensitive_file": "2-10-3-3",
+      "high_risk_port_open": "2-5-3-5",
+      "insecure_cookie": "1-6-2-2",
+      "legacy_tls_version": "2-15-3-3",
+      "missing_csp": "2-5-3-4",
+      "missing_hsts": "1-10-3-3",
+      "missing_permissions_policy": "1-10-3-3",
+      "missing_referrer_policy": "2-5-3-3",
+      "missing_x_content_type_options": "1-6-2-2",
+      "missing_x_frame_options": "1-6-2-2",
+      "mta_sts_missing": "2-4-3-5",
+      "no_ddos_protection": "2-5-3-9",
+      "no_https_redirect": "2-5-3-3",
+      "outdated_exposed_software": "2-10-3-4",
+      "self_signed_certificate": "2-8-3-2",
+      "spf_missing": "2-4-3-5",
+      "waf_absent": "2-15-3-1",
+      "weak_certificate_key": "2-8-3-2",
+      "weak_tls_cipher": "2-8-3-3"
+    },
+    "full_text": {
+      "directory_listing_enabled": "1-6-2-1",
+      "dkim_missing": "2-4-3-5",
+      "dmarc_missing_or_none": "2-4-3-5",
+      "dns_zone_transfer_open": "2-5-3-7",
+      "dnssec_missing": "2-5-3-7",
+      "eol_software_exposed": "2-10-3-4",
+      "expired_certificate": "2-10-3-4",
+      "exposed_database_port": "2-5-3-5",
+      "exposed_dev_environment": "2-5-3-2",
+      "exposed_internal_port": "2-5-3-5",
+      "exposed_login_panel": "2-2-3-5",
+      "exposed_management_port": "2-5-3-9",
+      "exposed_sensitive_file": "1-6-3-2",
+      "high_risk_port_open": "2-5-3-5",
+      "insecure_cookie": "2-15-3-3",
+      "legacy_tls_version": "2-15-3-3",
+      "missing_csp": "2-15-3-3",
+      "missing_hsts": "2-15-3-3",
+      "missing_permissions_policy": "1-10-3-3",
+      "missing_referrer_policy": "1-10-3-3",
+      "missing_x_content_type_options": "1-6-2-2",
+      "missing_x_frame_options": "1-6-2-2",
+      "mta_sts_missing": "2-4-3-5",
+      "no_ddos_protection": "2-5-3-9",
+      "no_https_redirect": "2-15-3-3",
+      "outdated_exposed_software": "2-10-3-4",
+      "self_signed_certificate": "2-15-3-3",
+      "spf_missing": "2-4-3-5",
+      "waf_absent": "2-15-3-1",
+      "weak_certificate_key": "2-8-3-2",
+      "weak_tls_cipher": "2-15-3-3"
+    },
+    "multi_full_text": {
+      "directory_listing_enabled": [
+        "2-10-3-1",
+        "2-10-3-2",
+        "2-10-3-3",
+        "2-15-3-4"
+      ],
+      "dkim_missing": [
+        "2-4-3-5"
+      ],
+      "dmarc_missing_or_none": [
+        "2-4-3-5"
+      ],
+      "dns_zone_transfer_open": [
+        "2-10-3-1",
+        "2-10-3-2",
+        "2-10-3-3",
+        "2-5-3-7"
+      ],
+      "dnssec_missing": [
+        "2-5-3-7",
+        "2-10-3-1"
+      ],
+      "eol_software_exposed": [
+        "2-10-3-4",
+        "2-10-3-5"
+      ],
+      "expired_certificate": [
+        "2-10-3-4",
+        "2-15-3-3"
+      ],
+      "exposed_database_port": [
+        "2-10-3-1",
+        "2-10-3-2",
+        "2-10-3-3",
+        "2-5-3-5"
+      ],
+      "exposed_dev_environment": [
+        "2-10-3-4",
+        "2-5-3-2"
+      ],
+      "exposed_internal_port": [
+        "2-10-3-1",
+        "2-10-3-2",
+        "2-10-3-3",
+        "2-5-3-5"
+      ],
+      "exposed_login_panel": [
+        "2-10-3-5",
+        "2-11-3-1",
+        "2-14-3-1",
+        "2-15-3-5"
+      ],
+      "exposed_management_port": [
+        "2-10-3-4",
+        "2-15-3-3"
+      ],
+      "exposed_sensitive_file": [
+        "1-6-3-2",
+        "1-9-4-2",
+        "2-10-3-1",
+        "2-10-3-5"
+      ],
+      "high_risk_port_open": [
+        "2-10-3-1",
+        "2-10-3-2",
+        "2-10-3-3",
+        "2-5-3-5"
+      ],
+      "insecure_cookie": [
+        "1-6-3-5",
+        "2-10-3-4"
+      ],
+      "legacy_tls_version": [
+        "2-10-3-4",
+        "2-5-3-9"
+      ],
+      "missing_csp": [
+        "1-6-2-1",
+        "1-9-4-2",
+        "2-5-3-3"
+      ],
+      "missing_hsts": [
+        "2-10-3-4",
+        "2-5-3-9"
+      ],
+      "missing_permissions_policy": [
+        "2-10-3-4",
+        "2-5-3-9"
+      ],
+      "missing_referrer_policy": [
+        "1-6-2-1",
+        "1-6-3-5",
+        "2-10-3-4",
+        "2-10-3-5",
+        "2-11-3-1",
+        "2-11-3-2",
+        "2-15-3-3"
+      ],
+      "missing_x_content_type_options": [
+        "1-6-2-1",
+        "1-9-4-2",
+        "2-3-3-3"
+      ],
+      "missing_x_frame_options": [
+        "2-10-3-1",
+        "2-15-3-3"
+      ],
+      "mta_sts_missing": [
+        "2-10-3-4",
+        "2-5-3-9"
+      ],
+      "no_ddos_protection": [
+        "2-10-3-5",
+        "2-11-3-1",
+        "2-12-1-2",
+        "2-15-3-1"
+      ],
+      "no_https_redirect": [
+        "2-10-3-1",
+        "2-15-3-3"
+      ],
+      "outdated_exposed_software": [
+        "2-10-3-4",
+        "2-10-3-5"
+      ],
+      "self_signed_certificate": [
+        "2-10-3-5",
+        "2-15-3-3"
+      ],
+      "spf_missing": [
+        "2-4-3-5",
+        "2-10-3-1"
+      ],
+      "waf_absent": [
+        "2-10-3-5",
+        "2-11-3-1",
+        "2-12-3-4",
+        "2-15-3-1"
+      ],
+      "weak_certificate_key": [
+        "2-10-3-4",
+        "2-8-3-1"
+      ],
+      "weak_tls_cipher": [
+        "2-10-3-4",
+        "2-15-3-3"
+      ]
+    }
+  },
+  "qwen3:32b": {
+    "title": {
+      "directory_listing_enabled": "1-6-2-2",
+      "dkim_missing": "2-4-3-5",
+      "dmarc_missing_or_none": "1-10-3-1",
+      "dns_zone_transfer_open": "2-5-3-7",
+      "dnssec_missing": "2-5-3-7",
+      "eol_software_exposed": "1-6-2-1",
+      "expired_certificate": "2-15-3-3",
+      "exposed_database_port": "2-5-3-5",
+      "exposed_dev_environment": "2-5-3-2",
+      "exposed_internal_port": "2-5-3-5",
+      "exposed_login_panel": "2-2-3-3",
+      "exposed_management_port": "2-5-3-5",
+      "exposed_sensitive_file": "1-6-2-1",
+      "high_risk_port_open": "2-5-3-5",
+      "insecure_cookie": "1-6-3-1",
+      "legacy_tls_version": "2-15-3-3",
+      "missing_csp": "1-6-2-2",
+      "missing_hsts": "2-15-3-3",
+      "missing_permissions_policy": "1-6-2-2",
+      "missing_referrer_policy": "2-15-3-3",
+      "missing_x_content_type_options": "1-6-2-2",
+      "missing_x_frame_options": "2-15-3-1",
+      "mta_sts_missing": "2-15-3-3",
+      "no_ddos_protection": "2-5-3-9",
+      "no_https_redirect": "2-15-3-3",
+      "outdated_exposed_software": "2-3-3-3",
+      "self_signed_certificate": "2-8-3-1",
+      "spf_missing": "2-4-3-5",
+      "waf_absent": "2-15-3-1",
+      "weak_certificate_key": "2-8-3-1",
+      "weak_tls_cipher": "2-15-3-3"
+    },
+    "full_text": {
+      "directory_listing_enabled": "1-6-2-2",
+      "dkim_missing": "2-4-3-5",
+      "dmarc_missing_or_none": "2-4-3-5",
+      "dns_zone_transfer_open": "2-5-3-7",
+      "dnssec_missing": "2-5-3-7",
+      "eol_software_exposed": "2-10-3-1",
+      "expired_certificate": "2-8-3-2",
+      "exposed_database_port": "2-5-3-5",
+      "exposed_dev_environment": "2-5-3-2",
+      "exposed_internal_port": "2-5-3-5",
+      "exposed_login_panel": "2-2-3-3",
+      "exposed_management_port": "2-5-3-5",
+      "exposed_sensitive_file": "1-6-2-1",
+      "high_risk_port_open": "2-5-3-5",
+      "insecure_cookie": "1-6-3-1",
+      "legacy_tls_version": "2-15-3-3",
+      "missing_csp": "1-6-3-1",
+      "missing_hsts": "2-15-3-3",
+      "missing_permissions_policy": "1-6-2-2",
+      "missing_referrer_policy": "1-6-3-5",
+      "missing_x_content_type_options": "1-6-3-5",
+      "missing_x_frame_options": "1-6-3-5",
+      "mta_sts_missing": "2-4-3-5",
+      "no_ddos_protection": "2-5-3-9",
+      "no_https_redirect": "2-15-3-3",
+      "outdated_exposed_software": "2-3-3-3",
+      "self_signed_certificate": "2-15-3-3",
+      "spf_missing": "2-4-3-5",
+      "waf_absent": "2-15-3-1",
+      "weak_certificate_key": "2-8-3-1",
+      "weak_tls_cipher": "2-8-3-1"
+    }
+  }
+}

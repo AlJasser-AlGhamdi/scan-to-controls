@@ -1,0 +1,40 @@
+{
+  "title": "Tiered-evidence toolkit, control classification and evaluation artefacts for Saudi SME cybersecurity compliance",
+  "description": "Artefacts for the article 'An automated tiered-evidence toolkit for cybersecurity compliance assessment in Saudi SMEs': the evidence-tier classification of all 203 ECC-2:2024 and NCNICC-1:2025 control rows keyed by control identifier, the toolkit with its 31 detectors, the fixed detector-to-control mapping, the evidence-precedence scorer and the contradiction check, the deterministic generator for the two synthetic cohorts of 100 Saudi Class B firms each, and every evaluation output reported in the article. The legally binding Arabic control text is withheld pending permission from the National Cybersecurity Authority; the openly published English wording, the control identifiers and the tier labels are included, and the identifiers resolve against the official NCA publications.",
+  "upload_type": "software",
+  "creators": [
+    {
+      "name": "AlGhamdi, AlJasser",
+      "affiliation": "Department of Information Systems, Faculty of Computing and Information Technology, King Abdulaziz University, Jeddah, Saudi Arabia",
+      "orcid": "0009-0006-4342-7452"
+    },
+    {
+      "name": "Almasre, Miada",
+      "affiliation": "Department of Information Technology, Faculty of Computing and Information Technology, King Abdulaziz University, Jeddah, Saudi Arabia",
+      "orcid": "0000-0002-4071-277X"
+    },
+    {
+      "name": "Al-Malki, Norah",
+      "affiliation": "Department of Modern Languages and their Literatures, College of Arts and Humanities, King Abdulaziz University, Jeddah, Saudi Arabia",
+      "orcid": "0000-0002-1497-1356"
+    }
+  ],
+  "keywords": [
+    "Saudi cybersecurity",
+    "ECC-2:2024",
+    "NCNICC-1:2025",
+    "SME security",
+    "compliance evidence",
+    "external attack surface",
+    "evidence-tier classification",
+    "security assessment"
+  ],
+  "related_identifiers": [
+    {
+      "relation": "isSupplementTo",
+      "identifier": "https://github.com/AlJasser-AlGhamdi/scan-to-controls",
+      "resource_type": "software"
+    }
+  ],
+  "access_right": "open"
+}

@@ -1,0 +1,48 @@
+{
+  "model": "qwen2.5:7b",
+  "model_digest": "845dbda0ea48ed749caafd9e6037047aa19acfcfd82e704d7ca97d631a0b697e",
+  "condition": "full public control text, single-pick, temperature 0, fixed seed 1337",
+  "without_boundary": {
+    "method": "zero-shot LLM (qwen2.5:7b) over full public control text, without boundary",
+    "micro_precision": 0.14570637119113575,
+    "micro_recall": 0.11965423111919928,
+    "micro_f1": 0.131401448913315,
+    "curated_f1": 1.0,
+    "n_findings": 1857,
+    "note": "representative-model local probe (not the 12-model ladder); constrained to catalog ids",
+    "unanswered_checks": 2
+  },
+  "with_boundary": {
+    "method": "zero-shot LLM (qwen2.5:7b) over full public control text, with boundary",
+    "micro_precision": 0.17543859649122806,
+    "micro_recall": 0.1410373066424022,
+    "micro_f1": 0.15636822194199243,
+    "curated_f1": 1.0,
+    "n_findings": 1857,
+    "note": "representative-model local probe (not the 12-model ladder); constrained to catalog ids",
+    "unanswered_checks": 1
+  },
+  "loo_fewshot": {
+    "method": "leave-one-out few-shot LLM (qwen2.5:7b): every other check's mapping shown, the target control's own held out (with all sibling rows sharing it)",
+    "micro_precision": 0.0,
+    "micro_recall": 0.0,
+    "micro_f1": 0.0,
+    "curated_f1": 1.0,
+    "n_findings": 1857,
+    "note": "leakage-bounded few-shot; the target control's mapping is never in the prompt, so a jump toward the single-pick ceiling would be leakage. It recovers nothing instead.",
+    "unanswered_checks": 0
+  },
+  "delta_micro_f1": 0.025,
+  "boundary_text": "Context: an external scan observes only what an unauthenticated observer of a firm's internet facing assets can determine, namely the contents of published DNS records, the negotiated parameters of a transport layer session, which ports answer, which response headers a web server returns, and which services and versions those responses reveal. The finding you are given was produced by such a scan, so it evidences a control this external observation settles.",
+  "n_findings": 1857,
+  "note": "Indicative observation-boundary ablation. One representative open-weight model (qwen2.5:7b, the ladder's zero-shot LLM) maps each external check to the ECC-2:2024 subcontrol it evidences, over the full public control text, with and without the paper's observation-boundary definition in the prompt. Not part of `make reproduce` and not the 12-model ladder of Appendix B. qwen2.5:14b would not load in a foreground budget on this 4-core GPU-less host, so 7B (already in the ladder) is the representative model.",
+  "provenance": {
+    "seed": 1337,
+    "temperature": 0.0,
+    "num_ctx": 8192,
+    "n_checks": 31,
+    "n_candidate_controls": 95,
+    "host": "CPU-only, 4 cores (arm64)",
+    "run_date_utc": "2026-08-16T15:52:39Z"
+  }
+}
