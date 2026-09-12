@@ -2,6 +2,7 @@ An automated tiered-evidence toolkit for cybersecurity compliance assessment
 in Saudi SMEs
 
 Code and data behind the paper.
+Archived at https://doi.org/10.5281/zenodo.22724989
 
 AlJasser AlGhamdi, Miada Almasre, Norah Al-Malki
 King Abdulaziz University, Jeddah, Saudi Arabia
