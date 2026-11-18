@@ -11,6 +11,7 @@ from p2c.evaluation.ablation import check_query_text, subcontrol_entries, subcon
 from p2c.evaluation.synthetic import expert_key, generate_cases
 
 ARABIC = re.compile(r"[؀-ۿݐ-ݿ]")
+PREDICTIONS = Path(__file__).resolve().parents[1] / "evaluation" / "baseline_ladder_predictions.json"
 NOTE = (
     "ATLAS ECC-mapping baseline, portable (synthetic only, no real data). Score = micro-F1 of "
     "predicted control id vs gold, pooled over checks weighted by observed frequency in the "
@@ -26,11 +27,13 @@ def build(n: int = 100, seed: int = 1337) -> dict:
 
     key = expert_key()
     freq = Counter(inj.check for c in generate_cases(n, seed=seed) for inj in c.injected)
+    recorded = json.loads(PREDICTIONS.read_text(encoding="utf-8"))
+    shown = set(next(iter(next(iter(recorded.values())).values())))
     checks = []
     for check in sorted(key, key=lambda c: c.value):
         gold = sorted(key[check])
         count = freq.get(check, 0)
-        if not gold or not count:
+        if not gold or not count or check.value not in shown:
             continue
         checks.append(
             {

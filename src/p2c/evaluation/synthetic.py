@@ -45,6 +45,7 @@ CATEGORIES: dict[str, tuple[CheckId, ...]] = {
         CheckId.EXPOSED_MANAGEMENT_PORT,
         CheckId.HIGH_RISK_PORT_OPEN,
         CheckId.EXPOSED_DATABASE_PORT,
+        CheckId.EXPOSED_PRINTER_SERVICE,
     ),
     "software": (CheckId.OUTDATED_EXPOSED_SOFTWARE,),
     "eol": (CheckId.EOL_SOFTWARE_EXPOSED,),
@@ -92,6 +93,7 @@ _SUBSET_PROB: dict[CheckId, float] = {
     CheckId.EXPOSED_MANAGEMENT_PORT: 0.50,
     CheckId.HIGH_RISK_PORT_OPEN: 0.50,
     CheckId.EXPOSED_DATABASE_PORT: 0.25,
+    CheckId.EXPOSED_PRINTER_SERVICE: 0.10,
     CheckId.OUTDATED_EXPOSED_SOFTWARE: 1.0,
     CheckId.EOL_SOFTWARE_EXPOSED: 1.0,
     CheckId.EXPOSED_LOGIN_PANEL: 1.0,
@@ -126,6 +128,7 @@ SENSITIVITY: dict[CheckId, float] = {
     CheckId.EXPOSED_MANAGEMENT_PORT: 0.95,
     CheckId.HIGH_RISK_PORT_OPEN: 0.95,
     CheckId.EXPOSED_DATABASE_PORT: 0.95,
+    CheckId.EXPOSED_PRINTER_SERVICE: 0.95,
     CheckId.OUTDATED_EXPOSED_SOFTWARE: 0.72,
     CheckId.EOL_SOFTWARE_EXPOSED: 0.70,
     CheckId.EXPOSED_LOGIN_PANEL: 0.88,
@@ -159,6 +162,7 @@ FALSE_ALARM: dict[CheckId, float] = {
     CheckId.EXPOSED_MANAGEMENT_PORT: 0.04,
     CheckId.HIGH_RISK_PORT_OPEN: 0.04,
     CheckId.EXPOSED_DATABASE_PORT: 0.04,
+    CheckId.EXPOSED_PRINTER_SERVICE: 0.04,
     CheckId.OUTDATED_EXPOSED_SOFTWARE: 0.06,
     CheckId.EOL_SOFTWARE_EXPOSED: 0.08,
     CheckId.EXPOSED_LOGIN_PANEL: 0.08,
@@ -171,6 +175,7 @@ FALSE_ALARM: dict[CheckId, float] = {
     CheckId.DNS_ZONE_TRANSFER_OPEN: 0.02,
     CheckId.NO_DDOS_PROTECTION: 0.20,
 }
+
 LOW_CONFIDENCE_FA = 0.08
 LOW_CONFIDENCE_CHECKS: frozenset[CheckId] = frozenset(
     c for c, v in FALSE_ALARM.items() if v >= LOW_CONFIDENCE_FA
@@ -218,11 +223,13 @@ _FALSE_ALARM_CHECKS: tuple[CheckId, ...] = (
     CheckId.EXPOSED_LOGIN_PANEL,
     CheckId.EXPOSED_DEV_ENVIRONMENT,
     CheckId.DNS_ZONE_TRANSFER_OPEN,
+    CheckId.EXPOSED_PRINTER_SERVICE,
 )
 
 
 @dataclass(frozen=True)
 class Sector:
+
     name: str
     prevalence: float
     weights: dict[str, float]
@@ -261,6 +268,7 @@ SECTORS: tuple[Sector, ...] = (
 
 @dataclass(frozen=True)
 class SizeBand:
+
     name: str
     share: float
     min_subs: int
@@ -279,6 +287,7 @@ _POSTURE_NAMES: tuple[str, ...] = ("strong", "moderate", "weak")
 
 @dataclass(frozen=True)
 class Posture:
+
     name: str
     share: float
     mult: float
@@ -294,7 +303,7 @@ def _marginal_posture_shares() -> dict[str, float]:
 
 _MARGINAL_POSTURE = _marginal_posture_shares()
 POSTURES: tuple[Posture, ...] = tuple(
-    Posture(name, round(_MARGINAL_POSTURE[name], 4), POSTURE_MULT[name]) for name in _POSTURE_NAMES
+    Posture(name, round(_MARGINAL_POSTURE[name], 6), POSTURE_MULT[name]) for name in _POSTURE_NAMES
 )
 _POSTURE_BY_NAME: dict[str, Posture] = {p.name: p for p in POSTURES}
 
@@ -339,12 +348,14 @@ class InjectedFinding:
 
 @dataclass(frozen=True)
 class InternalAssessment:
+
     control_id: str
     compliant: bool
 
 
 @dataclass(frozen=True)
 class GroundTruth:
+
     control_ids: frozenset[str]
     observed_ids: frozenset[str]
     per_asset: dict[str, frozenset[str]] = field(default_factory=dict)
@@ -365,7 +376,6 @@ class EvalCase:
     baseline_seconds: float
     internal_evidence: tuple[InternalAssessment, ...] = ()
     forced_true_fallback: bool = False
-    forced_observe_fallback: bool = False
     scan_conditions: dict[str, str] = field(default_factory=dict)
     scanner_competence: float = 1.0
 
@@ -516,7 +526,7 @@ P_INTERNAL_GAP = 0.25
 @lru_cache(maxsize=1)
 def off_surface_pools() -> tuple[tuple[str, ...], tuple[str, ...]]:
     from p2c.scoring.assemble import TIER1_CHECKABLE
-    from p2c.scoring.contradictions import control_related
+    from p2c.scoring.contradictions import hierarchy_related
 
     rows = json.loads(_OVERLAY_PATH.read_text(encoding="utf-8"))["controls"]
     pools: dict[int, list[str]] = {2: [], 3: []}
@@ -525,7 +535,7 @@ def off_surface_pools() -> tuple[tuple[str, ...], tuple[str, ...]]:
         if tier in pools:
             pools[tier].append(str(row["id"]))
     for tier, ids in pools.items():
-        reachable = [c for c in ids if any(control_related(c, t) for t in TIER1_CHECKABLE)]
+        reachable = [c for c in ids if any(hierarchy_related(c, t) for t in TIER1_CHECKABLE)]
         if reachable:
             raise ValueError(f"off-surface tier-{tier} pool holds scan-reachable controls {reachable}")
     return tuple(sorted(pools[2])), tuple(sorted(pools[3]))
@@ -607,15 +617,16 @@ def _observe(
     apex: str,
     conditions: dict[str, str],
     competence: float,
-) -> tuple[list[InjectedFinding], bool]:
+) -> list[InjectedFinding]:
     true_present = {(i.asset, i.check) for i in true}
     observed: list[InjectedFinding] = []
     for inj in true:
         if rng.random() < _effective_sensitivity(inj.check, inj.asset, conditions, competence):
             observed.append(inj)
+    extra = tuple(c for c, rate in FALSE_ALARM.items() if rate > 0 and c not in _FALSE_ALARM_CHECKS)
     for host in hosts:
         label = _host_label(host, apex)
-        for check in _FALSE_ALARM_CHECKS:
+        for check in _FALSE_ALARM_CHECKS + extra:
             if check in _APEX_ONLY_CHECKS and host != apex:
                 continue
             if check in _DEV_ONLY_CHECKS and label not in _DEV_LABELS:
@@ -627,10 +638,7 @@ def _observe(
                 fa *= _condition_factor(check, conditions[host])
             if rng.random() < fa:
                 observed.append(InjectedFinding(asset=host, check=check))
-    used_fallback = bool(true) and not observed
-    if used_fallback:
-        observed.append(true[0])
-    return _dedup(observed), used_fallback
+    return _dedup(observed)
 
 
 def _generate_case(
@@ -657,7 +665,7 @@ def _generate_case(
     forced_true = False
     if not clean:
         true, forced_true = _true_issues(rng, sector, hosts, apex, posture.mult)
-    observed, forced_observe = _observe(rng, true, hosts, apex, conditions, competence)
+    observed = _observe(rng, true, hosts, apex, conditions, competence)
     true_control_ids = _control_ids_for(true, key)
     attestations = _attestations(rng, f"eval-{index:03d}", true_control_ids, all_controls)
     internal, off_surface = draw_off_surface_evidence(rng, f"eval-{index:03d}", posture.name)
@@ -689,7 +697,6 @@ def _generate_case(
         baseline_seconds=baseline,
         internal_evidence=internal,
         forced_true_fallback=forced_true,
-        forced_observe_fallback=forced_observe,
         scan_conditions=conditions,
         scanner_competence=competence,
     )

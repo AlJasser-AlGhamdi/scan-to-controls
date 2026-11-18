@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import re
 from dataclasses import dataclass
 from typing import Protocol
 
@@ -40,6 +41,7 @@ class EmailDnsResult:
 
     checks: tuple[CheckId, ...] = ()
     indeterminate: tuple[str, ...] = ()
+    dkim_found: bool = False
 
 
 def _is_definitive_absence(exc: BaseException) -> bool:
@@ -47,17 +49,28 @@ def _is_definitive_absence(exc: BaseException) -> bool:
 
 
 def _dmarc_policy(records: tuple[str, ...]) -> str | None:
-    for record in records:
-        if "v=dmarc1" in record.lower():
-            for part in record.split(";"):
-                key, _, value = part.strip().partition("=")
-                if key.strip().lower() == "p":
-                    return value.strip().lower()
+    found = [r for r in records if r.strip().lower().replace(" ", "").startswith("v=dmarc1")]
+    if len(found) != 1:
+        return None
+    for part in found[0].split(";"):
+        key, _, value = part.strip().partition("=")
+        if key.strip().lower() == "p":
+            return value.strip().lower()
     return None
 
 
+def _spf_usable(records: tuple[str, ...]) -> bool:
+    found = [r.strip() for r in records if re.match(r"(?i)v=spf1(?:\s|$)", r.strip())]
+    if len(found) != 1:
+        return False
+    return bool(re.search(r"(?i)(?:^|\s)[-~]all(?:\s|$)|(?:^|\s)redirect=", found[0]))
+
+
+_DKIM_KEY = re.compile(r"(?i)(?:^|;)\s*p\s*=\s*[^;\s]")
+
+
 def _has_dkim_key(records: tuple[str, ...]) -> bool:
-    return any("v=dkim1" in r.lower() or "p=" in r.lower() for r in records)
+    return any(_DKIM_KEY.search(r) for r in records)
 
 
 class EmailDnsInspector:
@@ -91,7 +104,7 @@ class EmailDnsInspector:
 
         checks: list[CheckId] = []
         spf = read(domain)
-        if spf.resolved and not any("v=spf1" in record.lower() for record in spf.records):
+        if spf.resolved and not _spf_usable(spf.records):
             checks.append(CheckId.SPF_MISSING)
 
         dmarc = read(f"_dmarc.{domain}")
@@ -110,4 +123,4 @@ class EmailDnsInspector:
                 break
         if not dkim_found and dkim_fully_read:
             checks.append(CheckId.DKIM_MISSING)
-        return EmailDnsResult(checks=tuple(checks), indeterminate=tuple(indeterminate))
+        return EmailDnsResult(checks=tuple(checks), indeterminate=tuple(indeterminate), dkim_found=dkim_found)

@@ -7,7 +7,6 @@ info:
   tags: atlas,headers,misconfig,ecc
   metadata:
     atlas-check-id: missing_csp
-    control-id: "2-15-3-3"
 http:
   - method: GET
     path:

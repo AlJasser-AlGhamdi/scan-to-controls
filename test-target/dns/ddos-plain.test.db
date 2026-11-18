@@ -1,0 +1,6 @@
+$ORIGIN ddos-plain.test.
+$TTL 3600
+@    IN SOA ns1.ddos-plain.test. hostmaster.ddos-plain.test. 2026101401 7200 3600 1209600 3600
+@    IN NS  ns1.ddos-plain.test.
+ns1  IN A   127.0.0.1
+www  IN A   10.0.0.20

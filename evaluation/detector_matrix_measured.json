@@ -14,12 +14,12 @@
         "missing_x_frame_options"
       ],
       "fired": {
-        "missing_referrer_policy": 60,
-        "missing_permissions_policy": 60,
-        "missing_x_frame_options": 60,
-        "missing_x_content_type_options": 60,
         "missing_hsts": 60,
-        "missing_csp": 60
+        "missing_x_content_type_options": 60,
+        "missing_csp": 60,
+        "missing_permissions_policy": 60,
+        "missing_referrer_policy": 60,
+        "missing_x_frame_options": 60
       }
     },
     "http /clean": {
@@ -77,7 +77,7 @@
       "fired": {}
     },
     "tls :9443": {
-      "case": "self-signed RSA-2048",
+      "case": "self-signed RSA-3072",
       "trials": 60,
       "unreadable": 0,
       "expected": [
@@ -85,17 +85,19 @@
       ],
       "fired": {
         "self_signed_certificate": 60
-      }
+      },
+      "unreadable_by_design": null
     },
     "tls :9444": {
       "case": "private-CA leaf, untrusted but not self-signed",
       "trials": 60,
       "unreadable": 0,
       "expected": [],
-      "fired": {}
+      "fired": {},
+      "unreadable_by_design": null
     },
     "tls :9445": {
-      "case": "self-signed RSA-1024",
+      "case": "self-signed RSA-2048, below the NCS line",
       "trials": 60,
       "unreadable": 0,
       "expected": [
@@ -105,7 +107,8 @@
       "fired": {
         "weak_certificate_key": 60,
         "self_signed_certificate": 60
-      }
+      },
+      "unreadable_by_design": null
     },
     "tls :9446": {
       "case": "self-signed RSA-4096",
@@ -116,7 +119,8 @@
       ],
       "fired": {
         "self_signed_certificate": 60
-      }
+      },
+      "unreadable_by_design": null
     },
     "tls :9447": {
       "case": "self-signed EC P-256",
@@ -127,7 +131,8 @@
       ],
       "fired": {
         "self_signed_certificate": 60
-      }
+      },
+      "unreadable_by_design": null
     },
     "tls :9448": {
       "case": "self-signed EC secp192r1",
@@ -137,10 +142,11 @@
         "self_signed_certificate",
         "weak_certificate_key"
       ],
-      "fired": {}
+      "fired": {},
+      "unreadable_by_design": "declared blind spot: the scanner's TLS stack cannot negotiate this curve"
     },
     "tls :9449": {
-      "case": "expired self-signed RSA-2048",
+      "case": "expired self-signed RSA-3072",
       "trials": 60,
       "unreadable": 0,
       "expected": [
@@ -148,12 +154,529 @@
         "self_signed_certificate"
       ],
       "fired": {
-        "self_signed_certificate": 60,
-        "expired_certificate": 60
-      }
+        "expired_certificate": 60,
+        "self_signed_certificate": 60
+      },
+      "unreadable_by_design": null
+    },
+    "path /case-dir-pos": {
+      "case": "auto-generated directory index",
+      "trials": 60,
+      "unreadable": 0,
+      "expected": [
+        "directory_listing_enabled"
+      ],
+      "fired": {
+        "directory_listing_enabled": 60
+      },
+      "unreadable_by_design": null,
+      "declared_false_positive": null,
+      "detectors_left_unread": []
+    },
+    "path /case-dir-neg": {
+      "case": "directory with listing disabled",
+      "trials": 60,
+      "unreadable": 0,
+      "expected": [],
+      "fired": {},
+      "unreadable_by_design": null,
+      "declared_false_positive": null,
+      "detectors_left_unread": []
+    },
+    "path /case-dir-mention": {
+      "case": "a page that only mentions an index",
+      "trials": 60,
+      "unreadable": 0,
+      "expected": [],
+      "fired": {},
+      "unreadable_by_design": null,
+      "declared_false_positive": null,
+      "detectors_left_unread": [
+        "exposed_login_panel"
+      ]
+    },
+    "path /case-sens-git": {
+      "case": "a leaked .git/HEAD",
+      "trials": 60,
+      "unreadable": 0,
+      "expected": [
+        "exposed_sensitive_file"
+      ],
+      "fired": {
+        "exposed_sensitive_file": 60
+      },
+      "unreadable_by_design": null,
+      "declared_false_positive": null,
+      "detectors_left_unread": []
+    },
+    "path /case-sens-env": {
+      "case": "a leaked .env",
+      "trials": 60,
+      "unreadable": 0,
+      "expected": [
+        "exposed_sensitive_file"
+      ],
+      "fired": {
+        "exposed_sensitive_file": 60
+      },
+      "unreadable_by_design": null,
+      "declared_false_positive": null,
+      "detectors_left_unread": []
+    },
+    "path /case-sens-dsstore": {
+      "case": "a leaked .DS_Store",
+      "trials": 60,
+      "unreadable": 0,
+      "expected": [
+        "exposed_sensitive_file"
+      ],
+      "fired": {
+        "exposed_sensitive_file": 60
+      },
+      "unreadable_by_design": null,
+      "declared_false_positive": null,
+      "detectors_left_unread": []
+    },
+    "path /case-sens-sql": {
+      "case": "a leaked SQL dump",
+      "trials": 60,
+      "unreadable": 0,
+      "expected": [
+        "exposed_sensitive_file"
+      ],
+      "fired": {
+        "exposed_sensitive_file": 60
+      },
+      "unreadable_by_design": null,
+      "declared_false_positive": null,
+      "detectors_left_unread": []
+    },
+    "path /case-sens-status": {
+      "case": "an exposed Apache status page",
+      "trials": 60,
+      "unreadable": 0,
+      "expected": [
+        "exposed_sensitive_file"
+      ],
+      "fired": {
+        "exposed_sensitive_file": 60
+      },
+      "unreadable_by_design": null,
+      "declared_false_positive": null,
+      "detectors_left_unread": []
+    },
+    "path /case-sens-phpinfo": {
+      "case": "an exposed phpinfo page",
+      "trials": 60,
+      "unreadable": 0,
+      "expected": [
+        "exposed_sensitive_file"
+      ],
+      "fired": {
+        "exposed_sensitive_file": 60
+      },
+      "unreadable_by_design": null,
+      "declared_false_positive": null,
+      "detectors_left_unread": []
+    },
+    "path /case-sens-soft404": {
+      "case": "soft 404 on every path",
+      "trials": 60,
+      "unreadable": 0,
+      "expected": [],
+      "fired": {},
+      "unreadable_by_design": null,
+      "declared_false_positive": null,
+      "detectors_left_unread": [
+        "exposed_login_panel"
+      ]
+    },
+    "path /case-login-pos": {
+      "case": "a password form at /admin/",
+      "trials": 60,
+      "unreadable": 0,
+      "expected": [
+        "exposed_login_panel"
+      ],
+      "fired": {
+        "exposed_login_panel": 60
+      },
+      "unreadable_by_design": null,
+      "declared_false_positive": null,
+      "detectors_left_unread": []
+    },
+    "path /case-login-auth": {
+      "case": "an authentication challenge at /manager/html",
+      "trials": 60,
+      "unreadable": 0,
+      "expected": [
+        "exposed_login_panel"
+      ],
+      "fired": {
+        "exposed_login_panel": 60
+      },
+      "unreadable_by_design": null,
+      "declared_false_positive": null,
+      "detectors_left_unread": []
+    },
+    "path /case-login-search": {
+      "case": "a form without a password field",
+      "trials": 60,
+      "unreadable": 0,
+      "expected": [],
+      "fired": {},
+      "unreadable_by_design": null,
+      "declared_false_positive": null,
+      "detectors_left_unread": []
+    },
+    "path /case-login-everywhere": {
+      "case": "a login widget on every path, nonexistent ones too",
+      "trials": 60,
+      "unreadable": 60,
+      "expected": [],
+      "fired": {},
+      "unreadable_by_design": "contract: a login served on every path neither shows nor rules out a panel",
+      "declared_false_positive": null,
+      "detectors_left_unread": []
+    },
+    "banner /current": {
+      "case": "current nginx banner",
+      "trials": 60,
+      "unreadable": 0,
+      "expected": [],
+      "fired": {},
+      "unreadable_by_design": null,
+      "declared_false_positive": null,
+      "detectors_left_unread": []
+    },
+    "banner /outdated": {
+      "case": "older patch of a supported nginx cycle, a patch missed past three months",
+      "trials": 60,
+      "unreadable": 0,
+      "expected": [
+        "outdated_exposed_software"
+      ],
+      "fired": {
+        "outdated_exposed_software": 60
+      },
+      "unreadable_by_design": null,
+      "declared_false_positive": null,
+      "detectors_left_unread": []
+    },
+    "banner /outdated-recent": {
+      "case": "older patch, missing only a patch released within three months",
+      "trials": 60,
+      "unreadable": 0,
+      "expected": [],
+      "fired": {},
+      "unreadable_by_design": null,
+      "declared_false_positive": null,
+      "detectors_left_unread": []
+    },
+    "banner /eol": {
+      "case": "Apache 2.2 banner, cycle ended",
+      "trials": 60,
+      "unreadable": 0,
+      "expected": [
+        "eol_software_exposed"
+      ],
+      "fired": {
+        "eol_software_exposed": 60
+      },
+      "unreadable_by_design": null,
+      "declared_false_positive": null,
+      "detectors_left_unread": [
+        "outdated_exposed_software"
+      ]
+    },
+    "banner /php-eol": {
+      "case": "PHP 8.1 X-Powered-By, cycle ended",
+      "trials": 60,
+      "unreadable": 0,
+      "expected": [
+        "eol_software_exposed"
+      ],
+      "fired": {
+        "eol_software_exposed": 60
+      },
+      "unreadable_by_design": null,
+      "declared_false_positive": null,
+      "detectors_left_unread": [
+        "outdated_exposed_software"
+      ]
+    },
+    "banner /hidden": {
+      "case": "product named without a version",
+      "trials": 60,
+      "unreadable": 60,
+      "expected": [],
+      "fired": {},
+      "unreadable_by_design": "contract: no version is unread",
+      "declared_false_positive": null,
+      "detectors_left_unread": []
+    },
+    "banner /cycle-only": {
+      "case": "supported cycle named without a patch level",
+      "trials": 60,
+      "unreadable": 60,
+      "expected": [],
+      "fired": {},
+      "unreadable_by_design": "contract: no patch level is unread",
+      "declared_false_positive": null,
+      "detectors_left_unread": []
+    },
+    "waf /case-waf-cf": {
+      "case": "Cloudflare ray header",
+      "trials": 60,
+      "unreadable": 0,
+      "expected": [],
+      "fired": {},
+      "unreadable_by_design": null,
+      "declared_false_positive": null,
+      "detectors_left_unread": []
+    },
+    "waf /case-waf-cookie": {
+      "case": "Imperva session cookie",
+      "trials": 60,
+      "unreadable": 0,
+      "expected": [],
+      "fired": {},
+      "unreadable_by_design": null,
+      "declared_false_positive": null,
+      "detectors_left_unread": []
+    },
+    "waf /case-waf-none": {
+      "case": "bare origin",
+      "trials": 60,
+      "unreadable": 0,
+      "expected": [
+        "waf_absent"
+      ],
+      "fired": {
+        "waf_absent": 60
+      },
+      "unreadable_by_design": null,
+      "declared_false_positive": null,
+      "detectors_left_unread": []
+    },
+    "dns axfr-open.test": {
+      "case": "zone transfer allowed to anyone",
+      "trials": 60,
+      "unreadable": 0,
+      "expected": [
+        "dns_zone_transfer_open"
+      ],
+      "fired": {
+        "dns_zone_transfer_open": 60
+      },
+      "unreadable_by_design": null,
+      "declared_false_positive": null,
+      "detectors_left_unread": []
+    },
+    "dns axfr-closed.test": {
+      "case": "zone transfer refused",
+      "trials": 60,
+      "unreadable": 0,
+      "expected": [],
+      "fired": {},
+      "unreadable_by_design": null,
+      "declared_false_positive": null,
+      "detectors_left_unread": []
+    },
+    "dns ddos-ns.test": {
+      "case": "provider name servers alone",
+      "trials": 60,
+      "unreadable": 60,
+      "expected": [],
+      "fired": {},
+      "unreadable_by_design": "contract: name servers alone do not show that traffic passes the provider's edge",
+      "declared_false_positive": null,
+      "detectors_left_unread": []
+    },
+    "dns ddos-cname.test": {
+      "case": "www aliased to a provider edge",
+      "trials": 60,
+      "unreadable": 0,
+      "expected": [],
+      "fired": {},
+      "unreadable_by_design": null,
+      "declared_false_positive": null,
+      "detectors_left_unread": []
+    },
+    "dns ddos-plain.test": {
+      "case": "no provider in name servers or aliases",
+      "trials": 60,
+      "unreadable": 0,
+      "expected": [
+        "no_ddos_protection"
+      ],
+      "fired": {
+        "no_ddos_protection": 60
+      },
+      "unreadable_by_design": null,
+      "declared_false_positive": null,
+      "detectors_left_unread": []
+    },
+    "email email-good.test": {
+      "case": "SPF, DMARC reject and a DKIM key split over two strings",
+      "trials": 60,
+      "unreadable": 0,
+      "expected": [],
+      "fired": {},
+      "unreadable_by_design": null,
+      "declared_false_positive": null,
+      "detectors_left_unread": []
+    },
+    "email email-nospf.test": {
+      "case": "no SPF record beside another TXT record",
+      "trials": 60,
+      "unreadable": 0,
+      "expected": [
+        "spf_missing"
+      ],
+      "fired": {
+        "spf_missing": 60
+      },
+      "unreadable_by_design": null,
+      "declared_false_positive": null,
+      "detectors_left_unread": []
+    },
+    "email email-dmarc-none.test": {
+      "case": "DMARC policy none",
+      "trials": 60,
+      "unreadable": 0,
+      "expected": [
+        "dmarc_missing_or_none"
+      ],
+      "fired": {
+        "dmarc_missing_or_none": 60
+      },
+      "unreadable_by_design": null,
+      "declared_false_positive": null,
+      "detectors_left_unread": []
+    },
+    "email email-nodmarc.test": {
+      "case": "no DMARC record",
+      "trials": 60,
+      "unreadable": 0,
+      "expected": [
+        "dmarc_missing_or_none"
+      ],
+      "fired": {
+        "dmarc_missing_or_none": 60
+      },
+      "unreadable_by_design": null,
+      "declared_false_positive": null,
+      "detectors_left_unread": []
+    },
+    "email email-nodkim.test": {
+      "case": "no DKIM key at any selector",
+      "trials": 60,
+      "unreadable": 0,
+      "expected": [
+        "dkim_missing"
+      ],
+      "fired": {
+        "dkim_missing": 60
+      },
+      "unreadable_by_design": null,
+      "declared_false_positive": null,
+      "detectors_left_unread": []
+    },
+    "email email-selector1.test": {
+      "case": "DKIM key at a catalogued non-default selector",
+      "trials": 60,
+      "unreadable": 0,
+      "expected": [],
+      "fired": {},
+      "unreadable_by_design": null,
+      "declared_false_positive": null,
+      "detectors_left_unread": []
+    },
+    "email email-oddselector.test": {
+      "case": "DKIM key at a selector outside the catalogue",
+      "trials": 60,
+      "unreadable": 0,
+      "expected": [],
+      "fired": {
+        "dkim_missing": 60
+      },
+      "unreadable_by_design": null,
+      "declared_false_positive": "selector limit: a key the scan cannot name reads as missing",
+      "detectors_left_unread": []
     }
   },
   "detectors": {
+    "directory_listing_enabled": {
+      "positive_trials": 60,
+      "negative_trials": 720,
+      "sensitivity": 1.0,
+      "sensitivity_ci": [
+        0.9398,
+        1.0
+      ],
+      "false_alarm": 0.0,
+      "false_alarm_ci": [
+        0.0,
+        0.0053
+      ]
+    },
+    "dkim_missing": {
+      "positive_trials": 60,
+      "negative_trials": 300,
+      "sensitivity": 1.0,
+      "sensitivity_ci": [
+        0.9398,
+        1.0
+      ],
+      "false_alarm": 0.0,
+      "false_alarm_ci": [
+        0.0,
+        0.0126
+      ]
+    },
+    "dmarc_missing_or_none": {
+      "positive_trials": 120,
+      "negative_trials": 240,
+      "sensitivity": 1.0,
+      "sensitivity_ci": [
+        0.969,
+        1.0
+      ],
+      "false_alarm": 0.0,
+      "false_alarm_ci": [
+        0.0,
+        0.0158
+      ]
+    },
+    "dns_zone_transfer_open": {
+      "positive_trials": 60,
+      "negative_trials": 60,
+      "sensitivity": 1.0,
+      "sensitivity_ci": [
+        0.9398,
+        1.0
+      ],
+      "false_alarm": 0.0,
+      "false_alarm_ci": [
+        0.0,
+        0.0602
+      ]
+    },
+    "eol_software_exposed": {
+      "positive_trials": 120,
+      "negative_trials": 180,
+      "sensitivity": 1.0,
+      "sensitivity_ci": [
+        0.969,
+        1.0
+      ],
+      "false_alarm": 0.0,
+      "false_alarm_ci": [
+        0.0,
+        0.0209
+      ]
+    },
     "expired_certificate": {
       "positive_trials": 60,
       "negative_trials": 300,
@@ -180,6 +703,34 @@
       "false_alarm_ci": [
         0.0,
         0.0106
+      ]
+    },
+    "exposed_login_panel": {
+      "positive_trials": 120,
+      "negative_trials": 540,
+      "sensitivity": 1.0,
+      "sensitivity_ci": [
+        0.969,
+        1.0
+      ],
+      "false_alarm": 0.0,
+      "false_alarm_ci": [
+        0.0,
+        0.0071
+      ]
+    },
+    "exposed_sensitive_file": {
+      "positive_trials": 360,
+      "negative_trials": 420,
+      "sensitivity": 1.0,
+      "sensitivity_ci": [
+        0.9894,
+        1.0
+      ],
+      "false_alarm": 0.0,
+      "false_alarm_ci": [
+        0.0,
+        0.0091
       ]
     },
     "insecure_cookie": {
@@ -280,6 +831,34 @@
         0.0106
       ]
     },
+    "no_ddos_protection": {
+      "positive_trials": 60,
+      "negative_trials": 60,
+      "sensitivity": 1.0,
+      "sensitivity_ci": [
+        0.9398,
+        1.0
+      ],
+      "false_alarm": 0.0,
+      "false_alarm_ci": [
+        0.0,
+        0.0602
+      ]
+    },
+    "outdated_exposed_software": {
+      "positive_trials": 60,
+      "negative_trials": 120,
+      "sensitivity": 1.0,
+      "sensitivity_ci": [
+        0.9398,
+        1.0
+      ],
+      "false_alarm": 0.0,
+      "false_alarm_ci": [
+        0.0,
+        0.031
+      ]
+    },
     "self_signed_certificate": {
       "positive_trials": 300,
       "negative_trials": 60,
@@ -292,6 +871,34 @@
       "false_alarm_ci": [
         0.0,
         0.0602
+      ]
+    },
+    "spf_missing": {
+      "positive_trials": 60,
+      "negative_trials": 300,
+      "sensitivity": 1.0,
+      "sensitivity_ci": [
+        0.9398,
+        1.0
+      ],
+      "false_alarm": 0.0,
+      "false_alarm_ci": [
+        0.0,
+        0.0126
+      ]
+    },
+    "waf_absent": {
+      "positive_trials": 60,
+      "negative_trials": 120,
+      "sensitivity": 1.0,
+      "sensitivity_ci": [
+        0.9398,
+        1.0
+      ],
+      "false_alarm": 0.0,
+      "false_alarm_ci": [
+        0.0,
+        0.031
       ]
     },
     "weak_certificate_key": {

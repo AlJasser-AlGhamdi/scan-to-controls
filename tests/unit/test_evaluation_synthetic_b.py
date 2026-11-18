@@ -103,9 +103,8 @@ def test_b_corpus_is_non_degenerate_and_exercises_every_control() -> None:
     cases = generate_cases_b(100)
     assert all(c.injected for c in cases)
     true = set().union(*(set(c.ground_truth.control_ids) for c in cases))
-    assert len(true) == 16
+    assert len(true) == 11
     assert sum(c.forced_true_fallback for c in cases) <= 2
-    assert sum(c.forced_observe_fallback for c in cases) == 0
 
 
 def test_b_base_prevalence_covers_every_non_role_check() -> None:
@@ -139,4 +138,5 @@ def test_b_carries_the_same_off_surface_evidence_stream() -> None:
         assert all(a.control_id in set(declaration_pool) for a in off_surface)
         for cid in {a.control_id for a in off_surface}:
             assert not any(control_related(cid, checkable) for checkable in TIER1_CHECKABLE)
+            assert not any(control_related(checkable, cid) for checkable in TIER1_CHECKABLE)
     assert [c.internal_evidence for c in cases] == [c.internal_evidence for c in generate_cases_b(50)]

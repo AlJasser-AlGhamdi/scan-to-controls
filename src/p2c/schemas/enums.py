@@ -4,6 +4,7 @@ from enum import IntEnum, StrEnum
 
 
 class RunMode(StrEnum):
+
     LIVE = "LIVE"
     SYNTHETIC = "SYNTHETIC"
 
@@ -18,6 +19,7 @@ class Severity(StrEnum):
 
 
 class EvidenceTier(IntEnum):
+
     TIER_1 = 1
     TIER_2 = 2
     TIER_3 = 3

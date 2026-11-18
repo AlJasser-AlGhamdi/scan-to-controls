@@ -2,8 +2,10 @@
 from __future__ import annotations
 
 import json
+import os
 import pathlib
 import sys
+import tempfile
 import time
 import urllib.request
 
@@ -19,9 +21,7 @@ from p2c.mapping.catalog import load_default_index
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 OVERLAY = ROOT / "taxonomy" / "release" / "sort_overlay.json"
 ARTIFACT = ROOT / "evaluation" / "tier_second_coder.json"
-CKPT = pathlib.Path(
-    "evaluation/checkpoints/tier_second_coder_ckpt.json"
-)
+CKPT = pathlib.Path(os.environ.get("P2C_SCRATCH", tempfile.gettempdir())) / "tier_second_coder_ckpt.json"
 
 MODEL = "qwen2.5:7b"
 MODEL_DIGEST = "845dbda0ea48ed749caafd9e6037047aa19acfcfd82e704d7ca97d631a0b697e"
@@ -137,8 +137,8 @@ def score() -> None:
         "note": "Weak stability signal, NOT validation and NOT a substitute for the expert panel. "
         "One representative open-weight model (qwen2.5:7b, the paper's baseline ladder model) reads "
         "each control's own public text and picks scan-provable vs must-answer. This is the coarse "
-        "observation boundary, a much coarser judgment than the fine 31-check to subcontrol mapping "
-        "the baselines fail at (best micro F1 0.60), so agreement here says nothing about that fine "
+        "observation boundary, a much coarser judgment than the fine detector-to-subcontrol mapping "
+        "that no generic mapper recovers, so agreement here says nothing about that fine "
         "mapping. The durable output is the published disagreement set, which surfaces the "
         "contestable rows. Opt-in, not part of `make reproduce`; qwen2.5:14b would not load in a "
         "foreground budget on this 4-core GPU-less host. No NCA control text is in this artifact.",

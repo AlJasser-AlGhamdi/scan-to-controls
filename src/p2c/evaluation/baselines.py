@@ -15,9 +15,9 @@ from p2c.evaluation.ablation import (
     naive_keyword_observable_baseline,
     observable_subcontrol_entries,
     parent_reading_sensitivity,
+    rq2_candidates,
     score_check_mapping,
     single_pick_ceiling,
-    subcontrol_entries,
     subcontrol_text,
     subcontrol_text_full,
 )
@@ -45,7 +45,7 @@ def _embedding_mapping(
     text_fn: Callable[[ControlEntry], str] = subcontrol_text,
     candidates: list[ControlEntry] | None = None,
 ) -> dict[CheckId, str | None]:
-    candidates = candidates if candidates is not None else subcontrol_entries()
+    candidates = candidates if candidates is not None else rq2_candidates()
     candidate_vectors = embedder.embed([text_fn(e) for e in candidates])
     checks = _ranked_checks()
     query_vectors = embedder.embed([check_query_text(c) for c in checks])
@@ -138,7 +138,7 @@ def _llm_mapping(
 
     from p2c.llm.provider import OllamaProvider
 
-    candidates = subcontrol_entries()
+    candidates = rq2_candidates()
     valid = frozenset(e.native_id for e in candidates)
     if full_text:
         catalog_block = "\n".join(f"{e.native_id}: {subcontrol_text_full(e)}" for e in candidates)

@@ -36,6 +36,7 @@ def _is_dangerous_ip(host: str | None) -> bool:
 
 
 class EgressBlocked(OSError):
+
     def __init__(self, host: str) -> None:
         self.host = host
         super().__init__(
@@ -46,6 +47,7 @@ class EgressBlocked(OSError):
 
 @dataclass(frozen=True)
 class EgressPolicy:
+
     sovereign: bool
     allowlist: frozenset[str] = frozenset()
     allow_loopback: bool = True
@@ -136,7 +138,7 @@ def install(policy: EgressPolicy) -> None:
         real_connect = socket.socket.connect
         real_connect_ex = socket.socket.connect_ex
         real_sendto = socket.socket.sendto
-        real_sendmsg = socket.socket.sendmsg
+        real_sendmsg = getattr(socket.socket, "sendmsg", None)
         real_gethostbyname = socket.gethostbyname
         real_gethostbyname_ex = socket.gethostbyname_ex
         real_gethostbyaddr = socket.gethostbyaddr
@@ -197,6 +199,7 @@ def install(policy: EgressPolicy) -> None:
             address = kwargs.get("address", positional)
             if address is not None:
                 _check_connect(_extract_host(address))
+            assert real_sendmsg is not None
             return real_sendmsg(self, *args, **kwargs)
 
         _state.orig_getaddrinfo = real_getaddrinfo
@@ -216,7 +219,8 @@ def install(policy: EgressPolicy) -> None:
         socket.socket.connect = guarded_connect
         socket.socket.connect_ex = guarded_connect_ex
         socket.socket.sendto = guarded_sendto
-        socket.socket.sendmsg = guarded_sendmsg
+        if real_sendmsg is not None:
+            socket.socket.sendmsg = guarded_sendmsg
         _state.installed = True
         log.info(
             "egress_guard_installed",
@@ -238,7 +242,8 @@ def uninstall() -> None:
         socket.socket.connect = _state.orig_connect
         socket.socket.connect_ex = _state.orig_connect_ex
         socket.socket.sendto = _state.orig_sendto
-        socket.socket.sendmsg = _state.orig_sendmsg
+        if _state.orig_sendmsg is not None:
+            socket.socket.sendmsg = _state.orig_sendmsg
         _state.installed = False
         _state.policy = None
         _state.resolved_allowlisted_ips = set()
@@ -260,7 +265,12 @@ def running_loop_is_guarded() -> bool:
         loop = asyncio.get_running_loop()
     except RuntimeError:
         return True
-    return not type(loop).__module__.startswith("uvloop")
+    loop_type = type(loop)
+    return not (
+        loop_type.__module__.startswith("uvloop")
+        or "proactor" in loop_type.__name__.lower()
+        or "proactor" in loop_type.__module__.lower()
+    )
 
 
 def install_from_settings(settings: Settings) -> EgressPolicy:

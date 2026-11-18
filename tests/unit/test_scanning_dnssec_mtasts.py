@@ -47,6 +47,8 @@ class FakeResolver:
         return self._records[key]
 
 
+
+
 def test_an_unsigned_zone_is_reported() -> None:
     result = DnssecInspector(FakeResolver()).inspect_detailed(DOMAIN)
     assert result.checks == (CheckId.DNSSEC_MISSING,)
@@ -92,6 +94,7 @@ def test_an_egress_block_propagates_and_is_never_silent() -> None:
     resolver = FakeResolver(failures={(DOMAIN, "DS"): EgressBlocked("blocked")})
     with pytest.raises(EgressBlocked):
         DnssecInspector(resolver).inspect(DOMAIN)
+
 
 
 _RECORD = {("_mta-sts.example.com", "TXT"): ["v=STSv1; id=20260830T000000"]}
@@ -190,7 +193,28 @@ def test_a_policy_that_enforces_nothing_is_a_finding() -> None:
     assert result.state is MtaStsState.POLICY_NOT_ENFORCING
 
 
-def test_testing_mode_is_not_a_finding() -> None:
+def test_testing_mode_enforces_nothing_and_is_a_finding() -> None:
     body = "version: STSv1\nmode: testing\nmx: mail.example.com\nmax_age: 604800\n"
     client = _client(lambda request: httpx.Response(200, text=body))
-    assert MtaStsInspector(FakeResolver(_RECORD), client).inspect_detailed(DOMAIN).checks == ()
+    result = MtaStsInspector(FakeResolver(_RECORD), client).inspect_detailed(DOMAIN)
+    assert result.checks == (CheckId.MTA_STS_MISSING,)
+
+
+def test_a_policy_past_the_size_cap_is_unread_not_parsed() -> None:
+    oversized = "version: STSv1\nmode: enforce\nmx: mail.example.com\nmax_age: 86400\n" + "#" * 70_000
+    client = _client(lambda request: httpx.Response(200, text=oversized))
+    result = MtaStsInspector(FakeResolver(_RECORD), client).inspect_detailed(DOMAIN)
+    assert result.state is MtaStsState.POLICY_UNREACHABLE and result.checks == ()
+
+
+def test_a_record_in_presentation_form_is_read_as_its_text() -> None:
+    quoted = FakeResolver({("_mta-sts.example.com", "TXT"): ['"v=STSv1; " "id=20261015"']})
+    client = _client(lambda request: httpx.Response(200, text=_VALID_POLICY))
+    result = MtaStsInspector(quoted, client).inspect_detailed(DOMAIN)
+    assert result.checks == () and result.state is MtaStsState.POLICY_VALID
+
+
+def test_an_unrelated_txt_beside_the_record_is_discarded_as_the_rfc_says() -> None:
+    other = FakeResolver({("_mta-sts.example.com", "TXT"): ["google-site-verification=x", "v=STSv1; id=1"]})
+    client = _client(lambda request: httpx.Response(200, text=_VALID_POLICY))
+    assert MtaStsInspector(other, client).inspect_detailed(DOMAIN).state is MtaStsState.POLICY_VALID

@@ -57,12 +57,28 @@ def subcontrol_entries() -> list[ControlEntry]:
     return sorted((e for e in index.entries.values() if e.is_subcontrol), key=lambda e: e.native_id)
 
 
+RQ2_LATER_ROWS: frozenset[str] = frozenset({"2-7-1-1"})
+
+
+def rq2_candidates() -> list[ControlEntry]:
+    return [e for e in subcontrol_entries() if e.native_id not in RQ2_LATER_ROWS]
+
+
 def subcontrol_text(entry: ControlEntry) -> str:
     return f"{entry.title} {entry.statement_en[:_STATEMENT_CHARS]}"
 
 
 def subcontrol_text_full(entry: ControlEntry) -> str:
     return f"{entry.title}. {entry.statement_en}"
+
+
+RQ2_EXCLUDED: frozenset[CheckId] = frozenset({CheckId.EXPOSED_PRINTER_SERVICE})
+
+
+def _rq2_freq(n: int, seed: int | None) -> Counter[CheckId]:
+    return Counter(
+        inj.check for c in generate_cases(n, seed=seed) for inj in c.injected if inj.check not in RQ2_EXCLUDED
+    )
 
 
 def check_query_text(check: CheckId) -> str:
@@ -82,7 +98,7 @@ def _naive_map(check: CheckId, subcontrols: list[tuple[str, set[str]]]) -> str |
 
 
 def keyword_fulltext_baseline(n: int = 100, *, seed: int | None = None) -> dict[str, Any]:
-    subcontrols = [(e.native_id, _tokens(subcontrol_text_full(e))) for e in subcontrol_entries()]
+    subcontrols = [(e.native_id, _tokens(subcontrol_text_full(e))) for e in rq2_candidates()]
     naive = {check: _naive_map(check, subcontrols) for check in expert_key()}
     return score_check_mapping(
         naive,
@@ -103,7 +119,7 @@ def score_check_mapping(
     note: str,
 ) -> dict[str, Any]:
     key = expert_key()
-    freq = Counter(inj.check for c in generate_cases(n, seed=seed) for inj in c.injected)
+    freq = _rq2_freq(n, seed)
     pairs: list[tuple[set[str], set[str]]] = []
     for check, count in freq.items():
         gold = set(key.get(check, frozenset()))
@@ -130,7 +146,7 @@ def score_check_mapping(
 
 
 def naive_keyword_baseline(n: int = 100, *, seed: int | None = None) -> dict[str, Any]:
-    subcontrols = [(e.native_id, _tokens(subcontrol_text(e))) for e in subcontrol_entries()]
+    subcontrols = [(e.native_id, _tokens(subcontrol_text(e))) for e in rq2_candidates()]
     naive = {check: _naive_map(check, subcontrols) for check in expert_key()}
     return score_check_mapping(
         naive,
@@ -170,7 +186,7 @@ def naive_keyword_observable_baseline(
 
 
 def naive_keyword_multilabel_baseline(n: int = 100, *, seed: int | None = None, k: int = 2) -> dict[str, Any]:
-    subcontrols = [(e.native_id, _tokens(subcontrol_text_full(e))) for e in subcontrol_entries()]
+    subcontrols = [(e.native_id, _tokens(subcontrol_text_full(e))) for e in rq2_candidates()]
     multi = {check: _naive_map_set(check, subcontrols, k) for check in expert_key()}
     return score_check_mapping(
         multi,
@@ -196,7 +212,7 @@ def definitional_agreement() -> dict[str, Any]:
     ambiguous: list[str] = []
     for artifact, cid in _DEFINITIONAL_ARTIFACTS.items():
         naming = [
-            e.native_id for e in subcontrol_entries() if artifact in (e.title + " " + e.statement_en).lower()
+            e.native_id for e in rq2_candidates() if artifact in (e.title + " " + e.statement_en).lower()
         ]
         if naming != [cid]:
             ambiguous.append(f"{artifact}:{naming}")
@@ -221,7 +237,7 @@ def definitional_agreement() -> dict[str, Any]:
 
 def majority_class_mapper(n: int = 100, *, seed: int | None = None) -> dict[str, Any]:
     key = expert_key()
-    freq = Counter(inj.check for c in generate_cases(n, seed=seed) for inj in c.injected)
+    freq = _rq2_freq(n, seed)
     weight: Counter[str] = Counter()
     for check, count in freq.items():
         for cid in key.get(check, frozenset()):
@@ -256,35 +272,35 @@ PARENT_READING_CHECKS: frozenset[str] = frozenset(
 
 def parent_reading_sensitivity(n: int = 100, *, seed: int | None = None) -> dict[str, Any]:
     key = expert_key()
-    freq = Counter(inj.check for c in generate_cases(n, seed=seed) for inj in c.injected)
+    freq = _rq2_freq(n, seed)
 
     def weights(remap: bool) -> Counter[str]:
         w: Counter[str] = Counter()
         for check, count in freq.items():
-            for cid in key.get(check, frozenset()):
-                moved = remap and check.value in PARENT_READING_CHECKS and cid == "2-15-3-3"
-                w["2-15-3" if moved else cid] += count
+            for cid in ids_for(check, remap):
+                w[cid] += count
         return w
 
-    total = sum(count for check, count in freq.items() if key.get(check))
-    gold = sum(count * len(key[check]) for check, count in freq.items() if key.get(check))
+    def ids_for(check: CheckId, remap: bool) -> frozenset[str]:
+        coarse = remap and check.value in PARENT_READING_CHECKS
+        return key.get(check, frozenset()) | ({"2-15-3"} if coarse else frozenset())
+
     out: dict[str, Any] = {}
     for label, remap in (("as_shipped", False), ("parent_reading", True)):
+        total = sum(count for check, count in freq.items() if ids_for(check, remap))
+        gold = sum(count * len(ids_for(check, remap)) for check, count in freq.items())
         w = weights(remap)
         modal, mw = max(w.items(), key=lambda kv: (kv[1], kv[0]))
         tp = 0
         for check, count in freq.items():
-            ids = {
-                "2-15-3" if (remap and check.value in PARENT_READING_CHECKS and cid == "2-15-3-3") else cid
-                for cid in key.get(check, frozenset())
-            }
+            ids = ids_for(check, remap)
             if modal in ids:
                 tp += count
         precision, recall = tp / total, tp / gold
         out[label] = {
             "modal_control": modal,
             "modal_share": round(mw / total, 3),
-            "constant_mapper_f1": round(2 * precision * recall / (precision + recall), 4),
+            "constant_mapper_f1": round(2 * precision * recall / (precision + recall), 6),
         }
     out["note"] = (
         "sensitivity only. The shipped key is unchanged; the panel of Section 9.7 rules on the reading."
@@ -294,7 +310,7 @@ def parent_reading_sensitivity(n: int = 100, *, seed: int | None = None) -> dict
 
 def single_pick_ceiling(n: int = 100, *, seed: int | None = None) -> float:
     key = expert_key()
-    freq = Counter(inj.check for c in generate_cases(n, seed=seed) for inj in c.injected)
+    freq = _rq2_freq(n, seed)
     total = extra = 0
     for check, count in freq.items():
         gold = key.get(check, frozenset())

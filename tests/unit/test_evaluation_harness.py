@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import dataclasses
+import inspect
 import json
 from pathlib import Path
 
@@ -115,9 +116,9 @@ def test_contradiction_f1_carries_a_confidence_interval() -> None:
     assert ci["ci_low"] >= 0.0 and ci["ci_high"] <= 1.0
 
 
-def test_per_control_covers_sixteen_with_support() -> None:
+def test_per_control_covers_eleven_with_support() -> None:
     pc = run_evaluation(100).per_control
-    assert len(pc) == 16
+    assert len(pc) == 11
     assert all(v["support"] > 0 for v in pc.values())
 
 
@@ -173,17 +174,25 @@ def test_perfect_sensing_recovers_the_truth_exactly() -> None:
 
 
 def test_robustness_helpers_report_a_tight_band() -> None:
-    s = stability_across_seeds(30, seeds=(1, 2, 3))
+    s = stability_across_seeds(30, seeds=(1, 31, 61))
     assert s["stdev"] < 0.1 and 0.6 < s["mean"] < 1.0
     z = sensitivity_to_detection_assumptions(30, shifts=(-0.10, 0.10))
     assert z["max"] - z["min"] < 0.25
 
 
-def test_all_sixteen_controls_are_exercised() -> None:
+def test_stability_seeds_never_share_a_firm() -> None:
+    with pytest.raises(ValueError, match="share firms"):
+        stability_across_seeds(30, seeds=(1, 2, 3))
+    default = inspect.signature(stability_across_seeds).parameters["seeds"].default
+    assert len(default) == 30
+    assert all(abs(a - b) >= 100 for i, a in enumerate(default) for b in default[i + 1 :])
+
+
+def test_all_eleven_controls_are_exercised() -> None:
     preds = _predict(generate_cases(100))
     predicted = set().union(*(p.predicted for p in preds))
     true = set().union(*(p.true_gold for p in preds))
-    assert len(true) == 16
+    assert len(true) == 11
     assert predicted == true
 
 
@@ -192,6 +201,8 @@ def test_agreement_is_flagged_simulated_and_in_range() -> None:
     assert a["simulated"] is True
     assert 0.0 <= a["cohen_kappa"] <= 1.0
     assert a["krippendorff_alpha_ordinal"] >= a["krippendorff_alpha_nominal"]
+
+
 
 
 def test_latency_speedup_positive() -> None:
@@ -273,6 +284,26 @@ def test_tier2_precedence_is_always_enforced() -> None:
     assert t["precedence_checks"] > 0
     assert t["precedence_rate"] == 1.0
     assert t["precedence_correct"] == t["precedence_checks"]
+    assert t["tier2_flagged"] == t["precedence_checks"]
+
+
+def test_rate_class_slice_drops_judgement_detectors_from_both_sides() -> None:
+    from p2c.evaluation.appendix_tables import provenance
+    from p2c.evaluation.harness import _rate_class_slice
+
+    cases = generate_cases(60, seed=7)
+    s = _rate_class_slice(cases)
+    judged = {
+        c for c in syn.SENSITIVITY if provenance(syn.SENSITIVITY[c], syn.FALSE_ALARM[c]) == "author judgment"
+    }
+    kept = set(syn.SENSITIVITY) - judged
+    key = syn.expert_key()
+    assert set(s["controls"]) == {cid for c in kept for cid in key[c]}
+    assert s["n_dropped_detectors"] == len(judged)
+    assert 0.0 < s["f1"] <= 1.0 and 0.0 < s["trivial_floor_f1"] < s["f1"]
+    assert s["n_decisions"] == len(cases) * len(s["controls"])
+    perfect = [dataclasses.replace(c, injected=c.true_injected) for c in cases]
+    assert _rate_class_slice(perfect)["f1"] == 1.0
 
 
 def test_scan_realism_shows_obstruction_clustering() -> None:
@@ -387,3 +418,222 @@ def test_cohort_firms_sum_to_the_cohort_artifacts() -> None:
     assert sum(f["n_declarations"] for f in firms) == report.contradictions["n_attestations"]
     assert sum(f["n_overstated"] for f in firms) == report.contradictions["true_contradictions"]
     assert [f["case_id"] for f in firms] == sorted(f["case_id"] for f in firms)
+
+
+
+
+def _with_conditions(case, condition: str):
+    return dataclasses.replace(case, scan_conditions=dict.fromkeys(case.scan_conditions, condition))
+
+
+def test_a_fully_reachable_estate_is_fully_observed() -> None:
+    from p2c.evaluation.harness import _unobserved
+
+    case = _with_conditions(generate_cases(1, seed=3)[0], "reachable")
+    assert _unobserved(case) == frozenset()
+
+
+def test_blocking_every_host_leaves_only_the_apex_read_controls_observed() -> None:
+    from p2c.evaluation.harness import _unobserved
+
+    case = _with_conditions(generate_cases(1, seed=3)[0], "blocked")
+    assert _unobserved(case) == frozenset(
+        {
+            "2-3-3-3",
+            "2-5-3-1",
+            "2-5-3-5",
+            "2-7-1-3",
+            "2-8-3-1",
+            "2-8-3-2",
+            "2-8-3-3",
+            "2-10-3-4",
+            "2-15-3-3",
+        }
+    )
+
+
+def test_a_cdn_hides_origin_reads_but_not_edge_reads() -> None:
+    from p2c.evaluation.harness import _unobserved
+
+    case = _with_conditions(generate_cases(1, seed=3)[0], "cdn_fronted")
+    unobserved = _unobserved(case)
+    assert {"2-5-3-5", "2-7-1-3", "2-3-3-3", "2-10-3-4"} <= unobserved
+    assert not {"2-8-3-1", "2-8-3-2", "2-8-3-3", "2-15-3-3"} & unobserved
+
+
+def test_an_unknown_scan_condition_fails_closed() -> None:
+    from p2c.evaluation.harness import _unobserved
+
+    case = _with_conditions(generate_cases(1, seed=3)[0], "something_new")
+    assert _unobserved(case) == _unobserved(_with_conditions(case, "blocked"))
+
+
+def test_blocking_a_firm_never_raises_its_own_assessed_score() -> None:
+    from p2c.evaluation.harness import _block_hosts
+
+    engine = MappingEngine()
+    for case in generate_cases(60, seed=13):
+        open_score = compute_dual_score(_all_tier_assessments(case, engine.map_findings(case.findings())))
+        blocked = _block_hosts(case, set(case.scan_conditions))
+        blocked_score = compute_dual_score(
+            _all_tier_assessments(blocked, engine.map_findings(blocked.findings()))
+        )
+        assert blocked_score.assessed_score <= open_score.assessed_score + 1e-12
+
+
+def test_blocking_the_scan_cannot_buy_a_high_assessed_score() -> None:
+    from p2c.evaluation.synthetic import _APEX_ONLY_CHECKS
+
+    key = syn.expert_key()
+    host_controls = {c for chk, cs in key.items() if chk not in _APEX_ONLY_CHECKS for c in cs}
+    apex_only = {c for chk in _APEX_ONLY_CHECKS for c in key[chk]} - host_controls
+    cap = len(apex_only & TIER1_CHECKABLE) / len(TIER1_CHECKABLE)
+    for case in generate_cases(40, seed=11):
+        blocked = dataclasses.replace(_with_conditions(case, "blocked"), injected=())
+        score = compute_dual_score(_all_tier_assessments(blocked, []))
+        assert score.assessed_score <= cap + 1e-12
+        assert score.coverage == cap
+
+
+def test_unscoped_estate_scores_zero_with_zero_coverage() -> None:
+    case = dataclasses.replace(generate_cases(1, seed=5)[0], scan_conditions={}, injected=())
+    score = compute_dual_score(_all_tier_assessments(case, []))
+    assert score.assessed_score == 0.0
+    assert score.coverage == 0.0
+
+
+
+
+@pytest.fixture(scope="module")
+def evasions() -> dict:
+    from p2c.evaluation.harness import evasion_report
+
+    return evasion_report(40, seed=21)
+
+
+def test_evasion_report_is_deterministic(evasions: dict) -> None:
+    from p2c.evaluation.harness import evasion_report
+
+    assert evasion_report(40, seed=21) == evasions
+
+
+def test_the_evasion_baseline_is_the_headline_contradiction_result(evasions: dict) -> None:
+    con = run_evaluation(40, seed=21).contradictions
+    base = evasions["scenarios"]["baseline"]
+    declared = con["declarations_only"]
+    assert base["n_overstated"] == declared["true_contradictions"]
+    assert base["contradiction_recall"] == round(declared["recall"], 6)
+
+
+def test_deliberate_blocking_leaves_no_host_read_finding() -> None:
+    from p2c.evaluation.harness import _block_hosts
+    from p2c.evaluation.synthetic import _HOST_FETCHED_CHECKS
+
+    for case in generate_cases(20, seed=4):
+        blocked = _block_hosts(case, set(case.scan_conditions))
+        assert not any(i.check in _HOST_FETCHED_CHECKS for i in blocked.injected)
+        assert set(blocked.scan_conditions.values()) <= {"blocked"}
+
+
+def test_blocking_raised_the_old_score_and_lowers_the_new_one(evasions: dict) -> None:
+    s = evasions["scenarios"]
+    base, blocked = s["baseline"], s["block_all_hosts"]
+    assert blocked["assessed_absent_is_pass"] > base["assessed_absent_is_pass"]
+    assert blocked["assessed"] < base["assessed"]
+    assert blocked["coverage"] < base["coverage"]
+    assert blocked["contradiction_recall"] < base["contradiction_recall"]
+    assert s["block_half_subdomains"]["assessed"] <= base["assessed"]
+
+
+def test_omitting_the_apex_scores_zero_where_it_used_to_score_one(evasions: dict) -> None:
+    omit = evasions["scenarios"]["omit_apex"]
+    assert omit["assessed_absent_is_pass"] == 1.0
+    assert omit["assessed"] == 0.0 and omit["coverage"] == 0.0
+    assert omit["contradiction_recall"] == 0.0
+
+
+def test_omitting_subdomains_goes_undetected(evasions: dict) -> None:
+    s = evasions["scenarios"]
+    omit, base = s["omit_subdomains"], s["baseline"]
+    assert omit["coverage"] >= 0.9
+    assert omit["assessed"] > base["assessed"]
+    assert omit["contradiction_recall"] < base["contradiction_recall"]
+
+
+def test_throttling_buys_a_little_score_without_losing_coverage(evasions: dict) -> None:
+    s = evasions["scenarios"]
+    throttle, base = s["throttle_all_hosts"], s["baseline"]
+    assert throttle["assessed"] >= base["assessed"]
+    assert throttle["coverage"] >= base["coverage"] - 0.02
+    assert throttle["contradiction_recall"] <= base["contradiction_recall"]
+
+
+def test_suppression_is_not_observed_but_spoofing_reads_clean(evasions: dict) -> None:
+    s = evasions["scenarios"]
+    assert s["banner_suppression"]["coverage"] < s["string_spoofing"]["coverage"]
+    assert s["banner_suppression"]["coverage"] < s["baseline"]["coverage"]
+    assert s["banner_suppression"]["assessed"] < s["baseline"]["assessed"] < s["string_spoofing"]["assessed"]
+    assert s["string_spoofing"]["contradiction_recall"] <= s["banner_suppression"]["contradiction_recall"]
+
+
+def test_relabelling_runs_through_the_shipped_tier2_path(evasions: dict) -> None:
+    r = evasions["scenarios"]["relabel_tier2"]
+    assert r["contradiction_recall_old_check"] == 0.0
+    assert r["contradiction_recall"] == evasions["scenarios"]["baseline"]["contradiction_recall"]
+
+
+def test_an_oracle_declarer_is_the_floor_below_the_heuristic(evasions: dict) -> None:
+    s = evasions["scenarios"]
+    oracle, heuristic = (
+        s["oracle_declarer"]["contradiction_recall"],
+        s["adaptive_declarer"]["contradiction_recall"],
+    )
+    assert 0.0 < oracle <= min(heuristic, s["baseline"]["contradiction_recall"])
+    assert (
+        s["oracle_declarer"]["n_overstated"]
+        == s["adaptive_declarer"]["n_overstated"]
+        == s["baseline"]["n_overstated"]
+    )
+    assert 0 < s["oracle_declarer"]["violations_missed"] < s["oracle_declarer"]["violations_total"]
+
+
+
+
+def test_cohort_firms_carry_flag_counts_that_sum_to_the_headline() -> None:
+    report = run_evaluation(60)
+    firms = report.cohort_firms["firms"]
+    con = report.contradictions
+    assert sum(f["n_flags"] for f in firms) == con["flagged"]
+    assert sum(f["n_flags_true"] for f in firms) == con["tp"]
+    assert sum(f["n_flags_false"] for f in firms) == con["fp"]
+
+
+def test_exposure_sweep_moves_toward_the_anchors_and_reports_all_four_measures() -> None:
+    from p2c.evaluation.harness import exposure_toward_anchors
+
+    before = ({s.name: dict(s.weights) for s in syn.SECTORS}, dict(syn._SUBSET_PROB))
+    sweep = exposure_toward_anchors(40, seed=9, factors=(1.0, 2.0))
+    assert ({s.name: dict(s.weights) for s in syn.SECTORS}, dict(syn._SUBSET_PROB)) == before
+    lo, hi = sweep["by_factor"]["1.00"], sweep["by_factor"]["2.00"]
+    assert hi["precision"] > lo["precision"]
+    assert hi["realized_missing_csp_per_host"] > lo["realized_missing_csp_per_host"]
+    assert hi["base_rate"] > lo["base_rate"]
+    assert hi["predict_all_f1"] > lo["predict_all_f1"]
+    for row in (lo, hi):
+        assert row["predict_all_mcc"] == 0.0 and row["predict_all_balanced_accuracy"] == 0.5
+        assert 0.0 < row["mcc"] <= 1.0 and 0.5 < row["balanced_accuracy"] <= 1.0
+
+
+def test_mapper_disagreement_audit_covers_every_detector() -> None:
+    from p2c.evaluation.harness import mapper_disagreement_audit
+
+    audit = mapper_disagreement_audit()
+    assert audit["model"] == "gemma3:12b" and audit["condition"] == "title"
+    root = Path(__file__).resolve().parents[2]
+    ladder = json.loads((root / "evaluation" / "baseline_ladder_results.json").read_text(encoding="utf-8"))
+    best = max(s[c]["micro_f1"] for s in ladder.values() for c in ("title", "full_text") if s.get(c))
+    assert ladder["gemma3:12b"]["title"]["micro_f1"] == best
+    assert len(audit["detectors"]) == 31
+    n_dis = sum(1 for d in audit["detectors"] if not d["agrees"])
+    assert n_dis == audit["n_disagreements"]
+    assert sum(audit["disagreement_kinds"].values()) == n_dis

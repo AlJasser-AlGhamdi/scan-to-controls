@@ -10,7 +10,7 @@ _TOKEN_RE = re.compile(r"\w+", re.UNICODE)
 DEFAULT_DIM = 256
 _NGRAM = 3
 
-_ARABIC_DIACRITICS = re.compile(r"[ؐ-ًؚ-ٰٟۖ-ۭـ]")
+_ARABIC_DIACRITICS = re.compile("[\u0610-\u061a\u064b-\u065f\u0670\u06d6-\u06ed\u0640]")
 _ARABIC_NORM_MAP = str.maketrans(
     {
         "أ": "ا",
@@ -45,6 +45,7 @@ def _char_ngrams(token: str, n: int) -> list[str]:
 
 
 class HashingEmbedder:
+
     def __init__(self, dimension: int = DEFAULT_DIM, *, ngram: int = _NGRAM) -> None:
         self.dimension = dimension
         self._ngram = ngram

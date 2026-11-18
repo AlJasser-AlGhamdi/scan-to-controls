@@ -6,37 +6,22 @@
   "n_rows": 203,
   "n_scored": 203,
   "n_unparseable": 0,
-  "n_agree": 187,
-  "agreement_rate": 0.9212,
-  "cohen_kappa": 0.466,
-  "n_scan_author": 23,
+  "n_agree": 186,
+  "agreement_rate": 0.9163,
+  "cohen_kappa": 0.3308,
+  "n_scan_author": 18,
   "n_scan_model": 9,
   "confusion": {
-    "scan_scan": 8,
-    "scan_answer": 15,
-    "answer_scan": 1,
-    "answer_answer": 179
+    "scan_scan": 5,
+    "scan_answer": 13,
+    "answer_scan": 4,
+    "answer_answer": 181
   },
   "disagreement_set": [
     {
       "id": "1-10-3-3",
       "author": "answer",
       "model": "scan"
-    },
-    {
-      "id": "2-2-3",
-      "author": "scan",
-      "model": "answer"
-    },
-    {
-      "id": "2-2-3-1",
-      "author": "scan",
-      "model": "answer"
-    },
-    {
-      "id": "2-2-3-2",
-      "author": "scan",
-      "model": "answer"
     },
     {
       "id": "2-3-3",
@@ -59,12 +44,32 @@
       "model": "answer"
     },
     {
-      "id": "2-5-3-2",
+      "id": "2-5-3-9",
+      "author": "answer",
+      "model": "scan"
+    },
+    {
+      "id": "2-7-1",
+      "author": "scan",
+      "model": "answer"
+    },
+    {
+      "id": "2-7-1-3",
       "author": "scan",
       "model": "answer"
     },
     {
       "id": "2-8-3",
+      "author": "scan",
+      "model": "answer"
+    },
+    {
+      "id": "2-8-3-1",
+      "author": "scan",
+      "model": "answer"
+    },
+    {
+      "id": "2-8-3-2",
       "author": "scan",
       "model": "answer"
     },
@@ -79,6 +84,11 @@
       "model": "answer"
     },
     {
+      "id": "2-10-3-1",
+      "author": "answer",
+      "model": "scan"
+    },
+    {
       "id": "2-10-3-4",
       "author": "scan",
       "model": "answer"
@@ -89,30 +99,25 @@
       "model": "answer"
     },
     {
-      "id": "2-15-3-2",
-      "author": "scan",
-      "model": "answer"
-    },
-    {
-      "id": "2-15-3-5",
-      "author": "scan",
-      "model": "answer"
+      "id": "2-15-3-1",
+      "author": "answer",
+      "model": "scan"
     }
   ],
-  "n_disagreements": 16,
+  "n_disagreements": 17,
   "disagreement_breakdown": {
-    "author_scan_model_answer": 15,
-    "author_answer_model_scan": 1,
+    "author_scan_model_answer": 13,
+    "author_answer_model_scan": 4,
     "umbrella_main": 7,
-    "leaf": 9
+    "leaf": 10
   },
-  "note": "Weak stability signal, NOT validation and NOT a substitute for the expert panel. One representative open-weight model (qwen2.5:7b, the paper's baseline ladder model) reads each control's own public text and picks scan-provable vs must-answer. This is the coarse observation boundary, a much coarser judgment than the fine 31-check to subcontrol mapping the baselines fail at (best micro F1 0.60), so agreement here says nothing about that fine mapping. The durable output is the published disagreement set, which surfaces the contestable rows. Opt-in, not part of `make reproduce`; qwen2.5:14b would not load in a foreground budget on this 4-core GPU-less host. No NCA control text is in this artifact.",
+  "note": "Weak stability signal, NOT validation and NOT a substitute for the expert panel. One representative open-weight model (qwen2.5:7b, the paper's baseline ladder model) reads each control's own public text and picks scan-provable vs must-answer. This is the coarse observation boundary, a much coarser judgment than the fine detector-to-subcontrol mapping that no generic mapper recovers, so agreement here says nothing about that fine mapping. The durable output is the published disagreement set, which surfaces the contestable rows. Opt-in, not part of `make reproduce`; qwen2.5:14b would not load in a foreground budget on this 4-core GPU-less host. No NCA control text is in this artifact.",
   "provenance": {
     "seed": 1337,
     "temperature": 0.0,
     "num_ctx": 4096,
     "n_rows": 203,
     "host": "CPU-only, 4 cores (arm64)",
-    "run_date_utc": "2026-08-12T09:56:21Z"
+    "run_date_utc": "2026-10-20T13:46:08Z"
   }
 }

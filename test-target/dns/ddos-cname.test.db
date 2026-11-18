@@ -1,0 +1,6 @@
+$ORIGIN ddos-cname.test.
+$TTL 3600
+@    IN SOA ns1.ddos-cname.test. hostmaster.ddos-cname.test. 2026101401 7200 3600 1209600 3600
+@    IN NS    ns1.ddos-cname.test.
+ns1  IN A     127.0.0.1
+www  IN CNAME d111111abcdef8.cloudfront.net.

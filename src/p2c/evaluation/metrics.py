@@ -126,6 +126,29 @@ def cohens_kappa(rater_a: Sequence[object], rater_b: Sequence[object]) -> float:
     return (po - pe) / (1 - pe)
 
 
+def fleiss_kappa(units: Sequence[Sequence[object]]) -> float:
+    if not units:
+        raise ValueError("need at least one unit")
+    n = len(units[0])
+    if n < _MIN_RATINGS_PER_UNIT or any(len(row) != n for row in units):
+        raise ValueError("every unit needs the same number of raters, at least two")
+    categories = sorted({label for row in units for label in row}, key=repr)
+    totals = dict.fromkeys(categories, 0)
+    agreement = 0.0
+    for row in units:
+        counts = dict.fromkeys(categories, 0)
+        for label in row:
+            counts[label] += 1
+            totals[label] += 1
+        agreement += sum(k * (k - 1) for k in counts.values()) / (n * (n - 1))
+    p_bar = agreement / len(units)
+    shares = [t / (len(units) * n) for t in totals.values()]
+    p_e = sum(share * share for share in shares)
+    if p_e == 1.0:
+        return 1.0 if p_bar == 1.0 else 0.0
+    return (p_bar - p_e) / (1 - p_e)
+
+
 def _nominal_delta(c: float, k: float, _values: list[float]) -> float:
     return 0.0 if c == k else 1.0
 

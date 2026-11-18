@@ -1,20 +1,8 @@
 {
   "seeds": [
     1337,
-    7,
-    42,
     2025,
-    99,
     3,
-    11,
-    13,
-    17,
-    19,
-    23,
-    29,
-    31,
-    37,
-    101,
     202,
     303,
     404,
@@ -29,169 +17,246 @@
     8675,
     314159,
     271828,
-    161803
+    161803,
+    10000,
+    20000,
+    30000,
+    40000,
+    50000,
+    60000,
+    70000,
+    80000,
+    90000,
+    100000,
+    110000,
+    120000
   ],
   "pairs": [
     {
       "seed": 1337,
-      "measured_f1": 0.9085106382978723,
-      "expected_f1": 0.9097
-    },
-    {
-      "seed": 7,
-      "measured_f1": 0.9073514602215508,
-      "expected_f1": 0.9113
-    },
-    {
-      "seed": 42,
-      "measured_f1": 0.9029227557411275,
-      "expected_f1": 0.9037
+      "measured_f1": 0.9380165289256198,
+      "expected_f1": 0.947324637921487,
+      "simulated_expected_f1": 0.9472879010001473,
+      "mapping_mismatches": 0
     },
     {
       "seed": 2025,
-      "measured_f1": 0.8976793248945147,
-      "expected_f1": 0.9055
-    },
-    {
-      "seed": 99,
-      "measured_f1": 0.9054122407688415,
-      "expected_f1": 0.9084
+      "measured_f1": 0.9471458773784356,
+      "expected_f1": 0.9459512011890678,
+      "simulated_expected_f1": 0.9460003374433141,
+      "mapping_mismatches": 0
     },
     {
       "seed": 3,
-      "measured_f1": 0.9051987767584098,
-      "expected_f1": 0.9093
-    },
-    {
-      "seed": 11,
-      "measured_f1": 0.9075546719681908,
-      "expected_f1": 0.9148
-    },
-    {
-      "seed": 13,
-      "measured_f1": 0.909272183449651,
-      "expected_f1": 0.9144
-    },
-    {
-      "seed": 17,
-      "measured_f1": 0.9085427135678392,
-      "expected_f1": 0.9118
-    },
-    {
-      "seed": 19,
-      "measured_f1": 0.9099190283400809,
-      "expected_f1": 0.911
-    },
-    {
-      "seed": 23,
-      "measured_f1": 0.907520325203252,
-      "expected_f1": 0.9105
-    },
-    {
-      "seed": 29,
-      "measured_f1": 0.9049820236260914,
-      "expected_f1": 0.9074
-    },
-    {
-      "seed": 31,
-      "measured_f1": 0.9064895247828308,
-      "expected_f1": 0.9071
-    },
-    {
-      "seed": 37,
-      "measured_f1": 0.9019812304483837,
-      "expected_f1": 0.904
-    },
-    {
-      "seed": 101,
-      "measured_f1": 0.908266129032258,
-      "expected_f1": 0.9089
+      "measured_f1": 0.9396363636363637,
+      "expected_f1": 0.9422820021904271,
+      "simulated_expected_f1": 0.9422970375299552,
+      "mapping_mismatches": 0
     },
     {
       "seed": 202,
-      "measured_f1": 0.8844884488448845,
-      "expected_f1": 0.8972
+      "measured_f1": 0.9302325581395348,
+      "expected_f1": 0.939670740764768,
+      "simulated_expected_f1": 0.9396248229238472,
+      "mapping_mismatches": 0
     },
     {
       "seed": 303,
-      "measured_f1": 0.8983845752996352,
-      "expected_f1": 0.9023
+      "measured_f1": 0.9418604651162791,
+      "expected_f1": 0.9409811964573802,
+      "simulated_expected_f1": 0.9409382810491589,
+      "mapping_mismatches": 0
     },
     {
       "seed": 404,
-      "measured_f1": 0.9122994652406418,
-      "expected_f1": 0.9004
+      "measured_f1": 0.9450072358900145,
+      "expected_f1": 0.9452438541911546,
+      "simulated_expected_f1": 0.945228313888482,
+      "mapping_mismatches": 0
     },
     {
       "seed": 505,
-      "measured_f1": 0.898989898989899,
-      "expected_f1": 0.9069
+      "measured_f1": 0.9499304589707928,
+      "expected_f1": 0.9441816400349784,
+      "simulated_expected_f1": 0.9441740665360834,
+      "mapping_mismatches": 0
     },
     {
       "seed": 606,
-      "measured_f1": 0.8911449520586576,
-      "expected_f1": 0.8958
+      "measured_f1": 0.9218168279970215,
+      "expected_f1": 0.9379094033601248,
+      "simulated_expected_f1": 0.937893009198188,
+      "mapping_mismatches": 0
     },
     {
       "seed": 707,
-      "measured_f1": 0.8953744493392071,
-      "expected_f1": 0.894
+      "measured_f1": 0.9327217125382262,
+      "expected_f1": 0.9300751778278721,
+      "simulated_expected_f1": 0.9301061652834655,
+      "mapping_mismatches": 0
     },
     {
       "seed": 808,
-      "measured_f1": 0.9080919080919082,
-      "expected_f1": 0.9084
+      "measured_f1": 0.9345279117849757,
+      "expected_f1": 0.9440922754369688,
+      "simulated_expected_f1": 0.944144405767331,
+      "mapping_mismatches": 0
     },
     {
       "seed": 909,
-      "measured_f1": 0.9247417609444171,
-      "expected_f1": 0.9128
+      "measured_f1": 0.9613559322033898,
+      "expected_f1": 0.9546123866524459,
+      "simulated_expected_f1": 0.9546449141645106,
+      "mapping_mismatches": 0
     },
     {
       "seed": 1234,
-      "measured_f1": 0.8994018488308864,
-      "expected_f1": 0.8948
+      "measured_f1": 0.9422665716322167,
+      "expected_f1": 0.9394957285023161,
+      "simulated_expected_f1": 0.9395068520505283,
+      "mapping_mismatches": 0
     },
     {
       "seed": 4242,
-      "measured_f1": 0.9075114971895759,
-      "expected_f1": 0.9062
+      "measured_f1": 0.9450392576730906,
+      "expected_f1": 0.9417470803249711,
+      "simulated_expected_f1": 0.9417511479555133,
+      "mapping_mismatches": 0
     },
     {
       "seed": 5150,
-      "measured_f1": 0.9100844510680576,
-      "expected_f1": 0.9108
+      "measured_f1": 0.957004160887656,
+      "expected_f1": 0.9457513032174223,
+      "simulated_expected_f1": 0.9457367508380478,
+      "mapping_mismatches": 0
     },
     {
       "seed": 8675,
-      "measured_f1": 0.89798087141339,
-      "expected_f1": 0.8988
+      "measured_f1": 0.9440715883668905,
+      "expected_f1": 0.9343098954136044,
+      "simulated_expected_f1": 0.9343593959172204,
+      "mapping_mismatches": 0
     },
     {
       "seed": 314159,
-      "measured_f1": 0.8747913188647746,
-      "expected_f1": 0.8911
+      "measured_f1": 0.9357798165137613,
+      "expected_f1": 0.9316059007791765,
+      "simulated_expected_f1": 0.9316992017549929,
+      "mapping_mismatches": 0
     },
     {
       "seed": 271828,
-      "measured_f1": 0.8943270300333703,
-      "expected_f1": 0.8943
+      "measured_f1": 0.9298113207547171,
+      "expected_f1": 0.93314532950658,
+      "simulated_expected_f1": 0.9331750195542001,
+      "mapping_mismatches": 0
     },
     {
       "seed": 161803,
-      "measured_f1": 0.8966942148760331,
-      "expected_f1": 0.9044
+      "measured_f1": 0.9525745257452574,
+      "expected_f1": 0.9481422053688587,
+      "simulated_expected_f1": 0.9481437500694737,
+      "mapping_mismatches": 0
+    },
+    {
+      "seed": 10000,
+      "measured_f1": 0.9411764705882354,
+      "expected_f1": 0.9424733157215678,
+      "simulated_expected_f1": 0.9424708548055977,
+      "mapping_mismatches": 0
+    },
+    {
+      "seed": 20000,
+      "measured_f1": 0.9461883408071748,
+      "expected_f1": 0.9371563760751411,
+      "simulated_expected_f1": 0.9371261364275246,
+      "mapping_mismatches": 0
+    },
+    {
+      "seed": 30000,
+      "measured_f1": 0.94271911663216,
+      "expected_f1": 0.9438929894525907,
+      "simulated_expected_f1": 0.9438558487490718,
+      "mapping_mismatches": 0
+    },
+    {
+      "seed": 40000,
+      "measured_f1": 0.9436920883820384,
+      "expected_f1": 0.942856833535345,
+      "simulated_expected_f1": 0.9429379683419246,
+      "mapping_mismatches": 0
+    },
+    {
+      "seed": 50000,
+      "measured_f1": 0.9575757575757575,
+      "expected_f1": 0.9505828120371503,
+      "simulated_expected_f1": 0.9505929605211831,
+      "mapping_mismatches": 0
+    },
+    {
+      "seed": 60000,
+      "measured_f1": 0.9404934687953556,
+      "expected_f1": 0.937114317498177,
+      "simulated_expected_f1": 0.9371346835618735,
+      "mapping_mismatches": 0
+    },
+    {
+      "seed": 70000,
+      "measured_f1": 0.9291453615777939,
+      "expected_f1": 0.936898426524111,
+      "simulated_expected_f1": 0.9369163899020275,
+      "mapping_mismatches": 0
+    },
+    {
+      "seed": 80000,
+      "measured_f1": 0.9420617005267119,
+      "expected_f1": 0.9342773064475582,
+      "simulated_expected_f1": 0.9343279860559447,
+      "mapping_mismatches": 0
+    },
+    {
+      "seed": 90000,
+      "measured_f1": 0.9393718042366691,
+      "expected_f1": 0.9423779320443579,
+      "simulated_expected_f1": 0.9423870856361296,
+      "mapping_mismatches": 0
+    },
+    {
+      "seed": 100000,
+      "measured_f1": 0.9409312022237665,
+      "expected_f1": 0.9450880658643658,
+      "simulated_expected_f1": 0.9450961706008697,
+      "mapping_mismatches": 0
+    },
+    {
+      "seed": 110000,
+      "measured_f1": 0.9617790132036136,
+      "expected_f1": 0.946267323886142,
+      "simulated_expected_f1": 0.9462486758208514,
+      "mapping_mismatches": 0
+    },
+    {
+      "seed": 120000,
+      "measured_f1": 0.9290515309932786,
+      "expected_f1": 0.9396507344104718,
+      "simulated_expected_f1": 0.9397069946886047,
+      "mapping_mismatches": 0
     }
   ],
-  "measured_mean": 0.9028636572728744,
-  "measured_pstdev": 0.009082877978223101,
-  "measured_stdev": 0.009238152097311388,
-  "expected_mean": 0.9052,
-  "expected_pstdev": 0.00651255198315785,
-  "paired_diff_mean": -0.002336342727125577,
-  "paired_diff_stdev": 0.005716522541746495,
-  "paired_diff_se": 0.0010436894488671075,
-  "n_seeds_measured_above_expected": 6,
+  "measured_mean": 0.9420994989898933,
+  "measured_pstdev": 0.009519171237501716,
+  "measured_stdev": 0.009681903901300288,
+  "expected_mean": 0.9415052797545528,
+  "expected_pstdev": 0.0055652378142987576,
+  "paired_diff_mean": 0.0005942192353405244,
+  "paired_diff_stdev": 0.007298105987070489,
+  "paired_diff_se": 0.0013324457587273377,
+  "n_seeds_measured_above_expected": 17,
+  "simulation_draws": 20000,
+  "mapping_mismatches_total": 0,
+  "count_gap_mean": 1.1824513315994434e-05,
+  "residual_diff_mean": 0.00058239472202453,
+  "residual_diff_se": 0.0013320105734536637,
   "note": "Per seed: the end-to-end micro F1 on that seed's cohort against the analytic perfect-mapper expectation computed from the same cohort's expected detection counts. The paired difference is the loss (negative) or gain from the mapping and scoring stages plus the seeded draw around the expectation.",
   "eval_000_scan_conditions": {
     "sme000-co.sa": "reachable",

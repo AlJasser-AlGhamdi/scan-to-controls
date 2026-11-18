@@ -10,7 +10,7 @@
         {
           "name": "exclusive-controls",
           "ns": "https://atlas.sa/ns/oscal",
-          "value": "3"
+          "value": "4"
         },
         {
           "name": "source",
@@ -24,6 +24,63 @@
         "id": "ncnicc-exclusive",
         "title": "NCNICC-1:2025 controls with no ECC-2:2024 equivalent",
         "controls": [
+          {
+            "id": "ncnicc-2-7-1-1",
+            "title": "Use data leakage prevention and rights management technologies.",
+            "props": [
+              {
+                "name": "label",
+                "value": "2-7-1-1"
+              },
+              {
+                "name": "tier",
+                "ns": "https://atlas.sa/ns/oscal",
+                "value": "2"
+              },
+              {
+                "name": "ncnicc-class-a-status",
+                "ns": "https://atlas.sa/ns/oscal",
+                "value": "M"
+              },
+              {
+                "name": "ncnicc-class-b-status",
+                "ns": "https://atlas.sa/ns/oscal",
+                "value": "R"
+              },
+              {
+                "name": "kind",
+                "ns": "https://atlas.sa/ns/oscal",
+                "value": "ncnicc_exclusive"
+              },
+              {
+                "name": "text-source",
+                "ns": "https://atlas.sa/ns/oscal",
+                "value": "authors-paraphrase"
+              }
+            ],
+            "parts": [
+              {
+                "name": "statement",
+                "class": "en",
+                "prose": "Use data leakage prevention and rights management technologies."
+              },
+              {
+                "name": "guidance",
+                "class": "en",
+                "prose": "Data leakage prevention and rights management tools are deployed with policies covering the entity's classified data."
+              },
+              {
+                "name": "assessment-method",
+                "ns": "https://atlas.sa/ns/oscal",
+                "prose": "Inspect the configuration and policies of the deployed data leakage prevention and rights management tools."
+              },
+              {
+                "name": "remediation",
+                "ns": "https://atlas.sa/ns/oscal",
+                "prose": "Deploy data leakage prevention and rights management tools and set policies by data classification."
+              }
+            ]
+          },
           {
             "id": "ncnicc-2-7-1-2",
             "title": "Subscribe to a brand protection service that protects the entity's identity from",
@@ -92,7 +149,7 @@
               {
                 "name": "tier",
                 "ns": "https://atlas.sa/ns/oscal",
-                "value": "2"
+                "value": "1"
               },
               {
                 "name": "ncnicc-class-a-status",

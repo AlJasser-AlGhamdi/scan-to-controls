@@ -37,20 +37,20 @@ RULES: dict[CheckId, MappingRule] = {
     for r in [
         _rule(
             CheckId.MISSING_HSTS,
-            "Absent HSTS lets a network attacker strip TLS; bears on secure-transport "
-            "(2-8-3-3) and web-app protection (2-15-3-3).",
+            "Absent HSTS permits a first plaintext request but does not show HTTPS unused; a hardening "
+            "finding recorded against no control.",
             "RT-HSTS",
             "Confirm the app is HTTPS-only before treating HSTS absence as material.",
         ),
         _rule(
             CheckId.MISSING_CSP,
-            "No Content-Security-Policy weakens web-application hardening against injection/XSS.",
+            "No Content-Security-Policy weakens hardening against injection; no ECC requirement names it.",
             "RT-CSP",
             "CSP tuning is app-specific; flag, do not auto-score as critical.",
         ),
         _rule(
             CheckId.MISSING_X_FRAME_OPTIONS,
-            "Missing anti-framing control exposes the app to clickjacking (web-application security).",
+            "Missing anti-framing header exposes the app to clickjacking; no ECC requirement names it.",
             "RT-XFO",
             "Frame-ancestors CSP is an acceptable equivalent; reviewer to check.",
         ),
@@ -62,61 +62,68 @@ RULES: dict[CheckId, MappingRule] = {
         ),
         _rule(
             CheckId.MISSING_REFERRER_POLICY,
-            "No Referrer-Policy leaks navigation context; a web-application hygiene gap.",
+            "No Referrer-Policy leaks navigation context; a hygiene gap no ECC requirement names.",
             "RT-REFPOL",
             "Informational; bundles with the header baseline.",
         ),
         _rule(
             CheckId.NO_HTTPS_REDIRECT,
-            "HTTP served without redirect to HTTPS breaks the secure-protocol requirement for web apps.",
+            "Content served over plain HTTP: no secure protocol (2-15-3-3) and unencrypted transit (2-8-3-3).",
             "RT-HTTPS-REDIR",
             "Verify no plaintext-only legacy endpoint is required before enforcing.",
         ),
         _rule(
             CheckId.LEGACY_TLS_VERSION,
-            "TLS 1.0/1.1 fails the data-in-transit encryption requirement (cryptography).",
+            "TLS 1.0/1.1 is outside the NCS (2-8-3-1), below standard transit encryption (2-8-3-3) and no "
+            "secure protocol for a web application (2-15-3-3).",
             "RT-TLS-VERSION",
             "Confirm no legacy client dependency before disabling.",
         ),
         _rule(
             CheckId.WEAK_TLS_CIPHER,
-            "Weak/NULL/export ciphers violate the approved-cryptography requirement.",
+            "A NULL, anonymous, export, MD5, RC4 or DES suite is outside the NCS (2-8-3-1), below standard "
+            "transit encryption (2-8-3-3) and no secure protocol for a web application (2-15-3-3).",
             "RT-TLS-CIPHER",
             "Map negotiated cipher to NCA-approved list.",
         ),
         _rule(
             CheckId.EXPIRED_CERTIFICATE,
-            "Expired/invalid certificate undermines encrypted-transport assurance (cryptography).",
+            "A certificate in service past its validity shows the key lifecycle unmanaged (2-8-3-2) and leaves "
+            "HTTPS failing for clients (2-15-3-3).",
             "RT-CERT",
             "Distinguish expiry from chain/hostname mismatch in evidence.",
         ),
         _rule(
             CheckId.WAF_ABSENT,
-            "No WAF fingerprint on an external web app; the WAF web-application control is unmet.",
+            "No WAF signature on ordinary responses; a passive read cannot show a WAF absent, so no control.",
             "RT-WAF",
             "Fingerprinting is probabilistic; record confidence, needs review.",
         ),
         _rule(
             CheckId.EXPOSED_INTERNAL_PORT,
-            "Internal service reachable from the internet breaks network segmentation/defense-in-depth.",
+            "Internal service reachable from the internet breaks segmentation and the restriction of "
+            "services and ports.",
             "RT-SEGMENT",
             "Confirm the port is genuinely internal-only by design.",
         ),
         _rule(
             CheckId.EXPOSED_MANAGEMENT_PORT,
-            "Directly exposed SSH/RDP without MFA fronting fails the remote-access MFA control.",
+            "A management port open to the internet shows services and ports not restricted (2-5-3-5).",
             "RT-MGMT-PORT",
             "Check for a VPN/MFA gateway in front before scoring.",
         ),
         _rule(
             CheckId.HIGH_RISK_PORT_OPEN,
-            "Unnecessary high-risk port (Telnet/FTP/SMB) violates service/port restriction.",
+            "A legacy or plaintext service port (Telnet, FTP, SMB) open to the internet shows services and "
+            "ports not restricted (2-5-3-5).",
             "RT-PORT-RESTRICT",
             "Reconcile against the entity's approved-exception list.",
         ),
         _rule(
             CheckId.OUTDATED_EXPOSED_SOFTWARE,
-            "Outdated internet-facing software matches known CVEs; patch-management control is unmet.",
+            "A banner lacking a patch released more than three months earlier, the longest cycle the NCA's "
+            "patch management template allows applications, shows a released patch not applied "
+            "(2-3-3-3, 2-10-3-4).",
             "RT-PATCH",
             "Cross-check the banner version against the CVE before asserting.",
         ),
@@ -134,55 +141,58 @@ RULES: dict[CheckId, MappingRule] = {
         ),
         _rule(
             CheckId.DKIM_MISSING,
-            "No DKIM for probed selectors (selector-limited) weakens email-domain validation.",
+            "No DKIM key at the probed selectors; selectors cannot be listed, so DKIM is not shown unused.",
             "RT-DKIM",
             "Selector-limited: a negative may be a false negative; needs onboarding selectors.",
         ),
         _rule(
             CheckId.MTA_STS_MISSING,
-            "No MTA-STS policy leaves inbound SMTP open to downgrade; email-domain validation gap.",
+            "No MTA-STS policy leaves inbound SMTP open to downgrade; not domain validation, so no control.",
             "RT-MTA-STS",
             "Bundle with SPF/DKIM/DMARC review; low severity on its own.",
         ),
         _rule(
             CheckId.SELF_SIGNED_CERTIFICATE,
-            "Self-signed/untrusted chain breaks transport trust (cryptography, 2-8-3-3).",
+            "A self-signed certificate on a public web application leaves HTTPS without trust (2-15-3-3); "
+            "the NCS asks that a trusted CA certify the key (2-8-3-2).",
             "RT-CERT-TRUST",
             "Distinguish a genuinely untrusted chain from a private-CA endpoint before scoring.",
         ),
         _rule(
             CheckId.WEAK_CERTIFICATE_KEY,
-            "RSA<2048 or SHA-1 signature fails approved-cryptography strength (2-8-3-3).",
+            "A certificate key below the NCS line (RSA under 3072 bits, DSA, or an unaccepted curve) is "
+            "outside the NCS (2-8-3-1) and was created below strength (2-8-3-2).",
             "RT-CERT-KEY",
-            "Record the observed key size and signature algorithm as evidence.",
+            "Record the observed key algorithm and size as evidence.",
         ),
         _rule(
             CheckId.INSECURE_COOKIE,
-            "Session cookie without Secure/HttpOnly/SameSite weakens web-application hardening.",
+            "Session cookie without Secure/HttpOnly/SameSite weakens hardening; no ECC requirement names it.",
             "RT-COOKIE",
             "Confirm the cookie is session-bearing before treating it as material.",
         ),
         _rule(
             CheckId.DIRECTORY_LISTING_ENABLED,
-            "Directory listing discloses server contents; a web-application hardening gap.",
+            "Directory listing discloses server contents; a hardening gap no ECC requirement names.",
             "RT-DIRLIST",
             "Verify the listing is unintended, not a deliberate open index.",
         ),
         _rule(
             CheckId.EXPOSED_SENSITIVE_FILE,
-            "Exposed .git/.env/backup leaks source or secrets; web-application protection unmet.",
+            "Exposed .git/.env/backup leaks source or secrets; a hardening gap no ECC requirement names.",
             "RT-SENSFILE",
             "Confirm the artifact is genuinely sensitive, not a decoy or empty path.",
         ),
         _rule(
             CheckId.MISSING_PERMISSIONS_POLICY,
-            "Absent Permissions-Policy leaves powerful browser features unrestricted (web hardening).",
+            "Absent Permissions-Policy leaves browser features unrestricted; no ECC requirement names it.",
             "RT-PERMPOL",
             "Informational; part of the modern header baseline.",
         ),
         _rule(
             CheckId.EXPOSED_DEV_ENVIRONMENT,
-            "A reachable dev/staging host breaks production/test isolation (2-5-3-2).",
+            "A development-grade server or debug profiler answers; it shows neither an environment nor a network, "
+            "so no control.",
             "RT-DEVENV",
             "Confirm the environment is non-production, not a mislabeled production host.",
         ),
@@ -200,27 +210,35 @@ RULES: dict[CheckId, MappingRule] = {
         ),
         _rule(
             CheckId.NO_DDOS_PROTECTION,
-            "No DDoS-mitigation fingerprint with an exposed origin bears on DDoS protection (2-5-3-9).",
+            "No DDoS-mitigation fingerprint; upstream scrubbing is invisible, so protection is not shown absent.",
             "RT-DDOS",
             "Fingerprint absence is probabilistic; record confidence, needs review.",
         ),
         _rule(
             CheckId.EXPOSED_LOGIN_PANEL,
-            "An exposed admin login without fronting controls bears on web authentication (2-15-3-5).",
+            "A login form at a common path shows authentication exists, not that it is inadequate; no control.",
             "RT-LOGIN",
             "Check for a VPN/SSO gateway or MFA before scoring as a gap.",
         ),
         _rule(
             CheckId.EXPOSED_DATABASE_PORT,
-            "An internet-reachable database port breaks network isolation (2-5-3-1).",
+            "An internet-reachable database port breaks network isolation (2-5-3-1) and port "
+            "restriction (2-5-3-5).",
             "RT-DB-PORT",
             "Confirm the port is a live database service, not a honeypot or filtered response.",
         ),
         _rule(
             CheckId.EOL_SOFTWARE_EXPOSED,
-            "End-of-life exposed software cannot receive patches; system patch management gap (2-3-3-3).",
+            "End-of-life software gets no patches: patch management (2-3-3-3, 2-10-3-4) cannot be met for it.",
             "RT-EOL",
             "Cross-check the banner version against the vendor lifecycle before asserting.",
+        ),
+        _rule(
+            CheckId.EXPOSED_PRINTER_SERVICE,
+            "A print service open to the internet shows the printer's use not secured (2-7-1-3), "
+            "segmentation not in place (2-5-3-1) and a service and port not restricted (2-5-3-5).",
+            "RT-PRINTER",
+            "Number-only read: confirm the port is a print service before asserting.",
         ),
     ]
 }

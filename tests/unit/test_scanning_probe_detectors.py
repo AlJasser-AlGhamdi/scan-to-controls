@@ -15,6 +15,8 @@ def _probe(**kwargs: object) -> HttpProbe:
     return HttpProbe(**base)
 
 
+
+
 def test_a_cookie_without_secure_is_reported() -> None:
     probe = _probe(set_cookie=("sid=abc; Path=/; HttpOnly",))
     assert CheckId.INSECURE_COOKIE in checks_for_probe(probe)
@@ -73,6 +75,8 @@ def test_a_newline_joined_set_cookie_header_also_survives() -> None:
     assert parse_httpx(row)[0].set_cookie == ("a=1; Secure", "b=2; Path=/")
 
 
+
+
 @pytest.mark.parametrize(
     "headers",
     [
@@ -104,6 +108,8 @@ def test_a_hostname_is_not_evidence() -> None:
 def test_an_unreceived_response_cannot_show_a_development_signature() -> None:
     probe = _probe(status_code=0, headers={"Server": "Werkzeug/3.0.1"})
     assert checks_for_probe(probe) == []
+
+
 
 
 def test_a_mysql_greeting_is_identified() -> None:

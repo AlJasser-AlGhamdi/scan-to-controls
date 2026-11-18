@@ -17,12 +17,20 @@ TIER1_CHECKABLE: frozenset[str] = frozenset(
 
 
 def tier1_assessments(
-    mappings: Sequence[ControlMapping], *, checkable: frozenset[str] = TIER1_CHECKABLE
+    mappings: Sequence[ControlMapping],
+    *,
+    checkable: frozenset[str] = TIER1_CHECKABLE,
+    unobserved: frozenset[str],
 ) -> list[ControlAssessment]:
     non_compliant = {m.control_id for m in mappings if m.tier == 1}
     out: list[ControlAssessment] = []
     for cid in sorted(checkable | non_compliant):
-        status = ComplianceStatus.NON_COMPLIANT if cid in non_compliant else ComplianceStatus.COMPLIANT
+        if cid in non_compliant:
+            status = ComplianceStatus.NON_COMPLIANT
+        elif cid in unobserved:
+            status = ComplianceStatus.NOT_ASSESSED
+        else:
+            status = ComplianceStatus.COMPLIANT
         out.append(
             ControlAssessment(control_id=cid, tier=EvidenceTier.TIER_1, status=status, source="finding")
         )
@@ -52,16 +60,22 @@ def _neutralize_refuted(assessments: list[ControlAssessment]) -> list[ControlAss
         for a in assessments
         if a.tier == EvidenceTier.TIER_1 and a.status == ComplianceStatus.NON_COMPLIANT
     ]
-    if not tier1_nc:
+    tier1_unread = [
+        a.control_id
+        for a in assessments
+        if a.tier == EvidenceTier.TIER_1 and a.status == ComplianceStatus.NOT_ASSESSED
+    ]
+    if not tier1_nc and not tier1_unread:
         return assessments
     out: list[ControlAssessment] = []
     for a in assessments:
-        refuted = (
-            a.tier != EvidenceTier.TIER_1
-            and a.status == ComplianceStatus.COMPLIANT
-            and any(control_related(a.control_id, nc) for nc in tier1_nc)
-        )
-        out.append(a.model_copy(update={"status": ComplianceStatus.NON_COMPLIANT}) if refuted else a)
+        claim = a.tier != EvidenceTier.TIER_1 and a.status == ComplianceStatus.COMPLIANT
+        if claim and any(control_related(a.control_id, nc) for nc in tier1_nc):
+            out.append(a.model_copy(update={"status": ComplianceStatus.NON_COMPLIANT}))
+        elif claim and any(control_related(a.control_id, cid) for cid in tier1_unread):
+            out.append(a.model_copy(update={"status": ComplianceStatus.NOT_ASSESSED}))
+        else:
+            out.append(a)
     return out
 
 

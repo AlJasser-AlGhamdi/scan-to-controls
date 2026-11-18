@@ -12,7 +12,7 @@ KEY = b"nuclei-test-key"
 NUCLEI_JSONL = (
     '{"template-id":"atlas-missing-hsts","host":"x","matched-at":"http://x/",'
     '"info":{"name":"Missing HSTS","severity":"medium",'
-    '"metadata":{"atlas-check-id":"missing_hsts","control-id":"2-15-3-3"}}}\n'
+    '"metadata":{"atlas-check-id":"missing_hsts"}}}\n'
 )
 CVE_JSONL = (
     '{"template-id":"CVE-2099-0001","host":"x","matched-at":"http://x/",'
@@ -34,7 +34,7 @@ def test_parse_nuclei_extracts_metadata() -> None:
     result = parse_nuclei(NUCLEI_JSONL)[0]
     assert result.template_id == "atlas-missing-hsts"
     assert result.check_id == "missing_hsts"
-    assert result.control_ids == ("2-15-3-3",)
+    assert result.control_ids == ()
 
 
 def test_parse_nuclei_drops_malformed_control_ids() -> None:
@@ -62,7 +62,7 @@ def test_runner_maps_atlas_template_to_catalog_finding(tmp_path: Path) -> None:
     signer.write_manifest(tmp_path)
     fake = FakeRunner(NUCLEI_JSONL)
     findings = NucleiRunner(fake, signer).run("http://x/", tmp_path, consent_ref="C1")
-    assert findings[0].control_ids == ["2-15-3-3", "2-8-3-3"]
+    assert findings[0].control_ids == []
     assert findings[0].source_tool == "nuclei"
     assert any("atlas-missing-hsts.yaml" in a for a in fake.calls[0])
 

@@ -59,7 +59,7 @@ def test_every_control_has_tier_and_english_statement() -> None:
 def test_tier1_controls_are_bilingual() -> None:
     index = load_default_index()
     tier1_subcontrols = [e for e in index.by_tier(1) if e.is_subcontrol]
-    assert len(tier1_subcontrols) == 16
+    assert len(tier1_subcontrols) == 11
     for entry in tier1_subcontrols:
         assert entry.statement_ar, f"{entry.native_id} missing Arabic statement"
 

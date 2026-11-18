@@ -3,16 +3,18 @@ from __future__ import annotations
 
 import base64
 import json
+import os
 import pathlib
 import re
 import shutil
 import subprocess
 import sys
+import tempfile
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 KERNEL_DIR = ROOT / "evaluation" / "kaggle_kernel"
 DATA = ROOT / "evaluation" / "kaggle_baseline_data.json"
-BUILD = pathlib.Path("build/kaggle_build")
+BUILD = pathlib.Path(os.environ.get("P2C_SCRATCH", tempfile.gettempdir())) / "kaggle_build"
 KAGGLE = str(pathlib.Path.home() / ".local" / "bin" / "kaggle")
 ARABIC = re.compile(r"[؀-ۿݐ-ݿ]")
 

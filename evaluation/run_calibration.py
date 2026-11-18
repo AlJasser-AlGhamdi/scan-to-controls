@@ -13,7 +13,7 @@ from p2c.evaluation import metrics as M
 from p2c.scanning.catalog import CheckId
 from p2c.scanning.headers import analyze_security_headers
 
-TARGET = "http://127.0.0.1:8081/"
+TARGET = "http://127.0.0.1:9080/"
 HEADER_CHECKS: tuple[CheckId, ...] = (
     CheckId.MISSING_HSTS,
     CheckId.MISSING_CSP,

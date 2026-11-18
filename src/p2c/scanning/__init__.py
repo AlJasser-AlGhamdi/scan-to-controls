@@ -2,7 +2,9 @@ from __future__ import annotations
 
 from pathlib import Path
 
+from p2c.scanning.banners import BannerResult, BannerState, banner_checks, evaluate_banners
 from p2c.scanning.catalog import CATALOG, CheckId, CheckSpec, build_finding
+from p2c.scanning.dns_axfr import AxfrResult, ZoneTransferInspector
 from p2c.scanning.dns_sec import DnspythonResolver, DnssecInspector, DnssecResult, RecordResolver
 from p2c.scanning.email_dns import (
     DKIM_SELECTORS,
@@ -11,6 +13,7 @@ from p2c.scanning.email_dns import (
     EmailDnsInspector,
     EmailDnsResult,
 )
+from p2c.scanning.fingerprints import DdosInspector, DdosResult, waf_checks, waf_signature
 from p2c.scanning.headers import analyze_security_headers
 from p2c.scanning.httpx_probe import (
     HttpProbe,
@@ -25,6 +28,7 @@ from p2c.scanning.ports import classify_port, parse_naabu
 from p2c.scanning.services import ServiceInspector, ServiceProbe, checks_for_service, identify_database
 from p2c.scanning.signing import TemplateSigner, sign_bytes, verify_bytes
 from p2c.scanning.tls import TlsInfo, TlsInspector, evaluate_tls
+from p2c.scanning.web_paths import PathResult, PathState, WebPathInspector
 
 TEMPLATES_DIR = Path(__file__).parent / "templates"
 
@@ -32,8 +36,13 @@ __all__ = [
     "CATALOG",
     "DKIM_SELECTORS",
     "TEMPLATES_DIR",
+    "AxfrResult",
+    "BannerResult",
+    "BannerState",
     "CheckId",
     "CheckSpec",
+    "DdosInspector",
+    "DdosResult",
     "DnsReadIndeterminate",
     "DnsRecordAbsent",
     "DnspythonResolver",
@@ -47,18 +56,24 @@ __all__ = [
     "MtaStsState",
     "NucleiResult",
     "NucleiRunner",
+    "PathResult",
+    "PathState",
     "RecordResolver",
     "ServiceInspector",
     "ServiceProbe",
     "TemplateSigner",
     "TlsInfo",
     "TlsInspector",
+    "WebPathInspector",
+    "ZoneTransferInspector",
     "analyze_security_headers",
+    "banner_checks",
     "build_finding",
     "checks_for_probe",
     "checks_for_service",
     "classify_port",
     "dev_environment_signature",
+    "evaluate_banners",
     "evaluate_tls",
     "identify_database",
     "parse_httpx",
@@ -67,4 +82,6 @@ __all__ = [
     "response_received",
     "sign_bytes",
     "verify_bytes",
+    "waf_checks",
+    "waf_signature",
 ]

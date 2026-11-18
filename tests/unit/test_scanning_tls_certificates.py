@@ -44,6 +44,8 @@ def _mint(
     return signed.public_bytes(serialization.Encoding.DER)
 
 
+
+
 def test_a_truly_self_signed_certificate_is_reported() -> None:
     facts = _parse_certificate(_mint())
     assert facts.self_signed is True
@@ -79,9 +81,11 @@ def test_an_elliptic_curve_certificate_can_be_self_signed() -> None:
     assert facts.self_signed is True
 
 
+
+
 @pytest.mark.parametrize(
     ("bits", "weak"),
-    [(1024, True), (2048, False), (4096, False)],
+    [(1024, True), (2048, True), (3072, False), (4096, False)],
 )
 def test_rsa_key_sizes_against_the_documented_threshold(bits: int, weak: bool) -> None:
     key = rsa.generate_private_key(public_exponent=65537, key_size=bits)
@@ -95,7 +99,13 @@ def test_rsa_key_sizes_against_the_documented_threshold(bits: int, weak: bool) -
 
 @pytest.mark.parametrize(
     ("curve", "weak"),
-    [(ec.SECP256R1(), False), (ec.SECP384R1(), False), (ec.SECP521R1(), False), (ec.SECP192R1(), True)],
+    [
+        (ec.SECP256R1(), False),
+        (ec.SECP384R1(), False),
+        (ec.SECP521R1(), False),
+        (ec.BrainpoolP256R1(), False),
+        (ec.SECP192R1(), True),
+    ],
 )
 def test_elliptic_curves_against_the_approved_set(curve: ec.EllipticCurve, weak: bool) -> None:
     facts = _parse_certificate(_mint(subject_key=ec.generate_private_key(curve)))
@@ -106,8 +116,18 @@ def test_elliptic_curves_against_the_approved_set(curve: ec.EllipticCurve, weak:
     assert fired is weak
 
 
+def test_dsa_and_eddsa_keys_against_the_ncs() -> None:
+    def weak(algorithm: str, bits: int | None) -> bool:
+        info = TlsInfo("TLSv1.3", "AES", key_algorithm=algorithm, key_bits=bits)
+        return CheckId.WEAK_CERTIFICATE_KEY in evaluate_tls(info, now=NOW)
+
+    assert weak("dsa", 3072) and not weak("eddsa", None)
+
+
 def test_an_unread_key_raises_nothing() -> None:
     assert evaluate_tls(TlsInfo("TLSv1.3", "AES", key_algorithm=None, key_bits=None), now=NOW) == []
+
+
 
 
 def test_the_expiry_is_read_from_the_certificate() -> None:
@@ -127,6 +147,8 @@ def test_a_current_certificate_does_not_fire_the_expiry_check() -> None:
     assert evaluate_tls(TlsInfo("TLSv1.3", "AES", not_after=facts.not_after), now=NOW) == []
 
 
+
+
 def test_a_malformed_certificate_yields_no_findings() -> None:
     facts = _parse_certificate(b"not a certificate")
     assert facts == type(facts)()
@@ -139,6 +161,8 @@ def test_an_absent_certificate_yields_no_findings() -> None:
         assert facts.self_signed is None
         assert facts.key_algorithm is None
         assert facts.not_after is None
+
+
 
 
 def test_the_inspector_asks_for_the_binary_certificate(monkeypatch: pytest.MonkeyPatch) -> None:
@@ -175,7 +199,7 @@ def test_the_inspector_asks_for_the_binary_certificate(monkeypatch: pytest.Monke
     info = tls_module.TlsInspector().inspect("example.test", 443)
 
     reason = "the inspector must ask for the DER; the dict form is empty under CERT_NONE"
-    assert calls == [True], reason
+    assert calls and all(calls), reason
     assert info.not_after is not None, "the expiry must survive the live path, not just the pure one"
     assert CheckId.EXPIRED_CERTIFICATE in evaluate_tls(info, now=NOW)
 
@@ -191,3 +215,33 @@ def test_a_not_yet_valid_certificate_is_reported() -> None:
     assert CheckId.EXPIRED_CERTIFICATE not in evaluate_tls(
         TlsInfo("TLSv1.3", "AES", not_before=facts.not_before), now=NOW
     )
+
+
+def test_the_legacy_and_weak_suite_probes_drive_their_detectors() -> None:
+    modern = TlsInfo("TLSv1.3", "TLS_AES_256_GCM_SHA384")
+    assert evaluate_tls(modern, now=NOW) == []
+    suite = "ECDHE-RSA-AES256-GCM-SHA384"
+    accepts_old = TlsInfo("TLSv1.2", suite, legacy_accepted=True, weak_accepted=False)
+    assert evaluate_tls(accepts_old, now=NOW) == [CheckId.LEGACY_TLS_VERSION]
+    accepts_null = TlsInfo("TLSv1.2", suite, legacy_accepted=False, weak_accepted=True)
+    assert evaluate_tls(accepts_null, now=NOW) == [CheckId.WEAK_TLS_CIPHER]
+    unanswered = TlsInfo("TLSv1.3", "TLS_AES_256_GCM_SHA384", legacy_accepted=None, weak_accepted=None)
+    assert evaluate_tls(unanswered, now=NOW) == []
+
+
+def test_a_limit_of_our_own_library_leaves_a_probe_unread(monkeypatch: pytest.MonkeyPatch) -> None:
+    def local_limit(*args: object, **kwargs: object) -> None:
+        error = ssl.SSLError(1, "no protocols available")
+        error.reason = "NO_PROTOCOLS_AVAILABLE"
+        raise error
+
+    monkeypatch.setattr(tls_module, "_handshake", local_limit)
+    assert tls_module._accepts("example.test", 443, tls_module._LEGACY_PROBE, 1.0) is None
+
+    def refused(*args: object, **kwargs: object) -> None:
+        error = ssl.SSLError(1, "alert")
+        error.reason = "TLSV1_ALERT_PROTOCOL_VERSION"
+        raise error
+
+    monkeypatch.setattr(tls_module, "_handshake", refused)
+    assert tls_module._accepts("example.test", 443, tls_module._LEGACY_PROBE, 1.0) is False

@@ -1,0 +1,1234 @@
+{
+  "about": "SHA-256 of each row's Arabic statement in canonical form (normalised letters and digits, one space between words); check with scripts/verify_against_nca.py",
+  "sources": {
+    "nca-pdf": "NCA, Essential Cybersecurity Controls (ECC-2:2024), Arabic edition: https://cdn.nca.gov.sa/api/files/public/upload/da829b21-c4ef-4a6e-9f6e-82690d612ee9_ECC-2-2024-.pdf",
+    "gecc-2026-guide": "NCA, Guide to Essential Cybersecurity Controls Implementation (GECC-2:2026), Arabic text (its English edition: https://cdn.nca.gov.sa/api/files/public/upload/11bb8f2d-706a-4f18-80f1-40d620ebd845_GECC-.pdf); most of its pages carry no text layer, so these rows were transcribed from the page images, and a mismatch may be a transcription slip of ours",
+    "ncnicc-md": "NCA, Non-Critical National Infrastructure Cybersecurity Controls (NCNICC-1:2025), Arabic: https://cdn.nca.gov.sa/api/files/public/upload/721bed5c-5304-497c-a5ac-a92a049e6306_NCNICC-AR-.pdf"
+  },
+  "rows": [
+    {
+      "id": "1-1-1",
+      "sha256": "3dd6fb38c671e8e140b8206eeb859ac542d247b1f5cf666199b88016bc0437ec",
+      "words": 37,
+      "source": "gecc-2026-guide"
+    },
+    {
+      "id": "1-1-2",
+      "sha256": "7fc243fa1e537e857f6af4454363e45e85644e5134daaf867dcf8470c75db5c8",
+      "words": 13,
+      "source": "nca-pdf"
+    },
+    {
+      "id": "1-1-3",
+      "sha256": "c8ba77391f2786acf4e29a2d94be860c753238c1a843834045698b593d75fd39",
+      "words": 21,
+      "source": "gecc-2026-guide"
+    },
+    {
+      "id": "1-2-1",
+      "sha256": "19832c266edb7e9595be73dc3bf986e5d265b8029b89c6fd0aea058a587b4211",
+      "words": 39,
+      "source": "gecc-2026-guide"
+    },
+    {
+      "id": "1-2-2",
+      "sha256": "0722a7a82e37fe08bb6ca6b15da21707123403253e98569da038edfe6a12e87c",
+      "words": 16,
+      "source": "gecc-2026-guide"
+    },
+    {
+      "id": "1-2-3",
+      "sha256": "38f26bd799057ba9d40a975e762b8e89d10145e7fdc5364500f8be4c15b1cc21",
+      "words": 54,
+      "source": "gecc-2026-guide"
+    },
+    {
+      "id": "1-3-1",
+      "sha256": "850787cc40b66ef301eea042fddc7813675e374e439a542532926807b2b79bc0",
+      "words": 41,
+      "source": "gecc-2026-guide"
+    },
+    {
+      "id": "1-3-2",
+      "sha256": "b1c905fb4473a805a192e8edcd7f0082c4ff9929a6abe6e8d4c4d8497c974b1e",
+      "words": 19,
+      "source": "nca-pdf"
+    },
+    {
+      "id": "1-3-3",
+      "sha256": "d4f03b644af51125ed7853f925b0edc108dcfae9df31c61b4da11f9af40deefe",
+      "words": 24,
+      "source": "gecc-2026-guide"
+    },
+    {
+      "id": "1-3-4",
+      "sha256": "3e15f75606ba2073af3874b268e8409170f8978cc4c0d04b69587bc8b3535cc9",
+      "words": 30,
+      "source": "gecc-2026-guide"
+    },
+    {
+      "id": "1-4-1",
+      "sha256": "1f167908a951ebf0e82a44271a49693590c1db50c681f9b93883151649a0fbe3",
+      "words": 33,
+      "source": "gecc-2026-guide"
+    },
+    {
+      "id": "1-4-2",
+      "sha256": "d0ec11d769f8077aa428780df50a06cdc198f3e696b2e47f1692b2f649a24861",
+      "words": 25,
+      "source": "gecc-2026-guide"
+    },
+    {
+      "id": "1-5-1",
+      "sha256": "2d07938aac504e3e6c92c684ec0191eab01121bf0baf1739fe432aeb91245e0c",
+      "words": 28,
+      "source": "gecc-2026-guide"
+    },
+    {
+      "id": "1-5-2",
+      "sha256": "01d75a593f606c928b69abe4408ee7fb50f66000df227ec2198a9b2603bfc927",
+      "words": 15,
+      "source": "gecc-2026-guide"
+    },
+    {
+      "id": "1-5-3",
+      "sha256": "0bb8c29dadc15ea66619bd545343fcb9b55d0fc17c55879f66b68a1b96e3b325",
+      "words": 12,
+      "source": "gecc-2026-guide"
+    },
+    {
+      "id": "1-5-3-1",
+      "sha256": "e3c7f6de70af28980da09413bd34d978735bd1823e8b1745437072115207488e",
+      "words": 6,
+      "source": "gecc-2026-guide"
+    },
+    {
+      "id": "1-5-3-2",
+      "sha256": "4aeb7303a8cc81afa7e451dfd9c51cc13e66f76a6410592ea592f3ad69fdfa21",
+      "words": 22,
+      "source": "gecc-2026-guide"
+    },
+    {
+      "id": "1-5-3-3",
+      "sha256": "504f1c4f2d04986a454e9a1306ab387ae563dfd5d50002375f95b7d5225f4947",
+      "words": 7,
+      "source": "gecc-2026-guide"
+    },
+    {
+      "id": "1-5-3-4",
+      "sha256": "bce80b09f44342a5e0c3c474ef9439e7896f014b7b0a5fe31ec68d6c1ece51aa",
+      "words": 8,
+      "source": "gecc-2026-guide"
+    },
+    {
+      "id": "1-5-4",
+      "sha256": "1abc1ae2e867323b5555a7d2a5c9b4261e78b90ecffb2a9fcadc8eab9116fb37",
+      "words": 31,
+      "source": "gecc-2026-guide"
+    },
+    {
+      "id": "1-6-1",
+      "sha256": "26fdddb46ad7f9076befa78652c8f237b1b412653816a6eb00c1b34f6127bc89",
+      "words": 42,
+      "source": "gecc-2026-guide"
+    },
+    {
+      "id": "1-6-2",
+      "sha256": "115bd7b0397b08cfb398585a55e9b4d2a967c969b0acef31581bdbf12568b59e",
+      "words": 18,
+      "source": "gecc-2026-guide"
+    },
+    {
+      "id": "1-6-2-1",
+      "sha256": "81aede1ae5812932541d2cd3e137d95c5d3b2f61e6ac414983555bae6b72b219",
+      "words": 3,
+      "source": "gecc-2026-guide"
+    },
+    {
+      "id": "1-6-2-2",
+      "sha256": "710d1221c408743f3a8a9f11f29d9e1b5b21835c1fd88bd5fdf5b4966b5f7a78",
+      "words": 11,
+      "source": "gecc-2026-guide"
+    },
+    {
+      "id": "1-6-3",
+      "sha256": "4046eb42416e317ac46b41c5ccd331fe548cd4b6b7958a0d720b57fd44da3628",
+      "words": 16,
+      "source": "gecc-2026-guide"
+    },
+    {
+      "id": "1-6-3-1",
+      "sha256": "9f3a451098c32eb393b4eb12aa760433f2c109f3ec61ffb71318ec385c03c49c",
+      "words": 5,
+      "source": "gecc-2026-guide"
+    },
+    {
+      "id": "1-6-3-2",
+      "sha256": "ec7d58219b4da1b8c313c36e4b9e3deb345bc38502eea90cdc978d162cc0b6b2",
+      "words": 10,
+      "source": "gecc-2026-guide"
+    },
+    {
+      "id": "1-6-3-3",
+      "sha256": "90d6697ef2eea2cef7b1e4ec8e9622cf169836ba1894c9b3eba825577cb74bf6",
+      "words": 11,
+      "source": "gecc-2026-guide"
+    },
+    {
+      "id": "1-6-3-4",
+      "sha256": "b7edfba5c02db37ba115e4c982ac0ec1539202e02164b9c16c8a7237eb5ff32a",
+      "words": 4,
+      "source": "gecc-2026-guide"
+    },
+    {
+      "id": "1-6-3-5",
+      "sha256": "0cca75002ff0c6f6b80c5f3a9ec4da1bf34991c05407ccae727e168b05ae1be3",
+      "words": 10,
+      "source": "gecc-2026-guide"
+    },
+    {
+      "id": "1-6-4",
+      "sha256": "534212f65212eed3ae82388a2ace4369f21445d601374b97e9c8ebe75f53aef2",
+      "words": 11,
+      "source": "nca-pdf"
+    },
+    {
+      "id": "1-7-1",
+      "sha256": "a9fa8d3a5ed5ec81e4d862ed4020d8cdefd577d3ab2aded74b01694f4758f993",
+      "words": 22,
+      "source": "gecc-2026-guide"
+    },
+    {
+      "id": "1-8-1",
+      "sha256": "c62a9b742f5bafc9a58282a7e04debeb0a2aef047aa1080ab20c1b59eadf96cf",
+      "words": 14,
+      "source": "nca-pdf"
+    },
+    {
+      "id": "1-8-2",
+      "sha256": "a25c8482975de3985bf400c559134027754b8adbef16ef0518bd686730c275bd",
+      "words": 49,
+      "source": "gecc-2026-guide"
+    },
+    {
+      "id": "1-8-3",
+      "sha256": "775b9c9b3f7180642e5b57fc6e84d63d1972e156ffc333cb1fb01dce8cb4f6dd",
+      "words": 32,
+      "source": "gecc-2026-guide"
+    },
+    {
+      "id": "1-9-1",
+      "sha256": "aa0e44317d031c070d804146fb1bb50238d3d8eaa74a6dab2dedc5595f1b7fa1",
+      "words": 19,
+      "source": "nca-pdf"
+    },
+    {
+      "id": "1-9-2",
+      "sha256": "f0aabe2b481d732db94edeafe6963f4dd03f97be227cc2e0c46323734f931156",
+      "words": 9,
+      "source": "nca-pdf"
+    },
+    {
+      "id": "1-9-3",
+      "sha256": "a1d8ca97a460811c0053933499387ecc71cd02c96ea13ad6863540afcc953110",
+      "words": 16,
+      "source": "gecc-2026-guide"
+    },
+    {
+      "id": "1-9-3-1",
+      "sha256": "483520e344d35dc1056a4570d6df030a23c02e53b69a96ca17196377480d4ef7",
+      "words": 23,
+      "source": "gecc-2026-guide"
+    },
+    {
+      "id": "1-9-3-2",
+      "sha256": "b9486e9cc748e06752d3dbe1f09ed18bfd4990bac0af1af28730e16988944885",
+      "words": 14,
+      "source": "gecc-2026-guide"
+    },
+    {
+      "id": "1-9-4",
+      "sha256": "1eefbe65f837f914d483f7bd81fbb1dccdf2efe7914f8090ee3c0a1228be8f3f",
+      "words": 15,
+      "source": "gecc-2026-guide"
+    },
+    {
+      "id": "1-9-4-1",
+      "sha256": "36942825359170fbe805c00f87fcf1121f340494ee40da499bd63ddf5d5bc8ef",
+      "words": 8,
+      "source": "gecc-2026-guide"
+    },
+    {
+      "id": "1-9-4-2",
+      "sha256": "bcee0a3efd00313a2bf6394ebc4347d7c04b70b25f79fdfd3cc5be3de2b54a7d",
+      "words": 13,
+      "source": "gecc-2026-guide"
+    },
+    {
+      "id": "1-9-5",
+      "sha256": "127d8125ac024bb797558b03a5d68354d7cf161bbbddf1de50e9f0277378c762",
+      "words": 13,
+      "source": "gecc-2026-guide"
+    },
+    {
+      "id": "1-9-6",
+      "sha256": "2af3f3da213ae39d2364347110ec4a5f3e44ea0047cdfcfac62ffeef451943a2",
+      "words": 10,
+      "source": "nca-pdf"
+    },
+    {
+      "id": "1-10-1",
+      "sha256": "1797191e5f1054b676f47dee16c2acad28be8adb1fb949148652315c5cb8716a",
+      "words": 26,
+      "source": "gecc-2026-guide"
+    },
+    {
+      "id": "1-10-2",
+      "sha256": "6cb38804f81b6289b28e479f8f4698b781680cb415d3264328b5bc2cd447034f",
+      "words": 9,
+      "source": "nca-pdf"
+    },
+    {
+      "id": "1-10-3",
+      "sha256": "578601d99d6b83638cc025cbbf3b829dcf606d8fb0a28535e220b811c5e108ec",
+      "words": 21,
+      "source": "nca-pdf"
+    },
+    {
+      "id": "1-10-3-1",
+      "sha256": "5f392abae0b72dd52ab176eeaa3ede296835f2ff9100ffeadd4d7938abf3373e",
+      "words": 11,
+      "source": "gecc-2026-guide"
+    },
+    {
+      "id": "1-10-3-2",
+      "sha256": "4171e2834e708e699816d0ee2639e2791342eab5831476e23ef837c9d11560fe",
+      "words": 7,
+      "source": "gecc-2026-guide"
+    },
+    {
+      "id": "1-10-3-3",
+      "sha256": "a54a5d25fdde99565d284ca099ecada3306ae1d56242b61fb400392acf838135",
+      "words": 6,
+      "source": "gecc-2026-guide"
+    },
+    {
+      "id": "1-10-3-4",
+      "sha256": "87a962ff38452118d055ade1b1db0be6e2010033c52281bb9e7922a5ccd6ddf1",
+      "words": 6,
+      "source": "gecc-2026-guide"
+    },
+    {
+      "id": "1-10-4",
+      "sha256": "81b0e68c09f04574490bf2419452b356307e197a99177eb9a0d6930acabff8d2",
+      "words": 30,
+      "source": "gecc-2026-guide"
+    },
+    {
+      "id": "1-10-4-1",
+      "sha256": "53bd959a4b706440d6aedb8500980d2f272cb7ca986af1da3c3e7c0fb2818a65",
+      "words": 5,
+      "source": "gecc-2026-guide"
+    },
+    {
+      "id": "1-10-4-2",
+      "sha256": "8ce86d944f673dab94c1d499c6eacd8a0320d4a2605279cf396c93a9c395a6da",
+      "words": 12,
+      "source": "gecc-2026-guide"
+    },
+    {
+      "id": "1-10-4-3",
+      "sha256": "d68012d05c9d33027876a2c80428f4098158067663e320c5b6ee139efa45c309",
+      "words": 3,
+      "source": "gecc-2026-guide"
+    },
+    {
+      "id": "1-10-5",
+      "sha256": "ac7cfbd2c0a5a892fd633b1b36995ef0643c4f0d92c888bef0917ba3028b735f",
+      "words": 10,
+      "source": "nca-pdf"
+    },
+    {
+      "id": "2-1-1",
+      "sha256": "0ab8169656fa56dc3224df6dcdb19bce63b6276abbc6f63ad9df61c0aff3d5db",
+      "words": 12,
+      "source": "nca-pdf"
+    },
+    {
+      "id": "2-1-2",
+      "sha256": "b2d352b16702cf403a37fcddd4e75bd829aa28db26de11ab76dbbcce4627daf9",
+      "words": 10,
+      "source": "nca-pdf"
+    },
+    {
+      "id": "2-1-3",
+      "sha256": "968a9a9004b3da6676482a7f4ace4ef5794750d546fba440a42896ddb0bc6e36",
+      "words": 12,
+      "source": "gecc-2026-guide"
+    },
+    {
+      "id": "2-1-4",
+      "sha256": "846eec827c85669f2643ca6933318f95365569f47e370ae090bc14279879ee71",
+      "words": 9,
+      "source": "nca-pdf"
+    },
+    {
+      "id": "2-1-5",
+      "sha256": "ffd7ee17e2508806f8d0f49f64d4b061cc49f6d80669eb856619266c8f2ba5f2",
+      "words": 15,
+      "source": "gecc-2026-guide"
+    },
+    {
+      "id": "2-1-6",
+      "sha256": "0d9f6f39bc18c2fcf4df98d2a7c93c68a4763670a3c5fce0e39d3f6234f9ec63",
+      "words": 11,
+      "source": "nca-pdf"
+    },
+    {
+      "id": "2-2-1",
+      "sha256": "e1cb2a1b8ca7006d2bd8b2f93ca587952c837e79c042120800277dbab7f08625",
+      "words": 13,
+      "source": "nca-pdf"
+    },
+    {
+      "id": "2-2-2",
+      "sha256": "1468ec40901f145ffbe7f6934c7548594998454d17810bf2075892c29d21ee0e",
+      "words": 11,
+      "source": "nca-pdf"
+    },
+    {
+      "id": "2-2-3",
+      "sha256": "762041e1605612310615e281ca2c51287692a585e68d75510b586de24192cb7a",
+      "words": 17,
+      "source": "gecc-2026-guide"
+    },
+    {
+      "id": "2-2-3-1",
+      "sha256": "198d3e4c5e723189acb7d423f23621f945eed7b82891865b4fa15721fd998b81",
+      "words": 13,
+      "source": "gecc-2026-guide"
+    },
+    {
+      "id": "2-2-3-2",
+      "sha256": "7931a2487c9244c37dd49244ed32eb1c7e41d6304ac0a32c524b18652e7e540e",
+      "words": 34,
+      "source": "gecc-2026-guide"
+    },
+    {
+      "id": "2-2-3-3",
+      "sha256": "f2c244d5ca0230fb4514f2ad4e975fd421b1ac2a6d08e2639c4001adcae7c58d",
+      "words": 24,
+      "source": "gecc-2026-guide"
+    },
+    {
+      "id": "2-2-3-4",
+      "sha256": "e00fb1824706bf51b238230a9d3d38f3663f2112ba63d02819a419cba39b071a",
+      "words": 4,
+      "source": "gecc-2026-guide"
+    },
+    {
+      "id": "2-2-3-5",
+      "sha256": "c06c1c59e075efc9fbd8b75eea7fc45ba03d38b90e2284bc30808923aca5a8e9",
+      "words": 5,
+      "source": "gecc-2026-guide"
+    },
+    {
+      "id": "2-2-4",
+      "sha256": "771384b79c8c7019eeaaed237962599169f96f73d4c35bcd2be39e20beb74c04",
+      "words": 13,
+      "source": "gecc-2026-guide"
+    },
+    {
+      "id": "2-3-1",
+      "sha256": "2db718bd273c7a0288bb26f4af1ae80d274736b08dccf359451b16fcb767d0c4",
+      "words": 13,
+      "source": "nca-pdf"
+    },
+    {
+      "id": "2-3-2",
+      "sha256": "d6aca929a29c4d22e4b6a5e7ae64d21fdaf70f89e2fdbdce53b1ff6452e86bc1",
+      "words": 11,
+      "source": "nca-pdf"
+    },
+    {
+      "id": "2-3-3",
+      "sha256": "9cebd4630067272ca8a5eb4c5510963dd2045c7534edf0ef5a1b1db0cab04958",
+      "words": 16,
+      "source": "nca-pdf"
+    },
+    {
+      "id": "2-3-3-1",
+      "sha256": "524aeca01d0ecb1f006494c4d3996851f25897453a0b6b36010c8c5f5455feff",
+      "words": 21,
+      "source": "gecc-2026-guide"
+    },
+    {
+      "id": "2-3-3-2",
+      "sha256": "6b6401e28d016d4a56c6d4d8ee3c9f05eff981e4ef70d34bbfd4a30fc7d6258e",
+      "words": 10,
+      "source": "gecc-2026-guide"
+    },
+    {
+      "id": "2-3-3-3",
+      "sha256": "fb271b449006566362f2339822af1ad1d48a7af851264a468554eeb38699bdd8",
+      "words": 7,
+      "source": "gecc-2026-guide"
+    },
+    {
+      "id": "2-3-3-4",
+      "sha256": "a4cb4b622e2c42f1b96f752993e4e6336877b20cb74e84af30f665a8f04edfaf",
+      "words": 17,
+      "source": "gecc-2026-guide"
+    },
+    {
+      "id": "2-3-4",
+      "sha256": "9b88dc686d175b59a6c548a7c7302abdbf3e22b84b0ae2dabcce0dd012d17354",
+      "words": 12,
+      "source": "gecc-2026-guide"
+    },
+    {
+      "id": "2-4-1",
+      "sha256": "4a3bbd38547901496fd3e901114221c66b6b426b5371a4dab9db6762224c6b41",
+      "words": 11,
+      "source": "nca-pdf"
+    },
+    {
+      "id": "2-4-2",
+      "sha256": "d1962f4990df3754e952fac2bf3f2d88498588022ebec7f10896e6913d83b642",
+      "words": 9,
+      "source": "nca-pdf"
+    },
+    {
+      "id": "2-4-3",
+      "sha256": "bf73c14dcb17db0a7b38fd65ab0e7eba6f87f092c72171d1b71e8b9639729622",
+      "words": 14,
+      "source": "gecc-2026-guide"
+    },
+    {
+      "id": "2-4-3-1",
+      "sha256": "1f386f03d2888aeaf56b73632ab6dbbe7e42c9b0b4543aadcdbef5102961c8c2",
+      "words": 19,
+      "source": "gecc-2026-guide"
+    },
+    {
+      "id": "2-4-3-2",
+      "sha256": "bb33940fc956678eebbec957a78ddb9db699d00dcee4527bec65ecda70dafa89",
+      "words": 35,
+      "source": "gecc-2026-guide"
+    },
+    {
+      "id": "2-4-3-3",
+      "sha256": "5c3b3983268c96c739821bde244971a9c71d5999364ad71b8a37a75c485217ba",
+      "words": 5,
+      "source": "gecc-2026-guide"
+    },
+    {
+      "id": "2-4-3-4",
+      "sha256": "c3795bb1f68d8de0c1f67c3bd3ebda99fa0acd18948a3ac868e2f5a09cdc9cf0",
+      "words": 17,
+      "source": "gecc-2026-guide"
+    },
+    {
+      "id": "2-4-3-5",
+      "sha256": "e126d5d41fcde2b70260bc5942d0d819d924bb08bd7fb04c3c34effd5ce2ad1a",
+      "words": 18,
+      "source": "gecc-2026-guide"
+    },
+    {
+      "id": "2-4-4",
+      "sha256": "c4b8ccd3eb726048a9163aff74ecfaa4e44db65d65f13a3b4378e08e868fc8c6",
+      "words": 12,
+      "source": "nca-pdf"
+    },
+    {
+      "id": "2-5-1",
+      "sha256": "5e9d624b24952c3c8ea750adf1871df59782e0be725db17c2fe7b2457a4dfdd6",
+      "words": 11,
+      "source": "nca-pdf"
+    },
+    {
+      "id": "2-5-2",
+      "sha256": "a355f33aa3b85c4edafc39993d021771c795b0340374621ea46af048bcde0d55",
+      "words": 9,
+      "source": "nca-pdf"
+    },
+    {
+      "id": "2-5-3",
+      "sha256": "09714adaf4d2943ff1d71c41d985416be115ad4258400a670c81ee858afb40d3",
+      "words": 14,
+      "source": "gecc-2026-guide"
+    },
+    {
+      "id": "2-5-3-1",
+      "sha256": "9e18d4e4ec14ef70eebc36f4bd8a0d8f060093939b31f1d32271d84eeecdb388",
+      "words": 25,
+      "source": "gecc-2026-guide"
+    },
+    {
+      "id": "2-5-3-2",
+      "sha256": "0dfa64a6568c9451cf5846e56b072b5f2211856ee75f7f3c00f9340151abdbc1",
+      "words": 9,
+      "source": "gecc-2026-guide"
+    },
+    {
+      "id": "2-5-3-3",
+      "sha256": "c83ce9e9ffb4d96a2959a2fc3a3ad57f4a5afc7517848e482335ac98bcb222b8",
+      "words": 19,
+      "source": "gecc-2026-guide"
+    },
+    {
+      "id": "2-5-3-4",
+      "sha256": "6c85b55b188e7b28bcf6c1ed301c4c49f5e4c96944306d1f18c6af1c6b71470f",
+      "words": 35,
+      "source": "gecc-2026-guide"
+    },
+    {
+      "id": "2-5-3-5",
+      "sha256": "fddbcbc7b947d4da00d7a18a38b3bc3c3253eddd9667492da7d6e55f12daad96",
+      "words": 6,
+      "source": "gecc-2026-guide"
+    },
+    {
+      "id": "2-5-3-6",
+      "sha256": "2975993c5a2094a10a9c190bcc69c32091c6e86c7d18b97814ce83628dd026ff",
+      "words": 6,
+      "source": "gecc-2026-guide"
+    },
+    {
+      "id": "2-5-3-7",
+      "sha256": "f1b3fc382daab7a1472a59d7417364346a427920d3a09b9d3c13f79fb75db465",
+      "words": 4,
+      "source": "gecc-2026-guide"
+    },
+    {
+      "id": "2-5-3-8",
+      "sha256": "828b705fd1733870f40c31ae0e067a1d1286ef339c9cdbc2a286f96f6ba89c76",
+      "words": 20,
+      "source": "gecc-2026-guide"
+    },
+    {
+      "id": "2-5-3-9",
+      "sha256": "f055d631f7ac2825a2dc1bfc669d150ad52f8c1046fa1775eed5ec98fc01a691",
+      "words": 14,
+      "source": "gecc-2026-guide"
+    },
+    {
+      "id": "2-5-4",
+      "sha256": "4397ba4b9a5f4931ccecf2eca46f71fc5993ddfabdd073cc7bc03fdd0ec33cb4",
+      "words": 11,
+      "source": "gecc-2026-guide"
+    },
+    {
+      "id": "2-6-1",
+      "sha256": "cb4f80b35dd4dcf9cad09bcbf403562f6c3b4813581f9d5c961657ce3f497d76",
+      "words": 18,
+      "source": "gecc-2026-guide"
+    },
+    {
+      "id": "2-6-2",
+      "sha256": "b66a0cc9ad50cf59d145f8c7e9e46b021be2e292ac597c4a71c79b58b82718dc",
+      "words": 11,
+      "source": "gecc-2026-guide"
+    },
+    {
+      "id": "2-6-3",
+      "sha256": "b57ab856f2c81b4d29c8a077bfcd134e1b7625f82a1ee6fd23fcefd4750ec45e",
+      "words": 16,
+      "source": "gecc-2026-guide"
+    },
+    {
+      "id": "2-6-3-1",
+      "sha256": "70b8f30f0f5b6ca83a527a6600fea43d76b65e53128f5fa730bc3b987b05d32f",
+      "words": 11,
+      "source": "gecc-2026-guide"
+    },
+    {
+      "id": "2-6-3-2",
+      "sha256": "5c6c7704f3d137febfefb56df5efcaec98908256fa648929864d73a269be696b",
+      "words": 10,
+      "source": "gecc-2026-guide"
+    },
+    {
+      "id": "2-6-3-3",
+      "sha256": "314e9d1d051f63f0f94b2cb0180271e0a9b21b49d8c9f9872a10bdc5f41c35f6",
+      "words": 21,
+      "source": "gecc-2026-guide"
+    },
+    {
+      "id": "2-6-3-4",
+      "sha256": "7e2ee2a810b551577f94d7f007b49dc0cbf7222ff5038ab2b9f7104bbf269e38",
+      "words": 3,
+      "source": "gecc-2026-guide"
+    },
+    {
+      "id": "2-6-4",
+      "sha256": "180e6c2340756f9c2c192b97889ac98284b9c461a5336fcbdc58c6c194b8a846",
+      "words": 13,
+      "source": "gecc-2026-guide"
+    },
+    {
+      "id": "2-7-1",
+      "sha256": "b13d3b6574dc0f4a0cb06d031453faf70565bdff4d0b35a6920276eaed500944",
+      "words": 19,
+      "source": "gecc-2026-guide"
+    },
+    {
+      "id": "2-7-1-1",
+      "sha256": "45aa5a3b37348144fb2c2b8caff1d3cee268c9790bc17e1381ef8d203958fa30",
+      "words": 8,
+      "source": "ncnicc-md"
+    },
+    {
+      "id": "2-7-1-2",
+      "sha256": "c476987477a84f989fa520a7f1da06de0da88727353b6141a8f414eb238b8b1b",
+      "words": 10,
+      "source": "ncnicc-md"
+    },
+    {
+      "id": "2-7-1-3",
+      "sha256": "31d4f1fb3f3085335d52c240fa2ea26bc904680c18c9ab0dc5d6343f8437458e",
+      "words": 7,
+      "source": "ncnicc-md"
+    },
+    {
+      "id": "2-7-2",
+      "sha256": "f2518e38dff3c1e95e6704cacf20cff615c3fe276c15e1365d5fa34434b7846c",
+      "words": 12,
+      "source": "gecc-2026-guide"
+    },
+    {
+      "id": "2-7-3",
+      "sha256": "3229f183d1172faf1401e2fc7bc03709e583ced2501468b415c66ce66705b11d",
+      "words": 11,
+      "source": "nca-pdf"
+    },
+    {
+      "id": "2-8-1",
+      "sha256": "22d2536d74f5802a662ee06e800cb68bacc556161da40a54e0829832741a1806",
+      "words": 10,
+      "source": "gecc-2026-guide"
+    },
+    {
+      "id": "2-8-2",
+      "sha256": "61fcac6f26e1f2febf6a98e8f9b83a30d36cb0b35c437ca7d9e30db89f235929",
+      "words": 8,
+      "source": "nca-pdf"
+    },
+    {
+      "id": "2-8-3",
+      "sha256": "5dea86d5cc2916dac6ebb819bc1a2834bbfe0cf0e7925314955ec30e401917cc",
+      "words": 47,
+      "source": "gecc-2026-guide"
+    },
+    {
+      "id": "2-8-3-1",
+      "sha256": "53ecb887928556256fcafda256c2c57c118f7495d8d2b3ac205543a69afe147e",
+      "words": 9,
+      "source": "gecc-2026-guide"
+    },
+    {
+      "id": "2-8-3-2",
+      "sha256": "b2e0e075de38feb6256c22aac9d6d6fab786b82bfe7a8f8c28316adc58782a9a",
+      "words": 8,
+      "source": "gecc-2026-guide"
+    },
+    {
+      "id": "2-8-3-3",
+      "sha256": "cc845d13c6f6d03f0d04d6ccebaa50400b97aa51b93e36d2510155a819f84bdc",
+      "words": 15,
+      "source": "gecc-2026-guide"
+    },
+    {
+      "id": "2-8-4",
+      "sha256": "6522c264488ec0861ca58fdcc594fe6e93639f0b4b04a44a059e955d5e35ef7f",
+      "words": 10,
+      "source": "gecc-2026-guide"
+    },
+    {
+      "id": "2-9-1",
+      "sha256": "1998d094f36d521bbb59d7fb3c29508af5615167fedd55f738dd5f83ecf22a56",
+      "words": 11,
+      "source": "nca-pdf"
+    },
+    {
+      "id": "2-9-2",
+      "sha256": "b54c886aa9eb0636dc5e43afe0d2c6351df3f86707491ed010f240d7c5659778",
+      "words": 9,
+      "source": "nca-pdf"
+    },
+    {
+      "id": "2-9-3",
+      "sha256": "78a559cfdc673dd924a8a90b110a3f69db54219b71869f61db7d1b5c889dd2ec",
+      "words": 13,
+      "source": "gecc-2026-guide"
+    },
+    {
+      "id": "2-9-3-1",
+      "sha256": "b829e803bf9c30a356f25b21e9d072cd902460ae1572b1a6f78c5cc8296f9b19",
+      "words": 8,
+      "source": "gecc-2026-guide"
+    },
+    {
+      "id": "2-9-3-2",
+      "sha256": "ea0ddd49ca666bdc2c5184ccce7f1f987a1b767fa993e86f1d553c996a109d6d",
+      "words": 11,
+      "source": "gecc-2026-guide"
+    },
+    {
+      "id": "2-9-3-3",
+      "sha256": "378dc8d71176b7a726e331c0fad919e6ffd04d926e8453b25b1e332fd309cb5d",
+      "words": 8,
+      "source": "gecc-2026-guide"
+    },
+    {
+      "id": "2-9-4",
+      "sha256": "670bbf55f0b384e006a308ba292c3083cea0a2f504a390d9b3b9c77e81fabe8c",
+      "words": 10,
+      "source": "nca-pdf"
+    },
+    {
+      "id": "2-10-1",
+      "sha256": "e2ab26d31562be006a330a3d22fe1888ba587e3e8c31ccb94e936d8f20b54193",
+      "words": 11,
+      "source": "gecc-2026-guide"
+    },
+    {
+      "id": "2-10-2",
+      "sha256": "31cddf11ae2f9dc5b656cd7bbee49e1e9a8437f6b859d92da1522fad63c9d12d",
+      "words": 9,
+      "source": "nca-pdf"
+    },
+    {
+      "id": "2-10-3",
+      "sha256": "46dc6d0de95e50a271c9fc037a2096990dd3767108f41dd34dda921957cc9641",
+      "words": 12,
+      "source": "nca-pdf"
+    },
+    {
+      "id": "2-10-3-1",
+      "sha256": "d666cc158bd42e0a5aa587219319ad640e7c32890e6e16166ecc670e056b2a77",
+      "words": 4,
+      "source": "gecc-2026-guide"
+    },
+    {
+      "id": "2-10-3-2",
+      "sha256": "638060f20fe4e6407451a9fdcccee0f5df39d0b7745700e1bc975313aa836d5a",
+      "words": 4,
+      "source": "gecc-2026-guide"
+    },
+    {
+      "id": "2-10-3-3",
+      "sha256": "a8c31704c25c384af927d7d71cd891f709e57a575400623e35526d7401dfce98",
+      "words": 9,
+      "source": "gecc-2026-guide"
+    },
+    {
+      "id": "2-10-3-4",
+      "sha256": "61d8a7d6ddc2e78e46a8c5331da656c10bd3ea7fbb414efa48ce9afc48017b68",
+      "words": 25,
+      "source": "gecc-2026-guide"
+    },
+    {
+      "id": "2-10-3-5",
+      "sha256": "c863654c6ab5f95950af0c45795124afaa6a5e1a071a78caad0a68ad95c5216e",
+      "words": 12,
+      "source": "gecc-2026-guide"
+    },
+    {
+      "id": "2-10-4",
+      "sha256": "41b343b4c2e65e6125c059860db2d2d27d11b9dbd54729a2bf2947b63a997410",
+      "words": 11,
+      "source": "nca-pdf"
+    },
+    {
+      "id": "2-11-1",
+      "sha256": "233cc625e48f8ec396516060e9d213bf7553432912fc81bedfb4adef6b7b5ab2",
+      "words": 11,
+      "source": "gecc-2026-guide"
+    },
+    {
+      "id": "2-11-2",
+      "sha256": "a03a74ac95be447609232459e4b36c9a037410253e0df351d2337a834a70c727",
+      "words": 7,
+      "source": "nca-pdf"
+    },
+    {
+      "id": "2-11-3",
+      "sha256": "60c5fe741c7738601fc6eded77471424d7d0e3575e43f3398d2fbb593540c9e8",
+      "words": 12,
+      "source": "gecc-2026-guide"
+    },
+    {
+      "id": "2-11-3-1",
+      "sha256": "c2b1f408b0b8167074a0befbd093006b1f909d8d0bcc53538cfba04025d11713",
+      "words": 30,
+      "source": "gecc-2026-guide"
+    },
+    {
+      "id": "2-11-3-2",
+      "sha256": "21bdadbddd0320a4e34d0367da0f9fb8650067e7b7609da573d7cded11a4608c",
+      "words": 4,
+      "source": "gecc-2026-guide"
+    },
+    {
+      "id": "2-11-4",
+      "sha256": "d5d234028314ef8ac1341b84b1cf6f5b2b689b6d6d9aa579a14ce424890d0a60",
+      "words": 12,
+      "source": "nca-pdf"
+    },
+    {
+      "id": "2-12-1",
+      "sha256": "a441e100860d68fbd82c712a3d507c47bf87da99b2d3129269eb0d4382ee6058",
+      "words": 12,
+      "source": "nca-pdf"
+    },
+    {
+      "id": "2-12-1-2",
+      "sha256": "830e5febe6c273ee50c4b4d4cf4928232e0ac49adb4f00bfb4742123e1bef666",
+      "words": 14,
+      "source": "ncnicc-md"
+    },
+    {
+      "id": "2-12-2",
+      "sha256": "328fe708dd621e92efe9c5379874314836b32683ed01a20fc978fff44a44c705",
+      "words": 10,
+      "source": "nca-pdf"
+    },
+    {
+      "id": "2-12-3",
+      "sha256": "428a36e32c32103d20be6cb94966db0a213210af098e1efd46288150d38598ba",
+      "words": 14,
+      "source": "gecc-2026-guide"
+    },
+    {
+      "id": "2-12-3-1",
+      "sha256": "ca19115be3307ef3e5cf4b4335f7ad43d5b6763742c5def0cbc94762324a699b",
+      "words": 12,
+      "source": "gecc-2026-guide"
+    },
+    {
+      "id": "2-12-3-2",
+      "sha256": "bfe25c79b2941903f6790aea0f9a94d8ba6829aec3c9fab0b22bae68580adfb9",
+      "words": 19,
+      "source": "gecc-2026-guide"
+    },
+    {
+      "id": "2-12-3-3",
+      "sha256": "a9fd223ace9c937e8dbc9941ed0763ea5f134451b55c90f1079b42a8ee2fec21",
+      "words": 9,
+      "source": "gecc-2026-guide"
+    },
+    {
+      "id": "2-12-3-4",
+      "sha256": "b62bd5adf0a24ca47be5226efa022a0d1929d81393d0512aed59ea139af950d8",
+      "words": 7,
+      "source": "gecc-2026-guide"
+    },
+    {
+      "id": "2-12-3-5",
+      "sha256": "116b891bf97c053307185346086aff29620304a3cc4fbb82d8e22cbf915c97d5",
+      "words": 13,
+      "source": "gecc-2026-guide"
+    },
+    {
+      "id": "2-12-4",
+      "sha256": "987f546f4b72f5cce71c13b5b0f09e7f84ca8cfef594242d1987399d1f7b6201",
+      "words": 13,
+      "source": "nca-pdf"
+    },
+    {
+      "id": "2-13-1",
+      "sha256": "45c61f3ec5784a9b725cf63ee581fa3642b655de21b9667d6532f04665ea1868",
+      "words": 12,
+      "source": "nca-pdf"
+    },
+    {
+      "id": "2-13-2",
+      "sha256": "5be5d6e9bda43f0ee2ff93ee666c1aaece5a7d69e57435c0af34dd7e9667f353",
+      "words": 10,
+      "source": "nca-pdf"
+    },
+    {
+      "id": "2-13-3",
+      "sha256": "a9ca03517d4f508041b8949ba622bbc75eadc8526d6ef34c9b38fec5fd4358bf",
+      "words": 13,
+      "source": "gecc-2026-guide"
+    },
+    {
+      "id": "2-13-3-1",
+      "sha256": "6667e4420affd15d018b0af6ae4d065e5118f166e8835164ed03ba2e363475ce",
+      "words": 7,
+      "source": "gecc-2026-guide"
+    },
+    {
+      "id": "2-13-3-2",
+      "sha256": "db5eff2f26f3324cd56f001715754b7a4ecba7295c4f5d1db896b372db733a70",
+      "words": 4,
+      "source": "gecc-2026-guide"
+    },
+    {
+      "id": "2-13-3-3",
+      "sha256": "3d36f0a64b10b6333f83bf3bcd11dbb6e98ada4033375c7b1875e8337cd078a6",
+      "words": 7,
+      "source": "gecc-2026-guide"
+    },
+    {
+      "id": "2-13-3-4",
+      "sha256": "f755ea4bb0bda18631634f8a641818d51cb0531c6c3ec51dcc8b64cae2810016",
+      "words": 12,
+      "source": "gecc-2026-guide"
+    },
+    {
+      "id": "2-13-3-5",
+      "sha256": "159cafbd27b4b2df1aa1ed5e4a417184079dabc340e1e022d459041d486e8d2e",
+      "words": 6,
+      "source": "gecc-2026-guide"
+    },
+    {
+      "id": "2-13-4",
+      "sha256": "e0b16909f43538c5d6f02e639ff2b2ef9803a2cecdc10185763f8cdfa5975f88",
+      "words": 12,
+      "source": "nca-pdf"
+    },
+    {
+      "id": "2-14-1",
+      "sha256": "71fa135aa7d62cc240ebf10ecc6d106c0bf1ebd14adeabf60d0d6c527b211eef",
+      "words": 21,
+      "source": "gecc-2026-guide"
+    },
+    {
+      "id": "2-14-2",
+      "sha256": "4dd5cbd21a192ca080e73da4f6c6707571c4d3c9ea7ba758f9cd529aecd79650",
+      "words": 19,
+      "source": "gecc-2026-guide"
+    },
+    {
+      "id": "2-14-3",
+      "sha256": "2a19512ba20a28ca17b192bc0b6bba98b1c60ecd7ae2da5f03e52636eced93fd",
+      "words": 25,
+      "source": "gecc-2026-guide"
+    },
+    {
+      "id": "2-14-3-1",
+      "sha256": "412ab4cbf50afe937d8ee85db05820eed52ae315c29a6c271f521db1a9c6c0d0",
+      "words": 32,
+      "source": "gecc-2026-guide"
+    },
+    {
+      "id": "2-14-3-2",
+      "sha256": "58d6c1e175f8f4c4ae521f0eab56421f12e0cdacf86252424258d386b626c33e",
+      "words": 3,
+      "source": "gecc-2026-guide"
+    },
+    {
+      "id": "2-14-3-3",
+      "sha256": "088c52478246c6fed136d1f001afdf08dda15920188d9112d7f5bfecef2d8a87",
+      "words": 5,
+      "source": "gecc-2026-guide"
+    },
+    {
+      "id": "2-14-3-4",
+      "sha256": "2abf82626cc80d572dd8cec50f5a8f8992f4f251060e42f54630514a7b32225e",
+      "words": 16,
+      "source": "gecc-2026-guide"
+    },
+    {
+      "id": "2-14-3-5",
+      "sha256": "b20defe4281ffe1a8198887824a3efba294c0d2c327c484ab95cb4668e18e710",
+      "words": 7,
+      "source": "gecc-2026-guide"
+    },
+    {
+      "id": "2-14-4",
+      "sha256": "29eacb3b0080aca6cd759722a2004691be09f9440211d6962ec92edfd4f55ed0",
+      "words": 21,
+      "source": "gecc-2026-guide"
+    },
+    {
+      "id": "2-15-1",
+      "sha256": "ab247acbba21cb931eff345bfccf93ea6f5e08222cbd57ea5b5d5ae601fb4ddf",
+      "words": 15,
+      "source": "nca-pdf"
+    },
+    {
+      "id": "2-15-2",
+      "sha256": "675d3206f081f3345a3c7b730111accbe96bb16e607e9d0310bba60d6d3d77c4",
+      "words": 10,
+      "source": "nca-pdf"
+    },
+    {
+      "id": "2-15-3",
+      "sha256": "82faa8e1b90a38ef085da62eac12cd15ac5c0680ed76f8cd4717572b34d141ac",
+      "words": 15,
+      "source": "gecc-2026-guide"
+    },
+    {
+      "id": "2-15-3-1",
+      "sha256": "cf7f46d01ab584cc33ef439c566092a30e4f53de331ec9568b1255943eab100a",
+      "words": 5,
+      "source": "gecc-2026-guide"
+    },
+    {
+      "id": "2-15-3-2",
+      "sha256": "83111ccfb880e363ce7c43e0c42396a0a4e99f119286fda35b407e211536ec8e",
+      "words": 5,
+      "source": "gecc-2026-guide"
+    },
+    {
+      "id": "2-15-3-3",
+      "sha256": "1bd6e3fefded4583c27ac4db703652d13b797eba794ef3d41ccf35958d4cb909",
+      "words": 5,
+      "source": "gecc-2026-guide"
+    },
+    {
+      "id": "2-15-3-4",
+      "sha256": "4c00a7a59da886b5c591e26c16a108dc86f1ec8824516753be700e4abae77206",
+      "words": 5,
+      "source": "gecc-2026-guide"
+    },
+    {
+      "id": "2-15-3-5",
+      "sha256": "a6e1e15e08812649e3f22fc8058539d5bbdabf8f7961787d4025b156dc5d1c35",
+      "words": 29,
+      "source": "gecc-2026-guide"
+    },
+    {
+      "id": "2-15-4",
+      "sha256": "50028910ca29ff5bbbb22940bdf50aa3d251256ef8f34b32f2fac01151ac0b0a",
+      "words": 13,
+      "source": "nca-pdf"
+    },
+    {
+      "id": "3-1-1",
+      "sha256": "e350aeffbb143180aaa99fdbc49a8e58e86b574fab56f9efc02a450e43bd3972",
+      "words": 12,
+      "source": "nca-pdf"
+    },
+    {
+      "id": "3-1-2",
+      "sha256": "03d1b24a8eda144b7be9ed80ec150872858c6f8d025e6839f45cb1792d966a83",
+      "words": 10,
+      "source": "nca-pdf"
+    },
+    {
+      "id": "3-1-3",
+      "sha256": "e2e66a77f6be647383204d84bc6a912508e19c8e5f2360fbb6972f49abe6859f",
+      "words": 12,
+      "source": "gecc-2026-guide"
+    },
+    {
+      "id": "3-1-3-1",
+      "sha256": "20331e510ef036d6e50bc1ac5a8185e816198f59900c2938dc915a0fcf897f90",
+      "words": 8,
+      "source": "gecc-2026-guide"
+    },
+    {
+      "id": "3-1-3-2",
+      "sha256": "ec7a4ba356511ae5413a98d4f809114200c0501d9b886d781d96bff0645ae2b7",
+      "words": 13,
+      "source": "gecc-2026-guide"
+    },
+    {
+      "id": "3-1-3-3",
+      "sha256": "d910b083c49fb6ae2ad6d4bc7c42bcb342c85d6c93b7d0633e2b22ab7334ea20",
+      "words": 5,
+      "source": "gecc-2026-guide"
+    },
+    {
+      "id": "3-1-4",
+      "sha256": "ceacebd6d8acc516745233f88d5b629af19368347de6f9f1cb8e161230ae0af1",
+      "words": 11,
+      "source": "nca-pdf"
+    },
+    {
+      "id": "4-1-1",
+      "sha256": "fe4a3b7be1bbdae0f0c028e29e8f4c8895bb4c6798777b690f55f58681810b2b",
+      "words": 14,
+      "source": "nca-pdf"
+    },
+    {
+      "id": "4-1-2",
+      "sha256": "322b1662070dfa3de4391271a67f35f48f3ea1e57f1343c061e5d565f45bbfc6",
+      "words": 29,
+      "source": "gecc-2026-guide"
+    },
+    {
+      "id": "4-1-2-1",
+      "sha256": "8ec34bd26c426382ad39d19469aa2523781fa8124461f905261914ebffdbb26e",
+      "words": 16,
+      "source": "gecc-2026-guide"
+    },
+    {
+      "id": "4-1-2-2",
+      "sha256": "ed753d900651f877a4d9ef6c099a5f1ae936e1b6c602723fd1f5ca0aa0af4960",
+      "words": 8,
+      "source": "gecc-2026-guide"
+    },
+    {
+      "id": "4-1-2-3",
+      "sha256": "aa97e03be083c8afa3861ca7c2c7ee71095452e5572ee387a299f670fca68d27",
+      "words": 14,
+      "source": "gecc-2026-guide"
+    },
+    {
+      "id": "4-1-3",
+      "sha256": "34003caec3ad3c2175a1faba19d32f1319de68f664e0427539df1e5963bd6bb4",
+      "words": 25,
+      "source": "gecc-2026-guide"
+    },
+    {
+      "id": "4-1-3-1",
+      "sha256": "914353136d3b0905433e711e7f95b6078865926441f7a1ff561c0e6cef420bcd",
+      "words": 26,
+      "source": "gecc-2026-guide"
+    },
+    {
+      "id": "4-1-3-2",
+      "sha256": "219c8ec2ba0e6974558259181406a0f48391354d6c0dfcb6e88e1d6f308d82f2",
+      "words": 20,
+      "source": "gecc-2026-guide"
+    },
+    {
+      "id": "4-1-4",
+      "sha256": "cdc3bcfdccd72248e3114ac0f3c9b912dde9c0e3136dcb632a0593904a7a0c07",
+      "words": 9,
+      "source": "nca-pdf"
+    },
+    {
+      "id": "4-2-1",
+      "sha256": "4971267564f3936576de4a14ec6958d476c4579ae0cdbe882c719c46d8b15ef0",
+      "words": 13,
+      "source": "nca-pdf"
+    },
+    {
+      "id": "4-2-2",
+      "sha256": "69d6be5b1c07bf9e3b67ad370c6c8f0c123b6e4d64d3e9f5a455cd1f321e480a",
+      "words": 11,
+      "source": "nca-pdf"
+    },
+    {
+      "id": "4-2-3",
+      "sha256": "29dc43e27574834cce1b28d26be5df2bf7ee2d1e54594641e4f3e8e475ebb728",
+      "words": 52,
+      "source": "gecc-2026-guide"
+    },
+    {
+      "id": "4-2-3-1",
+      "sha256": "567e7b32ee33345e5fe92389ac921d1a2f49d187f9ff2e440bf0c0e68143f7de",
+      "words": 23,
+      "source": "gecc-2026-guide"
+    },
+    {
+      "id": "4-2-3-2",
+      "sha256": "66be88d59bf7318e85303c29505dbac04a5f17be1afe46b151e4e3d17a8ef781",
+      "words": 18,
+      "source": "gecc-2026-guide"
+    },
+    {
+      "id": "4-2-4",
+      "sha256": "16f73a2ef4506918f6120805692bf1e5d2555c26304d7d710ee587b8e09f1140",
+      "words": 11,
+      "source": "nca-pdf"
+    }
+  ]
+}

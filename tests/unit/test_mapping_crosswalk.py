@@ -4,16 +4,17 @@ from p2c.mapping.catalog import load_default_index
 from p2c.mapping.crosswalk import Crosswalk, build_crosswalk
 
 
-def test_three_ncnicc_exclusive_controls() -> None:
+def test_four_ncnicc_exclusive_controls() -> None:
     cw = Crosswalk.load()
     exclusive = {e.ncnicc_subcomponent for e in cw.exclusive_controls()}
-    assert exclusive == {"2-7-1-2", "2-12-1-2", "2-7-1-3"}
+    assert exclusive == {"2-7-1-1", "2-7-1-2", "2-12-1-2", "2-7-1-3"}
 
 
 def test_exclusive_class_applicability() -> None:
     cw = Crosswalk.load()
     by_id = {e.ncnicc_subcomponent: e for e in cw.exclusive_controls()}
     assert by_id["2-7-1-3"].class_b_status == "M"
+    assert by_id["2-7-1-1"].class_b_status == "R"
     assert by_id["2-7-1-2"].class_b_status == "R"
     assert by_id["2-12-1-2"].class_b_status == "R"
     assert all(e.class_a_status == "M" for e in cw.exclusive_controls())
@@ -37,6 +38,6 @@ def test_crosswalk_derived_from_catalog_is_stable() -> None:
     entries = build_crosswalk(load_default_index())
     mapped = [e for e in entries if not e.ncnicc_exclusive]
     exclusive = [e for e in entries if e.ncnicc_exclusive]
-    assert len(exclusive) == 3
+    assert len(exclusive) == 4
     assert len(mapped) > 100
     assert all(e.ecc_control_id is not None for e in mapped)

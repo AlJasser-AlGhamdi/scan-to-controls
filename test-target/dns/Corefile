@@ -1,0 +1,39 @@
+axfr-open.test:53 {
+    file /zones/axfr-open.test.db
+    transfer {
+        to *
+    }
+}
+axfr-closed.test:53 {
+    file /zones/axfr-closed.test.db
+}
+ddos-ns.test:53 {
+    file /zones/ddos-ns.test.db
+}
+ddos-cname.test:53 {
+    file /zones/ddos-cname.test.db
+}
+ddos-plain.test:53 {
+    file /zones/ddos-plain.test.db
+}
+email-good.test:53 {
+    file /zones/email-good.test.db
+}
+email-nospf.test:53 {
+    file /zones/email-nospf.test.db
+}
+email-dmarc-none.test:53 {
+    file /zones/email-dmarc-none.test.db
+}
+email-nodmarc.test:53 {
+    file /zones/email-nodmarc.test.db
+}
+email-nodkim.test:53 {
+    file /zones/email-nodkim.test.db
+}
+email-selector1.test:53 {
+    file /zones/email-selector1.test.db
+}
+email-oddselector.test:53 {
+    file /zones/email-oddselector.test.db
+}

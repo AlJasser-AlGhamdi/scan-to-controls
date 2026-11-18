@@ -84,7 +84,8 @@ def test_allowed_loopback_egress_passes_through_guard() -> None:
 
             udp = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
             udp.sendto(b"x", ("127.0.0.1", port))
-            udp.sendmsg([b"y"], [], 0, ("127.0.0.1", port))
+            if hasattr(udp, "sendmsg"):
+                udp.sendmsg([b"y"], [], 0, ("127.0.0.1", port))
             udp.close()
         finally:
             listener.close()

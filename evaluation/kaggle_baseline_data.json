@@ -293,28 +293,12 @@
   },
   "checks": [
     {
-      "check": "directory_listing_enabled",
-      "query_text": "Directory listing enabled on web server",
-      "gold_ids": [
-        "2-15-3-3"
-      ],
-      "frequency": 29
-    },
-    {
-      "check": "dkim_missing",
-      "query_text": "DKIM not found for probed selectors (selector-limited)",
-      "gold_ids": [
-        "2-4-3-5"
-      ],
-      "frequency": 35
-    },
-    {
       "check": "dmarc_missing_or_none",
       "query_text": "DMARC absent or policy=none",
       "gold_ids": [
         "2-4-3-5"
       ],
-      "frequency": 32
+      "frequency": 29
     },
     {
       "check": "dns_zone_transfer_open",
@@ -322,7 +306,7 @@
       "gold_ids": [
         "2-5-3-7"
       ],
-      "frequency": 7
+      "frequency": 9
     },
     {
       "check": "dnssec_missing",
@@ -330,72 +314,51 @@
       "gold_ids": [
         "2-5-3-7"
       ],
-      "frequency": 54
+      "frequency": 62
     },
     {
       "check": "eol_software_exposed",
       "query_text": "End-of-life, unsupported software version exposed",
       "gold_ids": [
+        "2-10-3-4",
         "2-3-3-3"
       ],
-      "frequency": 109
+      "frequency": 103
     },
     {
       "check": "expired_certificate",
       "query_text": "Expired or not-yet-valid certificate",
       "gold_ids": [
-        "2-8-3-3"
+        "2-15-3-3",
+        "2-8-3-2"
       ],
-      "frequency": 28
+      "frequency": 29
     },
     {
       "check": "exposed_database_port",
       "query_text": "Database service port reachable from the internet",
       "gold_ids": [
-        "2-5-3-1"
+        "2-5-3-1",
+        "2-5-3-5"
       ],
-      "frequency": 50
-    },
-    {
-      "check": "exposed_dev_environment",
-      "query_text": "Development or staging environment publicly reachable",
-      "gold_ids": [
-        "2-5-3-2"
-      ],
-      "frequency": 11
+      "frequency": 55
     },
     {
       "check": "exposed_internal_port",
       "query_text": "Internal service port exposed to internet",
       "gold_ids": [
-        "2-5-3-1"
+        "2-5-3-1",
+        "2-5-3-5"
       ],
-      "frequency": 53
-    },
-    {
-      "check": "exposed_login_panel",
-      "query_text": "Administrative login interface exposed without access control",
-      "gold_ids": [
-        "2-15-3-5"
-      ],
-      "frequency": 77
+      "frequency": 48
     },
     {
       "check": "exposed_management_port",
       "query_text": "Management service (SSH/RDP) directly exposed",
       "gold_ids": [
-        "2-2-3-1",
-        "2-2-3-2"
+        "2-5-3-5"
       ],
-      "frequency": 86
-    },
-    {
-      "check": "exposed_sensitive_file",
-      "query_text": "Sensitive file exposed (.git, .env, or backup archive)",
-      "gold_ids": [
-        "2-15-3-3"
-      ],
-      "frequency": 36
+      "frequency": 77
     },
     {
       "check": "high_risk_port_open",
@@ -403,114 +366,44 @@
       "gold_ids": [
         "2-5-3-5"
       ],
-      "frequency": 77
-    },
-    {
-      "check": "insecure_cookie",
-      "query_text": "Session cookie without Secure/HttpOnly/SameSite",
-      "gold_ids": [
-        "2-15-3-3"
-      ],
-      "frequency": 78
+      "frequency": 85
     },
     {
       "check": "legacy_tls_version",
       "query_text": "Legacy TLS version (1.0/1.1) enabled",
       "gold_ids": [
-        "2-8-3-3"
-      ],
-      "frequency": 84
-    },
-    {
-      "check": "missing_csp",
-      "query_text": "Content-Security-Policy absent",
-      "gold_ids": [
-        "2-15-3-3"
-      ],
-      "frequency": 95
-    },
-    {
-      "check": "missing_hsts",
-      "query_text": "HSTS header absent",
-      "gold_ids": [
         "2-15-3-3",
+        "2-8-3-1",
         "2-8-3-3"
-      ],
-      "frequency": 90
-    },
-    {
-      "check": "missing_permissions_policy",
-      "query_text": "Permissions-Policy header absent",
-      "gold_ids": [
-        "2-15-3-3"
-      ],
-      "frequency": 70
-    },
-    {
-      "check": "missing_referrer_policy",
-      "query_text": "Referrer-Policy absent",
-      "gold_ids": [
-        "2-15-3-3"
-      ],
-      "frequency": 60
-    },
-    {
-      "check": "missing_x_content_type_options",
-      "query_text": "X-Content-Type-Options absent",
-      "gold_ids": [
-        "2-15-3-3"
-      ],
-      "frequency": 66
-    },
-    {
-      "check": "missing_x_frame_options",
-      "query_text": "X-Frame-Options absent (clickjacking)",
-      "gold_ids": [
-        "2-15-3-3"
       ],
       "frequency": 82
-    },
-    {
-      "check": "mta_sts_missing",
-      "query_text": "MTA-STS policy absent (no enforced inbound TLS)",
-      "gold_ids": [
-        "2-4-3-5"
-      ],
-      "frequency": 28
-    },
-    {
-      "check": "no_ddos_protection",
-      "query_text": "No DDoS mitigation fingerprint; origin appears directly exposed",
-      "gold_ids": [
-        "2-15-3-2",
-        "2-5-3-9"
-      ],
-      "frequency": 41
     },
     {
       "check": "no_https_redirect",
       "query_text": "HTTP served without HTTPS redirect",
       "gold_ids": [
-        "2-15-3-3"
+        "2-15-3-3",
+        "2-8-3-3"
       ],
-      "frequency": 41
+      "frequency": 39
     },
     {
       "check": "outdated_exposed_software",
       "query_text": "Outdated exposed software version",
       "gold_ids": [
-        "2-10-3-1",
-        "2-10-3-4"
+        "2-10-3-4",
+        "2-3-3-3"
       ],
-      "frequency": 124
+      "frequency": 94
     },
     {
       "check": "self_signed_certificate",
       "query_text": "Self-signed or untrusted certificate chain",
       "gold_ids": [
-        "2-8-3-3"
+        "2-15-3-3",
+        "2-8-3-2"
       ],
-      "frequency": 24
+      "frequency": 26
     },
     {
       "check": "spf_missing",
@@ -518,31 +411,26 @@
       "gold_ids": [
         "2-4-3-5"
       ],
-      "frequency": 17
-    },
-    {
-      "check": "waf_absent",
-      "query_text": "No WAF fingerprint on external web app",
-      "gold_ids": [
-        "2-15-3-1"
-      ],
-      "frequency": 185
+      "frequency": 21
     },
     {
       "check": "weak_certificate_key",
       "query_text": "Weak certificate key or signature (RSA<2048 or SHA-1)",
       "gold_ids": [
-        "2-8-3-3"
+        "2-8-3-1",
+        "2-8-3-2"
       ],
-      "frequency": 33
+      "frequency": 34
     },
     {
       "check": "weak_tls_cipher",
       "query_text": "Weak TLS cipher negotiated",
       "gold_ids": [
+        "2-15-3-3",
+        "2-8-3-1",
         "2-8-3-3"
       ],
-      "frequency": 55
+      "frequency": 56
     }
   ]
 }

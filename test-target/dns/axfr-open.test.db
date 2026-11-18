@@ -1,0 +1,8 @@
+$ORIGIN axfr-open.test.
+$TTL 3600
+@    IN SOA ns1.axfr-open.test. hostmaster.axfr-open.test. 2026101401 7200 3600 1209600 3600
+@    IN NS  ns1.axfr-open.test.
+ns1  IN A   127.0.0.1
+www  IN A   10.0.0.10
+vpn  IN A   10.0.0.11
+db   IN A   10.0.0.12

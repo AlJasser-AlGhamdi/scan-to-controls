@@ -14,7 +14,7 @@ ROOT = pathlib.Path(__file__).resolve().parent.parent
 OVERLAY = ROOT / "taxonomy" / "release" / "sort_overlay.json"
 DEFAULT_OUT = ROOT / "private" / "blind_recode_sheet.csv"
 SHUFFLE_SEED = 20260812
-FIELDS = ["order", "id", "kind", "title", "statement", "assessment_method", "tier"]
+FIELDS = ["order", "id", "kind", "title", "statement", "tier"]
 
 
 def _overlay_rows() -> list[dict]:
@@ -44,12 +44,11 @@ def generate(out: pathlib.Path) -> None:
                     "kind": row["kind"],
                     "title": entry.title,
                     "statement": entry.statement_en,
-                    "assessment_method": entry.assessment_en,
                     "tier": "",
                 }
             )
     print(f"wrote {len(rows)} shuffled rows -> {out}")
-    print("Fill the `tier` column with 1 (scan provable), 2 (internal assessment), or 3 (declaration).")
+    print("Fill the `tier` column with 1 (externally testable), 2 (internal assessment), or 3 (declaration).")
     print("This sheet carries NCA control text: keep it under private/, do not commit or send it off host.")
     print(f"When done: uv run python scripts/blind_recode_template.py score --in {out}")
 

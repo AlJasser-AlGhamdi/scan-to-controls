@@ -1,6 +1,6 @@
 {
-  "atlas-missing-csp.yaml": "ed73a7bdbf702bb794489ed3a650f0ed18f001dfa9dd85734a3bd26f14e8d5c0",
-  "atlas-missing-hsts.yaml": "01d6b7f956d79e9a90344fec80d3ea17aade342e893780f928ef976be6b25cee",
-  "atlas-missing-x-content-type-options.yaml": "742bcfbeaef437706a7aa52305fa929256805a6d055a04e787b1d781cfe0416d",
-  "atlas-missing-x-frame-options.yaml": "807dad8018b7068ac54eabd46abc53512ed5d72ed9724eb577aadb3c369c7a6d"
+  "atlas-missing-csp.yaml": "0093d85501dbdd9e998c5fc2d239dced8b8b8336ec94e867bba0322c1fbcb5b0",
+  "atlas-missing-hsts.yaml": "4453825b003f7d102bb40d9344500706351738e899cc0fd763e227d715276e81",
+  "atlas-missing-x-content-type-options.yaml": "cfd98665e8d73998b40ff5f9e9179c98e4ffde94f7a1a009e8e7918d0abd557c",
+  "atlas-missing-x-frame-options.yaml": "71947cb072874a16911866900532c37214ebfea925c6cd2beffdc6d28c016c86"
 }

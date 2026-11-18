@@ -1,11 +1,11 @@
 [project]
 name = "p2c"
-version = "0.0.0"
+version = "1.1.0"
 description = "From Ports to Controls — what an external scan can prove about ECC-2:2024 and NCNICC-1:2025, tested on 100 synthetic Saudi SMEs"
-readme = "README.txt"
+readme = "README.md"
 requires-python = "==3.12.*"
 license = "Apache-2.0"
-authors = [{ name = "ports-to-controls" }]
+authors = [{ name = "AlJasser AlGhamdi" }, { name = "Miada Almasre" }, { name = "Norah Al-Malki" }]
 dependencies = [
     "compliance-trestle==4.1.0",  # build-time OSCAL models (mapping/catalog_build.py)
     "cryptography>=45.0.0",       # scanning/tls.py X.509 parsing (self-signed, key strength)

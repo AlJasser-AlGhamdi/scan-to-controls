@@ -31,14 +31,14 @@ def test_parent_attestation_refuted_by_child_finding_cannot_inflate_documented()
     assert compute_dual_score(merged).documented_score == 0.0
 
 
-def test_child_attestation_refuted_by_parent_finding_is_neutralized() -> None:
+def test_child_attestation_is_not_neutralized_by_a_parent_finding() -> None:
     merged = merge_assessments(
         [_mk("2-4-3", EvidenceTier.TIER_1, ComplianceStatus.NON_COMPLIANT)],
         [_mk("2-4-3-5", EvidenceTier.TIER_3, ComplianceStatus.COMPLIANT)],
     )
     child = next(a for a in merged if a.control_id == "2-4-3-5")
-    assert child.status == ComplianceStatus.NON_COMPLIANT
-    assert compute_dual_score(merged).documented_score == 0.0
+    assert child.status == ComplianceStatus.COMPLIANT
+    assert compute_dual_score(merged).documented_score == 0.5
 
 
 def test_unrelated_attestation_still_lifts_documented() -> None:

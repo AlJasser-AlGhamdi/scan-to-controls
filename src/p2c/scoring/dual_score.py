@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from collections.abc import Iterable, Mapping, Sequence
+from collections.abc import Collection, Iterable, Mapping, Sequence
 
 from p2c.scoring.models import ComplianceStatus, ControlAssessment, DualScore
 
@@ -35,12 +35,46 @@ def _weighted(assessments: Iterable[ControlAssessment]) -> tuple[float, float]:
 
 
 def compute_dual_score(
-    assessments: Sequence[ControlAssessment], *, weights_source: str = "uniform"
+    assessments: Sequence[ControlAssessment],
+    *,
+    weights_source: str = "uniform",
+    universe: Collection[str] | None = None,
 ) -> DualScore:
+    recorded_gap = {a.control_id for a in assessments if a.tier > 1 and a.status is ComplianceStatus.NON_COMPLIANT}
     assessments = reconcile(assessments)
+
+    def passes(a: ControlAssessment) -> bool:
+        return a.satisfied and not (a.tier == 1 and a.control_id in recorded_gap)
+
     tier1 = [a for a in assessments if a.tier == 1]
     tier1_compliant, tier1_total = _weighted(tier1)
-    documented_satisfied, documented_total = _weighted(assessments)
+    tier1_observed = 0.0
+    for a in tier1:
+        if a.status is not ComplianceStatus.NOT_ASSESSED:
+            tier1_observed += a.weight
+
+    if universe is not None:
+        if any(a.weight != 1.0 for a in assessments):
+            raise ValueError(
+                "a fixed documented set needs uniform weights: an unevidenced row has no group to take "
+                "a share from, so weighted scoring over a universe could reward withholding evidence"
+            )
+        rows = set(universe)
+        in_set = [a for a in assessments if a.control_id in rows]
+        documented_satisfied = float(sum(1 for a in in_set if passes(a)))
+        documented_total = float(len(rows))
+        evidenced = float(sum(1 for a in in_set if a.status is not ComplianceStatus.NOT_ASSESSED))
+    else:
+        documented_total = 0.0
+        documented_satisfied = 0.0
+        for a in assessments:
+            documented_total += a.weight
+            if passes(a):
+                documented_satisfied += a.weight
+        evidenced = 0.0
+        for a in assessments:
+            if a.status is not ComplianceStatus.NOT_ASSESSED:
+                evidenced += a.weight
 
     assessed = tier1_compliant / tier1_total if tier1_total > 0 else 0.0
     documented = documented_satisfied / documented_total if documented_total > 0 else 0.0
@@ -52,6 +86,8 @@ def compute_dual_score(
         tier1_compliant_weight=tier1_compliant,
         documented_total_weight=documented_total,
         documented_satisfied_weight=documented_satisfied,
+        coverage=tier1_observed / tier1_total if tier1_total > 0 else 0.0,
+        evidence_coverage=evidenced / documented_total if documented_total > 0 else 0.0,
         weights_source=weights_source,
     )
 

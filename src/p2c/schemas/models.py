@@ -63,6 +63,7 @@ class Asset(AtlasModel):
 
 
 class Finding(AtlasModel):
+
     finding_id: str
     asset: str = Field(description="reference to Asset.asset_id (or asset value)")
     source_tool: str
@@ -90,6 +91,7 @@ class Finding(AtlasModel):
 
 
 class Control(AtlasModel):
+
     control_id: str = Field(description="native scheme, e.g. 2-5-3-1")
     framework: Framework
     title_en: str
@@ -114,6 +116,7 @@ class Evidence(AtlasModel):
 
 
 class Consent(AtlasModel):
+
     consent_id: str
     verified_apex: str
     in_scope_subdomains: list[str] = Field(default_factory=list)
@@ -157,6 +160,7 @@ class Attestation(AtlasModel):
 
 
 class Score(AtlasModel):
+
     subject_id: str
     assessed_score: float = Field(ge=0.0, le=1.0)
     documented_score: float = Field(ge=0.0, le=1.0)

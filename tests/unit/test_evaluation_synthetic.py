@@ -23,7 +23,7 @@ from p2c.evaluation.synthetic import (
     off_surface_pools,
 )
 from p2c.mapping.rules import check_id_from_finding
-from p2c.scanning.catalog import CheckId
+from p2c.scanning.catalog import CATALOG, CheckId
 from p2c.scoring.assemble import TIER1_CHECKABLE
 from p2c.scoring.contradictions import control_related
 
@@ -106,7 +106,8 @@ def test_expert_key_covers_all_checks_and_is_catalog_valid() -> None:
     key = expert_key()
     all_checks = {c for checks in CATEGORIES.values() for c in checks}
     assert set(key) == all_checks
-    assert all(ids for ids in key.values())
+    assert all(key[c] == frozenset(CATALOG[c].control_ids) for c in key)
+    assert sum(1 for ids in key.values() if ids) == 17
 
 
 def test_generate_rejects_nonpositive_n() -> None:
@@ -151,18 +152,37 @@ def test_obstruction_reduces_detection_but_dns_signals_are_exempt() -> None:
     assert obstructed > 0
 
 
-def test_forced_fallbacks_never_fire_on_the_reported_corpus() -> None:
+def test_forced_fallback_never_fires_on_the_reported_corpus() -> None:
     cases = generate_cases(100)
     assert sum(c.forced_true_fallback for c in cases) == 0
-    assert sum(c.forced_observe_fallback for c in cases) == 0
+
+
+def test_a_scan_that_detects_nothing_keeps_an_empty_finding_set() -> None:
+    import random
+
+    from p2c.evaluation.synthetic import InjectedFinding, _observe
+
+    class _Never(random.Random):
+        def random(self) -> float:
+            return 1.0
+
+    true = [InjectedFinding(asset="example.sa", check=next(iter(expert_key())))]
+    assert _observe(_Never(0), true, ["example.sa"], "example.sa", {"example.sa": "reachable"}, 1.0) == []
+
+
 
 
 def test_off_surface_pools_come_from_the_overlay_and_are_unreachable_by_a_scan() -> None:
+    from p2c.scoring.contradictions import IMPLEMENTS, hierarchy_related
+
     internal, declarable = off_surface_pools()
-    assert (len(internal), len(declarable)) == (72, 108)
+    assert (len(internal), len(declarable)) == (127, 59)
     assert not set(internal) & set(declarable)
     for cid in (*internal, *declarable):
-        assert not any(control_related(cid, checkable) for checkable in TIER1_CHECKABLE)
+        assert not any(hierarchy_related(cid, checkable) for checkable in TIER1_CHECKABLE)
+        assert not any(hierarchy_related(checkable, cid) for checkable in TIER1_CHECKABLE)
+        reached = any(control_related(cid, checkable) for checkable in TIER1_CHECKABLE)
+        assert reached == (cid in IMPLEMENTS), cid
     assert list(internal) == sorted(internal) and list(declarable) == sorted(declarable)
 
 
@@ -202,6 +222,7 @@ def test_off_surface_coverage_rises_with_posture() -> None:
 def test_off_surface_evidence_is_drawn_last_and_moves_no_earlier_draw(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
+
     def fingerprint(case: EvalCase) -> tuple[object, ...]:
         return (
             case.case_id,

@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import re
+import time
 from dataclasses import dataclass
 from enum import StrEnum
 
@@ -15,8 +17,23 @@ log = structlog.get_logger("p2c.scanning.mta_sts")
 _POLICY_URL = "https://mta-sts.{domain}/.well-known/mta-sts.txt"
 _REQUIRED_FIELDS = ("version", "mode", "max_age")
 _MODES = frozenset({"enforce", "testing", "none"})
-_ENFORCING_MODES = frozenset({"enforce", "testing"})
+_ENFORCING_MODES = frozenset({"enforce"})
 _HTTP_OK = 200
+_MAX_POLICY_BYTES = 65_536
+_MAX_POLICY_SECONDS = 30.0
+
+
+def _get_capped(client: httpx.Client, url: str) -> tuple[int, str] | None:
+    deadline = time.monotonic() + _MAX_POLICY_SECONDS
+    with client.stream("GET", url, headers={"Accept-Encoding": "identity"}) as response:
+        body = bytearray()
+        for chunk in response.iter_bytes():
+            body.extend(chunk)
+            if len(body) > _MAX_POLICY_BYTES:
+                return None
+            if time.monotonic() > deadline:
+                raise httpx.ReadTimeout(f"the policy took longer than {_MAX_POLICY_SECONDS:.0f} seconds")
+        return response.status_code, body.decode("utf-8", "replace")
 
 
 class MtaStsState(StrEnum):
@@ -36,8 +53,20 @@ class MtaStsResult:
     policy: str | None = None
 
 
+_STS_ID = re.compile(r"(?:^|;)\s*id=[A-Za-z0-9]{1,32}\s*(?:;|$)")
+
+
 def _announces_policy(records: tuple[str, ...]) -> bool:
-    return len(records) == 1 and records[0].strip().lower().startswith("v=stsv1")
+    sts = [r for r in records if r.strip().lower().startswith("v=stsv1")]
+    return len(sts) == 1 and bool(_STS_ID.search(sts[0]))
+
+
+_QUOTED = re.compile(r'"((?:[^"\\]|\\.)*)"')
+
+
+def _txt_text(record: str) -> str:
+    parts = _QUOTED.findall(record)
+    return "".join(parts) if parts and record.lstrip().startswith('"') else record
 
 
 def policy_mode(body: str) -> str | None:
@@ -86,8 +115,11 @@ class MtaStsInspector:
         return list(self.inspect_detailed(domain).checks)
 
     def inspect_detailed(self, domain: str) -> MtaStsResult:
+        name = f"_mta-sts.{domain}"
         try:
-            records = tuple(self._resolver.resolve(f"_mta-sts.{domain}", "TXT"))
+            read = getattr(self._resolver, "resolve_txt", None)
+            raw = read(name) if read else [_txt_text(r) for r in self._resolver.resolve(name, "TXT")]
+            records = tuple(raw)
         except Exception as exc:
             if caused_by_egress_block(exc):
                 raise
@@ -105,24 +137,28 @@ class MtaStsInspector:
         url = _POLICY_URL.format(domain=domain)
         try:
             if self._client is not None:
-                response = self._client.get(url)
+                fetched = _get_capped(self._client, url)
             else:
-                with httpx.Client(timeout=10.0, follow_redirects=False) as client:
-                    response = client.get(url)
+                with httpx.Client(timeout=10.0, follow_redirects=False, trust_env=False) as client:
+                    fetched = _get_capped(client, url)
         except Exception as exc:
             if caused_by_egress_block(exc):
                 raise
             log.warning("mta_sts_policy_unreachable", domain=domain, error=type(exc).__name__)
             return MtaStsResult(state=MtaStsState.POLICY_UNREACHABLE)
-        if response.status_code != _HTTP_OK:
-            return MtaStsResult(state=MtaStsState.POLICY_UNREACHABLE, policy=response.text)
-        mode = policy_mode(response.text)
+        if fetched is None:
+            log.warning("mta_sts_policy_oversized", domain=domain, limit=_MAX_POLICY_BYTES)
+            return MtaStsResult(state=MtaStsState.POLICY_UNREACHABLE)
+        status, text = fetched
+        if status != _HTTP_OK:
+            return MtaStsResult(state=MtaStsState.POLICY_UNREACHABLE, policy=text)
+        mode = policy_mode(text)
         if mode is None:
-            return MtaStsResult(state=MtaStsState.POLICY_UNREACHABLE, policy=response.text)
+            return MtaStsResult(state=MtaStsState.POLICY_UNREACHABLE, policy=text)
         if mode not in _ENFORCING_MODES:
             return MtaStsResult(
                 checks=(CheckId.MTA_STS_MISSING,),
                 state=MtaStsState.POLICY_NOT_ENFORCING,
-                policy=response.text,
+                policy=text,
             )
-        return MtaStsResult(state=MtaStsState.POLICY_VALID, policy=response.text)
+        return MtaStsResult(state=MtaStsState.POLICY_VALID, policy=text)

@@ -376,12 +376,12 @@
                   {
                     "name": "tier",
                     "ns": "https://atlas.sa/ns/oscal",
-                    "value": "3"
+                    "value": "2"
                   },
                   {
                     "name": "tier-source",
                     "ns": "https://atlas.sa/ns/oscal",
-                    "value": "taxonomy"
+                    "value": "author-curated"
                   },
                   {
                     "name": "domain",
@@ -494,26 +494,6 @@
                     "name": "text-source",
                     "ns": "https://atlas.sa/ns/oscal",
                     "value": "nca-pdf-en"
-                  },
-                  {
-                    "name": "ncnicc-class-a",
-                    "ns": "https://atlas.sa/ns/oscal",
-                    "value": "1-1"
-                  },
-                  {
-                    "name": "ncnicc-class-a-status",
-                    "ns": "https://atlas.sa/ns/oscal",
-                    "value": "M"
-                  },
-                  {
-                    "name": "ncnicc-class-b",
-                    "ns": "https://atlas.sa/ns/oscal",
-                    "value": "1-1"
-                  },
-                  {
-                    "name": "ncnicc-class-b-status",
-                    "ns": "https://atlas.sa/ns/oscal",
-                    "value": "R"
                   }
                 ],
                 "parts": [
@@ -649,12 +629,12 @@
                   {
                     "name": "tier",
                     "ns": "https://atlas.sa/ns/oscal",
-                    "value": "2"
+                    "value": "3"
                   },
                   {
                     "name": "tier-source",
                     "ns": "https://atlas.sa/ns/oscal",
-                    "value": "taxonomy"
+                    "value": "author-curated"
                   },
                   {
                     "name": "domain",
@@ -736,12 +716,12 @@
                   {
                     "name": "tier",
                     "ns": "https://atlas.sa/ns/oscal",
-                    "value": "2"
+                    "value": "3"
                   },
                   {
                     "name": "tier-source",
                     "ns": "https://atlas.sa/ns/oscal",
-                    "value": "taxonomy"
+                    "value": "author-curated"
                   },
                   {
                     "name": "domain",
@@ -767,26 +747,6 @@
                     "name": "text-source",
                     "ns": "https://atlas.sa/ns/oscal",
                     "value": "nca-pdf-en"
-                  },
-                  {
-                    "name": "ncnicc-class-a",
-                    "ns": "https://atlas.sa/ns/oscal",
-                    "value": "2-1"
-                  },
-                  {
-                    "name": "ncnicc-class-a-status",
-                    "ns": "https://atlas.sa/ns/oscal",
-                    "value": "M"
-                  },
-                  {
-                    "name": "ncnicc-class-b",
-                    "ns": "https://atlas.sa/ns/oscal",
-                    "value": "2-1"
-                  },
-                  {
-                    "name": "ncnicc-class-b-status",
-                    "ns": "https://atlas.sa/ns/oscal",
-                    "value": "R"
                   }
                 ],
                 "parts": [
@@ -1040,26 +1000,6 @@
                     "name": "text-source",
                     "ns": "https://atlas.sa/ns/oscal",
                     "value": "nca-pdf-en"
-                  },
-                  {
-                    "name": "ncnicc-class-a",
-                    "ns": "https://atlas.sa/ns/oscal",
-                    "value": "1-1"
-                  },
-                  {
-                    "name": "ncnicc-class-a-status",
-                    "ns": "https://atlas.sa/ns/oscal",
-                    "value": "M"
-                  },
-                  {
-                    "name": "ncnicc-class-b",
-                    "ns": "https://atlas.sa/ns/oscal",
-                    "value": "1-1"
-                  },
-                  {
-                    "name": "ncnicc-class-b-status",
-                    "ns": "https://atlas.sa/ns/oscal",
-                    "value": "R"
                   }
                 ],
                 "parts": [
@@ -1200,7 +1140,7 @@
                   {
                     "name": "tier-source",
                     "ns": "https://atlas.sa/ns/oscal",
-                    "value": "taxonomy"
+                    "value": "author-curated"
                   },
                   {
                     "name": "domain",
@@ -1287,7 +1227,7 @@
                   {
                     "name": "tier-source",
                     "ns": "https://atlas.sa/ns/oscal",
-                    "value": "taxonomy"
+                    "value": "author-curated"
                   },
                   {
                     "name": "domain",
@@ -1313,26 +1253,6 @@
                     "name": "text-source",
                     "ns": "https://atlas.sa/ns/oscal",
                     "value": "nca-pdf-en"
-                  },
-                  {
-                    "name": "ncnicc-class-a",
-                    "ns": "https://atlas.sa/ns/oscal",
-                    "value": "3-1"
-                  },
-                  {
-                    "name": "ncnicc-class-a-status",
-                    "ns": "https://atlas.sa/ns/oscal",
-                    "value": "M"
-                  },
-                  {
-                    "name": "ncnicc-class-b",
-                    "ns": "https://atlas.sa/ns/oscal",
-                    "value": "3-1"
-                  },
-                  {
-                    "name": "ncnicc-class-b-status",
-                    "ns": "https://atlas.sa/ns/oscal",
-                    "value": "R"
                   }
                 ],
                 "parts": [
@@ -1369,7 +1289,7 @@
                       {
                         "name": "tier",
                         "ns": "https://atlas.sa/ns/oscal",
-                        "value": "3"
+                        "value": "2"
                       },
                       {
                         "name": "tier-source",
@@ -1421,7 +1341,7 @@
                       {
                         "name": "tier",
                         "ns": "https://atlas.sa/ns/oscal",
-                        "value": "3"
+                        "value": "2"
                       },
                       {
                         "name": "tier-source",
@@ -1473,7 +1393,7 @@
                       {
                         "name": "tier",
                         "ns": "https://atlas.sa/ns/oscal",
-                        "value": "3"
+                        "value": "2"
                       },
                       {
                         "name": "tier-source",
@@ -1525,7 +1445,7 @@
                       {
                         "name": "tier",
                         "ns": "https://atlas.sa/ns/oscal",
-                        "value": "3"
+                        "value": "2"
                       },
                       {
                         "name": "tier-source",
@@ -1678,12 +1598,12 @@
                   {
                     "name": "tier",
                     "ns": "https://atlas.sa/ns/oscal",
-                    "value": "2"
+                    "value": "3"
                   },
                   {
                     "name": "tier-source",
                     "ns": "https://atlas.sa/ns/oscal",
-                    "value": "taxonomy"
+                    "value": "author-curated"
                   },
                   {
                     "name": "domain",
@@ -1750,7 +1670,7 @@
                   {
                     "name": "tier-source",
                     "ns": "https://atlas.sa/ns/oscal",
-                    "value": "taxonomy"
+                    "value": "author-curated"
                   },
                   {
                     "name": "domain",
@@ -1812,7 +1732,7 @@
                       {
                         "name": "tier",
                         "ns": "https://atlas.sa/ns/oscal",
-                        "value": "3"
+                        "value": "2"
                       },
                       {
                         "name": "tier-source",
@@ -1864,7 +1784,7 @@
                       {
                         "name": "tier",
                         "ns": "https://atlas.sa/ns/oscal",
-                        "value": "3"
+                        "value": "2"
                       },
                       {
                         "name": "tier-source",
@@ -1923,7 +1843,7 @@
                   {
                     "name": "tier-source",
                     "ns": "https://atlas.sa/ns/oscal",
-                    "value": "taxonomy"
+                    "value": "author-curated"
                   },
                   {
                     "name": "domain",
@@ -1985,7 +1905,7 @@
                       {
                         "name": "tier",
                         "ns": "https://atlas.sa/ns/oscal",
-                        "value": "3"
+                        "value": "2"
                       },
                       {
                         "name": "tier-source",
@@ -2037,7 +1957,7 @@
                       {
                         "name": "tier",
                         "ns": "https://atlas.sa/ns/oscal",
-                        "value": "3"
+                        "value": "2"
                       },
                       {
                         "name": "tier-source",
@@ -2089,7 +2009,7 @@
                       {
                         "name": "tier",
                         "ns": "https://atlas.sa/ns/oscal",
-                        "value": "3"
+                        "value": "2"
                       },
                       {
                         "name": "tier-source",
@@ -2141,7 +2061,7 @@
                       {
                         "name": "tier",
                         "ns": "https://atlas.sa/ns/oscal",
-                        "value": "3"
+                        "value": "2"
                       },
                       {
                         "name": "tier-source",
@@ -2193,7 +2113,7 @@
                       {
                         "name": "tier",
                         "ns": "https://atlas.sa/ns/oscal",
-                        "value": "3"
+                        "value": "2"
                       },
                       {
                         "name": "tier-source",
@@ -2326,12 +2246,12 @@
                   {
                     "name": "tier",
                     "ns": "https://atlas.sa/ns/oscal",
-                    "value": "2"
+                    "value": "3"
                   },
                   {
                     "name": "tier-source",
                     "ns": "https://atlas.sa/ns/oscal",
-                    "value": "taxonomy"
+                    "value": "author-curated"
                   },
                   {
                     "name": "domain",
@@ -2492,12 +2412,12 @@
                   {
                     "name": "tier",
                     "ns": "https://atlas.sa/ns/oscal",
-                    "value": "3"
+                    "value": "2"
                   },
                   {
                     "name": "tier-source",
                     "ns": "https://atlas.sa/ns/oscal",
-                    "value": "taxonomy"
+                    "value": "author-curated"
                   },
                   {
                     "name": "domain",
@@ -2579,12 +2499,12 @@
                   {
                     "name": "tier",
                     "ns": "https://atlas.sa/ns/oscal",
-                    "value": "3"
+                    "value": "2"
                   },
                   {
                     "name": "tier-source",
                     "ns": "https://atlas.sa/ns/oscal",
-                    "value": "taxonomy"
+                    "value": "author-curated"
                   },
                   {
                     "name": "domain",
@@ -2610,26 +2530,6 @@
                     "name": "text-source",
                     "ns": "https://atlas.sa/ns/oscal",
                     "value": "nca-pdf-en"
-                  },
-                  {
-                    "name": "ncnicc-class-a",
-                    "ns": "https://atlas.sa/ns/oscal",
-                    "value": "4-1"
-                  },
-                  {
-                    "name": "ncnicc-class-a-status",
-                    "ns": "https://atlas.sa/ns/oscal",
-                    "value": "M"
-                  },
-                  {
-                    "name": "ncnicc-class-b",
-                    "ns": "https://atlas.sa/ns/oscal",
-                    "value": "4-1"
-                  },
-                  {
-                    "name": "ncnicc-class-b-status",
-                    "ns": "https://atlas.sa/ns/oscal",
-                    "value": "R"
                   }
                 ],
                 "parts": [
@@ -2817,7 +2717,7 @@
                   {
                     "name": "tier-source",
                     "ns": "https://atlas.sa/ns/oscal",
-                    "value": "taxonomy"
+                    "value": "author-curated"
                   },
                   {
                     "name": "domain",
@@ -2879,7 +2779,7 @@
                       {
                         "name": "tier",
                         "ns": "https://atlas.sa/ns/oscal",
-                        "value": "3"
+                        "value": "2"
                       },
                       {
                         "name": "tier-source",
@@ -2931,7 +2831,7 @@
                       {
                         "name": "tier",
                         "ns": "https://atlas.sa/ns/oscal",
-                        "value": "3"
+                        "value": "2"
                       },
                       {
                         "name": "tier-source",
@@ -2990,7 +2890,7 @@
                   {
                     "name": "tier-source",
                     "ns": "https://atlas.sa/ns/oscal",
-                    "value": "taxonomy"
+                    "value": "author-curated"
                   },
                   {
                     "name": "domain",
@@ -3052,7 +2952,7 @@
                       {
                         "name": "tier",
                         "ns": "https://atlas.sa/ns/oscal",
-                        "value": "3"
+                        "value": "2"
                       },
                       {
                         "name": "tier-source",
@@ -3104,7 +3004,7 @@
                       {
                         "name": "tier",
                         "ns": "https://atlas.sa/ns/oscal",
-                        "value": "3"
+                        "value": "2"
                       },
                       {
                         "name": "tier-source",
@@ -3483,7 +3383,7 @@
                   {
                     "name": "tier-source",
                     "ns": "https://atlas.sa/ns/oscal",
-                    "value": "taxonomy"
+                    "value": "author-curated"
                   },
                   {
                     "name": "domain",
@@ -3565,7 +3465,7 @@
                       {
                         "name": "tier",
                         "ns": "https://atlas.sa/ns/oscal",
-                        "value": "3"
+                        "value": "2"
                       },
                       {
                         "name": "tier-source",
@@ -3596,6 +3496,26 @@
                         "name": "text-source",
                         "ns": "https://atlas.sa/ns/oscal",
                         "value": "nca-pdf-en"
+                      },
+                      {
+                        "name": "ncnicc-class-a",
+                        "ns": "https://atlas.sa/ns/oscal",
+                        "value": "5-1"
+                      },
+                      {
+                        "name": "ncnicc-class-a-status",
+                        "ns": "https://atlas.sa/ns/oscal",
+                        "value": "M"
+                      },
+                      {
+                        "name": "ncnicc-class-b",
+                        "ns": "https://atlas.sa/ns/oscal",
+                        "value": "5-1"
+                      },
+                      {
+                        "name": "ncnicc-class-b-status",
+                        "ns": "https://atlas.sa/ns/oscal",
+                        "value": "R"
                       }
                     ],
                     "parts": [
@@ -3617,7 +3537,7 @@
                       {
                         "name": "tier",
                         "ns": "https://atlas.sa/ns/oscal",
-                        "value": "3"
+                        "value": "2"
                       },
                       {
                         "name": "tier-source",
@@ -3669,7 +3589,7 @@
                       {
                         "name": "tier",
                         "ns": "https://atlas.sa/ns/oscal",
-                        "value": "3"
+                        "value": "2"
                       },
                       {
                         "name": "tier-source",
@@ -3721,7 +3641,7 @@
                       {
                         "name": "tier",
                         "ns": "https://atlas.sa/ns/oscal",
-                        "value": "3"
+                        "value": "2"
                       },
                       {
                         "name": "tier-source",
@@ -3752,6 +3672,26 @@
                         "name": "text-source",
                         "ns": "https://atlas.sa/ns/oscal",
                         "value": "nca-pdf-en"
+                      },
+                      {
+                        "name": "ncnicc-class-a",
+                        "ns": "https://atlas.sa/ns/oscal",
+                        "value": "5-1"
+                      },
+                      {
+                        "name": "ncnicc-class-a-status",
+                        "ns": "https://atlas.sa/ns/oscal",
+                        "value": "M"
+                      },
+                      {
+                        "name": "ncnicc-class-b",
+                        "ns": "https://atlas.sa/ns/oscal",
+                        "value": "5-1"
+                      },
+                      {
+                        "name": "ncnicc-class-b-status",
+                        "ns": "https://atlas.sa/ns/oscal",
+                        "value": "R"
                       }
                     ],
                     "parts": [
@@ -3780,7 +3720,7 @@
                   {
                     "name": "tier-source",
                     "ns": "https://atlas.sa/ns/oscal",
-                    "value": "taxonomy"
+                    "value": "author-curated"
                   },
                   {
                     "name": "domain",
@@ -3806,26 +3746,6 @@
                     "name": "text-source",
                     "ns": "https://atlas.sa/ns/oscal",
                     "value": "nca-pdf-en"
-                  },
-                  {
-                    "name": "ncnicc-class-a",
-                    "ns": "https://atlas.sa/ns/oscal",
-                    "value": "5-1"
-                  },
-                  {
-                    "name": "ncnicc-class-a-status",
-                    "ns": "https://atlas.sa/ns/oscal",
-                    "value": "M"
-                  },
-                  {
-                    "name": "ncnicc-class-b",
-                    "ns": "https://atlas.sa/ns/oscal",
-                    "value": "5-1"
-                  },
-                  {
-                    "name": "ncnicc-class-b-status",
-                    "ns": "https://atlas.sa/ns/oscal",
-                    "value": "R"
                   }
                 ],
                 "parts": [
@@ -3862,7 +3782,7 @@
                       {
                         "name": "tier",
                         "ns": "https://atlas.sa/ns/oscal",
-                        "value": "3"
+                        "value": "2"
                       },
                       {
                         "name": "tier-source",
@@ -3914,7 +3834,7 @@
                       {
                         "name": "tier",
                         "ns": "https://atlas.sa/ns/oscal",
-                        "value": "3"
+                        "value": "2"
                       },
                       {
                         "name": "tier-source",
@@ -3966,7 +3886,7 @@
                       {
                         "name": "tier",
                         "ns": "https://atlas.sa/ns/oscal",
-                        "value": "3"
+                        "value": "2"
                       },
                       {
                         "name": "tier-source",
@@ -4336,26 +4256,6 @@
                     "name": "text-source",
                     "ns": "https://atlas.sa/ns/oscal",
                     "value": "nca-pdf-en"
-                  },
-                  {
-                    "name": "ncnicc-class-a",
-                    "ns": "https://atlas.sa/ns/oscal",
-                    "value": "1-2"
-                  },
-                  {
-                    "name": "ncnicc-class-a-status",
-                    "ns": "https://atlas.sa/ns/oscal",
-                    "value": "M"
-                  },
-                  {
-                    "name": "ncnicc-class-b",
-                    "ns": "https://atlas.sa/ns/oscal",
-                    "value": "1-2"
-                  },
-                  {
-                    "name": "ncnicc-class-b-status",
-                    "ns": "https://atlas.sa/ns/oscal",
-                    "value": "M"
                   }
                 ],
                 "parts": [
@@ -4423,26 +4323,6 @@
                     "name": "text-source",
                     "ns": "https://atlas.sa/ns/oscal",
                     "value": "nca-pdf-en"
-                  },
-                  {
-                    "name": "ncnicc-class-a",
-                    "ns": "https://atlas.sa/ns/oscal",
-                    "value": "1-2"
-                  },
-                  {
-                    "name": "ncnicc-class-a-status",
-                    "ns": "https://atlas.sa/ns/oscal",
-                    "value": "M"
-                  },
-                  {
-                    "name": "ncnicc-class-b",
-                    "ns": "https://atlas.sa/ns/oscal",
-                    "value": "1-2"
-                  },
-                  {
-                    "name": "ncnicc-class-b-status",
-                    "ns": "https://atlas.sa/ns/oscal",
-                    "value": "M"
                   }
                 ],
                 "parts": [
@@ -4839,7 +4719,7 @@
                   {
                     "name": "tier",
                     "ns": "https://atlas.sa/ns/oscal",
-                    "value": "1"
+                    "value": "2"
                   },
                   {
                     "name": "tier-source",
@@ -4891,12 +4771,12 @@
                       {
                         "name": "tier",
                         "ns": "https://atlas.sa/ns/oscal",
-                        "value": "1"
+                        "value": "2"
                       },
                       {
                         "name": "tier-source",
                         "ns": "https://atlas.sa/ns/oscal",
-                        "value": "taxonomy"
+                        "value": "author-curated"
                       },
                       {
                         "name": "domain",
@@ -4978,12 +4858,12 @@
                       {
                         "name": "tier",
                         "ns": "https://atlas.sa/ns/oscal",
-                        "value": "1"
+                        "value": "2"
                       },
                       {
                         "name": "tier-source",
                         "ns": "https://atlas.sa/ns/oscal",
-                        "value": "taxonomy"
+                        "value": "author-curated"
                       },
                       {
                         "name": "domain",
@@ -5239,12 +5119,12 @@
                       {
                         "name": "tier",
                         "ns": "https://atlas.sa/ns/oscal",
-                        "value": "3"
+                        "value": "2"
                       },
                       {
                         "name": "tier-source",
                         "ns": "https://atlas.sa/ns/oscal",
-                        "value": "taxonomy"
+                        "value": "author-curated"
                       },
                       {
                         "name": "domain",
@@ -6502,12 +6382,12 @@
                       {
                         "name": "tier",
                         "ns": "https://atlas.sa/ns/oscal",
-                        "value": "3"
+                        "value": "2"
                       },
                       {
                         "name": "tier-source",
                         "ns": "https://atlas.sa/ns/oscal",
-                        "value": "taxonomy"
+                        "value": "author-curated"
                       },
                       {
                         "name": "domain",
@@ -6533,26 +6413,6 @@
                         "name": "text-source",
                         "ns": "https://atlas.sa/ns/oscal",
                         "value": "nca-pdf-en"
-                      },
-                      {
-                        "name": "ncnicc-class-a",
-                        "ns": "https://atlas.sa/ns/oscal",
-                        "value": "9-2"
-                      },
-                      {
-                        "name": "ncnicc-class-a-status",
-                        "ns": "https://atlas.sa/ns/oscal",
-                        "value": "M"
-                      },
-                      {
-                        "name": "ncnicc-class-b",
-                        "ns": "https://atlas.sa/ns/oscal",
-                        "value": "9-2"
-                      },
-                      {
-                        "name": "ncnicc-class-b-status",
-                        "ns": "https://atlas.sa/ns/oscal",
-                        "value": "M"
                       }
                     ],
                     "parts": [
@@ -6589,12 +6449,12 @@
                       {
                         "name": "tier",
                         "ns": "https://atlas.sa/ns/oscal",
-                        "value": "3"
+                        "value": "2"
                       },
                       {
                         "name": "tier-source",
                         "ns": "https://atlas.sa/ns/oscal",
-                        "value": "taxonomy"
+                        "value": "author-curated"
                       },
                       {
                         "name": "domain",
@@ -7140,7 +7000,7 @@
                       {
                         "name": "ncnicc-class-b-status",
                         "ns": "https://atlas.sa/ns/oscal",
-                        "value": "M"
+                        "value": "R"
                       }
                     ],
                     "parts": [
@@ -7177,12 +7037,12 @@
                       {
                         "name": "tier",
                         "ns": "https://atlas.sa/ns/oscal",
-                        "value": "1"
+                        "value": "2"
                       },
                       {
                         "name": "tier-source",
                         "ns": "https://atlas.sa/ns/oscal",
-                        "value": "taxonomy"
+                        "value": "author-curated"
                       },
                       {
                         "name": "domain",
@@ -7679,12 +7539,12 @@
                       {
                         "name": "tier",
                         "ns": "https://atlas.sa/ns/oscal",
-                        "value": "3"
+                        "value": "2"
                       },
                       {
                         "name": "tier-source",
                         "ns": "https://atlas.sa/ns/oscal",
-                        "value": "taxonomy"
+                        "value": "author-curated"
                       },
                       {
                         "name": "domain",
@@ -7710,26 +7570,6 @@
                         "name": "text-source",
                         "ns": "https://atlas.sa/ns/oscal",
                         "value": "nca-pdf-en"
-                      },
-                      {
-                        "name": "ncnicc-class-a",
-                        "ns": "https://atlas.sa/ns/oscal",
-                        "value": "5-2"
-                      },
-                      {
-                        "name": "ncnicc-class-a-status",
-                        "ns": "https://atlas.sa/ns/oscal",
-                        "value": "M"
-                      },
-                      {
-                        "name": "ncnicc-class-b",
-                        "ns": "https://atlas.sa/ns/oscal",
-                        "value": "5-2"
-                      },
-                      {
-                        "name": "ncnicc-class-b-status",
-                        "ns": "https://atlas.sa/ns/oscal",
-                        "value": "R"
                       }
                     ],
                     "parts": [
@@ -7766,12 +7606,12 @@
                       {
                         "name": "tier",
                         "ns": "https://atlas.sa/ns/oscal",
-                        "value": "1"
+                        "value": "2"
                       },
                       {
                         "name": "tier-source",
                         "ns": "https://atlas.sa/ns/oscal",
-                        "value": "taxonomy"
+                        "value": "author-curated"
                       },
                       {
                         "name": "domain",
@@ -8211,26 +8051,6 @@
                         "name": "text-source",
                         "ns": "https://atlas.sa/ns/oscal",
                         "value": "nca-pdf-en"
-                      },
-                      {
-                        "name": "ncnicc-class-a",
-                        "ns": "https://atlas.sa/ns/oscal",
-                        "value": "6-2"
-                      },
-                      {
-                        "name": "ncnicc-class-a-status",
-                        "ns": "https://atlas.sa/ns/oscal",
-                        "value": "M"
-                      },
-                      {
-                        "name": "ncnicc-class-b",
-                        "ns": "https://atlas.sa/ns/oscal",
-                        "value": "6-2"
-                      },
-                      {
-                        "name": "ncnicc-class-b-status",
-                        "ns": "https://atlas.sa/ns/oscal",
-                        "value": "M"
                       }
                     ],
                     "parts": [
@@ -8298,26 +8118,6 @@
                         "name": "text-source",
                         "ns": "https://atlas.sa/ns/oscal",
                         "value": "nca-pdf-en"
-                      },
-                      {
-                        "name": "ncnicc-class-a",
-                        "ns": "https://atlas.sa/ns/oscal",
-                        "value": "6-2"
-                      },
-                      {
-                        "name": "ncnicc-class-a-status",
-                        "ns": "https://atlas.sa/ns/oscal",
-                        "value": "M"
-                      },
-                      {
-                        "name": "ncnicc-class-b",
-                        "ns": "https://atlas.sa/ns/oscal",
-                        "value": "6-2"
-                      },
-                      {
-                        "name": "ncnicc-class-b-status",
-                        "ns": "https://atlas.sa/ns/oscal",
-                        "value": "M"
                       }
                     ],
                     "parts": [
@@ -8385,26 +8185,6 @@
                         "name": "text-source",
                         "ns": "https://atlas.sa/ns/oscal",
                         "value": "nca-pdf-en"
-                      },
-                      {
-                        "name": "ncnicc-class-a",
-                        "ns": "https://atlas.sa/ns/oscal",
-                        "value": "6-2"
-                      },
-                      {
-                        "name": "ncnicc-class-a-status",
-                        "ns": "https://atlas.sa/ns/oscal",
-                        "value": "M"
-                      },
-                      {
-                        "name": "ncnicc-class-b",
-                        "ns": "https://atlas.sa/ns/oscal",
-                        "value": "6-2"
-                      },
-                      {
-                        "name": "ncnicc-class-b-status",
-                        "ns": "https://atlas.sa/ns/oscal",
-                        "value": "M"
                       }
                     ],
                     "parts": [
@@ -8472,26 +8252,6 @@
                         "name": "text-source",
                         "ns": "https://atlas.sa/ns/oscal",
                         "value": "nca-pdf-en"
-                      },
-                      {
-                        "name": "ncnicc-class-a",
-                        "ns": "https://atlas.sa/ns/oscal",
-                        "value": "6-2"
-                      },
-                      {
-                        "name": "ncnicc-class-a-status",
-                        "ns": "https://atlas.sa/ns/oscal",
-                        "value": "M"
-                      },
-                      {
-                        "name": "ncnicc-class-b",
-                        "ns": "https://atlas.sa/ns/oscal",
-                        "value": "6-2"
-                      },
-                      {
-                        "name": "ncnicc-class-b-status",
-                        "ns": "https://atlas.sa/ns/oscal",
-                        "value": "M"
                       }
                     ],
                     "parts": [
@@ -8629,12 +8389,12 @@
                   {
                     "name": "tier",
                     "ns": "https://atlas.sa/ns/oscal",
-                    "value": "3"
+                    "value": "1"
                   },
                   {
                     "name": "tier-source",
                     "ns": "https://atlas.sa/ns/oscal",
-                    "value": "taxonomy"
+                    "value": "author-curated"
                   },
                   {
                     "name": "domain",
@@ -9128,12 +8888,12 @@
                       {
                         "name": "tier",
                         "ns": "https://atlas.sa/ns/oscal",
-                        "value": "2"
+                        "value": "1"
                       },
                       {
                         "name": "tier-source",
                         "ns": "https://atlas.sa/ns/oscal",
-                        "value": "taxonomy"
+                        "value": "author-curated"
                       },
                       {
                         "name": "domain",
@@ -9215,12 +8975,12 @@
                       {
                         "name": "tier",
                         "ns": "https://atlas.sa/ns/oscal",
-                        "value": "2"
+                        "value": "1"
                       },
                       {
                         "name": "tier-source",
                         "ns": "https://atlas.sa/ns/oscal",
-                        "value": "taxonomy"
+                        "value": "author-curated"
                       },
                       {
                         "name": "domain",
@@ -9246,26 +9006,6 @@
                         "name": "text-source",
                         "ns": "https://atlas.sa/ns/oscal",
                         "value": "nca-pdf-en"
-                      },
-                      {
-                        "name": "ncnicc-class-a",
-                        "ns": "https://atlas.sa/ns/oscal",
-                        "value": "8-2"
-                      },
-                      {
-                        "name": "ncnicc-class-a-status",
-                        "ns": "https://atlas.sa/ns/oscal",
-                        "value": "M"
-                      },
-                      {
-                        "name": "ncnicc-class-b",
-                        "ns": "https://atlas.sa/ns/oscal",
-                        "value": "8-2"
-                      },
-                      {
-                        "name": "ncnicc-class-b-status",
-                        "ns": "https://atlas.sa/ns/oscal",
-                        "value": "M"
                       }
                     ],
                     "parts": [
@@ -9834,26 +9574,6 @@
                         "name": "text-source",
                         "ns": "https://atlas.sa/ns/oscal",
                         "value": "nca-pdf-en"
-                      },
-                      {
-                        "name": "ncnicc-class-a",
-                        "ns": "https://atlas.sa/ns/oscal",
-                        "value": "9-2"
-                      },
-                      {
-                        "name": "ncnicc-class-a-status",
-                        "ns": "https://atlas.sa/ns/oscal",
-                        "value": "M"
-                      },
-                      {
-                        "name": "ncnicc-class-b",
-                        "ns": "https://atlas.sa/ns/oscal",
-                        "value": "9-2"
-                      },
-                      {
-                        "name": "ncnicc-class-b-status",
-                        "ns": "https://atlas.sa/ns/oscal",
-                        "value": "M"
                       }
                     ],
                     "parts": [
@@ -9890,12 +9610,12 @@
                       {
                         "name": "tier",
                         "ns": "https://atlas.sa/ns/oscal",
-                        "value": "3"
+                        "value": "2"
                       },
                       {
                         "name": "tier-source",
                         "ns": "https://atlas.sa/ns/oscal",
-                        "value": "taxonomy"
+                        "value": "author-curated"
                       },
                       {
                         "name": "domain",
@@ -10304,12 +10024,12 @@
                       {
                         "name": "tier",
                         "ns": "https://atlas.sa/ns/oscal",
-                        "value": "1"
+                        "value": "2"
                       },
                       {
                         "name": "tier-source",
                         "ns": "https://atlas.sa/ns/oscal",
-                        "value": "taxonomy"
+                        "value": "author-curated"
                       },
                       {
                         "name": "domain",
@@ -10483,7 +10203,7 @@
                       {
                         "name": "tier-source",
                         "ns": "https://atlas.sa/ns/oscal",
-                        "value": "taxonomy"
+                        "value": "author-curated"
                       },
                       {
                         "name": "domain",
@@ -10652,12 +10372,12 @@
                       {
                         "name": "tier",
                         "ns": "https://atlas.sa/ns/oscal",
-                        "value": "3"
+                        "value": "2"
                       },
                       {
                         "name": "tier-source",
                         "ns": "https://atlas.sa/ns/oscal",
-                        "value": "taxonomy"
+                        "value": "author-curated"
                       },
                       {
                         "name": "domain",
@@ -10683,26 +10403,6 @@
                         "name": "text-source",
                         "ns": "https://atlas.sa/ns/oscal",
                         "value": "nca-pdf-en"
-                      },
-                      {
-                        "name": "ncnicc-class-a",
-                        "ns": "https://atlas.sa/ns/oscal",
-                        "value": "10-2"
-                      },
-                      {
-                        "name": "ncnicc-class-a-status",
-                        "ns": "https://atlas.sa/ns/oscal",
-                        "value": "M"
-                      },
-                      {
-                        "name": "ncnicc-class-b",
-                        "ns": "https://atlas.sa/ns/oscal",
-                        "value": "10-2"
-                      },
-                      {
-                        "name": "ncnicc-class-b-status",
-                        "ns": "https://atlas.sa/ns/oscal",
-                        "value": "M"
                       }
                     ],
                     "parts": [
@@ -11153,12 +10853,12 @@
                       {
                         "name": "tier",
                         "ns": "https://atlas.sa/ns/oscal",
-                        "value": "3"
+                        "value": "2"
                       },
                       {
                         "name": "tier-source",
                         "ns": "https://atlas.sa/ns/oscal",
-                        "value": "taxonomy"
+                        "value": "author-curated"
                       },
                       {
                         "name": "domain",
@@ -11184,26 +10884,6 @@
                         "name": "text-source",
                         "ns": "https://atlas.sa/ns/oscal",
                         "value": "nca-pdf-en"
-                      },
-                      {
-                        "name": "ncnicc-class-a",
-                        "ns": "https://atlas.sa/ns/oscal",
-                        "value": "11-2"
-                      },
-                      {
-                        "name": "ncnicc-class-a-status",
-                        "ns": "https://atlas.sa/ns/oscal",
-                        "value": "M"
-                      },
-                      {
-                        "name": "ncnicc-class-b",
-                        "ns": "https://atlas.sa/ns/oscal",
-                        "value": "11-2"
-                      },
-                      {
-                        "name": "ncnicc-class-b-status",
-                        "ns": "https://atlas.sa/ns/oscal",
-                        "value": "R"
                       }
                     ],
                     "parts": [
@@ -11341,12 +11021,12 @@
                   {
                     "name": "tier",
                     "ns": "https://atlas.sa/ns/oscal",
-                    "value": "3"
+                    "value": "2"
                   },
                   {
                     "name": "tier-source",
                     "ns": "https://atlas.sa/ns/oscal",
-                    "value": "taxonomy"
+                    "value": "author-curated"
                   },
                   {
                     "name": "domain",
@@ -11685,26 +11365,6 @@
                         "name": "text-source",
                         "ns": "https://atlas.sa/ns/oscal",
                         "value": "nca-pdf-en"
-                      },
-                      {
-                        "name": "ncnicc-class-a",
-                        "ns": "https://atlas.sa/ns/oscal",
-                        "value": "12-2"
-                      },
-                      {
-                        "name": "ncnicc-class-a-status",
-                        "ns": "https://atlas.sa/ns/oscal",
-                        "value": "M"
-                      },
-                      {
-                        "name": "ncnicc-class-b",
-                        "ns": "https://atlas.sa/ns/oscal",
-                        "value": "12-2"
-                      },
-                      {
-                        "name": "ncnicc-class-b-status",
-                        "ns": "https://atlas.sa/ns/oscal",
-                        "value": "M"
                       }
                     ],
                     "parts": [
@@ -11772,26 +11432,6 @@
                         "name": "text-source",
                         "ns": "https://atlas.sa/ns/oscal",
                         "value": "nca-pdf-en"
-                      },
-                      {
-                        "name": "ncnicc-class-a",
-                        "ns": "https://atlas.sa/ns/oscal",
-                        "value": "12-2"
-                      },
-                      {
-                        "name": "ncnicc-class-a-status",
-                        "ns": "https://atlas.sa/ns/oscal",
-                        "value": "M"
-                      },
-                      {
-                        "name": "ncnicc-class-b",
-                        "ns": "https://atlas.sa/ns/oscal",
-                        "value": "12-2"
-                      },
-                      {
-                        "name": "ncnicc-class-b-status",
-                        "ns": "https://atlas.sa/ns/oscal",
-                        "value": "M"
                       }
                     ],
                     "parts": [
@@ -11859,26 +11499,6 @@
                         "name": "text-source",
                         "ns": "https://atlas.sa/ns/oscal",
                         "value": "nca-pdf-en"
-                      },
-                      {
-                        "name": "ncnicc-class-a",
-                        "ns": "https://atlas.sa/ns/oscal",
-                        "value": "12-2"
-                      },
-                      {
-                        "name": "ncnicc-class-a-status",
-                        "ns": "https://atlas.sa/ns/oscal",
-                        "value": "M"
-                      },
-                      {
-                        "name": "ncnicc-class-b",
-                        "ns": "https://atlas.sa/ns/oscal",
-                        "value": "12-2"
-                      },
-                      {
-                        "name": "ncnicc-class-b-status",
-                        "ns": "https://atlas.sa/ns/oscal",
-                        "value": "M"
                       }
                     ],
                     "parts": [
@@ -11946,26 +11566,6 @@
                         "name": "text-source",
                         "ns": "https://atlas.sa/ns/oscal",
                         "value": "nca-pdf-en"
-                      },
-                      {
-                        "name": "ncnicc-class-a",
-                        "ns": "https://atlas.sa/ns/oscal",
-                        "value": "12-2"
-                      },
-                      {
-                        "name": "ncnicc-class-a-status",
-                        "ns": "https://atlas.sa/ns/oscal",
-                        "value": "M"
-                      },
-                      {
-                        "name": "ncnicc-class-b",
-                        "ns": "https://atlas.sa/ns/oscal",
-                        "value": "12-2"
-                      },
-                      {
-                        "name": "ncnicc-class-b-status",
-                        "ns": "https://atlas.sa/ns/oscal",
-                        "value": "M"
                       }
                     ],
                     "parts": [
@@ -12329,12 +11929,12 @@
                       {
                         "name": "tier",
                         "ns": "https://atlas.sa/ns/oscal",
-                        "value": "2"
+                        "value": "3"
                       },
                       {
                         "name": "tier-source",
                         "ns": "https://atlas.sa/ns/oscal",
-                        "value": "taxonomy"
+                        "value": "author-curated"
                       },
                       {
                         "name": "domain",
@@ -12447,26 +12047,6 @@
                         "name": "text-source",
                         "ns": "https://atlas.sa/ns/oscal",
                         "value": "nca-pdf-en"
-                      },
-                      {
-                        "name": "ncnicc-class-a",
-                        "ns": "https://atlas.sa/ns/oscal",
-                        "value": "13-2"
-                      },
-                      {
-                        "name": "ncnicc-class-a-status",
-                        "ns": "https://atlas.sa/ns/oscal",
-                        "value": "M"
-                      },
-                      {
-                        "name": "ncnicc-class-b",
-                        "ns": "https://atlas.sa/ns/oscal",
-                        "value": "13-2"
-                      },
-                      {
-                        "name": "ncnicc-class-b-status",
-                        "ns": "https://atlas.sa/ns/oscal",
-                        "value": "M"
                       }
                     ],
                     "parts": [
@@ -12503,12 +12083,12 @@
                       {
                         "name": "tier",
                         "ns": "https://atlas.sa/ns/oscal",
-                        "value": "3"
+                        "value": "2"
                       },
                       {
                         "name": "tier-source",
                         "ns": "https://atlas.sa/ns/oscal",
-                        "value": "taxonomy"
+                        "value": "author-curated"
                       },
                       {
                         "name": "domain",
@@ -12590,12 +12170,12 @@
                       {
                         "name": "tier",
                         "ns": "https://atlas.sa/ns/oscal",
-                        "value": "3"
+                        "value": "2"
                       },
                       {
                         "name": "tier-source",
                         "ns": "https://atlas.sa/ns/oscal",
-                        "value": "taxonomy"
+                        "value": "author-curated"
                       },
                       {
                         "name": "domain",
@@ -12708,26 +12288,6 @@
                         "name": "text-source",
                         "ns": "https://atlas.sa/ns/oscal",
                         "value": "nca-pdf-en"
-                      },
-                      {
-                        "name": "ncnicc-class-a",
-                        "ns": "https://atlas.sa/ns/oscal",
-                        "value": "13-2"
-                      },
-                      {
-                        "name": "ncnicc-class-a-status",
-                        "ns": "https://atlas.sa/ns/oscal",
-                        "value": "M"
-                      },
-                      {
-                        "name": "ncnicc-class-b",
-                        "ns": "https://atlas.sa/ns/oscal",
-                        "value": "13-2"
-                      },
-                      {
-                        "name": "ncnicc-class-b-status",
-                        "ns": "https://atlas.sa/ns/oscal",
-                        "value": "M"
                       }
                     ],
                     "parts": [
@@ -12952,12 +12512,12 @@
                   {
                     "name": "tier",
                     "ns": "https://atlas.sa/ns/oscal",
-                    "value": "3"
+                    "value": "2"
                   },
                   {
                     "name": "tier-source",
                     "ns": "https://atlas.sa/ns/oscal",
-                    "value": "taxonomy"
+                    "value": "author-curated"
                   },
                   {
                     "name": "domain",
@@ -13039,7 +12599,7 @@
                   {
                     "name": "tier",
                     "ns": "https://atlas.sa/ns/oscal",
-                    "value": "3"
+                    "value": "2"
                   },
                   {
                     "name": "tier-source",
@@ -13091,12 +12651,12 @@
                       {
                         "name": "tier",
                         "ns": "https://atlas.sa/ns/oscal",
-                        "value": "3"
+                        "value": "2"
                       },
                       {
                         "name": "tier-source",
                         "ns": "https://atlas.sa/ns/oscal",
-                        "value": "taxonomy"
+                        "value": "author-curated"
                       },
                       {
                         "name": "domain",
@@ -13178,12 +12738,12 @@
                       {
                         "name": "tier",
                         "ns": "https://atlas.sa/ns/oscal",
-                        "value": "3"
+                        "value": "2"
                       },
                       {
                         "name": "tier-source",
                         "ns": "https://atlas.sa/ns/oscal",
-                        "value": "taxonomy"
+                        "value": "author-curated"
                       },
                       {
                         "name": "domain",
@@ -13265,12 +12825,12 @@
                       {
                         "name": "tier",
                         "ns": "https://atlas.sa/ns/oscal",
-                        "value": "3"
+                        "value": "2"
                       },
                       {
                         "name": "tier-source",
                         "ns": "https://atlas.sa/ns/oscal",
-                        "value": "taxonomy"
+                        "value": "author-curated"
                       },
                       {
                         "name": "domain",
@@ -13352,12 +12912,12 @@
                       {
                         "name": "tier",
                         "ns": "https://atlas.sa/ns/oscal",
-                        "value": "3"
+                        "value": "2"
                       },
                       {
                         "name": "tier-source",
                         "ns": "https://atlas.sa/ns/oscal",
-                        "value": "taxonomy"
+                        "value": "author-curated"
                       },
                       {
                         "name": "domain",
@@ -13439,12 +12999,12 @@
                       {
                         "name": "tier",
                         "ns": "https://atlas.sa/ns/oscal",
-                        "value": "3"
+                        "value": "2"
                       },
                       {
                         "name": "tier-source",
                         "ns": "https://atlas.sa/ns/oscal",
-                        "value": "taxonomy"
+                        "value": "author-curated"
                       },
                       {
                         "name": "domain",
@@ -13853,12 +13413,12 @@
                       {
                         "name": "tier",
                         "ns": "https://atlas.sa/ns/oscal",
-                        "value": "1"
+                        "value": "2"
                       },
                       {
                         "name": "tier-source",
                         "ns": "https://atlas.sa/ns/oscal",
-                        "value": "taxonomy"
+                        "value": "author-curated"
                       },
                       {
                         "name": "domain",
@@ -13940,12 +13500,12 @@
                       {
                         "name": "tier",
                         "ns": "https://atlas.sa/ns/oscal",
-                        "value": "1"
+                        "value": "2"
                       },
                       {
                         "name": "tier-source",
                         "ns": "https://atlas.sa/ns/oscal",
-                        "value": "taxonomy"
+                        "value": "author-curated"
                       },
                       {
                         "name": "domain",
@@ -14114,12 +13674,12 @@
                       {
                         "name": "tier",
                         "ns": "https://atlas.sa/ns/oscal",
-                        "value": "3"
+                        "value": "2"
                       },
                       {
                         "name": "tier-source",
                         "ns": "https://atlas.sa/ns/oscal",
-                        "value": "taxonomy"
+                        "value": "author-curated"
                       },
                       {
                         "name": "domain",
@@ -14201,12 +13761,12 @@
                       {
                         "name": "tier",
                         "ns": "https://atlas.sa/ns/oscal",
-                        "value": "1"
+                        "value": "2"
                       },
                       {
                         "name": "tier-source",
                         "ns": "https://atlas.sa/ns/oscal",
-                        "value": "taxonomy"
+                        "value": "author-curated"
                       },
                       {
                         "name": "domain",
@@ -14468,12 +14028,12 @@
                   {
                     "name": "tier",
                     "ns": "https://atlas.sa/ns/oscal",
-                    "value": "3"
+                    "value": "2"
                   },
                   {
                     "name": "tier-source",
                     "ns": "https://atlas.sa/ns/oscal",
-                    "value": "taxonomy"
+                    "value": "author-curated"
                   },
                   {
                     "name": "domain",
@@ -14535,7 +14095,7 @@
                   {
                     "name": "tier",
                     "ns": "https://atlas.sa/ns/oscal",
-                    "value": "3"
+                    "value": "2"
                   },
                   {
                     "name": "tier-source",
@@ -14587,12 +14147,12 @@
                       {
                         "name": "tier",
                         "ns": "https://atlas.sa/ns/oscal",
-                        "value": "3"
+                        "value": "2"
                       },
                       {
                         "name": "tier-source",
                         "ns": "https://atlas.sa/ns/oscal",
-                        "value": "taxonomy"
+                        "value": "author-curated"
                       },
                       {
                         "name": "domain",
@@ -14968,12 +14528,12 @@
                   {
                     "name": "tier",
                     "ns": "https://atlas.sa/ns/oscal",
-                    "value": "3"
+                    "value": "2"
                   },
                   {
                     "name": "tier-source",
                     "ns": "https://atlas.sa/ns/oscal",
-                    "value": "taxonomy"
+                    "value": "author-curated"
                   },
                   {
                     "name": "domain",
@@ -15055,7 +14615,7 @@
                       {
                         "name": "tier",
                         "ns": "https://atlas.sa/ns/oscal",
-                        "value": "3"
+                        "value": "2"
                       },
                       {
                         "name": "tier-source",
@@ -15086,6 +14646,26 @@
                         "name": "text-source",
                         "ns": "https://atlas.sa/ns/oscal",
                         "value": "nca-pdf-en"
+                      },
+                      {
+                        "name": "ncnicc-class-a",
+                        "ns": "https://atlas.sa/ns/oscal",
+                        "value": "1-3"
+                      },
+                      {
+                        "name": "ncnicc-class-a-status",
+                        "ns": "https://atlas.sa/ns/oscal",
+                        "value": "M"
+                      },
+                      {
+                        "name": "ncnicc-class-b",
+                        "ns": "https://atlas.sa/ns/oscal",
+                        "value": "1-3"
+                      },
+                      {
+                        "name": "ncnicc-class-b-status",
+                        "ns": "https://atlas.sa/ns/oscal",
+                        "value": "R"
                       }
                     ],
                     "parts": [
@@ -15107,7 +14687,7 @@
                       {
                         "name": "tier",
                         "ns": "https://atlas.sa/ns/oscal",
-                        "value": "3"
+                        "value": "2"
                       },
                       {
                         "name": "tier-source",
@@ -15138,6 +14718,26 @@
                         "name": "text-source",
                         "ns": "https://atlas.sa/ns/oscal",
                         "value": "nca-pdf-en"
+                      },
+                      {
+                        "name": "ncnicc-class-a",
+                        "ns": "https://atlas.sa/ns/oscal",
+                        "value": "1-3"
+                      },
+                      {
+                        "name": "ncnicc-class-a-status",
+                        "ns": "https://atlas.sa/ns/oscal",
+                        "value": "M"
+                      },
+                      {
+                        "name": "ncnicc-class-b",
+                        "ns": "https://atlas.sa/ns/oscal",
+                        "value": "1-3"
+                      },
+                      {
+                        "name": "ncnicc-class-b-status",
+                        "ns": "https://atlas.sa/ns/oscal",
+                        "value": "R"
                       }
                     ],
                     "parts": [
@@ -15159,7 +14759,7 @@
                       {
                         "name": "tier",
                         "ns": "https://atlas.sa/ns/oscal",
-                        "value": "3"
+                        "value": "2"
                       },
                       {
                         "name": "tier-source",
@@ -15213,12 +14813,12 @@
                   {
                     "name": "tier",
                     "ns": "https://atlas.sa/ns/oscal",
-                    "value": "3"
+                    "value": "2"
                   },
                   {
                     "name": "tier-source",
                     "ns": "https://atlas.sa/ns/oscal",
-                    "value": "taxonomy"
+                    "value": "author-curated"
                   },
                   {
                     "name": "domain",
@@ -15244,26 +14844,6 @@
                     "name": "text-source",
                     "ns": "https://atlas.sa/ns/oscal",
                     "value": "nca-pdf-en"
-                  },
-                  {
-                    "name": "ncnicc-class-a",
-                    "ns": "https://atlas.sa/ns/oscal",
-                    "value": "1-3"
-                  },
-                  {
-                    "name": "ncnicc-class-a-status",
-                    "ns": "https://atlas.sa/ns/oscal",
-                    "value": "M"
-                  },
-                  {
-                    "name": "ncnicc-class-b",
-                    "ns": "https://atlas.sa/ns/oscal",
-                    "value": "1-3"
-                  },
-                  {
-                    "name": "ncnicc-class-b-status",
-                    "ns": "https://atlas.sa/ns/oscal",
-                    "value": "R"
                   }
                 ],
                 "parts": [
@@ -15300,7 +14880,7 @@
                       {
                         "name": "tier",
                         "ns": "https://atlas.sa/ns/oscal",
-                        "value": "3"
+                        "value": "2"
                       },
                       {
                         "name": "tier-source",
@@ -15352,7 +14932,7 @@
                       {
                         "name": "tier",
                         "ns": "https://atlas.sa/ns/oscal",
-                        "value": "3"
+                        "value": "2"
                       },
                       {
                         "name": "tier-source",

@@ -13,6 +13,7 @@ from p2c.schemas.enums import RunMode
 
 
 class Settings(BaseSettings):
+
     model_config = SettingsConfigDict(
         env_prefix="ATLAS_",
         env_file=".env",

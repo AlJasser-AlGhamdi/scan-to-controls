@@ -1,0 +1,7 @@
+$ORIGIN email-nodkim.test.
+$TTL 3600
+@    IN SOA ns1.email-nodkim.test. hostmaster.email-nodkim.test. 2026101501 7200 3600 1209600 3600
+@    IN NS  ns1.email-nodkim.test.
+ns1  IN A   127.0.0.1
+@    IN TXT "v=spf1 -all"
+_dmarc IN TXT "v=DMARC1; p=reject; rua=mailto:dmarc@email-nodkim.test"

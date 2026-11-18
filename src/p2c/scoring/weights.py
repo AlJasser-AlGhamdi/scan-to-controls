@@ -62,6 +62,7 @@ class AHPResult:
 
 @dataclass(frozen=True)
 class BWMResult:
+
     weights: tuple[float, ...]
     xi: float
     consistency_ratio: float

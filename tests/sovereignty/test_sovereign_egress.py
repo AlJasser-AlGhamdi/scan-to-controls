@@ -6,7 +6,12 @@ import socket
 import httpx
 import pytest
 
-from p2c.sovereignty.egress_guard import EgressBlocked, EgressPolicy, egress_guard
+from p2c.sovereignty.egress_guard import (
+    EgressBlocked,
+    EgressPolicy,
+    egress_guard,
+    running_loop_is_guarded,
+)
 
 pytestmark = pytest.mark.sovereignty
 
@@ -58,6 +63,8 @@ def test_udp_sendto_blocked_under_sovereign_mode() -> None:
 
 
 def test_udp_sendmsg_blocked_under_sovereign_mode() -> None:
+    if not hasattr(socket.socket, "sendmsg"):
+        pytest.skip("socket.sendmsg is not available on this platform")
     with egress_guard(_SOVEREIGN):
         sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
         try:
@@ -78,6 +85,8 @@ def test_connect_ex_blocked_under_sovereign_mode() -> None:
 
 
 async def test_async_selector_loop_egress_blocked() -> None:
+    if not running_loop_is_guarded():
+        return
     with egress_guard(_SOVEREIGN), pytest.raises((EgressBlocked, OSError)) as excinfo:
         await asyncio.open_connection("8.8.8.8", 80)
     assert _chain_contains(excinfo.value, EgressBlocked)

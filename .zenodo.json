@@ -1,6 +1,6 @@
 {
   "title": "Tiered-evidence toolkit, control classification and evaluation artefacts for Saudi SME cybersecurity compliance",
-  "description": "Artefacts for the article 'An automated tiered-evidence toolkit for cybersecurity compliance assessment in Saudi SMEs': the evidence-tier classification of all 203 ECC-2:2024 and NCNICC-1:2025 control rows keyed by control identifier, the toolkit with its 31 detectors, the fixed detector-to-control mapping, the evidence-precedence scorer and the contradiction check, the deterministic generator for the two synthetic cohorts of 100 Saudi Class B firms each, and every evaluation output reported in the article. The legally binding Arabic control text is withheld pending permission from the National Cybersecurity Authority; the openly published English wording, the control identifiers and the tier labels are included, and the identifiers resolve against the official NCA publications.",
+  "description": "Artefacts for the article 'An automated tiered-evidence toolkit for cybersecurity compliance assessment in Saudi SMEs', version 1.1.0: the evidence-tier classification of all 204 ECC-2:2024 and NCNICC-1:2025 control rows keyed by control identifier, the toolkit with its 32 detectors, each with a working reader and a written detector contract, the fixed detector-to-control mapping, the evidence-precedence scorer and the contradiction check, the deterministic generator for the two synthetic cohorts of 100 Saudi Class B firms each, the local test servers and the detector parsing matrix measured on them, and the code and stored artefacts from which every evaluation output reported in the article regenerates from the stated seed. The legally binding Arabic control text is withheld, since redistributing it needs the National Cybersecurity Authority's permission. The openly published English wording (for the four NCNICC-1:2025 rows, published in Arabic only, the authors' English rendering), the control identifiers and the tier labels are included, the identifiers resolve against the official NCA publications, and a SHA-256 fingerprint of the Arabic text of every row lets anyone holding those publications verify the encoding row by row. The live-scanning orchestrator is not included.",
   "upload_type": "software",
   "creators": [
     {
@@ -34,12 +34,9 @@
       "relation": "isSupplementTo",
       "identifier": "https://github.com/AlJasser-AlGhamdi/scan-to-controls",
       "resource_type": "software"
-    },
-    {
-      "relation": "isIdenticalTo",
-      "identifier": "https://doi.org/10.5281/zenodo.22724989",
-      "resource_type": "software"
     }
   ],
-  "access_right": "open"
+  "access_right": "open",
+  "license": "Apache-2.0",
+  "version": "1.1.0"
 }

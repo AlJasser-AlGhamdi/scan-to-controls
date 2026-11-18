@@ -10,6 +10,8 @@ from p2c.schemas.models import Asset, AtlasModel
 
 class DiscoveryError(RuntimeError):
     pass
+
+
 class DiscoverySource(Protocol):
 
     source_tool: str

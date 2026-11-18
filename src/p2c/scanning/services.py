@@ -26,12 +26,19 @@ class ServiceProbe:
     read: bool = True
 
 
+def _mysql_greeting(banner: bytes) -> bool:
+    if len(banner) < _MIN_MYSQL_GREETING or banner[3] != 0 or banner[4] != _MYSQL_PROTOCOL_VERSION:
+        return False
+    length = int.from_bytes(banner[:3], "little")
+    return length + 4 >= len(banner) >= min(length + 4, _MIN_MYSQL_GREETING) and b"\x00" in banner[5:]
+
+
 def identify_database(banner: bytes, pg_reply: bytes = b"", redis_reply: bytes = b"") -> str | None:
-    if len(banner) >= _MIN_MYSQL_GREETING and banner[4] == _MYSQL_PROTOCOL_VERSION:
+    if _mysql_greeting(banner):
         return "mariadb" if b"MariaDB" in banner else "mysql"
     if pg_reply in (b"S", b"N"):
         return "postgresql"
-    if redis_reply.startswith((b"+PONG", b"-NOAUTH", b"-ERR operation not permitted")):
+    if redis_reply.startswith((b"+PONG", b"-NOAUTH", b"-ERR operation not permitted", b"-DENIED")):
         return "redis"
     return None
 
@@ -48,7 +55,8 @@ class ServiceInspector:
             log.warning("service_read_indeterminate", host=host, port=port, error=type(exc).__name__)
             return ServiceProbe(host=host, port=port, read=False)
         protocol = identify_database(banner, pg_reply, redis_reply)
-        evidence = banner or pg_reply or redis_reply
+        named = [r for r in (pg_reply, redis_reply) if r.startswith(_OTHER_SERVICES)]
+        evidence = banner or (named[0] if named else pg_reply or redis_reply)
         return ServiceProbe(host=host, port=port, protocol=protocol, evidence=evidence)
 
     def _exchange(self, host: str, port: int) -> tuple[bytes, bytes, bytes]:
@@ -71,6 +79,13 @@ class ServiceInspector:
                 return sock.recv(size)
         except OSError:
             return b""
+
+
+_OTHER_SERVICES = (b"SSH-", b"220", b"HTTP/", b"+OK", b"* OK", b"RFB ")
+
+
+def database_read(probe: ServiceProbe) -> bool:
+    return probe.read and (probe.protocol is not None or probe.evidence.startswith(_OTHER_SERVICES))
 
 
 def checks_for_service(probe: ServiceProbe) -> list[CheckId]:

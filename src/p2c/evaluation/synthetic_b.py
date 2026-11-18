@@ -45,6 +45,7 @@ BASE_PREVALENCE: dict[CheckId, float] = {
     CheckId.EXPOSED_MANAGEMENT_PORT: 0.35,
     CheckId.HIGH_RISK_PORT_OPEN: 0.35,
     CheckId.EXPOSED_DATABASE_PORT: 0.20,
+    CheckId.EXPOSED_PRINTER_SERVICE: 0.10,
     CheckId.OUTDATED_EXPOSED_SOFTWARE: 0.55,
     CheckId.EOL_SOFTWARE_EXPOSED: 0.45,
     CheckId.SPF_MISSING: 0.45,
@@ -65,6 +66,7 @@ _DEV_LABEL_B = "sandbox"
 
 
 class SectorB:
+
     __slots__ = ("name", "prevalence", "neglect_a", "neglect_b", "min_subs", "max_subs")
 
     def __init__(
@@ -177,7 +179,7 @@ def _generate_case_b(
 
     conditions, competence = _draw_conditions(rng, hosts)
     true, forced_true = _true_issues_b(rng, hosts, apex, admin_host, dev_host, firm_neglect)
-    observed, forced_observe = _observe(rng, true, hosts, apex, conditions, competence)
+    observed = _observe(rng, true, hosts, apex, conditions, competence)
     true_control_ids = _control_ids_for(true, key)
     attestations = _attestations(rng, f"evalb-{index:03d}", true_control_ids, all_controls)
     internal, off_surface = draw_off_surface_evidence(
@@ -212,7 +214,6 @@ def _generate_case_b(
         baseline_seconds=baseline,
         internal_evidence=internal,
         forced_true_fallback=forced_true,
-        forced_observe_fallback=forced_observe,
         scan_conditions=conditions,
         scanner_competence=competence,
     )

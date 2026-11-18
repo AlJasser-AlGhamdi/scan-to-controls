@@ -1,11 +1,15 @@
 from __future__ import annotations
 
+import dataclasses
+import functools
+import itertools
 import json
 import random
 import statistics
 import time
-from collections.abc import Sequence
+from collections.abc import Collection, Iterable, Mapping, Sequence
 from dataclasses import asdict, dataclass, field
+from datetime import timedelta
 from pathlib import Path
 from typing import Any
 
@@ -28,9 +32,11 @@ from p2c.evaluation.synthetic import (
     generate_cases,
 )
 from p2c.evaluation.synthetic_b import generate_cases_b
-from p2c.mapping.models import ControlMapping
-from p2c.scanning.catalog import LIVE_CHECKS
+from p2c.mapping.models import ControlMapping, MappingMethod
 from p2c.mapping.rules import MappingEngine, check_id_from_finding
+from p2c.scanning.catalog import LIVE_CHECKS, CheckId
+from p2c.schemas.enums import EvidenceTier
+from p2c.schemas.models import Attestation
 from p2c.scoring.assemble import (
     TIER1_CHECKABLE,
     attestation_assessments,
@@ -39,7 +45,6 @@ from p2c.scoring.assemble import (
 )
 from p2c.scoring.contradictions import control_related, detect_contradictions
 from p2c.scoring.dual_score import apply_weights, compute_dual_score
-from p2c.schemas.enums import EvidenceTier
 from p2c.scoring.models import ComplianceStatus, ControlAssessment
 from p2c.scoring.questionnaire import (
     Answer,
@@ -103,6 +108,7 @@ class EvaluationReport:
     trivial_floor: dict[str, Any] = field(default_factory=dict)
     detection_ceiling: dict[str, Any] = field(default_factory=dict)
     implemented_only: dict[str, Any] = field(default_factory=dict)
+    rate_class_slice: dict[str, Any] = field(default_factory=dict)
     tier2_integrity: dict[str, Any] = field(default_factory=dict)
     dual_score_gap: dict[str, Any] = field(default_factory=dict)
     parent_reading: dict[str, Any] = field(default_factory=dict)
@@ -264,29 +270,97 @@ def _per_size(preds: list[CasePrediction], *, seed: int) -> dict[str, Any]:
 LIVE_INSPECTOR_CHECKS: frozenset[str] = frozenset(check.value for check in LIVE_CHECKS)
 
 
-def _implemented_only(preds: list[CasePrediction]) -> dict[str, Any]:
+def _implemented_only(cases: list[EvalCase]) -> dict[str, Any]:
     from p2c.evaluation.synthetic import expert_key
 
-    live = {c for check, gold in expert_key().items() if check.value in LIVE_INSPECTOR_CHECKS for c in gold}
-    pairs = [(set(p.predicted) & live, set(p.true_gold) & live) for p in preds]
+    key = expert_key()
+    live_checks = {check for check in key if check.value in LIVE_INSPECTOR_CHECKS}
+    live = {c for check in live_checks for c in key[check]}
+    engine = MappingEngine()
+    pairs: list[tuple[set[str], set[str]]] = []
+    for case in cases:
+        findings = [f for f in case.findings() if check_id_from_finding(f) in live_checks]
+        predicted = {m.control_id for m in engine.map_findings(findings)} & live
+        gold = {c for inj in case.true_injected if inj.check in live_checks for c in key[inj.check]} & live
+        pairs.append((predicted, gold))
     micro = M.micro_prf(pairs)
     true_cells = sum(len(g) for _, g in pairs)
     base = true_cells / (len(pairs) * len(live)) if pairs and live else 0.0
     return {
         "n_controls": len(live),
         "controls": sorted(live),
-        "precision": round(micro.precision, 4),
-        "recall": round(micro.recall, 4),
-        "f1": round(micro.f1, 4),
+        "n_live_detectors": len(live_checks),
+        "precision": round(micro.precision, 6),
+        "recall": round(micro.recall, 6),
+        "f1": round(micro.f1, 6),
         "true_assignments": true_cells,
-        "trivial_floor_f1": round(2 * base / (base + 1), 4) if base else 0.0,
-        "note": "recovery over the controls reachable by an implemented inspector. Detection is modelled "
-        "here exactly as in the full result, so this is a dependence check on the implementation gap, "
-        "not a field measurement.",
+        "trivial_floor_f1": round(2 * base / (base + 1), 6) if base else 0.0,
+        "note": "recovery from the implemented detectors alone: findings and true issues of detectors "
+        "without a live inspector are dropped from both sides, over the controls the implemented "
+        "inspectors reach. Detection is modelled here exactly as in the full result, so this is a "
+        "dependence check on the implementation gap, not a field measurement.",
     }
 
 
-def _detection_ceiling(cases: list[EvalCase]) -> dict[str, Any]:
+def _rate_class_slice(cases: list[EvalCase]) -> dict[str, Any]:
+    from p2c.evaluation import synthetic as S
+    from p2c.evaluation.appendix_tables import provenance
+
+    key = expert_key()
+    judged = {c for c in S.SENSITIVITY if provenance(S.SENSITIVITY[c], S.FALSE_ALARM[c]) == "author judgment"}
+    kept = set(S.SENSITIVITY) - judged
+    universe = {cid for check in kept for cid in key[check]}
+    engine = MappingEngine()
+    pairs: list[tuple[set[str], set[str]]] = []
+    for case in cases:
+        findings = [f for f in case.findings() if check_id_from_finding(f) in kept]
+        predicted = {m.control_id for m in engine.map_findings(findings)} & universe
+        gold = {cid for inj in case.true_injected if inj.check in kept for cid in key[inj.check]} & universe
+        pairs.append((predicted, gold))
+    micro = M.micro_prf(pairs)
+    tp, fp, fn = micro.true_positive, micro.false_positive, micro.false_negative
+    decisions = len(pairs) * len(universe)
+    tn = decisions - tp - fp - fn
+    base = (tp + fn) / decisions if decisions else 0.0
+    return {
+        "n_dropped_detectors": len(judged),
+        "dropped_detectors": sorted(c.value for c in judged),
+        "n_controls": len(universe),
+        "controls": sorted(universe),
+        "precision": round(micro.precision, 6),
+        "recall": round(micro.recall, 6),
+        "f1": round(micro.f1, 6),
+        "true_assignments": tp + fn,
+        "n_decisions": decisions,
+        "base_rate": round(base, 6),
+        "trivial_floor_f1": round(2 * base / (base + 1), 6) if base else 0.0,
+        "mcc": round(M.mcc_from_counts(tp, fp, fn, tn), 6),
+        "balanced_accuracy": round(M.balanced_accuracy_from_counts(tp, fp, fn, tn), 6),
+        "note": "violation detection with the analyst-judgement detectors dropped from predictions and "
+        "ground truth alike, over the controls the deterministic reads and probes reach; the floor is the "
+        "predict-all baseline on the same decisions. Detection is modelled exactly as in the full result.",
+    }
+
+
+def _p_finding(check: Any, host: str, case: EvalCase, present: bool) -> float:
+    from p2c.evaluation import synthetic as S
+
+    if present:
+        return S._effective_sensitivity(check, host, case.scan_conditions, case.scanner_competence)
+    if check not in S._FALSE_ALARM_CHECKS:
+        return 0.0
+    apex = case.profile.apex
+    if check in S._APEX_ONLY_CHECKS and host != apex:
+        return 0.0
+    if check in S._DEV_ONLY_CHECKS and S._host_label(host, apex) not in S._DEV_LABELS:
+        return 0.0
+    rate = S.FALSE_ALARM[check]
+    if check in S._HOST_FETCHED_CHECKS:
+        rate *= S._condition_factor(check, case.scan_conditions[host])
+    return rate
+
+
+def _assert_probabilities(cases: list[EvalCase]) -> list[tuple[float, bool]]:
     from p2c.evaluation import synthetic as S
 
     key = S.expert_key()
@@ -297,41 +371,32 @@ def _detection_ceiling(cases: list[EvalCase]) -> dict[str, Any]:
             if cid in by_control:
                 by_control[cid].append(check)
 
-    def p_observed(check: Any, host: str, case: EvalCase, present: bool) -> float:
-        if present:
-            return S._effective_sensitivity(check, host, case.scan_conditions, case.scanner_competence)
-        if check not in S._FALSE_ALARM_CHECKS:
-            return 0.0
-        apex = case.profile.apex
-        if check in S._APEX_ONLY_CHECKS and host != apex:
-            return 0.0
-        if check in S._DEV_ONLY_CHECKS and S._host_label(host, apex) not in S._DEV_LABELS:
-            return 0.0
-        rate = S.FALSE_ALARM[check]
-        if check in S._HOST_FETCHED_CHECKS:
-            rate *= S._condition_factor(check, case.scan_conditions[host])
-        return rate
-
-    e_tp = e_fp = e_fn = 0.0
+    cells: list[tuple[float, bool]] = []
     for case in cases:
         present = {(i.asset, i.check) for i in case.true_injected}
         for cid in universe:
             miss = 1.0
             for host in case.scan_conditions:
                 for check in by_control[cid]:
-                    miss *= 1.0 - p_observed(check, host, case, (host, check) in present)
-            assert_p = 1.0 - miss
-            if cid in case.ground_truth.control_ids:
-                e_tp += assert_p
-                e_fn += 1.0 - assert_p
-            else:
-                e_fp += assert_p
+                    miss *= 1.0 - _p_finding(check, host, case, (host, check) in present)
+            cells.append((1.0 - miss, cid in case.ground_truth.control_ids))
+    return cells
+
+
+def _detection_ceiling(cases: list[EvalCase]) -> dict[str, Any]:
+    e_tp = e_fp = e_fn = 0.0
+    for assert_p, violated in _assert_probabilities(cases):
+        if violated:
+            e_tp += assert_p
+            e_fn += 1.0 - assert_p
+        else:
+            e_fp += assert_p
     precision = e_tp / (e_tp + e_fp) if e_tp + e_fp else 0.0
     recall = e_tp / (e_tp + e_fn) if e_tp + e_fn else 0.0
     return {
-        "precision": round(precision, 4),
-        "recall": round(recall, 4),
-        "f1": round(2 * precision * recall / (precision + recall), 4) if precision + recall else 0.0,
+        "precision": round(precision, 6),
+        "recall": round(recall, 6),
+        "f1": round(2 * precision * recall / (precision + recall), 6) if precision + recall else 0.0,
         "expected_tp": round(e_tp, 1),
         "expected_fp": round(e_fp, 1),
         "expected_fn": round(e_fn, 1),
@@ -353,8 +418,8 @@ def _trivial_floor(preds: list[CasePrediction]) -> dict[str, Any]:
         base = true_cells / cells if cells else 0.0
         tp, fp = true_cells, cells - true_cells
         out[level or "corpus"] = {
-            "base_rate": round(base, 4),
-            "f1": round(2 * base / (base + 1), 4) if base else 0.0,
+            "base_rate": round(base, 6),
+            "f1": round(2 * base / (base + 1), 6) if base else 0.0,
             "mcc": M.mcc_from_counts(tp, fp, 0, 0),
             "balanced_accuracy": M.balanced_accuracy_from_counts(tp, fp, 0, 0),
             "n_orgs": len(rows),
@@ -490,12 +555,65 @@ def _internal_assessments(case: EvalCase) -> list[ControlAssessment]:
     return QuestionnaireEngine().assessments(questionnaire, response)
 
 
+@functools.cache
+def _documented_universe() -> frozenset[str]:
+    internal, declared = _syn.off_surface_pools()
+    return frozenset(TIER1_CHECKABLE) | frozenset(internal) | frozenset(declared)
+
+
+@functools.cache
+def _class_b_status() -> dict[str, str | None]:
+    rows = json.loads(_syn._OVERLAY_PATH.read_text(encoding="utf-8"))["controls"]
+    return {str(r["id"]): r.get("ncnicc_class_b_status") for r in rows}
+
+
+def _unobserved(case: EvalCase, unread: frozenset[tuple[str, Any]] = frozenset()) -> frozenset[str]:
+    from p2c.evaluation import synthetic as S
+
+    conditions = case.scan_conditions
+    apex = case.profile.apex
+    missing: set[str] = set()
+    for check, controls in expert_key().items():
+        if check in S._APEX_ONLY_CHECKS:
+            read = apex in conditions and (apex, check) not in unread
+        else:
+            read = bool(conditions) and all(
+                (
+                    cond in ("reachable", "throttled")
+                    or (cond == "cdn_fronted" and check not in S._ORIGIN_CHECKS)
+                )
+                and (host, check) not in unread
+                for host, cond in conditions.items()
+            )
+        if not read:
+            missing |= set(controls)
+    return frozenset(missing & TIER1_CHECKABLE)
+
+
 def _all_tier_assessments(case: EvalCase, mappings: Sequence[ControlMapping]) -> list[ControlAssessment]:
     return merge_assessments(
-        tier1_assessments(mappings),
+        tier1_assessments(mappings, unobserved=_unobserved(case)),
         _internal_assessments(case),
         attestation_assessments(case.attestations, now=EVAL_EPOCH),
     )
+
+
+def _claim_flags(
+    case: EvalCase, mappings: Sequence[ControlMapping], truth: Iterable[str]
+) -> tuple[set[tuple[int, str]], set[tuple[int, str]]]:
+    tier2 = _internal_assessments(case)
+    live = [a for a in case.attestations if a.valid_from <= EVAL_EPOCH <= a.valid_until]
+    claims = {(int(EvidenceTier.TIER_3), a.control_id) for a in live}
+    claims |= {
+        (int(EvidenceTier.TIER_2), r.control_id) for r in tier2 if r.status is ComplianceStatus.COMPLIANT
+    }
+    truth = set(truth)
+    gt = {(t, c) for t, c in claims if any(control_related(c, x) for x in truth)}
+    detected = {
+        (x.tier, x.control_id)
+        for x in detect_contradictions(case.attestations, mappings, now=EVAL_EPOCH, tier2=tier2)
+    }
+    return gt, detected
 
 
 def _governance(cases: list[EvalCase], *, seed: int) -> dict[str, Any]:
@@ -505,6 +623,8 @@ def _governance(cases: list[EvalCase], *, seed: int) -> dict[str, Any]:
     gt_total = flagged = n_att = 0
     n_lapsed = 0
     n_unrefutable = n_unrefutable_live = 0
+    n_checkable_records = 0
+    d_tp = d_fn = 0
     lapsed_wrongly_flagged = 0
     contra_counts: list[tuple[int, int, int]] = []
     true_assessed: list[float] = []
@@ -516,9 +636,17 @@ def _governance(cases: list[EvalCase], *, seed: int) -> dict[str, Any]:
         live = [a for a in case.attestations if a.valid_from <= EVAL_EPOCH <= a.valid_until]
         lapsed_ids = {a.control_id for a in case.attestations if a not in live}
         attested = {a.control_id for a in live}
-        gt = {c for c in attested if any(control_related(c, t) for t in true)}
-        detected = {x.control_id for x in detect_contradictions(case.attestations, mappings, now=EVAL_EPOCH)}
+        gt, detected = _claim_flags(case, mappings, true)
+        n_checkable_records += sum(
+            1
+            for r in _internal_assessments(case)
+            if r.status is ComplianceStatus.COMPLIANT
+            and any(control_related(r.control_id, c) for c in TIER1_CHECKABLE)
+        )
         tp_i, fp_i, fn_i = len(gt & detected), len(detected - gt), len(gt - detected)
+        declared = {c for c in gt if c[0] == int(EvidenceTier.TIER_3)}
+        d_tp += len(declared & detected)
+        d_fn += len(declared - detected)
         c_tp += tp_i
         c_fn += fn_i
         c_fp += fp_i
@@ -534,8 +662,10 @@ def _governance(cases: list[EvalCase], *, seed: int) -> dict[str, Any]:
         }
         n_unrefutable += sum(1 for a in case.attestations if a.control_id in unrefutable)
         n_unrefutable_live += sum(1 for a in live if a.control_id in unrefutable)
-        lapsed_wrongly_flagged += len(detected & (lapsed_ids - attested))
-        score = compute_dual_score(_all_tier_assessments(case, mappings))
+        lapsed_wrongly_flagged += len(
+            {c for t, c in detected if t == EvidenceTier.TIER_3} & (lapsed_ids - attested)
+        )
+        score = compute_dual_score(_all_tier_assessments(case, mappings), universe=_documented_universe())
         true_a = (n_check - len(true & TIER1_CHECKABLE)) / n_check
         true_assessed.append(true_a)
         abs_err.append(abs(score.assessed_score - true_a))
@@ -557,13 +687,19 @@ def _governance(cases: list[EvalCase], *, seed: int) -> dict[str, Any]:
             "n_lapsed_attestations": n_lapsed,
             "n_unrefutable_attestations": n_unrefutable,
             "n_unrefutable_active_attestations": n_unrefutable_live,
+            "n_checkable_tier2_records": n_checkable_records,
+            "declarations_only": {
+                "true_contradictions": d_tp + d_fn,
+                "recall": d_tp / (d_tp + d_fn) if d_tp + d_fn else 0.0,
+            },
             "lapsed_wrongly_flagged": lapsed_wrongly_flagged,
             "note": "overstatement detection: a Tier-3 attestation refuted by a Tier-1 finding; "
             "recall limited by scanner misses, precision by false alarms. Lapsed (expired or not yet "
             "effective) attestations are excluded from both the ground truth and the detector. "
             "Declarations on off-surface controls, which no Tier-1 finding can reach, are counted "
             "separately: the detector sees them and correctly leaves them alone, so they enter "
-            "neither the ground truth nor the flagged set and move no rate here.",
+            "neither the ground truth nor the flagged set and move no rate here. Tier-2 records "
+            "that a list of requirements is implemented (rule 4) are checkable, counted apart.",
         },
         "posture": {
             "true_assessed_min": min(true_assessed),
@@ -580,10 +716,10 @@ def _governance(cases: list[EvalCase], *, seed: int) -> dict[str, Any]:
 def _tier2_integrity(cases: list[EvalCase], *, seed: int) -> dict[str, Any]:
     engine = MappingEngine()
     qeng = QuestionnaireEngine()
-    n_with_tier2 = precedence_total = precedence_correct = 0
+    n_with_tier2 = precedence_total = precedence_correct = tier2_flagged = 0
     for case in cases:
         mappings = engine.map_findings(case.findings())
-        t1 = tier1_assessments(mappings)
+        t1 = tier1_assessments(mappings, unobserved=_unobserved(case))
         refuted = sorted({a.control_id for a in t1 if a.status == ComplianceStatus.NON_COMPLIANT})
         if not refuted:
             continue
@@ -604,18 +740,29 @@ def _tier2_integrity(cases: list[EvalCase], *, seed: int) -> dict[str, Any]:
         t2 = qeng.assessments(questionnaire, response)
         merged = merge_assessments(t1, t2, attestation_assessments(case.attestations, now=EVAL_EPOCH))
         status = {a.control_id: a.status for a in merged}
+        flagged = {
+            x.control_id
+            for x in detect_contradictions([], mappings, tier2=t2)
+            if x.tier == EvidenceTier.TIER_2
+        }
         for cid in refuted:
             precedence_total += 1
             if status.get(cid) == ComplianceStatus.NON_COMPLIANT:
                 precedence_correct += 1
+            if cid in flagged:
+                tier2_flagged += 1
     return {
         "n_orgs_with_tier2": n_with_tier2,
         "precedence_checks": precedence_total,
         "precedence_correct": precedence_correct,
         "precedence_rate": precedence_correct / precedence_total if precedence_total else 1.0,
+        "tier2_flagged": tier2_flagged,
+        "tier2_flag_rate": tier2_flagged / precedence_total if precedence_total else 1.0,
         "note": "three-tier assembly at scale: a Tier-2 compliant self-report on a control a Tier-1 "
-        "finding refutes must not raise the score (lowest-tier-wins). Tier-2 answers are synthesized, "
-        "so this is a precedence-integrity check, not accuracy against experts.",
+        "finding refutes must not raise the score (lowest-tier-wins), and the contradiction check "
+        "must flag it, so filing an overstatement as a Tier-2 record instead of a declaration "
+        "(relabelling) does not escape the check. Tier-2 answers are synthesized, so this is a "
+        "precedence-integrity check, not accuracy against experts.",
     }
 
 
@@ -752,10 +899,10 @@ def _cohort_firms(cases: list[EvalCase], *, seed: int) -> dict[str, Any]:
     engine = MappingEngine()
     firms: list[dict[str, Any]] = []
     for case in cases:
-        score = compute_dual_score(_all_tier_assessments(case, engine.map_findings(case.findings())))
+        mappings = engine.map_findings(case.findings())
+        score = compute_dual_score(_all_tier_assessments(case, mappings), universe=_documented_universe())
+        claim_truth, claim_flags = _claim_flags(case, mappings, case.ground_truth.control_ids)
         true_states = {(i.asset, i.check) for i in case.true_injected}
-        live = [a for a in case.attestations if a.valid_from <= EVAL_EPOCH <= a.valid_until]
-        truly_violated = case.ground_truth.control_ids
         firms.append(
             {
                 "case_id": case.case_id,
@@ -767,11 +914,12 @@ def _cohort_firms(cases: list[EvalCase], *, seed: int) -> dict[str, Any]:
                 "n_findings": len(case.injected),
                 "n_false_positives": sum(1 for i in case.injected if (i.asset, i.check) not in true_states),
                 "n_declarations": len(case.attestations),
-                "n_overstated": sum(
-                    1 for a in live if any(control_related(a.control_id, t) for t in truly_violated)
-                ),
-                "assessed_score": round(score.assessed_score, 4),
-                "documented_score": round(score.documented_score, 4),
+                "n_overstated": len(claim_truth),
+                "n_flags": len(claim_flags),
+                "n_flags_true": len(claim_flags & claim_truth),
+                "n_flags_false": len(claim_flags - claim_truth),
+                "assessed_score": round(score.assessed_score, 6),
+                "documented_score": round(score.documented_score, 6),
             }
         )
     return {
@@ -781,7 +929,7 @@ def _cohort_firms(cases: list[EvalCase], *, seed: int) -> dict[str, Any]:
         "note": (
             "one record per synthetic firm of the reported seed: counts are the per-firm terms of "
             "the cohort totals (hosts, true issues, findings, false positives, declarations, "
-            "overstatements) and the two scores are the assessed (Tier-1, 16 externally testable "
+            "overstatements) and the two scores are the assessed (Tier-1, 11 externally testable "
             "subcontrols) and documented (every evidenced control) shares the toolkit reports"
         ),
     }
@@ -791,16 +939,26 @@ def _dual_score_gap(cases: list[EvalCase], *, seed: int) -> dict[str, Any]:
     engine = MappingEngine()
     assessed: list[float] = []
     documented: list[float] = []
+    coverage: list[float] = []
+    evidence_coverage: list[float] = []
     gaps: list[float] = []
     off_surface_counts: list[int] = []
     tier2_3_only = 0
     must_answer_rows = sum(len(pool) for pool in _syn.off_surface_pools())
+    mandatory = frozenset(c for c in _documented_universe() if _class_b_status().get(c) == "M")
+    assessed_m: list[float] = []
+    documented_m: list[float] = []
     worked: dict[str, Any] = {}
     for case in cases:
         mappings = engine.map_findings(case.findings())
         merged = _all_tier_assessments(case, mappings)
-        score = compute_dual_score(merged)
+        score = compute_dual_score(merged, universe=_documented_universe())
+        on_mandatory = compute_dual_score([a for a in merged if a.control_id in mandatory], universe=mandatory)
+        assessed_m.append(on_mandatory.assessed_score)
+        documented_m.append(on_mandatory.documented_score)
         assessed.append(score.assessed_score)
+        coverage.append(score.coverage)
+        evidence_coverage.append(score.evidence_coverage)
         documented.append(score.documented_score)
         gaps.append(score.documented_score - score.assessed_score)
         off_surface = sum(1 for a in merged if a.control_id not in TIER1_CHECKABLE)
@@ -809,11 +967,19 @@ def _dual_score_gap(cases: list[EvalCase], *, seed: int) -> dict[str, Any]:
         if case.case_id == "eval-000":
             worked = {
                 "case_id": case.case_id,
-                "assessed": round(score.assessed_score, 4),
-                "documented": round(score.documented_score, 4),
+                "assessed": round(score.assessed_score, 6),
+                "documented": round(score.documented_score, 6),
                 "off_surface_controls": off_surface,
-                "documented_universe": len(merged),
+                "evidenced_controls": len(merged),
+                "documented_universe": len(_documented_universe() | {a.control_id for a in merged}),
+                "coverage": round(score.coverage, 6),
+                "evidence_coverage": round(score.evidence_coverage, 6),
                 "must_answer_remaining": must_answer_rows - off_surface,
+                "must_answer_remaining_class_b_mandatory": sum(
+                    1
+                    for cid in _documented_universe() - TIER1_CHECKABLE - {a.control_id for a in merged}
+                    if _class_b_status().get(cid) == "M"
+                ),
                 "n_declarations": len(case.attestations),
                 "n_declarations_on_surface": sum(
                     1 for a in case.attestations if a.control_id in TIER1_CHECKABLE
@@ -827,9 +993,26 @@ def _dual_score_gap(cases: list[EvalCase], *, seed: int) -> dict[str, Any]:
         "gap_min": round(min(gaps), 6),
         "gap_max": round(max(gaps), 6),
         "n_firms_scores_differ": n_differ,
-        "share_firms_differ": round(n_differ / len(gaps), 4) if gaps else 0.0,
-        "assessed_mean": round(statistics.fmean(assessed), 4),
-        "documented_mean": round(statistics.fmean(documented), 4),
+        "share_firms_differ": round(n_differ / len(gaps), 6) if gaps else 0.0,
+        "assessed_mean": round(statistics.fmean(assessed), 6),
+        "documented_mean": round(statistics.fmean(documented), 6),
+        "class_b_mandatory": {
+            "n_rows": len(mandatory),
+            "n_subcontrols": len(mandatory & frozenset(TIER1_CHECKABLE)),
+            "assessed_mean": round(statistics.fmean(assessed_m), 6),
+            "documented_mean": round(statistics.fmean(documented_m), 6),
+            "n_firms_documented_lower": sum(1 for a, d in zip(assessed_m, documented_m, strict=True) if d < a),
+        },
+        "documented_universe": len(_documented_universe()),
+        "coverage_mean": round(statistics.fmean(coverage), 6),
+        "coverage_min": round(min(coverage), 6),
+        "n_firms_not_fully_observed": sum(1 for c in coverage if c < 1.0),
+        "n_firms_with_obstructed_host": sum(
+            1 for c in cases if any(v in ("blocked", "cdn_fronted") for v in c.scan_conditions.values())
+        ),
+        "evidence_coverage_mean": round(statistics.fmean(evidence_coverage), 6),
+        "evidence_coverage_min": round(min(evidence_coverage), 6),
+        "evidence_coverage_max": round(max(evidence_coverage), 6),
         "off_surface_controls_mean": round(statistics.fmean(off_surface_counts), 2),
         "off_surface_controls_min": min(off_surface_counts),
         "off_surface_controls_max": max(off_surface_counts),
@@ -838,51 +1021,53 @@ def _dual_score_gap(cases: list[EvalCase], *, seed: int) -> dict[str, Any]:
         "worked_firm": worked,
         "note": (
             "documented minus assessed across the cohort, under uniform (unweighted) control "
-            "weights, the reported default. The assessed score is over the Tier-1 checkable "
-            "subcontrols; the documented score is over those plus the off-surface controls the "
-            "firm evidences at Tier 2 or Tier 3, so the gap is entirely the firm's off-surface "
-            "evidence. A declaration on a Tier-1 checkable control contributes nothing, because "
-            "lowest-tier-wins collapses it onto that control's Tier-1 assessment."
+            "weights, the reported default. The assessed score is the share of the 11 externally "
+            "testable subcontrols observed with no violation (a control the scan could not read "
+            "never passes; coverage is the share it did read). The documented score is over a fixed "
+            "set, the 11 plus every attestation-required row (197), each determined by its highest-priority "
+            "evidence; a row with no evidence counts as not passing, so withholding evidence cannot "
+            "raise it, and evidence coverage is the share of the 197 that is evidenced. Its level is "
+            "driven by the declared off-surface evidence rates (OFF_SURFACE_COVERAGE), which have "
+            "no source. A declaration on an externally testable control contributes nothing, because "
+            "the evidence-precedence rule collapses it onto that control's Tier-1 assessment."
         ),
     }
 
 
-def _coarsen_2_15_3_3(check_value: str, control_id: str) -> str:
-    if check_value in PARENT_READING_CHECKS and control_id == "2-15-3-3":
-        return "2-15-3"
-    return control_id
+COARSE_PARENT = "2-15-3"
 
 
 def _parent_reading(cases: list[EvalCase], *, seed: int) -> dict[str, Any]:
     engine = MappingEngine()
-    key = expert_key()
 
     def block(remap: bool) -> dict[str, Any]:
         rec_pairs: list[tuple[set[str], set[str]]] = []
         c_tp = c_fp = c_fn = 0
         for case in cases:
             findings = case.findings()
-            fid_check = {f.finding_id: check_id_from_finding(f) for f in findings}
             mappings = engine.map_findings(findings)
+            true = set(case.ground_truth.control_ids)
             if remap:
-                relabeled = []
-                for m in mappings:
-                    chk = fid_check.get(m.finding_id)
-                    cid = _coarsen_2_15_3_3(chk.value if chk is not None else "", m.control_id)
-                    relabeled.append(m.model_copy(update={"control_id": cid}))
-                mappings = relabeled
-                true = {
-                    _coarsen_2_15_3_3(inj.check.value, cid)
-                    for inj in case.true_injected
-                    for cid in key[inj.check]
-                }
-            else:
-                true = set(case.ground_truth.control_ids)
+                for f in findings:
+                    chk = check_id_from_finding(f)
+                    if chk is not None and chk.value in PARENT_READING_CHECKS:
+                        mappings.append(
+                            ControlMapping(
+                                control_id=COARSE_PARENT,
+                                framework="ecc",
+                                tier=EvidenceTier.TIER_1,
+                                finding_id=f.finding_id,
+                                asset=f.asset,
+                                severity=f.severity,
+                                method=MappingMethod.DETERMINISTIC,
+                                confidence=1.0,
+                                rule_id=f"coarse-{chk.value}",
+                            )
+                        )
+                if any(inj.check.value in PARENT_READING_CHECKS for inj in case.true_injected):
+                    true.add(COARSE_PARENT)
             rec_pairs.append(({m.control_id for m in mappings}, true))
-            live = [a for a in case.attestations if a.valid_from <= EVAL_EPOCH <= a.valid_until]
-            attested = {a.control_id for a in live}
-            gt = {c for c in attested if any(control_related(c, t) for t in true)}
-            detected = {x.control_id for x in detect_contradictions(case.attestations, mappings, now=EVAL_EPOCH)}
+            gt, detected = _claim_flags(case, mappings, true)
             c_tp += len(gt & detected)
             c_fp += len(detected - gt)
             c_fn += len(gt - detected)
@@ -890,14 +1075,14 @@ def _parent_reading(cases: list[EvalCase], *, seed: int) -> dict[str, Any]:
         con = M.prf_from_counts(c_tp, c_fp, c_fn)
         return {
             "recovery": {
-                "precision": round(rec.precision, 4),
-                "recall": round(rec.recall, 4),
-                "f1": round(rec.f1, 4),
+                "precision": round(rec.precision, 6),
+                "recall": round(rec.recall, 6),
+                "f1": round(rec.f1, 6),
             },
             "contradiction": {
-                "precision": round(con.precision, 4),
-                "recall": round(con.recall, 4),
-                "f1": round(con.f1, 4),
+                "precision": round(con.precision, 6),
+                "recall": round(con.recall, 6),
+                "f1": round(con.f1, 6),
             },
         }
 
@@ -914,16 +1099,86 @@ def _parent_reading(cases: list[EvalCase], *, seed: int) -> dict[str, Any]:
         "fine": fine,
         "coarse": coarse,
         "note": (
-            "recovery (end-to-end micro P/R/F1) and contradiction P/R/F1 under the fine reading "
-            "(2-15-3-3 as a leaf, shipped) and the coarse reading (the seven hardening checks moved "
-            "to the parent 2-15-3), with the finding-weighted modal share and the constant-mapper "
-            "floor from parent_reading_sensitivity. The relabel is applied consistently to predicted "
-            "and gold. The fine reading is the object the expert panel will test and is held fixed; "
-            "the coarse reading raises both recovery and contradiction (a parent finding refutes more "
-            "sibling declarations) while lowering the concentration, so shipping the fine reading is "
-            "the conservative choice."
+            "recovery (end-to-end micro P/R/F1) and contradiction P/R/F1 as shipped (the seven web "
+            "hardening checks recorded against no control) and under the coarse reading (the same "
+            "checks recorded at the parent 2-15-3), with the finding-weighted modal share and the "
+            "constant-mapper floor from parent_reading_sensitivity. Each reading is scored on its own "
+            "truth, and the direction-sensitive relation never lets a parent-level finding flag or make "
+            "true a subcontrol declaration. As shipped is the object the expert panel tests and is held "
+            "fixed."
         ),
     }
+
+
+def relinked_reading(
+    table: Mapping[CheckId, frozenset[str]], n: int = 100, *, seed: int | None = None
+) -> dict[str, Any]:
+    resolved = get_settings().global_seed if seed is None else seed
+    cases = generate_cases(n, seed=resolved)
+    engine = MappingEngine()
+
+    def block(links: Mapping[CheckId, frozenset[str]]) -> dict[str, Any]:
+        rec_pairs: list[tuple[set[str], set[str]]] = []
+        c_tp = c_fp = c_fn = 0
+        for case in cases:
+            mappings = engine.map_findings(case.findings())
+            true = {cid for inj in case.true_injected for cid in links.get(inj.check, frozenset())}
+            rec_pairs.append(({m.control_id for m in mappings}, true))
+            gt, detected = _claim_flags(case, mappings, true)
+            c_tp += len(gt & detected)
+            c_fp += len(detected - gt)
+            c_fn += len(gt - detected)
+        rec, con = M.micro_prf(rec_pairs), M.prf_from_counts(c_tp, c_fp, c_fn)
+        return {
+            "violation_detection": {k: round(getattr(rec, k), 6) for k in ("precision", "recall", "f1")},
+            "contradiction": {k: round(getattr(con, k), 6) for k in ("precision", "recall", "f1")},
+        }
+
+    return {
+        "seed": resolved,
+        "n_firms": len(cases),
+        "against_curated": block(expert_key()),
+        "against_table": block(table),
+    }
+
+
+def kept_tier1_reading(kept: Collection[str], n: int = 100, *, seed: int | None = None) -> dict[str, Any]:
+    resolved = get_settings().global_seed if seed is None else seed
+    keep, cases, engine = set(kept), generate_cases(n, seed=resolved), MappingEngine()
+    rec_pairs: list[tuple[set[str], set[str]]] = []
+    c_tp = c_fp = c_fn = 0
+    for case in cases:
+        mappings = [m for m in engine.map_findings(case.findings()) if m.control_id in keep]
+        true = {cid for inj in case.true_injected for cid in expert_key().get(inj.check, ()) if cid in keep}
+        rec_pairs.append(({m.control_id for m in mappings}, true))
+        gt, detected = _claim_flags(case, mappings, true)
+        c_tp += len(gt & detected)
+        c_fp += len(detected - gt)
+        c_fn += len(gt - detected)
+    rec, con = M.micro_prf(rec_pairs), M.prf_from_counts(c_tp, c_fp, c_fn)
+    return {
+        "seed": resolved,
+        "kept_subcontrols": sorted(keep),
+        "violation_detection": {k: round(getattr(rec, k), 6) for k in ("precision", "recall", "f1")},
+        "contradiction": {k: round(getattr(con, k), 6) for k in ("precision", "recall", "f1")},
+    }
+
+
+def _evidence_level(cases: list[EvalCase]) -> dict[str, float]:
+    key = expert_key()
+
+    def controls(findings: list[Any]) -> frozenset[str]:
+        return frozenset(c for f in findings for c in key[f.check])
+
+    tp = fp = fn = 0
+    for case in cases:
+        true = {(i.asset, i.check) for i in case.true_injected}
+        predicted = controls(list(case.injected))
+        supported = controls([i for i in case.injected if (i.asset, i.check) in true])
+        gold = case.ground_truth.control_ids
+        tp, fp, fn = tp + len(supported & gold), fp + len(predicted - supported), fn + len(gold - supported)
+    prf = M.prf_from_counts(tp, fp, fn)
+    return {"precision": prf.precision, "recall": prf.recall, "f1": prf.f1, "tp": tp, "fp": fp, "fn": fn}
 
 
 def run_evaluation(n: int = 100, *, seed: int | None = None) -> EvaluationReport:
@@ -941,14 +1196,15 @@ def run_evaluation(n: int = 100, *, seed: int | None = None) -> EvaluationReport
             b: sum(1 for c in cases if c.size_band == b) for b in sorted({c.size_band for c in cases})
         },
         mapping=_mapping_metrics(preds, seed=resolved),
-        end_to_end=_end_to_end_metrics(preds, seed=resolved),
+        end_to_end={**_end_to_end_metrics(preds, seed=resolved), "evidence_level": _evidence_level(cases)},
         end_to_end_corroborated=_end_to_end_corroborated_metrics(preds, seed=resolved),
         per_sector=_per_sector(preds, seed=resolved),
         per_posture=_per_posture(preds, seed=resolved),
         per_size=_per_size(preds, seed=resolved),
         trivial_floor=_trivial_floor(preds),
         detection_ceiling=_detection_ceiling(cases),
-        implemented_only=_implemented_only(preds),
+        implemented_only=_implemented_only(cases),
+        rate_class_slice=_rate_class_slice(cases),
         per_control=_per_control(preds),
         effect_size=_effect_size(preds),
         ablation=naive_keyword_baseline(n, seed=resolved),
@@ -973,12 +1229,41 @@ def run_evaluation(n: int = 100, *, seed: int | None = None) -> EvaluationReport
 def stability_across_seeds(
     n: int = 100,
     seeds: tuple[int, ...] = (
-        1337, 7, 42, 2025, 99,
-        3, 11, 13, 17, 19, 23, 29, 31, 37, 101,
-        202, 303, 404, 505, 606, 707, 808, 909, 1234, 4242,
-        5150, 8675, 314159, 271828, 161803,
+        1337,
+        2025,
+        3,
+        202,
+        303,
+        404,
+        505,
+        606,
+        707,
+        808,
+        909,
+        1234,
+        4242,
+        5150,
+        8675,
+        314159,
+        271828,
+        161803,
+        10_000,
+        20_000,
+        30_000,
+        40_000,
+        50_000,
+        60_000,
+        70_000,
+        80_000,
+        90_000,
+        100_000,
+        110_000,
+        120_000,
     ),
 ) -> dict[str, Any]:
+    ordered = sorted(seeds)
+    if any(b - a < n for a, b in itertools.pairwise(ordered)):
+        raise ValueError(f"seeds closer than {n} share firms (firm i of seed s uses s + i)")
     f1s = [run_evaluation(n, seed=s).end_to_end["exact_micro"]["f1"] for s in seeds]
     return {
         "seeds": list(seeds),
@@ -1125,7 +1410,7 @@ def sensitivity_to_weighting(n: int = 100, *, seed: int | None = None) -> dict[s
     uniform: list[float] = []
     weighted: list[float] = []
     for case in cases:
-        tier1 = tier1_assessments(engine.map_findings(case.findings()))
+        tier1 = tier1_assessments(engine.map_findings(case.findings()), unobserved=_unobserved(case))
         uniform.append(compute_dual_score(tier1).assessed_score)
         weighted.append(
             compute_dual_score(
@@ -1176,10 +1461,13 @@ def precision_stress(
 
 
 def worst_case_corner(n: int = 100, *, seed: int | None = None) -> dict[str, Any]:
+    from p2c.evaluation.appendix_tables import DETERMINISTIC_MIN
+
     base_sens = dict(_syn.SENSITIVITY)
     base_fa = dict(_syn.FALSE_ALARM)
+    judged = [cid for cid, sens in base_sens.items() if sens < DETERMINISTIC_MIN]
     try:
-        for cid in LOW_CONFIDENCE_CHECKS:
+        for cid in judged:
             _syn.FALSE_ALARM[cid] = min(1.0, base_fa[cid] * 2.0)
             _syn.SENSITIVITY[cid] = max(0.0, base_sens[cid] * 0.8)
         report = run_evaluation(n, seed=seed)
@@ -1195,15 +1483,18 @@ def worst_case_corner(n: int = 100, *, seed: int | None = None) -> dict[str, Any
         _syn.FALSE_ALARM.update(base_fa)
     return {
         "corner": corner,
-        "note": "all low-confidence checks at their pessimistic end at once (false alarm x2, "
+        "note": "all nine analyst-judgement checks at their pessimistic end at once (false alarm x2, "
         "sensitivity x0.8): a defended simultaneous worst case for the scanner-dependent numbers.",
     }
 
 
 def detection_uncertainty_ensemble(n: int = 100, *, draws: int = 500, seed: int = 1337) -> dict[str, Any]:
+    from p2c.evaluation.appendix_tables import DETERMINISTIC_MIN
+
     rng = random.Random(seed)
     base_sens = dict(_syn.SENSITIVITY)
     base_fa = dict(_syn.FALSE_ALARM)
+    judged = frozenset(cid for cid, sens in base_sens.items() if sens < DETERMINISTIC_MIN)
 
     def _sample(mean: float, *, wide: bool) -> float:
         if not 0.0 < mean < 1.0:
@@ -1217,9 +1508,9 @@ def detection_uncertainty_ensemble(n: int = 100, *, draws: int = 500, seed: int 
     try:
         for _ in range(draws):
             for cid, mean in base_sens.items():
-                _syn.SENSITIVITY[cid] = _sample(mean, wide=cid in LOW_CONFIDENCE_CHECKS)
+                _syn.SENSITIVITY[cid] = _sample(mean, wide=cid in judged)
             for cid, mean in base_fa.items():
-                drawn = _sample(mean, wide=cid in LOW_CONFIDENCE_CHECKS)
+                drawn = _sample(mean, wide=cid in judged)
                 _syn.FALSE_ALARM[cid] = drawn
                 fa_samples[cid.value].append(drawn)
             exact = run_evaluation(n, seed=seed).end_to_end["exact_micro"]
@@ -1245,8 +1536,8 @@ def detection_uncertainty_ensemble(n: int = 100, *, draws: int = 500, seed: int 
         "precision_median": _pct(precisions, 0.5),
         "precision_predictive_interval": [_pct(precisions, 0.025), _pct(precisions, 0.975)],
         "top_variance_drivers": drivers[:5],
-        "note": "Monte-Carlo ensemble with per-check Beta priors (wide for low-confidence checks, tight "
-        "for deterministic reads); the predictive interval is the honest uncertainty from the modelled "
+        "note": "Monte-Carlo ensemble with per-check Beta priors (wide for the nine analyst-judgement checks, tight "
+        "for the reads and probes); the predictive interval is the honest uncertainty from the modelled "
         "detection rates, distinct from the per-run bootstrap CI which is corpus-sampling variability.",
     }
 
@@ -1270,6 +1561,356 @@ def robustness_report(
     }
 
 
+def exposure_toward_anchors(
+    n: int = 100, *, factors: tuple[float, ...] = (1.0, 1.5, 2.0, 3.0), seed: int | None = None
+) -> dict[str, Any]:
+    base_weights = {s.name: dict(s.weights) for s in _syn.SECTORS}
+    base_subset = dict(_syn._SUBSET_PROB)
+    rows: dict[str, Any] = {}
+    try:
+        for f in factors:
+            for sector in _syn.SECTORS:
+                for k, v in base_weights[sector.name].items():
+                    sector.weights[k] = min(1.0, max(0.0, v * f))
+            for cid, p in base_subset.items():
+                _syn._SUBSET_PROB[cid] = min(1.0, max(0.0, p * f))
+            report = run_evaluation(n, seed=seed)
+            anchors = exposure_anchor_report(n, seed=seed)
+            floor = report.trivial_floor["corpus"]
+            rows[f"{f:.2f}"] = {
+                "realized_missing_csp_per_host": anchors["realized_exposure"]["web_headers_per_host"][
+                    "missing_csp"
+                ],
+                "realized_exposure": anchors["realized_exposure"],
+                "precision": round(report.end_to_end["exact_micro"]["precision"], 6),
+                "base_rate": floor["base_rate"],
+                "f1": round(report.end_to_end["exact_micro"]["f1"], 6),
+                "mcc": round(report.end_to_end["decision_universe"]["mcc"], 6),
+                "balanced_accuracy": round(report.end_to_end["decision_universe"]["balanced_accuracy"], 6),
+                "predict_all_f1": floor["f1"],
+                "predict_all_mcc": floor["mcc"],
+                "predict_all_balanced_accuracy": floor["balanced_accuracy"],
+            }
+    finally:
+        for sector in _syn.SECTORS:
+            sector.weights.update(base_weights[sector.name])
+        _syn._SUBSET_PROB.update(base_subset)
+    return {
+        "n_profiles": n,
+        "factors": [f"{f:.2f}" for f in factors],
+        "by_factor": rows,
+        "published_missing_csp": {"global": 0.81, "saudi_audience": 0.76},
+        "note": "exposure scaled toward the published anchors; F1 and the predict-all floor rise together, "
+        "while MCC and balanced accuracy, on which the floor is fixed at 0 and 0.5, show the margin.",
+    }
+
+
+_GOVERNANCE_DOMAIN = "1"
+_DEFENCE_DOMAIN = "2"
+_EVAL_DIR = Path(__file__).resolve().parents[3] / "evaluation"
+
+
+def mapper_disagreement_audit(model: str = "gemma3:12b", condition: str = "title") -> dict[str, Any]:
+    from p2c.mapping.catalog import load_default_index
+
+    preds = json.loads((_EVAL_DIR / "baseline_ladder_predictions.json").read_text(encoding="utf-8"))
+    picks = preds[model][condition]
+    index = load_default_index()
+    key = expert_key()
+
+    def title(cid: str) -> str:
+        entry = index.get(cid)
+        return entry.title if entry is not None else ""
+
+    def subdomain(cid: str) -> str:
+        return "-".join(cid.split("-")[:2])
+
+    detectors: list[dict[str, Any]] = []
+    kinds = {
+        "same_subdomain": 0,
+        "governance_domain": 0,
+        "other_defence_subdomain": 0,
+        "elsewhere": 0,
+        "no_answer": 0,
+        "curated_none": 0,
+    }
+    tier1_picks = 0
+    for check in sorted((c for c in key if c.value in picks), key=lambda c: c.value):
+        curated = sorted(key[check])
+        pick = picks.get(check.value)
+        agrees = pick in curated
+        kind = None
+        if not agrees:
+            if not pick:
+                kind = "no_answer"
+            elif not curated:
+                kind = "curated_none"
+            elif any(subdomain(pick) == subdomain(c) for c in curated):
+                kind = "same_subdomain"
+            elif pick.split("-")[0] == _GOVERNANCE_DOMAIN:
+                kind = "governance_domain"
+            elif pick.split("-")[0] == _DEFENCE_DOMAIN:
+                kind = "other_defence_subdomain"
+            else:
+                kind = "elsewhere"
+            kinds[kind] += 1
+            tier1_picks += int(bool(pick) and pick in TIER1_CHECKABLE)
+        detectors.append(
+            {
+                "detector": check.value,
+                "curated": [{"id": c, "title": title(c)} for c in curated],
+                "pick": {"id": pick, "title": title(pick)} if pick else None,
+                "agrees": agrees,
+                "disagreement": kind,
+            }
+        )
+    return {
+        "model": model,
+        "condition": condition,
+        "n_detectors": len(detectors),
+        "n_disagreements": sum(1 for d in detectors if not d["agrees"]),
+        "disagreement_kinds": kinds,
+        "disagreeing_picks_externally_testable": tier1_picks,
+        "detectors": detectors,
+        "note": "single-pick output of the best generic mapper against the curated table, per detector; "
+        "the disagreement class is positional (same subdomain, governance domain, elsewhere), read from "
+        "the identifiers, so it describes where the pick lands, not who is right.",
+    }
+
+
+_VERSION_CHECKS: frozenset[str] = frozenset({"outdated_exposed_software", "eol_software_exposed"})
+_MARKER_CHECKS: frozenset[str] = frozenset({"exposed_dev_environment"})
+_SPOOFABLE_CHECKS: frozenset[str] = _VERSION_CHECKS | _MARKER_CHECKS | {"waf_absent"}
+
+
+def _block_hosts(case: EvalCase, hosts: set[str]) -> EvalCase:
+    from p2c.evaluation import synthetic as S
+
+    conditions = dict(case.scan_conditions)
+    kept = tuple(i for i in case.injected if not (i.asset in hosts and i.check in S._HOST_FETCHED_CHECKS))
+    for host in hosts:
+        conditions[host] = "blocked"
+    return dataclasses.replace(case, injected=kept, scan_conditions=conditions)
+
+
+def _throttle_hosts(case: EvalCase, rng: random.Random) -> EvalCase:
+    from p2c.evaluation import synthetic as S
+
+    conditions = dict(case.scan_conditions)
+    targets = {h for h, c in conditions.items() if c == "reachable"}
+    kept = []
+    for inj in case.injected:
+        if inj.asset in targets and inj.check in S._HOST_FETCHED_CHECKS:
+            ratio = S._condition_factor(inj.check, "throttled") / S._condition_factor(inj.check, "reachable")
+            if rng.random() >= ratio:
+                continue
+        kept.append(inj)
+    for host in targets:
+        conditions[host] = "throttled"
+    return dataclasses.replace(case, injected=tuple(kept), scan_conditions=conditions)
+
+
+def _scope(case: EvalCase, hosts: set[str]) -> EvalCase:
+    return dataclasses.replace(
+        case,
+        injected=tuple(i for i in case.injected if i.asset in hosts),
+        scan_conditions={h: c for h, c in case.scan_conditions.items() if h in hosts},
+    )
+
+
+def _without_checks(case: EvalCase, checks: frozenset[str]) -> EvalCase:
+    return dataclasses.replace(case, injected=tuple(i for i in case.injected if i.check.value not in checks))
+
+
+def _overstated_on_surface(case: EvalCase) -> list[str]:
+    truth = case.ground_truth.control_ids
+    return [
+        a.control_id
+        for a in case.attestations
+        if a.valid_from <= EVAL_EPOCH <= a.valid_until
+        and a.control_id in TIER1_CHECKABLE
+        and any(control_related(a.control_id, t) for t in truth)
+    ]
+
+
+def _evasion_block(variants: list[tuple[EvalCase, frozenset[tuple[str, Any]]]]) -> dict[str, Any]:
+    engine = MappingEngine()
+    old: list[float] = []
+    new: list[float] = []
+    coverage: list[float] = []
+    tp = fn = unverified = 0
+    for case, unread in variants:
+        mappings = engine.map_findings(case.findings())
+        unobserved = _unobserved(case, unread)
+        old.append(compute_dual_score(tier1_assessments(mappings, unobserved=frozenset())).assessed_score)
+        score = compute_dual_score(tier1_assessments(mappings, unobserved=unobserved))
+        new.append(score.assessed_score)
+        coverage.append(score.coverage)
+        flagged = {x.control_id for x in detect_contradictions(case.attestations, mappings, now=EVAL_EPOCH)}
+        over = _overstated_on_surface(case)
+        tp += sum(1 for c in over if c in flagged)
+        fn += sum(1 for c in over if c not in flagged)
+        not_observed = unobserved - {m.control_id for m in mappings}
+        unverified += sum(
+            1
+            for a in case.attestations
+            if a.valid_from <= EVAL_EPOCH <= a.valid_until and a.control_id in not_observed
+        )
+    return {
+        "assessed_absent_is_pass": round(statistics.fmean(old), 6),
+        "assessed": round(statistics.fmean(new), 6),
+        "coverage": round(statistics.fmean(coverage), 6),
+        "contradiction_recall": round(tp / (tp + fn), 6) if tp + fn else 0.0,
+        "n_overstated": tp + fn,
+        "declarations_on_unobserved_controls": unverified,
+    }
+
+
+_ONE_YEAR = timedelta(days=365)
+
+
+def _declarer_recall(cases: list[EvalCase], choose: Any) -> dict[str, Any]:
+    engine = MappingEngine()
+    tp = total = 0
+    for case in cases:
+        mappings = engine.map_findings(case.findings())
+        chosen = choose(case, mappings)
+        claims = [
+            Attestation(
+                attestation_id=f"adaptive:{case.case_id}:{cid}",
+                control_id=cid,
+                statement="control fully implemented",
+                signer_identity="declarer",
+                payload_hash="adaptive",
+                valid_from=EVAL_EPOCH - _ONE_YEAR,
+                valid_until=EVAL_EPOCH + _ONE_YEAR,
+            )
+            for cid in chosen
+        ]
+        flagged = {x.control_id for x in detect_contradictions(claims, mappings, now=EVAL_EPOCH)}
+        total += len(chosen)
+        tp += sum(1 for cid in chosen if cid in flagged)
+    return {"n_overstated": total, "contradiction_recall": round(tp / total, 6) if total else 0.0}
+
+
+def evasion_report(n: int = 100, *, seed: int | None = None) -> dict[str, Any]:
+    resolved = get_settings().global_seed if seed is None else seed
+    cases = generate_cases(n, seed=resolved)
+
+    def subdomains(case: EvalCase) -> list[str]:
+        return sorted(h for h in case.scan_conditions if h != case.profile.apex)
+
+    def version_unread(case: EvalCase) -> frozenset[tuple[str, Any]]:
+        return frozenset(
+            (h, c) for h in case.scan_conditions for c in expert_key() if c.value in _VERSION_CHECKS
+        )
+
+    half_rng = random.Random(resolved + 4049)
+    throttle_rng = random.Random(resolved + 4051)
+    scenarios: dict[str, Any] = {}
+    scenarios["baseline"] = _evasion_block([(c, frozenset()) for c in cases])
+    scenarios["block_all_hosts"] = _evasion_block(
+        [(_block_hosts(c, set(c.scan_conditions)), frozenset()) for c in cases]
+    )
+    halves: list[tuple[EvalCase, frozenset[tuple[str, Any]]]] = []
+    for c in cases:
+        subs = subdomains(c)
+        halves.append((_block_hosts(c, set(half_rng.sample(subs, (len(subs) + 1) // 2))), frozenset()))
+    scenarios["block_half_subdomains"] = _evasion_block(halves)
+    scenarios["throttle_all_hosts"] = _evasion_block(
+        [(_throttle_hosts(c, throttle_rng), frozenset()) for c in cases]
+    )
+    scenarios["omit_apex"] = _evasion_block([(_scope(c, set()), frozenset()) for c in cases])
+    scenarios["omit_subdomains"] = _evasion_block([(_scope(c, {c.profile.apex}), frozenset()) for c in cases])
+    scenarios["banner_suppression"] = _evasion_block(
+        [(_without_checks(c, _VERSION_CHECKS | _MARKER_CHECKS), version_unread(c)) for c in cases]
+    )
+    scenarios["string_spoofing"] = _evasion_block(
+        [(_without_checks(c, _SPOOFABLE_CHECKS), frozenset()) for c in cases]
+    )
+
+    engine = MappingEngine()
+    r_old = r_new = r_total = 0
+    for case in cases:
+        mappings = engine.map_findings(case.findings())
+        over = set(_overstated_on_surface(case))
+        kept = tuple(a for a in case.attestations if a.control_id not in over)
+        records = [
+            ControlAssessment(
+                control_id=cid,
+                tier=EvidenceTier.TIER_2,
+                status=ComplianceStatus.COMPLIANT,
+                evidence_ids=[f"relabelled:{cid}"],
+                source="questionnaire",
+            )
+            for cid in sorted(over)
+        ]
+        old_flags = {x.control_id for x in detect_contradictions(kept, mappings, now=EVAL_EPOCH)}
+        new_flags = {
+            x.control_id
+            for x in detect_contradictions(kept, mappings, now=EVAL_EPOCH, tier2=records)
+            if x.tier == EvidenceTier.TIER_2
+        }
+        r_total += len(over)
+        r_old += len(over & old_flags)
+        r_new += len(over & new_flags)
+    scenarios["relabel_tier2"] = {
+        "n_overstated": r_total,
+        "contradiction_recall_old_check": round(r_old / r_total, 6) if r_total else 0.0,
+        "contradiction_recall": round(r_new / r_total, 6) if r_total else 0.0,
+    }
+
+    key = expert_key()
+    by_control: dict[str, list[Any]] = {}
+    for check, gold in key.items():
+        for cid in gold:
+            by_control.setdefault(cid, []).append(check)
+
+    def p_any(case: EvalCase, cid: str) -> float:
+        present = {(i.asset, i.check) for i in case.true_injected}
+        miss = 1.0
+        for host in case.scan_conditions:
+            for check in by_control.get(cid, []):
+                miss *= 1.0 - _p_finding(check, host, case, (host, check) in present)
+        return 1.0 - miss
+
+    def white_box(case: EvalCase, _mappings: Any) -> list[str]:
+        violated = sorted(case.ground_truth.control_ids & TIER1_CHECKABLE)
+        return sorted(violated, key=lambda c: (p_any(case, c), c))[: len(_overstated_on_surface(case))]
+
+    missed_total = violated_total = 0
+
+    def oracle(case: EvalCase, mappings: Any) -> list[str]:
+        nonlocal missed_total, violated_total
+        violated = sorted(case.ground_truth.control_ids & TIER1_CHECKABLE)
+        found = {m.control_id for m in mappings}
+        missed = [c for c in violated if c not in found]
+        missed_total += len(missed)
+        violated_total += len(violated)
+        rest = sorted((c for c in violated if c in found), key=lambda c: (p_any(case, c), c))
+        return (missed + rest)[: len(_overstated_on_surface(case))]
+
+    scenarios["adaptive_declarer"] = _declarer_recall(cases, white_box)
+    scenarios["oracle_declarer"] = _declarer_recall(cases, oracle)
+    scenarios["oracle_declarer"]["violations_missed"] = missed_total
+    scenarios["oracle_declarer"]["violations_total"] = violated_total
+    return {
+        "n_profiles": n,
+        "seed": resolved,
+        "scenarios": scenarios,
+        "note": "evasions 2 to 5 run against the same cohort, true issues and declarations held fixed. "
+        "assessed_absent_is_pass is the assessed score under the replaced rule (an absent finding counted "
+        "as a pass); assessed uses observation states (not observed never passes). Deliberate blocking "
+        "removes every host-read finding on the blocked hosts; throttling thins reachable hosts' findings "
+        "to the throttled rate but leaves them read; scope omission removes hosts from the scan but not "
+        "from the truth; suppression makes the version reads fail and the dev-server marker read clean; "
+        "spoofing makes the version, marker and WAF strings read clean; relabelling files each "
+        "overstatement as a Tier-2 record (identical recall by construction); the white-box declarer "
+        "overstates its least detectable violated controls and the oracle the ones the scan will miss, "
+        "both at the drawn count per firm. The oracle can always escape at most violations_missed.",
+    }
+
+
 def _recovery_and_contradiction(cases: list[EvalCase], *, seed: int) -> dict[str, Any]:
     preds = _predict(cases)
     recovery = _end_to_end_metrics(preds, seed=seed)["exact_micro"]
@@ -1278,11 +1919,7 @@ def _recovery_and_contradiction(cases: list[EvalCase], *, seed: int) -> dict[str
     gt_total = flagged = n_att = 0
     for case in cases:
         mappings = engine.map_findings(case.findings())
-        true = case.ground_truth.control_ids
-        live = [a for a in case.attestations if a.valid_from <= EVAL_EPOCH <= a.valid_until]
-        attested = {a.control_id for a in live}
-        gt = {c for c in attested if any(control_related(c, t) for t in true)}
-        detected = {x.control_id for x in detect_contradictions(case.attestations, mappings, now=EVAL_EPOCH)}
+        gt, detected = _claim_flags(case, mappings, case.ground_truth.control_ids)
         c_tp += len(gt & detected)
         c_fp += len(detected - gt)
         c_fn += len(gt - detected)
@@ -1295,6 +1932,7 @@ def _recovery_and_contradiction(cases: list[EvalCase], *, seed: int) -> dict[str
         "n_findings": sum(len(c.injected) for c in cases),
         "n_true_findings": sum(len(c.true_injected) for c in cases),
         "recovery": {"precision": recovery["precision"], "recall": recovery["recall"], "f1": recovery["f1"]},
+        "predict_all": _trivial_floor(preds)["corpus"],
         "contradiction": {
             "precision": con.precision,
             "recall": con.recall,
@@ -1313,12 +1951,13 @@ def cross_generator_report(n: int = 100, *, seed: int | None = None) -> dict[str
     resolved = get_settings().global_seed if seed is None else seed
     cases_a = generate_cases(n, seed=resolved)
     cases_b = generate_cases_b(n, seed=resolved)
+    cohort_a = _recovery_and_contradiction(cases_a, seed=resolved)
     cohort_b = _recovery_and_contradiction(cases_b, seed=resolved)
-    cohort_b["forced_true_fallback"] = sum(c.forced_true_fallback for c in cases_b)
-    cohort_b["forced_observe_fallback"] = sum(c.forced_observe_fallback for c in cases_b)
+    for block, cases in ((cohort_a, cases_a), (cohort_b, cases_b)):
+        block["forced_true_fallback"] = sum(c.forced_true_fallback for c in cases)
     return {
         "seed": resolved,
-        "cohort_a": _recovery_and_contradiction(cases_a, seed=resolved),
+        "cohort_a": cohort_a,
         "cohort_b": cohort_b,
         "note": (
             "cross-generator transfer. Cohort B is a structurally independent, never-tuned second "
@@ -1351,10 +1990,10 @@ def exposure_anchor_report(n: int = 100, *, seed: int | None = None) -> dict[str
     n_hosts = sum(len(c.profile.assets) for c in cases)
 
     def per_host(check: CheckId) -> float:
-        return round(sum(1 for c in cases for i in c.true_injected if i.check == check) / n_hosts, 4)
+        return round(sum(1 for c in cases for i in c.true_injected if i.check == check) / n_hosts, 6)
 
     def per_firm(check: CheckId) -> float:
-        return round(sum(1 for c in cases if any(i.check == check for i in c.true_injected)) / len(cases), 4)
+        return round(sum(1 for c in cases if any(i.check == check for i in c.true_injected)) / len(cases), 6)
 
     headers = {
         "missing_hsts": CheckId.MISSING_HSTS,
@@ -1375,7 +2014,7 @@ def exposure_anchor_report(n: int = 100, *, seed: int | None = None) -> dict[str
         "dkim_missing": CheckId.DKIM_MISSING,
     }
     header_rates = {k: per_host(v) for k, v in headers.items()}
-    published = {k: round(1.0 - a, 4) for k, a in _WEB_ALMANAC_2024_ADOPTION.items()}
+    published = {k: round(1.0 - a, 6) for k, a in _WEB_ALMANAC_2024_ADOPTION.items()}
     return {
         "seed": resolved,
         "n_firms": len(cases),
@@ -1396,7 +2035,7 @@ def exposure_anchor_report(n: int = 100, *, seed: int | None = None) -> dict[str
             "web_headers": published,
             "web_headers_min": min(published.values()),
             "web_headers_max": max(published.values()),
-            "tls13_not_used": round(1.0 - _WEB_ALMANAC_2024_TLS13_USED, 4),
+            "tls13_not_used": round(1.0 - _WEB_ALMANAC_2024_TLS13_USED, 6),
         },
         "published_non_adoption_saudi": {
             "source": (
@@ -1446,6 +2085,7 @@ def write_outputs(report: EvaluationReport, out_dir: Path) -> list[Path]:
         "trivial_floor": report.trivial_floor,
         "detection_ceiling": report.detection_ceiling,
         "implemented_only": report.implemented_only,
+        "rate_class_slice": report.rate_class_slice,
         "per_control": report.per_control,
         "effect_size": report.effect_size,
         "ablation": report.ablation,
@@ -1477,7 +2117,7 @@ def write_outputs(report: EvaluationReport, out_dir: Path) -> list[Path]:
         "Seeded simulations, NOT measurements, and not reported in the paper.\n\n"
         "agreement.json  a simulated 5-annotator set (see _simulated_annotations)\n"
         "sus.json        a simulated System Usability Scale response set (see _sus)\n\n"
-        "Both carry \"simulated\": true. Do not cite either as a result.\n",
+        'Both carry "simulated": true. Do not cite either as a result.\n',
         encoding="utf-8",
     )
     for name, payload in (("agreement", report.agreement), ("sus", report.sus)):
@@ -1503,4 +2143,15 @@ def reproduce(out_dir: Path, *, n: int = 100, seed: int | None = None) -> Evalua
     (out_dir / "exposure_anchors.json").write_text(
         json.dumps(anchors, indent=2, sort_keys=True, ensure_ascii=False) + "\n", encoding="utf-8"
     )
+    evasions = evasion_report(n, seed=seed)
+    (out_dir / "evasions.json").write_text(
+        json.dumps(evasions, indent=2, sort_keys=True, ensure_ascii=False) + "\n", encoding="utf-8"
+    )
+    for name, payload in (
+        ("exposure_sweep", exposure_toward_anchors(n, seed=seed)),
+        ("mapper_disagreements", mapper_disagreement_audit()),
+    ):
+        (out_dir / f"{name}.json").write_text(
+            json.dumps(payload, indent=2, sort_keys=True, ensure_ascii=False) + "\n", encoding="utf-8"
+        )
     return report

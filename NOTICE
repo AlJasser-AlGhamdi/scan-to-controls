@@ -9,8 +9,9 @@ LICENSE. Two exclusions:
    Cybersecurity Authority of Saudi Arabia and are NOT redistributed here. The
    full-text catalogs live in a gitignored private/ directory. The tracked
    taxonomy/release/sort_overlay.json carries only control identifiers and this
-   project's own classification. Resolve identifiers against the official NCA
-   publications at nca.gov.sa.
+   project's own classification, and taxonomy/release/text_manifest.json only a
+   SHA-256 fingerprint of each row's Arabic text. Resolve identifiers against the
+   official NCA publications at nca.gov.sa.
 
-2. The manuscript in paper/ is a submission to Computers & Security (Elsevier)
-   and is subject to that venue's copyright terms on acceptance.
+2. The manuscript (paper/, not part of the public release) is under review at
+   Array (Elsevier) and is subject to that journal's terms on acceptance.

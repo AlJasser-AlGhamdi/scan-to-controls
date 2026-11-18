@@ -58,6 +58,9 @@ def test_parse_naabu_and_classify() -> None:
     assert classify_port(5432) is CheckId.EXPOSED_INTERNAL_PORT
     assert classify_port(22) is CheckId.EXPOSED_MANAGEMENT_PORT
     assert classify_port(23) is CheckId.HIGH_RISK_PORT_OPEN
+    assert classify_port(631) is CheckId.EXPOSED_PRINTER_SERVICE
+    assert classify_port(9100) is None
+    assert classify_port(631) is CheckId.EXPOSED_PRINTER_SERVICE
     assert classify_port(8080) is None
 
 
@@ -118,6 +121,7 @@ def test_checks_for_https_probe_with_all_headers() -> None:
 
 
 class FakeResolver:
+
     def __init__(
         self, records: dict[str, list[str]], *, failures: dict[str, Exception] | None = None
     ) -> None:
@@ -244,3 +248,38 @@ def test_email_dns_dmarc_policy_none_flagged() -> None:
         }
     )
     assert EmailDnsInspector(resolver).inspect("example.com") == [CheckId.DMARC_MISSING_OR_NONE]
+
+
+def test_the_released_resolver_decodes_txt_records(monkeypatch: pytest.MonkeyPatch) -> None:
+    import dns.rdata
+    import dns.resolver
+
+    from p2c.scanning.dns_sec import DnspythonResolver
+    from p2c.scanning.email_dns import EmailDnsInspector
+
+    records = {
+        "example.com": ['"v=spf1 -all"'],
+        "_dmarc.example.com": ['"v=DMARC1; p=none"'],
+        "default._domainkey.example.com": ['"v=DKIM1; k=rsa; p=AAAA" "BBBB"'],
+    }
+
+    def resolve(self: object, name: str, rdtype: str) -> list[object]:
+        assert rdtype == "TXT"
+        if name not in records:
+            raise dns.resolver.NXDOMAIN
+        return [dns.rdata.from_text("IN", "TXT", text) for text in records[name]]
+
+    monkeypatch.setattr(dns.resolver.Resolver, "resolve", resolve)
+    resolver = DnspythonResolver(nameservers=["127.0.0.1"])
+    assert resolver.resolve_txt("_dmarc.example.com") == ["v=DMARC1; p=none"]
+    assert resolver.resolve_txt("default._domainkey.example.com") == ["v=DKIM1; k=rsa; p=AAAABBBB"]
+    assert EmailDnsInspector(resolver).inspect("example.com") == [CheckId.DMARC_MISSING_OR_NONE]
+
+
+def test_only_an_identified_service_settles_the_database_read() -> None:
+    from p2c.scanning.services import ServiceProbe, database_read
+
+    assert database_read(ServiceProbe("h", 3306, protocol="mysql", evidence=b"\x4a\x00"))
+    assert database_read(ServiceProbe("h", 22, evidence=b"SSH-2.0-OpenSSH_9.6"))
+    assert not database_read(ServiceProbe("h", 9999, evidence=b"\x00\x01\x02"))
+    assert not database_read(ServiceProbe("h", 5432, read=False))

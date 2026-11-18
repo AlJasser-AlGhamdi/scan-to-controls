@@ -2,13 +2,16 @@
 from __future__ import annotations
 
 import json
+import os
 import pathlib
 import re
 import sys
+import tempfile
 import time
 import urllib.request
 
 from p2c.evaluation.ablation import (
+    RQ2_EXCLUDED,
     check_query_text,
     score_check_mapping,
     subcontrol_entries,
@@ -17,9 +20,7 @@ from p2c.evaluation.ablation import (
 from p2c.evaluation.synthetic import expert_key
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
-CKPT = pathlib.Path(
-    "evaluation/checkpoints/boundary_probe_ckpt.json"
-)
+CKPT = pathlib.Path(os.environ.get("P2C_SCRATCH", tempfile.gettempdir())) / "boundary_probe_ckpt.json"
 ARTIFACT = ROOT / "evaluation" / "baselines_boundary.json"
 
 MODEL = "qwen2.5:7b"
@@ -46,7 +47,7 @@ CONDITIONS = {"without_boundary": BASE_SYSTEM, "with_boundary": BASE_SYSTEM + BO
 
 
 def _ranked_checks() -> list:
-    return sorted(expert_key(), key=lambda c: c.value)
+    return sorted((c for c in expert_key() if c not in RQ2_EXCLUDED), key=lambda c: c.value)
 
 
 def _catalog_block() -> tuple[str, frozenset[str]]:
@@ -174,7 +175,7 @@ def loo_score() -> None:
         raise SystemExit(f"loo incomplete ({len(preds)}/{len(checks)}); run `loo` first")
     result = _score_condition(preds, "leave-one-out few-shot")
     zero = _score_condition(ckpt["without_boundary"], "zero-shot") if len(ckpt.get("without_boundary", {})) == len(checks) else None
-    ceiling = 0.919
+    ceiling = json.loads((ROOT / "evaluation" / "outputs" / "baselines.json").read_text())["single_pick_ceiling"]
     print(f"loo_fewshot micro_f1={result['micro_f1']:.4f} (unanswered {result['unanswered_checks']})")
     if zero:
         print(f"zero-shot   micro_f1={zero['micro_f1']:.4f}  delta={result['micro_f1'] - zero['micro_f1']:+.4f}")
@@ -195,6 +196,12 @@ def _score_condition(preds: dict[str, str | None], label: str) -> dict:
     )
     result["unanswered_checks"] = unanswered
     return result
+
+
+def _previous_run_date() -> str | None:
+    if not ARTIFACT.is_file():
+        return None
+    return json.loads(ARTIFACT.read_text(encoding="utf-8")).get("provenance", {}).get("run_date_utc")
 
 
 def score() -> None:
@@ -240,8 +247,10 @@ def score() -> None:
             "n_checks": len(checks),
             "n_candidate_controls": len(subcontrol_entries()),
             "host": "CPU-only, 4 cores (arm64)",
-            "run_date_utc": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
+            "run_date_utc": _previous_run_date() or time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
+            "scored_date_utc": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
         },
+        "picks": {cond: ckpt.get(cond, {}) for cond in (*CONDITIONS, "loo_fewshot")},
     }
     ARTIFACT.write_text(json.dumps(artifact, indent=2) + "\n", encoding="utf-8")
     print(f"without_boundary micro_f1={without['micro_f1']:.4f} (unanswered {without['unanswered_checks']})")

@@ -15,6 +15,10 @@ _INSPECTOR_MODULES = (
     "dns_sec",
     "mta_sts",
     "services",
+    "web_paths",
+    "banners",
+    "fingerprints",
+    "dns_axfr",
 )
 
 
@@ -29,7 +33,7 @@ def test_live_checks_match_inspector_sources() -> None:
 
 def test_live_checks_are_catalog_members() -> None:
     assert set(CheckId) >= LIVE_CHECKS
-    assert len(LIVE_CHECKS) == 23
+    assert len(LIVE_CHECKS) == len(CheckId) == 32
 
 
 def test_the_implemented_only_slice_reads_the_same_live_set() -> None:

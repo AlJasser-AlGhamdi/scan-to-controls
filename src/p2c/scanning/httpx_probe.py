@@ -2,6 +2,8 @@ from __future__ import annotations
 
 import json
 from dataclasses import dataclass, field
+from datetime import UTC, datetime
+from email.utils import parsedate_to_datetime
 
 import structlog
 
@@ -21,6 +23,7 @@ class HttpProbe:
     headers: dict[str, str] = field(default_factory=dict)
     tech: tuple[str, ...] = ()
     set_cookie: tuple[str, ...] = ()
+    body: bytes | None = b""
 
 
 def parse_httpx(output: str) -> list[HttpProbe]:
@@ -69,12 +72,35 @@ def _set_cookie_values(raw_headers: object) -> tuple[str, ...]:
     return ()
 
 
+def cookie_deletion(set_cookie: str) -> bool:
+    parts = [p.strip() for p in set_cookie.split(";")[1:]]
+    for part in parts:
+        name, _, value = part.partition("=")
+        if name.strip().lower() == "max-age" and value.strip().lstrip("-").isdigit():
+            return int(value) <= 0
+    for part in parts:
+        name, _, value = part.partition("=")
+        if name.strip().lower() == "max-age" and value.strip().lstrip("-").isdigit() and int(value) <= 0:
+            return True
+        if name.strip().lower() == "expires":
+            try:
+                expires = parsedate_to_datetime(value.strip())
+            except (TypeError, ValueError):
+                continue
+            if expires.tzinfo is None:
+                expires = expires.replace(tzinfo=UTC)
+            if expires < datetime.now(UTC):
+                return True
+    return False
+
+
 def cookie_lacks_secure(set_cookie: str) -> bool:
-    attributes = {part.strip().lower() for part in set_cookie.split(";")[1:]}
-    return "secure" not in attributes
+    parts = [part.strip() for part in set_cookie.split(";")[1:]]
+    attributes = {part.split("=", 1)[0].strip().lower() for part in parts}
+    return "secure" not in attributes and not cookie_deletion(set_cookie)
 
 
-_DEV_SERVER_MARKERS = ("werkzeug", "webrick", "rack-dev", "django-devserver")
+_DEV_SERVER_MARKERS = ("werkzeug", "webrick", "rack-dev", "django-devserver", "wsgiserver/", "simplehttp/")
 _DEV_HEADERS = ("x-debug-token", "x-debug-token-link", "x-symfony-profiler")
 
 
@@ -96,7 +122,7 @@ def response_received(probe: HttpProbe) -> bool:
     return _STATUS_MIN <= probe.status_code <= _STATUS_MAX
 
 
-def _redirects_to_https(probe: HttpProbe) -> bool:
+def redirects_to_https(probe: HttpProbe) -> bool:
     if not (_REDIRECT_MIN <= probe.status_code < _REDIRECT_MAX):
         return False
     location = next((v for k, v in probe.headers.items() if k.lower() == "location"), "")
@@ -108,7 +134,7 @@ def checks_for_probe(probe: HttpProbe) -> list[CheckId]:
         log.warning("http_read_indeterminate", url=probe.url, status_code=probe.status_code)
         return []
     checks: list[CheckId] = []
-    if probe.scheme == "http" and not _redirects_to_https(probe):
+    if probe.scheme == "http" and not redirects_to_https(probe):
         checks.append(CheckId.NO_HTTPS_REDIRECT)
     checks.extend(analyze_security_headers(probe.headers))
     if any(cookie_lacks_secure(value) for value in probe.set_cookie):

@@ -108,6 +108,17 @@ def test_duplicate_control_ids_are_reconciled_not_double_counted() -> None:
     assert score.assessed_score == 0.0
 
 
+def test_recorded_gap_stands_over_a_clean_scan_in_documented_only() -> None:
+    scan_clean = _mk("2-5-3-1", EvidenceTier.TIER_1, ComplianceStatus.COMPLIANT)
+    record_gap = _mk("2-5-3-1", EvidenceTier.TIER_2, ComplianceStatus.NON_COMPLIANT)
+    score = compute_dual_score([scan_clean, record_gap], universe={"2-5-3-1"})
+    assert score.assessed_score == 1.0
+    assert score.documented_score == 0.0
+    assert compute_dual_score([scan_clean], universe={"2-5-3-1"}).documented_score == 1.0
+    weighted = compute_dual_score([scan_clean, record_gap])
+    assert (weighted.assessed_score, weighted.documented_score) == (1.0, 0.0)
+
+
 def test_reconcile_tie_prefers_non_compliant() -> None:
     both_orders = [
         [

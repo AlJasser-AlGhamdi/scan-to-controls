@@ -7,6 +7,7 @@ from p2c.scanning.catalog import CheckId
 _INTERNAL_PORTS = {1433, 1521, 3306, 5432, 6379, 9200, 11211, 27017}
 _MANAGEMENT_PORTS = {22, 3389, 5900, 5985, 5986}
 _HIGH_RISK_PORTS = {21, 23, 25, 111, 135, 139, 445, 512, 513, 514}
+_PRINTER_PORTS = {515, 631}
 
 
 def parse_naabu(output: str) -> list[tuple[str, int]]:
@@ -33,4 +34,11 @@ def classify_port(port: int) -> CheckId | None:
         return CheckId.EXPOSED_MANAGEMENT_PORT
     if port in _HIGH_RISK_PORTS:
         return CheckId.HIGH_RISK_PORT_OPEN
+    if port in _PRINTER_PORTS:
+        return CheckId.EXPOSED_PRINTER_SERVICE
     return None
+
+
+PROBED_PORTS: tuple[int, ...] = tuple(
+    sorted(_INTERNAL_PORTS | _MANAGEMENT_PORTS | _HIGH_RISK_PORTS | _PRINTER_PORTS)
+)

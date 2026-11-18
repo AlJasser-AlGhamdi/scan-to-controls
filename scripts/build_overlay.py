@@ -52,7 +52,7 @@ def main() -> None:
                 "domain": props.get("domain"),
                 "subdomain": props.get("subdomain"),
                 "tier": int(tier),
-                "tier_class": {"1": "scan-provable", "2": "internal-assessment", "3": "declaration"}[tier],
+                "tier_class": {"1": "externally-testable", "2": "internal-assessment", "3": "declaration"}[tier],
                 "tier_source": props.get("tier-source"),
                 "ncnicc_class_a_status": props.get("ncnicc-class-a-status"),
                 "ncnicc_class_b_status": props.get("ncnicc-class-b-status"),
@@ -64,22 +64,22 @@ def main() -> None:
     tier_counts: dict[str, int] = defaultdict(int)
     for r in rows:
         tier_counts[r["tier_class"]] += 1
-    scan_provable = tier_counts["scan-provable"]
+    externally_testable = tier_counts["externally-testable"]
 
     payload = {
         "schema": "p2c-sort-overlay/1",
         "description": (
-            "ID-keyed sort of ECC-2:2024 and NCNICC-1:2025 controls into scan-provable "
+            "ID-keyed sort of ECC-2:2024 and NCNICC-1:2025 controls into externally-testable "
             "(Tier 1), internal-assessment (Tier 2), and declaration (Tier 3). Contains no "
             "NCA control text; control text is NCA copyright and is not redistributable. "
             "Resolve identifiers against the official NCA publications at nca.gov.sa."
         ),
         "counts": {
             "total_rows": len(rows),
-            "scan_provable": scan_provable,
+            "externally_testable": externally_testable,
             "internal_assessment": tier_counts["internal-assessment"],
             "declaration": tier_counts["declaration"],
-            "scan_provable_share": round(scan_provable / len(rows), 4),
+            "externally_testable_share": round(externally_testable / len(rows), 4),
         },
         "controls": rows,
     }
